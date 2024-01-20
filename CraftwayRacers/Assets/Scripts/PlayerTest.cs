@@ -8,6 +8,8 @@ using Unity.Netcode;
 //MAKE SURE ALL OBJECT BEING USED OVER A NETWORK INHERIT FROM NetworkBehaviour INSTEAD OF Monobehaviour
 public class PlayerTest : NetworkBehaviour
 {
+    private int playerID;
+
     [SerializeField] private float spd;
 
     private InputActionAsset testActions;
@@ -16,6 +18,8 @@ public class PlayerTest : NetworkBehaviour
     private InputAction move;
 
     private Coroutine moveAction;
+
+    private GameObject gc;
 
     //Sets up references for movement action.
     private void Awake()
@@ -26,6 +30,10 @@ public class PlayerTest : NetworkBehaviour
 
         move.started += Move_Started;
         move.canceled += Move_Canceled;
+
+        //Assigns a playerID.
+        playerID = GameObject.FindGameObjectsWithTag("Player").Length;
+        Debug.Log(playerID);
     }
 
     /// <summary>
@@ -48,11 +56,33 @@ public class PlayerTest : NetworkBehaviour
 
     private IEnumerator movement()
     {
+        if(gc == null)
+        {
+            gc = GameObject.FindGameObjectWithTag("GameController");
+        }
+
         for(; ; )
         {
             Vector2 moveDir = move.ReadValue<Vector2>();
 
             GetComponent<Rigidbody>().velocity = new Vector3(moveDir.x * spd, 0f, moveDir.y * spd);
+
+            //Sets network positions variables according to the ID of the player.
+            switch(playerID)
+            {
+                case 1:
+                    gc.GetComponent<GameController>().Player1Pos.Value = transform.position;
+                    break;
+                case 2:
+                    gc.GetComponent<GameController>().Player2Pos.Value = transform.position;
+                    break;
+                case 3:
+                    gc.GetComponent<GameController>().Player3Pos.Value = transform.position;
+                    break;
+                case 4:
+                    gc.GetComponent<GameController>().Player4Pos.Value = transform.position;
+                    break;
+            }
 
             yield return new WaitForEndOfFrame();
         }

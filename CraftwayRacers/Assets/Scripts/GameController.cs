@@ -5,17 +5,36 @@ using Unity.Netcode;
 
 public class GameController : NetworkBehaviour
 {
-    public Vector3[] PlayerPositions;
+    public NetworkVariable<Vector3> Player1Pos;
+    public NetworkVariable<Vector3> Player2Pos;
+    public NetworkVariable<Vector3> Player3Pos;
+    public NetworkVariable<Vector3> Player4Pos;
 
-    public struct PlayerPosition : INetworkSerializable
+    private void Start()
     {
-        public Vector3[] PlayerPositions;
-
-        //Serializes PlayerPositions array in inspector.
-        public void NetworkSerialize<T>(BufferSerializer<T> serializer) where T : IReaderWriter
+        //Ensures that only one GameController is active in the scene at a time.
+        if(GameObject.FindGameObjectsWithTag("GameController").Length > 1)
         {
-            serializer.SerializeValue(ref PlayerPositions);
+            Destroy(gameObject);
         }
+
+        StartCoroutine(PrintPos());
     }
 
+    /// <summary>
+    /// Prints the player positions variables every second for testing.
+    /// </summary>
+    /// <returns></returns>
+    private IEnumerator PrintPos()
+    {
+        for(; ; )
+        {
+            print(Player1Pos.Value);
+            print(Player2Pos.Value);
+            print(Player3Pos.Value);
+            print(Player4Pos.Value);
+
+            yield return new WaitForSeconds(1f);
+        }
+    }
 }
