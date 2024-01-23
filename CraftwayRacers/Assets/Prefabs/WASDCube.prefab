@@ -118,4 +118,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38957cb936ac49b448b57743bc09b5e2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Speed: 0.05
+  MoveSpeed: 0
+  ReverseSpeed: 0
+  TurnSpeed: 0
+  MyInput: {fileID: 0}
+  Wheel:
+    m_Name: Wheel
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 19b3e315-49ba-470d-b7d8-2d2d1ec14084
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Accelerate:
+    m_Name: Accelerate
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: 29c1cff7-892b-4b33-a04c-3ee06115ff33
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
+  Reverse:
+    m_Name: Reverse
+    m_Type: 0
+    m_ExpectedControlType: 
+    m_Id: a170fdec-32e9-45a3-8eaa-3193659fcfff
+    m_Processors: 
+    m_Interactions: 
+    m_SingletonActionBindings: []
+    m_Flags: 0
