@@ -49,7 +49,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""name"": ""Steer"",
                     ""type"": ""Value"",
                     ""id"": ""53000272-354c-4c35-a44b-083efaad52b5"",
-                    ""expectedControlType"": """",
+                    ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
@@ -101,26 +101,37 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""isPartOfComposite"": false
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""f119c743-1641-4307-94ff-2005af8adb70"",
+                    ""name"": ""Turn"",
+                    ""id"": ""ccf603c2-73c7-4c14-94f6-75d4e1e338ad"",
+                    ""path"": ""1DAxis"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steer"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""negative"",
+                    ""id"": ""be4daab2-c234-4aba-89b4-e5333fca1f6c"",
                     ""path"": ""<Gamepad>/leftStick/left"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Steer"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 },
                 {
-                    ""name"": """",
-                    ""id"": ""bc4c685e-ec6c-4093-87ca-b79c664b73cd"",
+                    ""name"": ""positive"",
+                    ""id"": ""aafea848-f0dd-4e24-b1f4-351b73e57273"",
                     ""path"": ""<Gamepad>/leftStick/right"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Steer"",
                     ""isComposite"": false,
-                    ""isPartOfComposite"": false
+                    ""isPartOfComposite"": true
                 }
             ]
         }

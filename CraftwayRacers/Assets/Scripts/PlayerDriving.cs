@@ -80,7 +80,7 @@ public class PlayerDriving : MonoBehaviour
 
         else
         {
-            
+            verticalInput = 0;
             //GetComponent<Rigidbody>().velocity = new Vector2(0, 0);
         }
     }
@@ -93,7 +93,7 @@ public class PlayerDriving : MonoBehaviour
         var velocity = rb.velocity + force;
         rb.velocity = Vector3.ClampMagnitude(velocity, maxSpeed);
 
-            //orientation.Rotate(0, hInput * TurnSpeed, 0);
+        //orientation.Rotate(0, hInput * TurnSpeed, 0);
 
         //rb.AddForce(moveDirection.normalized * DriveSpeed, ForceMode.Force);
     }

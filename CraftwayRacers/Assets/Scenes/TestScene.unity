@@ -237,6 +237,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 748342344}
+  - component: {fileID: 748342345}
   m_Layer: 0
   m_Name: Parent
   m_TagString: Untagged
@@ -260,6 +261,19 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: -96.614, z: 0}
+--- !u!114 &748342345
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 748342343}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 404106d9df59a8e43a3a97e3c7a3f26e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Steering: {fileID: 8111548404663126491}
 --- !u!1 &1095072627
 GameObject:
   m_ObjectHideFlags: 0
@@ -569,7 +583,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1704050725434606521, guid: d3fcecfec09701c44ad54799266ef803, type: 3}
       propertyPath: TurnSpeed
-      value: 20
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 1704050725434606521, guid: d3fcecfec09701c44ad54799266ef803, type: 3}
       propertyPath: DriveSpeed
@@ -687,3 +701,14 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 80
   m_CollisionDetection: 0
+--- !u!114 &8111548404663126491 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1704050725434606521, guid: d3fcecfec09701c44ad54799266ef803, type: 3}
+  m_PrefabInstance: {fileID: 1401803802386723039}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6703710252567451275}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 38957cb936ac49b448b57743bc09b5e2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
