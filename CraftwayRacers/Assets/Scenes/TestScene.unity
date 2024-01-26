@@ -257,6 +257,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1095072630}
   - {fileID: 8111548404663126488}
   m_Father: {fileID: 0}
   m_RootOrder: 2
@@ -358,12 +359,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1095072627}
-  m_LocalRotation: {x: 0.12615445, y: -0.6547782, z: 0.1727151, w: 0.7249277}
-  m_LocalPosition: {x: 3.1200008, y: 3.6799998, z: -0.40999985}
-  m_LocalScale: {x: 0.99364823, y: 1.0496469, z: 0.44583026}
+  m_LocalRotation: {x: 0.21133271, y: 0.049603194, z: 0.03292335, w: 0.97559935}
+  m_LocalPosition: {x: -0.41000092, y: 3.6799998, z: -6.2400026}
+  m_LocalScale: {x: 1.0004723, y: 1.2309614, z: 0.8115869}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 8111548404663126488}
+  m_Father: {fileID: 748342344}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 24.147, y: -83.032, z: 5.358}
 --- !u!1 &1442682363
@@ -583,11 +584,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1704050725434606521, guid: d3fcecfec09701c44ad54799266ef803, type: 3}
       propertyPath: TurnSpeed
-      value: 2
+      value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 1704050725434606521, guid: d3fcecfec09701c44ad54799266ef803, type: 3}
       propertyPath: DriveSpeed
-      value: 10
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 1704050725434606521, guid: d3fcecfec09701c44ad54799266ef803, type: 3}
       propertyPath: orientation
@@ -655,10 +656,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects:
-    - targetCorrespondingSourceObject: {fileID: 5802012394937649849, guid: d3fcecfec09701c44ad54799266ef803, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 1095072630}
+    m_AddedGameObjects: []
     m_AddedComponents:
     - targetCorrespondingSourceObject: {fileID: 669959652407783363, guid: d3fcecfec09701c44ad54799266ef803, type: 3}
       insertIndex: -1

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class PlayerDriving : MonoBehaviour
+public class PlayerDriving : MonoBehaviour //DON'T USE
 {
     public PlayerInput MyInput;
 
@@ -19,7 +19,6 @@ public class PlayerDriving : MonoBehaviour
     Vector3 moveDirection;
     public Transform orientation;
     private float verticalInput;
-    private float hInput;
     public float maxSpeed;
     Rigidbody rb;
 
@@ -63,8 +62,6 @@ public class PlayerDriving : MonoBehaviour
 
     private void GetInput()
     {
-        hInput = move;
-
         if (APressed == true)
         {
             verticalInput = 1;
