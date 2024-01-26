@@ -11,4 +11,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/JacobScene.unity
     guid: e4140c8b3f47d6543b45c70ee22718b6
+  - enabled: 1
+    path: Assets/Scenes/EliScene.unity
+    guid: 9683ee2e576753d49922d0700fa9f91b
   m_configObjects: {}
