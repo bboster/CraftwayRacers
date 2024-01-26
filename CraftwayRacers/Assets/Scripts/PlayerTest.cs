@@ -20,7 +20,7 @@ public class PlayerTest : NetworkBehaviour
     //Sets up references for movement action.
     private void Awake()
     {
-        testMap = GetComponent<PlayerInput>().currentActionMap;
+      //  testMap = GetComponent<PlayerInput>().cu;
 
         move = testMap.FindAction("Movement");
 
