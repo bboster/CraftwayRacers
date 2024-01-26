@@ -47,7 +47,6 @@ public class NewDriving : MonoBehaviour
     {
         SteerPlayer();
         MovePlayer();
-        AnimateWheels();
     }
     void MovePlayer()
     {
