@@ -2,7 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.UIElements;
+using UnityEngine.SceneManagement;
 
 public class SpawnPointManager : MonoBehaviour
 {
@@ -48,6 +50,8 @@ public class SpawnPointManager : MonoBehaviour
         spawnPoints.Add(value8);
     }
 
+    
+
     // Update is called once per frame
     void Update()
     {
@@ -64,5 +68,10 @@ public class SpawnPointManager : MonoBehaviour
             count--;
             Instantiate(enemy, where, Quaternion.identity);
         }
+    }
+
+    public void Restart()
+    {
+        SceneManager.LoadScene("DavidScene");
     }
 }
