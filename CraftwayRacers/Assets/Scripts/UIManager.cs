@@ -6,15 +6,15 @@ using Unity.Netcode;
 
 public class UIManager : MonoBehaviour
 {
-    [SerializeField] private Button hostBtn;
-    [SerializeField] private Button clientBtn;
+    [SerializeField] private RelayServerController rsc;
 
-    private void Awake()
+    public void StartRelayServer()
     {
-        //Starts a host when host button is clicked.
-        hostBtn.onClick.AddListener(() => { NetworkManager.Singleton.StartHost(); });
+        rsc.CreateRelay();
+    }
 
-        //Starts client when client button is clicked.
-        clientBtn.onClick.AddListener(() => { NetworkManager.Singleton.StartClient(); });
+    public void JoinRelayServer(string code)
+    {
+        rsc.JoinRelay(code);
     }
 }
