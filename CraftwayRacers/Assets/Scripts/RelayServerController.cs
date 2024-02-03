@@ -15,6 +15,9 @@ public class RelayServerController : MonoBehaviour
     [SerializeField] private GameObject display;
     [SerializeField] private TextMeshProUGUI codeDisplay;
 
+    [SerializeField] private TMP_InputField joinCodeInput;
+    [SerializeField] private GameObject input;
+
     private async void Start()
     {
         await UnityServices.InitializeAsync();
@@ -39,6 +42,8 @@ public class RelayServerController : MonoBehaviour
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartHost();
+
+            input.SetActive(false);
         }
         catch (RelayServiceException e)
         {
@@ -56,10 +61,12 @@ public class RelayServerController : MonoBehaviour
         display.SetActive(false);
     }
 
-    public async void JoinRelay(string joinCode)
+    public async void JoinRelay()
     {
         try
         {
+            string joinCode = joinCodeInput.text;
+
             await RelayService.Instance.JoinAllocationAsync(joinCode);
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
@@ -68,6 +75,8 @@ public class RelayServerController : MonoBehaviour
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartClient();
+
+            input.SetActive(false);
         }
         catch (RelayServiceException e)
         {
