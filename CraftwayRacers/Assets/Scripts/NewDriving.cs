@@ -7,12 +7,13 @@ using UnityEngine.InputSystem;
 
 public class NewDriving : MonoBehaviour
 {
-    public float SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power=50f,  CurrentSpeed=0f, MaxSpeed=100f, BrakePower=100f;
+    public float TerrainDetectorLength=2f, SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power=50f,  CurrentSpeed=0f, MaxSpeed=100f, BrakePower=100f;
     public Vector3 CenterOfMass;
     private float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f;
     private PlayerControls playerControls;
     private Rigidbody carRb;
     public PlayerInput PlayerInput;
+    public bool IsOnOffRoad = false, IsOnSlickRoad = false, IsOnNormalRoad=false;
 
     /// <summary>
     /// We need the enum (named integer) do diffrentiate between front and rear so steering 
@@ -20,8 +21,7 @@ public class NewDriving : MonoBehaviour
     /// </summary>
     public enum Axle
     {
-        Front,
-        Rear
+        Front,Rear
     }
     /// <summary>
     /// A struct (structure) is a custom datatype. It allows you to make a list of wheels.
@@ -62,7 +62,26 @@ public class NewDriving : MonoBehaviour
         carRb = GetComponent<Rigidbody>();
         //carRb.centerOfMass = CenterOfMass;
         StartCoroutine(CalcSpeed());
+        StartCoroutine(DetectTerrain());
 
+    }
+    public void ChangeDriveValue(Enum TerrainType)
+    {
+
+    }
+    IEnumerator DetectTerrain()
+    {
+        while(true)
+        {
+            RaycastHit hit;
+            Physics.Raycast(transform.position, Vector3.down, out hit, TerrainDetectorLength);
+            if (hit.collider.CompareTag("OffRoad"))
+            {
+                IsOnOffRoad= true;  
+                print("HERLLO");
+            }
+            yield return new WaitForSeconds(1f);
+        }       
     }
 
     // Update is called once per frame
@@ -71,6 +90,7 @@ public class NewDriving : MonoBehaviour
         SteerPlayer();
         MovePlayer();
         Brake();
+        DetectTerrain();
     }
     void MovePlayer()
     {
