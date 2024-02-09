@@ -12,16 +12,16 @@ public class Init : MonoBehaviour
 
     private void Awake()
     {
-        if(Application.platform == RuntimePlatform.IPhonePlayer)
-        {
-            ipadCam.SetActive(true);
-            ipadCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
-        }
-        else
-        {
-            
-        }
+        //if (Application.platform == RuntimePlatform.IPhonePlayer)
+        //{
+        //    ipadCam.SetActive(true);
+        //    ipadCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
+        //}
+        //else
+        //{
 
-        relay.SetActive(true);
+        //}
+
+        //relay.SetActive(true);
     }
 }

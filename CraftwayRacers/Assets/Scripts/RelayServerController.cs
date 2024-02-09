@@ -49,7 +49,6 @@ public class RelayServerController : MonoBehaviour
         {
             Debug.Log(e);
         }
-
     }
 
     private IEnumerator DisplayJoinCode(string code)
