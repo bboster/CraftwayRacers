@@ -1,9 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
-using UnityEditor;
 using UnityEngine;
-using UnityEngine.InputSystem;
 
 public class NewDriving : MonoBehaviour
 {
@@ -12,7 +10,6 @@ public class NewDriving : MonoBehaviour
     private float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f;
     private PlayerControls playerControls;
     private Rigidbody carRb;
-    public PlayerInput PlayerInput;
 
     /// <summary>
     /// We need the enum (named integer) do diffrentiate between front and rear so steering 
@@ -37,16 +34,6 @@ public class NewDriving : MonoBehaviour
     public List<Wheel> wheels;
     void Start()
     {
-        PlayerInput.currentActionMap.FindAction("Accelerate").started += ctx => AccelerateOn();
-        PlayerInput.currentActionMap.FindAction("Accelerate").canceled += ctx => AccelerateOff();
-        PlayerInput.currentActionMap.FindAction("Reverse").started += ctx => ReverseOn();
-        PlayerInput.currentActionMap.FindAction("Reverse").canceled += ctx => ReverseOff();
-        PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
-        PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
-        PlayerInput.currentActionMap.FindAction("Quit").performed += ctx => Quit();
-
-
-        /*
         playerControls = new PlayerControls();
         playerControls.Movement.Enable();
         playerControls.Movement.Accelerate.started += ctx => AccelerateOn();
@@ -55,10 +42,6 @@ public class NewDriving : MonoBehaviour
         playerControls.Movement.Reverse.canceled += ctx => ReverseOff();
         playerControls.Movement.Steer.performed += ctx => steerValue = ctx.ReadValue<float>();
         playerControls.Movement.Steer.canceled += ctx => steerValue = 0;
-        */
-
-
-
         carRb = GetComponent<Rigidbody>();
         //carRb.centerOfMass = CenterOfMass;
         StartCoroutine(CalcSpeed());
@@ -149,10 +132,5 @@ public class NewDriving : MonoBehaviour
     private void ReverseOff()
     {
         ReverseVal = 0;
-    }
-    public void Quit()
-    {
-        Application.Quit();
-        EditorApplication.ExitPlaymode();
     }
 }

@@ -62,24 +62,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Quit"",
-                    ""type"": ""Button"",
-                    ""id"": ""f2bafbf9-6511-407e-b0ae-fbb769790902"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
-                },
-                {
-                    ""name"": ""Join"",
-                    ""type"": ""Button"",
-                    ""id"": ""de71587c-1005-447b-9cf3-72ea8518b061"",
-                    ""expectedControlType"": ""Button"",
-                    ""processors"": """",
-                    ""interactions"": """",
-                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -170,28 +152,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""22850567-20e1-4a08-bb7a-96f15bc0801d"",
-                    ""path"": ""<Keyboard>/escape"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Quit"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""18f90bdd-e00e-416a-962f-24dd24a81038"",
-                    ""path"": ""<Gamepad>/start"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""Join"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -204,8 +164,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Reverse = m_Movement.FindAction("Reverse", throwIfNotFound: true);
         m_Movement_Steer = m_Movement.FindAction("Steer", throwIfNotFound: true);
         m_Movement_Restart = m_Movement.FindAction("Restart", throwIfNotFound: true);
-        m_Movement_Quit = m_Movement.FindAction("Quit", throwIfNotFound: true);
-        m_Movement_Join = m_Movement.FindAction("Join", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -271,8 +229,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Reverse;
     private readonly InputAction m_Movement_Steer;
     private readonly InputAction m_Movement_Restart;
-    private readonly InputAction m_Movement_Quit;
-    private readonly InputAction m_Movement_Join;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -281,8 +237,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Reverse => m_Wrapper.m_Movement_Reverse;
         public InputAction @Steer => m_Wrapper.m_Movement_Steer;
         public InputAction @Restart => m_Wrapper.m_Movement_Restart;
-        public InputAction @Quit => m_Wrapper.m_Movement_Quit;
-        public InputAction @Join => m_Wrapper.m_Movement_Join;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -304,12 +258,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
-            @Quit.started += instance.OnQuit;
-            @Quit.performed += instance.OnQuit;
-            @Quit.canceled += instance.OnQuit;
-            @Join.started += instance.OnJoin;
-            @Join.performed += instance.OnJoin;
-            @Join.canceled += instance.OnJoin;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -326,12 +274,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
-            @Quit.started -= instance.OnQuit;
-            @Quit.performed -= instance.OnQuit;
-            @Quit.canceled -= instance.OnQuit;
-            @Join.started -= instance.OnJoin;
-            @Join.performed -= instance.OnJoin;
-            @Join.canceled -= instance.OnJoin;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -355,7 +297,5 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnReverse(InputAction.CallbackContext context);
         void OnSteer(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
-        void OnQuit(InputAction.CallbackContext context);
-        void OnJoin(InputAction.CallbackContext context);
     }
 }

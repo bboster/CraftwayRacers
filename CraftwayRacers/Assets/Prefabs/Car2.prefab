@@ -270,7 +270,6 @@ GameObject:
   - component: {fileID: 5090774813487114084}
   - component: {fileID: 5662752175421877226}
   - component: {fileID: 4912156710645208828}
-  - component: {fileID: 3042799271456796643}
   m_Layer: 0
   m_Name: Car2
   m_TagString: Untagged
@@ -294,7 +293,7 @@ Transform:
   - {fileID: 1278186588857817503}
   - {fileID: 5330113783473015869}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &5090774813487114084
 Rigidbody:
@@ -342,7 +341,6 @@ MonoBehaviour:
   MaxSpeed: 100
   BrakePower: 100
   CenterOfMass: {x: 0, y: 0, z: 0}
-  PlayerInput: {fileID: 3042799271456796643}
   wheels:
   - wheelModel: {fileID: 7236233089573107400}
     wheelCollider: {fileID: 2883032345081734059}
@@ -377,36 +375,6 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 4, y: 1.5, z: 4.75}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3042799271456796643
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4485842232745963951}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: a1d23339e5ba7794c9156ea5cb101164, type: 3}
-  m_NotificationBehavior: 0
-  m_UIInputModule: {fileID: 0}
-  m_DeviceLostEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_DeviceRegainedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ControlsChangedEvent:
-    m_PersistentCalls:
-      m_Calls: []
-  m_ActionEvents: []
-  m_NeverAutoSwitchControlSchemes: 0
-  m_DefaultControlScheme: 
-  m_DefaultActionMap: Movement
-  m_SplitScreenIndex: -1
-  m_Camera: {fileID: 662714856359763297}
 --- !u!1 &4571631055876046241
 GameObject:
   m_ObjectHideFlags: 0
