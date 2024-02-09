@@ -271,6 +271,7 @@ GameObject:
   - component: {fileID: 5662752175421877226}
   - component: {fileID: 4912156710645208828}
   - component: {fileID: 3042799271456796643}
+  - component: {fileID: 937735565047954816}
   m_Layer: 0
   m_Name: Car2
   m_TagString: Untagged
@@ -401,12 +402,53 @@ MonoBehaviour:
   m_ControlsChangedEvent:
     m_PersistentCalls:
       m_Calls: []
-  m_ActionEvents: []
+  m_ActionEvents:
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: b8e86cd8-15e2-47d2-91fa-34a7cc4ab735
+    m_ActionName: Movement/Accelerate[/XInputControllerWindows1/rightTrigger,/XInputControllerWindows1/buttonEast]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: af4ae13c-b2ec-48d6-a837-3de85751947c
+    m_ActionName: Movement/Reverse[/XInputControllerWindows1/leftTrigger,/XInputControllerWindows1/buttonSouth]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 53000272-354c-4c35-a44b-083efaad52b5
+    m_ActionName: Movement/Steer[/XInputControllerWindows1/leftStick/left,/XInputControllerWindows1/leftStick/right]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 1a0bbd1c-276b-4af1-9492-39dff53b6e5b
+    m_ActionName: Movement/Restart[/Keyboard/r]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: f2bafbf9-6511-407e-b0ae-fbb769790902
+    m_ActionName: Movement/Quit[/Keyboard/escape]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: de71587c-1005-447b-9cf3-72ea8518b061
+    m_ActionName: Movement/Join[/XInputControllerWindows1/start]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 662714856359763297}
+  m_Camera: {fileID: 0}
+--- !u!114 &937735565047954816
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4485842232745963951}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c3f0ba4d3cbaf9d418d7c5dc625d06ac, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player1Spawn: {x: 0, y: 0, z: 0}
+  Player2Spawn: {x: 85.869545, y: 26.312551, z: -6.57}
+  Player3Spawn: {x: 0, y: 0, z: 0}
+  Player4Spawn: {x: 0, y: 0, z: 0}
+  PlayerCount: {fileID: 3042799271456796643}
 --- !u!1 &4571631055876046241
 GameObject:
   m_ObjectHideFlags: 0
