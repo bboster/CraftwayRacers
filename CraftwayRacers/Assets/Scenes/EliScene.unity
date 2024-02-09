@@ -5570,6 +5570,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1742680931}
+    - target: {fileID: 3346844612542164146, guid: a583f2691eb65d248a432eccea0eba19, type: 3}
+      propertyPath: m_TagString
+      value: OffRoad
+      objectReference: {fileID: 0}
     - target: {fileID: 3719194065327359452, guid: a583f2691eb65d248a432eccea0eba19, type: 3}
       propertyPath: m_Mesh
       value: 
