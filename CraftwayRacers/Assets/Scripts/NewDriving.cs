@@ -5,9 +5,11 @@ using UnityEngine;
 
 public class NewDriving : MonoBehaviour
 {
-    public float SteerSensitivity = 1.0f, Power=50f, AccelerationVal=0;
-    private float steerValue = 0;
+    public float SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power=50f,  CurrentSpeed=0f, MaxSpeed=100f, BrakePower=100f;
+    public Vector3 CenterOfMass;
+    private float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f;
     private PlayerControls playerControls;
+    private Rigidbody carRb;
 
     /// <summary>
     /// We need the enum (named integer) do diffrentiate between front and rear so steering 
@@ -40,6 +42,10 @@ public class NewDriving : MonoBehaviour
         playerControls.Movement.Reverse.canceled += ctx => ReverseOff();
         playerControls.Movement.Steer.performed += ctx => steerValue = ctx.ReadValue<float>();
         playerControls.Movement.Steer.canceled += ctx => steerValue = 0;
+        carRb = GetComponent<Rigidbody>();
+        //carRb.centerOfMass = CenterOfMass;
+        StartCoroutine(CalcSpeed());
+
     }
 
     // Update is called once per frame
@@ -47,43 +53,84 @@ public class NewDriving : MonoBehaviour
     {
         SteerPlayer();
         MovePlayer();
+        Brake();
     }
     void MovePlayer()
     {
         foreach(Wheel wheel in wheels) 
         {
-            wheel.wheelCollider.motorTorque= (AccelerationVal * Power);
+            wheel.wheelCollider.motorTorque = ((ForwardVal + ReverseVal) * Power);
+        }
+    }
+    IEnumerator CalcSpeed()
+    {
+        while (true)
+        {
+            Vector3 prevPos = transform.position;
+            yield return new WaitForFixedUpdate();
+            CurrentSpeed = (float)Math.Round((Vector3.Distance(transform.position, prevPos) / Time.deltaTime), 0);
+            //print(CurrentSpeed);
+        }
+    }
+    void Brake()
+    {
+        if (CurrentSpeed > 10f && ReverseVal < 0)
+        {
+            foreach (Wheel wheel in wheels)
+            {
+                wheel.wheelCollider.brakeTorque = (BrakePower * 100);
+                //print("BeingApplied" + wheel.wheelCollider.brakeTorque);
+            }
+        }
+        else if (CurrentSpeed < 10f)
+        {
+            foreach (Wheel wheel in wheels)
+            {
+                wheel.wheelCollider.brakeTorque = 0;
+                //print("NOTBEINGAPPLIED " + wheel.wheelCollider.brakeTorque);
+            }
         }
     }
     void SteerPlayer()
     {
-        foreach (var wheel in wheels)
-        {
-            if (wheel.AxleType == Axle.Front)
+       foreach (Wheel wheel in wheels)
             {
-                var steerAngle = steerValue * SteerSensitivity * 30f;
-                wheel.wheelCollider.steerAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
-                
+                if (wheel.AxleType == Axle.Front)
+                {
+                    var steerAngle = steerValue * SteerSensitivity * MaxSteerAngle * (1 - (CurrentSpeed / MaxSpeed));
+                    var finalAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
+                    //Inverse relationship; as current speed increases, 25 will be multiplied by a smaller decimal to get a smaller angle. (To make it harder to accidently oversteer at high speed)       
+                    //Lerp is included so that steering isn't instantanious
+                    wheel.wheelCollider.steerAngle = finalAngle;
+                    //wheel.wheelModel.transform.localEulerAngles = new Vector3(wheel.wheelModel.transform.eulerAngles.x, finalAngle, wheel.wheelModel.transform.eulerAngles.z);
+
+                }
             }
+        foreach (Wheel wheel in wheels)
+        {
+            Quaternion rot;
+            Vector3 pos;
+            wheel.wheelCollider.GetWorldPose(out pos, out rot);
+            wheel.wheelModel.transform.position = pos;
+            wheel.wheelModel.transform.rotation = rot;
         }
     }
 
     private void AccelerateOn()
     {
-        AccelerationVal = 1;
-        print("HELLO");
+        ForwardVal = 1;
     }
     private void AccelerateOff()
     {
-        AccelerationVal = 0;
+        ForwardVal = 0;
 
     }
     private void ReverseOn()
     {
-        AccelerationVal = -1;
+        ReverseVal = -1;
     }
     private void ReverseOff()
     {
-        AccelerationVal = 0;
+        ReverseVal = 0;
     }
 }
