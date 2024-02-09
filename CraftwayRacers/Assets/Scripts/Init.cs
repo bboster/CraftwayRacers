@@ -22,6 +22,6 @@ public class Init : MonoBehaviour
 
         //}
 
-        //relay.SetActive(true);
+        relay.SetActive(true);
     }
 }
