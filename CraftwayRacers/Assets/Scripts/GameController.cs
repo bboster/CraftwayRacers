@@ -17,5 +17,4 @@ public class GameController : NetworkBehaviour
             serializer.SerializeValue(ref PlayerPositions);
         }
     }
-
 }
