@@ -7,7 +7,7 @@ using UnityEngine.InputSystem;
 
 public class NewDriving : MonoBehaviour
 {
-    public float TerrainDetectorLength = 2f, SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power = 50f, CurrentSpeed = 0f, MaxSpeed = 100f, BrakePower = 100f;
+    public float TerrainDetectorLength = 2f, SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power = 50f, CurrentSpeed = 0f, MaxSpeed = 50f, BrakePower = 100f;
     public Vector3 CenterOfMass;
     private float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f;
     private PlayerControls playerControls;
