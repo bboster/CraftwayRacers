@@ -43,7 +43,7 @@ public class NewDriving : MonoBehaviour
         PlayerInput.currentActionMap.FindAction("Reverse").canceled += ctx => ReverseOff();
         PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
         PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
-        PlayerInput.currentActionMap.FindAction("Quit").performed += ctx => Quit();
+        //PlayerInput.currentActionMap.FindAction("Quit").performed += ctx => Quit();
 
 
         /*
@@ -62,7 +62,7 @@ public class NewDriving : MonoBehaviour
         carRb = GetComponent<Rigidbody>();
         //carRb.centerOfMass = CenterOfMass;
         StartCoroutine(CalcSpeed());
-        StartCoroutine(DetectTerrain());
+        //StartCoroutine(DetectTerrain());
 
     }
     public void ChangeDriveValue(Enum TerrainType)
@@ -143,6 +143,7 @@ public class NewDriving : MonoBehaviour
 
             }
         }
+        
         foreach (Wheel wheel in wheels)
         {
             Quaternion rot;
