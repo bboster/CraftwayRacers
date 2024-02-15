@@ -1,15 +1,19 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class NewDriving : MonoBehaviour
 {
-    public float SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power=50f,  CurrentSpeed=0f, MaxSpeed=100f, BrakePower=100f;
+    public float TerrainDetectorLength = 2f, SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power = 50f, CurrentSpeed = 0f, MaxSpeed = 50f, BrakePower = 100f;
     public Vector3 CenterOfMass;
     private float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f;
     private PlayerControls playerControls;
     private Rigidbody carRb;
+    public PlayerInput PlayerInput;
+    public bool IsOnOffRoad = false, IsOnSlickRoad = false, IsOnNormalRoad = false;
 
     /// <summary>
     /// We need the enum (named integer) do diffrentiate between front and rear so steering 
@@ -17,8 +21,7 @@ public class NewDriving : MonoBehaviour
     /// </summary>
     public enum Axle
     {
-        Front,
-        Rear
+        Front, Rear
     }
     /// <summary>
     /// A struct (structure) is a custom datatype. It allows you to make a list of wheels.
@@ -34,6 +37,16 @@ public class NewDriving : MonoBehaviour
     public List<Wheel> wheels;
     void Start()
     {
+        PlayerInput.currentActionMap.FindAction("Accelerate").started += ctx => AccelerateOn();
+        PlayerInput.currentActionMap.FindAction("Accelerate").canceled += ctx => AccelerateOff();
+        PlayerInput.currentActionMap.FindAction("Reverse").started += ctx => ReverseOn();
+        PlayerInput.currentActionMap.FindAction("Reverse").canceled += ctx => ReverseOff();
+        PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
+        PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
+        //PlayerInput.currentActionMap.FindAction("Quit").performed += ctx => Quit();
+
+
+        /*
         playerControls = new PlayerControls();
         playerControls.Movement.Enable();
         playerControls.Movement.Accelerate.started += ctx => AccelerateOn();
@@ -42,10 +55,33 @@ public class NewDriving : MonoBehaviour
         playerControls.Movement.Reverse.canceled += ctx => ReverseOff();
         playerControls.Movement.Steer.performed += ctx => steerValue = ctx.ReadValue<float>();
         playerControls.Movement.Steer.canceled += ctx => steerValue = 0;
+        */
+
+
+
         carRb = GetComponent<Rigidbody>();
         //carRb.centerOfMass = CenterOfMass;
         StartCoroutine(CalcSpeed());
+        //StartCoroutine(DetectTerrain());
 
+    }
+    public void ChangeDriveValue(Enum TerrainType)
+    {
+
+    }
+    IEnumerator DetectTerrain()
+    {
+        while (true)
+        {
+            RaycastHit hit;
+            Physics.Raycast(transform.position, Vector3.down, out hit, TerrainDetectorLength);
+            if (hit.collider.CompareTag("OffRoad"))
+            {
+                IsOnOffRoad = true;
+                print("HERLLO");
+            }
+            yield return new WaitForSeconds(1f);
+        }
     }
 
     // Update is called once per frame
@@ -54,10 +90,11 @@ public class NewDriving : MonoBehaviour
         SteerPlayer();
         MovePlayer();
         Brake();
+        DetectTerrain();
     }
     void MovePlayer()
     {
-        foreach(Wheel wheel in wheels) 
+        foreach (Wheel wheel in wheels)
         {
             wheel.wheelCollider.motorTorque = ((ForwardVal + ReverseVal) * Power);
         }
@@ -93,19 +130,20 @@ public class NewDriving : MonoBehaviour
     }
     void SteerPlayer()
     {
-       foreach (Wheel wheel in wheels)
+        foreach (Wheel wheel in wheels)
+        {
+            if (wheel.AxleType == Axle.Front)
             {
-                if (wheel.AxleType == Axle.Front)
-                {
-                    var steerAngle = steerValue * SteerSensitivity * MaxSteerAngle * (1 - (CurrentSpeed / MaxSpeed));
-                    var finalAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
-                    //Inverse relationship; as current speed increases, 25 will be multiplied by a smaller decimal to get a smaller angle. (To make it harder to accidently oversteer at high speed)       
-                    //Lerp is included so that steering isn't instantanious
-                    wheel.wheelCollider.steerAngle = finalAngle;
-                    //wheel.wheelModel.transform.localEulerAngles = new Vector3(wheel.wheelModel.transform.eulerAngles.x, finalAngle, wheel.wheelModel.transform.eulerAngles.z);
+                var steerAngle = steerValue * SteerSensitivity * MaxSteerAngle * (1 - (CurrentSpeed / MaxSpeed));
+                var finalAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
+                //Inverse relationship; as current speed increases, 25 will be multiplied by a smaller decimal to get a smaller angle. (To make it harder to accidently oversteer at high speed)       
+                //Lerp is included so that steering isn't instantanious
+                wheel.wheelCollider.steerAngle = finalAngle;
+                //wheel.wheelModel.transform.localEulerAngles = new Vector3(wheel.wheelModel.transform.eulerAngles.x, finalAngle, wheel.wheelModel.transform.eulerAngles.z);
 
-                }
             }
+        }
+        
         foreach (Wheel wheel in wheels)
         {
             Quaternion rot;
@@ -132,5 +170,10 @@ public class NewDriving : MonoBehaviour
     private void ReverseOff()
     {
         ReverseVal = 0;
+    }
+    public void Quit()
+    {
+        Application.Quit();
+        EditorApplication.ExitPlaymode();
     }
 }
