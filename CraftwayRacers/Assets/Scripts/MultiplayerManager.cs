@@ -9,14 +9,18 @@ public class MultiplayerManager : MonoBehaviour
     public Vector3 Player1Spawn;
     public Vector3 Player2Spawn;
     public Vector3 Player3Spawn;
-    public Vector4 Player4Spawn;
+    public Vector3 Player4Spawn;
 
     public PlayerInput PlayerCount;
 
     // Start is called before the first frame update
     void Start() //Tells the players' starting positions 
     {
-        
+        if(PlayerCount.playerIndex == 0)
+        {
+            transform.position = new Vector3(Player1Spawn.x, Player1Spawn.y, Player1Spawn.z);
+        }
+
         if(PlayerCount.playerIndex == 1)
         {
             transform.position = new Vector3(Player2Spawn.x, Player2Spawn.y, Player2Spawn.z);

@@ -154,7 +154,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7076532454101911709}
-  m_LocalRotation: {x: 0.15558179, y: 0.000000016061275, z: -0.0000000025296454, w: 0.987823}
+  m_LocalRotation: {x: 0.15558177, y: -0.00000002110136, z: 0.0000000033234568, w: 0.987823}
   m_LocalPosition: {x: 0.24, y: 4.59, z: -14.21}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7076532454101911709}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 72ece51f2901e7445ab60da3685d6b5f, type: 3}
   m_Name: 
@@ -263,7 +263,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7076532454101911709}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 45e653bab7fb20e499bda25e1b646fea, type: 3}
   m_Name: 
@@ -310,6 +310,7 @@ GameObject:
   - component: {fileID: 5494100142946374046}
   - component: {fileID: 5109112230567737478}
   - component: {fileID: 2964461916946570463}
+  - component: {fileID: 4710195796613315504}
   m_Layer: 0
   m_Name: CarModel_Body
   m_TagString: Untagged
@@ -324,7 +325,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8322709740399207785}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: -0.7071068, z: 0, w: 0.7071068}
   m_LocalPosition: {x: -0.24, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -333,7 +334,7 @@ Transform:
   - {fileID: 8097702210785267358}
   m_Father: {fileID: 2577244774722663664}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
 --- !u!33 &8125451808017550768
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -498,7 +499,24 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 3384573440596647614}
+--- !u!114 &4710195796613315504
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8322709740399207785}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player1Spawn: {x: 1.9104, y: 35, z: 119.24966}
+  Player2Spawn: {x: -57.9, y: 35, z: 116.3}
+  Player3Spawn: {x: -80.7, y: 35, z: 115.2}
+  Player4Spawn: {x: -21.6, y: 34.8, z: 116.3}
+  PlayerCount: {fileID: 2964461916946570463}
 --- !u!1001 &4227709980407404038
 PrefabInstance:
   m_ObjectHideFlags: 0
