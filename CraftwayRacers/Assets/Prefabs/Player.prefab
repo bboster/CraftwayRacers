@@ -10,7 +10,6 @@ GameObject:
   m_Component:
   - component: {fileID: 209825787394963326}
   - component: {fileID: 4108632928894837207}
-  - component: {fileID: 6330166625761166236}
   - component: {fileID: -2797988819566489879}
   - component: {fileID: 255650574910568417}
   - component: {fileID: -6106921631399193158}
@@ -57,19 +56,6 @@ MonoBehaviour:
   SpawnWithObservers: 1
   DontDestroyWithOwner: 0
   AutoObjectParentSync: 1
---- !u!114 &6330166625761166236
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3631748060998290252}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e73e9d3372df18a4f97034898d93dff0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  spd: 40
 --- !u!114 &-2797988819566489879
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -82,7 +68,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Actions: {fileID: -944628639613478452, guid: 3dcd885b65ee63e4a9b84668bad71109, type: 3}
+  m_Actions: {fileID: -944628639613478452, guid: a1d23339e5ba7794c9156ea5cb101164, type: 3}
   m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
@@ -101,7 +87,7 @@ MonoBehaviour:
     m_ActionName: Test/Movement[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
-  m_DefaultActionMap: Test
+  m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
   m_Camera: {fileID: 0}
 --- !u!54 &255650574910568417
