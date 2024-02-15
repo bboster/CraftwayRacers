@@ -24,7 +24,7 @@ public class GameController : NetworkBehaviour
 
     private void Update()
     {
-        Debug.Log(playerPositions.Value.PlayerPositions[0]);
+        //Debug.Log(playerPositions.Value.PlayerPositions[0]);
     }
 
     public struct PlayerPosition : INetworkSerializable

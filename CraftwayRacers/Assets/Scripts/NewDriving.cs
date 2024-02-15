@@ -174,6 +174,6 @@ public class NewDriving : MonoBehaviour
     public void Quit()
     {
         Application.Quit();
-        EditorApplication.ExitPlaymode();
+        //EditorApplication.ExitPlaymode();
     }
 }
