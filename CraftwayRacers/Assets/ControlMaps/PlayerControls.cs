@@ -62,6 +62,24 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Flip"",
+                    ""type"": ""Button"",
+                    ""id"": ""cca77d14-3d6f-4b59-9e6d-0979f00fe9ba"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Rotate"",
+                    ""type"": ""Button"",
+                    ""id"": ""9810caee-9baf-494e-8593-7cb0a703af78"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +170,28 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""096c9ed1-bcb5-4f13-86ea-9e89be7f2291"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flip"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f6ed7d1e-54dd-4c80-a582-53582629f6da"",
+                    ""path"": ""<Gamepad>/dpad/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Rotate"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +204,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Reverse = m_Movement.FindAction("Reverse", throwIfNotFound: true);
         m_Movement_Steer = m_Movement.FindAction("Steer", throwIfNotFound: true);
         m_Movement_Restart = m_Movement.FindAction("Restart", throwIfNotFound: true);
+        m_Movement_Flip = m_Movement.FindAction("Flip", throwIfNotFound: true);
+        m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +271,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Reverse;
     private readonly InputAction m_Movement_Steer;
     private readonly InputAction m_Movement_Restart;
+    private readonly InputAction m_Movement_Flip;
+    private readonly InputAction m_Movement_Rotate;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -237,6 +281,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Reverse => m_Wrapper.m_Movement_Reverse;
         public InputAction @Steer => m_Wrapper.m_Movement_Steer;
         public InputAction @Restart => m_Wrapper.m_Movement_Restart;
+        public InputAction @Flip => m_Wrapper.m_Movement_Flip;
+        public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +304,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
+            @Flip.started += instance.OnFlip;
+            @Flip.performed += instance.OnFlip;
+            @Flip.canceled += instance.OnFlip;
+            @Rotate.started += instance.OnRotate;
+            @Rotate.performed += instance.OnRotate;
+            @Rotate.canceled += instance.OnRotate;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -274,6 +326,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
+            @Flip.started -= instance.OnFlip;
+            @Flip.performed -= instance.OnFlip;
+            @Flip.canceled -= instance.OnFlip;
+            @Rotate.started -= instance.OnRotate;
+            @Rotate.performed -= instance.OnRotate;
+            @Rotate.canceled -= instance.OnRotate;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -297,5 +355,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnReverse(InputAction.CallbackContext context);
         void OnSteer(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
+        void OnFlip(InputAction.CallbackContext context);
+        void OnRotate(InputAction.CallbackContext context);
     }
 }
