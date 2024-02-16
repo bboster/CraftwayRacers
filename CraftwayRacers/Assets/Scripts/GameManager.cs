@@ -16,7 +16,7 @@ public class GameManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            SceneManager.LoadScene("DavidScene");
+            //SceneManager.LoadScene("DavidScene");
         }
     }
 }
