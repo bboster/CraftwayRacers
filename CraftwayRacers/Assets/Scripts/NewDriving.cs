@@ -7,9 +7,9 @@ using UnityEngine.InputSystem;
 
 public class NewDriving : MonoBehaviour
 {
-    public float TerrainDetectorLength = 2f, SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power = 50f, CurrentSpeed = 0f, MaxSpeed = 50f, BrakePower = 100f;
-    public Vector3 CenterOfMass;
-    private float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f;
+    public float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f, TerrainDetectorLength = 2f, SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power = 50f, CurrentSpeed = 0f, MaxSpeed = 50f, BrakePower = 100f;
+    public Transform CenterOfMass;
+    //private float ;
     private PlayerControls playerControls;
     private Rigidbody carRb;
     public PlayerInput PlayerInput;
@@ -60,7 +60,8 @@ public class NewDriving : MonoBehaviour
 
 
         carRb = GetComponent<Rigidbody>();
-        //carRb.centerOfMass = CenterOfMass;
+        if(CenterOfMass != null) { carRb.centerOfMass = new Vector3(CenterOfMass.position.x, CenterOfMass.position.y, CenterOfMass.position.z); }
+            
         StartCoroutine(CalcSpeed());
         //StartCoroutine(DetectTerrain());
 
@@ -96,7 +97,10 @@ public class NewDriving : MonoBehaviour
     {
         foreach (Wheel wheel in wheels)
         {
-            wheel.wheelCollider.motorTorque = ((ForwardVal + ReverseVal) * Power);
+            if(CurrentSpeed < MaxSpeed)
+            {
+                wheel.wheelCollider.motorTorque = ((ForwardVal + ReverseVal) * Power);
+            }          
         }
     }
     IEnumerator CalcSpeed()
@@ -111,22 +115,26 @@ public class NewDriving : MonoBehaviour
     }
     void Brake()
     {
-        if (CurrentSpeed > 10f && ReverseVal < 0)
+        foreach (Wheel wheel in wheels)
         {
-            foreach (Wheel wheel in wheels)
+            if(wheel.AxleType== Axle.Rear)
             {
-                wheel.wheelCollider.brakeTorque = (BrakePower * 100);
-                //print("BeingApplied" + wheel.wheelCollider.brakeTorque);
+                if (CurrentSpeed > 8f && ReverseVal < 0)
+                {
+                    wheel.wheelCollider.brakeTorque = (BrakePower * 1000);
+                    carRb.drag = 1f;
+                    //print("BeingApplied" + wheel.wheelCollider.brakeTorque);
+                    
+                }
+                else if (CurrentSpeed < 8f)
+                {
+                    wheel.wheelCollider.brakeTorque = 0;
+                    carRb.drag = 0.05f;
+                    //print("NOTBEINGAPPLIED " + wheel.wheelCollider.brakeTorque);
+
+                }
             }
-        }
-        else if (CurrentSpeed < 10f)
-        {
-            foreach (Wheel wheel in wheels)
-            {
-                wheel.wheelCollider.brakeTorque = 0;
-                //print("NOTBEINGAPPLIED " + wheel.wheelCollider.brakeTorque);
-            }
-        }
+        }    
     }
     void SteerPlayer()
     {
