@@ -32,7 +32,9 @@ public class RandomTrapPlacement : NetworkBehaviour
         {
             int choice = Random.Range(0, trapPositions.Count);
 
-            Instantiate(trapTest, parent.transform).transform.localPosition = trapPositions[choice].localPosition;
+            GameObject local = Instantiate(trapTest, trapPositions[choice].transform.position, Quaternion.identity);
+            local.GetComponent<NetworkObject>().Spawn(true);
+            //local.transform.position = trapPositions[choice].position;
 
             GameObject obj = Instantiate(trapTest, netParent.transform);
             obj.GetComponent<NetworkObject>().Spawn(true);
