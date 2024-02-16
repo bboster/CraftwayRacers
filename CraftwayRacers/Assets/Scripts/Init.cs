@@ -25,6 +25,7 @@ public class Init : MonoBehaviour
             ipadCam.SetActive(true);
             ipadCam.GetComponent<CinemachineVirtualCamera>().Priority = 100;
             iPadUI.SetActive(true);
+            iPadMap.SetActive(true);
             codeTxt.SetActive(false);
         }
         else

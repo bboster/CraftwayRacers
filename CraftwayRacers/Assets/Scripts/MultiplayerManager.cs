@@ -13,9 +13,16 @@ public class MultiplayerManager : MonoBehaviour
 
     public PlayerInput PlayerCount;
 
+    [SerializeField] private GameObject parent;
+
     // Start is called before the first frame update
     void Start() //Tells the players' starting positions 
     {
+        if(Application.platform == RuntimePlatform.Android)
+        {
+            Destroy(parent);
+        }
+
         if(PlayerCount.playerIndex == 0)
         {
             transform.position = new Vector3(Player1Spawn.x, Player1Spawn.y, Player1Spawn.z);
