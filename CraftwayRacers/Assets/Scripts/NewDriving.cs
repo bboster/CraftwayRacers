@@ -63,6 +63,7 @@ public class NewDriving : MonoBehaviour
         */
 
 
+
         if(CenterOfMass == null)
         {
             CenterOfMass = GameObject.Find("CoM");

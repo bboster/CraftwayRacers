@@ -62,6 +62,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Pause"",
+                    ""type"": ""Button"",
+                    ""id"": ""d6e0ac0c-f2db-49c9-a52e-38768acd23b6"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -152,6 +161,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Restart"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e6d47509-d885-4995-916b-320692366dd1"",
+                    ""path"": ""<Keyboard>/p"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -164,6 +184,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Reverse = m_Movement.FindAction("Reverse", throwIfNotFound: true);
         m_Movement_Steer = m_Movement.FindAction("Steer", throwIfNotFound: true);
         m_Movement_Restart = m_Movement.FindAction("Restart", throwIfNotFound: true);
+        m_Movement_Pause = m_Movement.FindAction("Pause", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -229,6 +250,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Reverse;
     private readonly InputAction m_Movement_Steer;
     private readonly InputAction m_Movement_Restart;
+    private readonly InputAction m_Movement_Pause;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -237,6 +259,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Reverse => m_Wrapper.m_Movement_Reverse;
         public InputAction @Steer => m_Wrapper.m_Movement_Steer;
         public InputAction @Restart => m_Wrapper.m_Movement_Restart;
+        public InputAction @Pause => m_Wrapper.m_Movement_Pause;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -258,6 +281,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Restart.started += instance.OnRestart;
             @Restart.performed += instance.OnRestart;
             @Restart.canceled += instance.OnRestart;
+            @Pause.started += instance.OnPause;
+            @Pause.performed += instance.OnPause;
+            @Pause.canceled += instance.OnPause;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -274,6 +300,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Restart.started -= instance.OnRestart;
             @Restart.performed -= instance.OnRestart;
             @Restart.canceled -= instance.OnRestart;
+            @Pause.started -= instance.OnPause;
+            @Pause.performed -= instance.OnPause;
+            @Pause.canceled -= instance.OnPause;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -297,5 +326,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnReverse(InputAction.CallbackContext context);
         void OnSteer(InputAction.CallbackContext context);
         void OnRestart(InputAction.CallbackContext context);
+        void OnPause(InputAction.CallbackContext context);
     }
 }
