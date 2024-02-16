@@ -512,11 +512,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Spawn: {x: 36.81, y: 456.65, z: -60.53}
-  Player2Spawn: {x: 36.81, y: 456.65, z: -60.53}
-  Player3Spawn: {x: 36.81, y: 456.65, z: -60.53}
-  Player4Spawn: {x: 36.81, y: 456.65, z: -60.53}
+  Player1Spawn: {x: 32.176804, y: 458, z: -64.63989}
+  Player2Spawn: {x: 32.176804, y: 458, z: -58.39}
+  Player3Spawn: {x: 41.64, y: 458, z: -63.42}
+  Player4Spawn: {x: 41.3, y: 458, z: -55.5}
   PlayerCount: {fileID: 2964461916946570463}
+  parent: {fileID: 0}
 --- !u!1001 &4227709980407404038
 PrefabInstance:
   m_ObjectHideFlags: 0
