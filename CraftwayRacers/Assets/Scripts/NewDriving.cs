@@ -7,10 +7,10 @@ using UnityEngine.InputSystem;
 
 public class NewDriving : MonoBehaviour
 {
-    public float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f, TerrainDetectorLength = 2f, SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power = 50f, CurrentSpeed = 0f, MaxSpeed = 50f, BrakePower = 100f;
-    public Transform CenterOfMass;
-    //private float ;
+    public float  TerrainDetectorLength = 2f, SteerSensitivity = 1.0f, MaxSteerAngle = 30f, Power = 50f, CurrentSpeed = 0f, MaxSpeed = 50f, BrakePower = 100f, DownForceVal=5f;
+    private float steerValue = 0, ForwardVal = 0f, ReverseVal = 0f;
     private PlayerControls playerControls;
+    public GameObject CenterOfMass;
     private Rigidbody carRb;
     public PlayerInput PlayerInput;
     public bool IsOnOffRoad = false, IsOnSlickRoad = false, IsOnNormalRoad = false;
@@ -23,6 +23,10 @@ public class NewDriving : MonoBehaviour
     {
         Front, Rear
     }
+    public enum WheelSide
+    {
+        Left, Right
+    }
     /// <summary>
     /// A struct (structure) is a custom datatype. It allows you to make a list of wheels.
     /// It NEEDS to be serializeable so that we can see our custom datatype in the inspector.
@@ -33,6 +37,7 @@ public class NewDriving : MonoBehaviour
         public GameObject wheelModel;
         public WheelCollider wheelCollider;
         public Axle AxleType;
+        public WheelSide SideType;
     }
     public List<Wheel> wheels;
     void Start()
@@ -58,10 +63,12 @@ public class NewDriving : MonoBehaviour
         */
 
 
-
+        if(CenterOfMass == null)
+        {
+            CenterOfMass = GameObject.Find("CoM");
+        }
         carRb = GetComponent<Rigidbody>();
-        if(CenterOfMass != null) { carRb.centerOfMass = new Vector3(CenterOfMass.position.x, CenterOfMass.position.y, CenterOfMass.position.z); }
-            
+        carRb.centerOfMass = CenterOfMass.transform.localPosition;
         StartCoroutine(CalcSpeed());
         //StartCoroutine(DetectTerrain());
 
@@ -92,6 +99,11 @@ public class NewDriving : MonoBehaviour
         MovePlayer();
         Brake();
         DetectTerrain();
+        AddDownForce();
+    }
+    void AddDownForce()
+    {
+        carRb.AddForce(-transform.up*DownForceVal*carRb.velocity.magnitude);
     }
     void MovePlayer()
     {
@@ -119,10 +131,10 @@ public class NewDriving : MonoBehaviour
         {
             if(wheel.AxleType== Axle.Rear)
             {
-                if (CurrentSpeed > 8f && ReverseVal < 0)
+                if (CurrentSpeed > 8f && (ReverseVal+ForwardVal) < 0)
                 {
-                    wheel.wheelCollider.brakeTorque = (BrakePower * 1000);
-                    carRb.drag = 1f;
+                    wheel.wheelCollider.brakeTorque = (BrakePower * 100);
+                    carRb.drag = .5f;
                     //print("BeingApplied" + wheel.wheelCollider.brakeTorque);
                     
                 }
@@ -142,13 +154,15 @@ public class NewDriving : MonoBehaviour
         {
             if (wheel.AxleType == Axle.Front)
             {
-                var steerAngle = steerValue * SteerSensitivity * MaxSteerAngle * (1 - (CurrentSpeed / MaxSpeed));
-                var finalAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
+                
+                //var steerAngle = steerValue * SteerSensitivity * MaxSteerAngle * (1 - (CurrentSpeed / MaxSpeed));
+                //var finalAngle = Mathf.Lerp(wheel.wheelCollider.steerAngle, steerAngle, 0.6f);
+                wheel.wheelCollider.steerAngle = steerValue * SteerSensitivity * MaxSteerAngle * (1 - (CurrentSpeed / (MaxSpeed+30)));
                 //Inverse relationship; as current speed increases, 25 will be multiplied by a smaller decimal to get a smaller angle. (To make it harder to accidently oversteer at high speed)       
                 //Lerp is included so that steering isn't instantanious
-                wheel.wheelCollider.steerAngle = finalAngle;
+                //wheel.wheelCollider.steerAngle = finalAngle;
                 //wheel.wheelModel.transform.localEulerAngles = new Vector3(wheel.wheelModel.transform.eulerAngles.x, finalAngle, wheel.wheelModel.transform.eulerAngles.z);
-
+                
             }
         }
         
