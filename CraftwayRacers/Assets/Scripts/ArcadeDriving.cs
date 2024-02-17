@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static UnityEditor.PlayerSettings;
 
 public class ArcadeDriving : MonoBehaviour
 {
@@ -10,9 +11,11 @@ public class ArcadeDriving : MonoBehaviour
     private Rigidbody carRb;
     public PlayerInput PlayerInput;
     public float MaxSuspensionLength = 1f, springForce = 100f, springDamp = 10f;
+    private float steerValue =0;
 
     public Transform[] SpringMountList = new Transform[4];
     private float[] lastVelocity = new float[4];
+    public Vector3 relativeMovement;
 
 
     void Start()
@@ -27,6 +30,8 @@ public class ArcadeDriving : MonoBehaviour
         PlayerInput.currentActionMap.FindAction("Flip").performed += ctx => Flip();
         PlayerInput.currentActionMap.FindAction("Rotate").performed += ctx => Rotate();
         */
+        PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
+        PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
         if (CenterOfMass == null)
         {
             CenterOfMass = GameObject.Find("CoM");
@@ -46,7 +51,6 @@ public class ArcadeDriving : MonoBehaviour
         {
             RaycastHit hit;
             Debug.DrawRay(springMount.transform.position, -transform.up, Color.red, MaxSuspensionLength);
-            
 
             if (Physics.Raycast(springMount.transform.position, -transform.up, out hit, MaxSuspensionLength))
             {
@@ -64,6 +68,26 @@ public class ArcadeDriving : MonoBehaviour
 
                 carRb.AddForceAtPosition(hit.normal * springForceMagnitude, springMount.transform.position);
                 lastVelocity[i] = compression; //This works because this is in fixedupdate.
+
+                relativeMovement = -1 * carRb.GetPointVelocity(springMount.transform.position);
+                Vector3 tangentForward = -Vector3.Cross(hit.normal, transform.right);
+                //Makes a forward vector that is perpendicular to the normal and the right vector "cross product" (google it)
+                //Negating the cross product ensures that the resulting tangent vector always points in the direction opposite to the object's right direction
+                //For some reason, it points opposite to the blue (z) without the negative
+                Vector3 tangentRight = Vector3.Cross(hit.normal, transform.forward);
+                //these two tangents will be used to apply force to the car according to if its angled on a surface
+                Vector3 forward;
+                if (i == 2 || i == 3)
+                {
+                    forward = tangentForward;
+                }
+                else
+                {
+                    forward = (tangentForward + tangentRight * (steerValue)).normalized;
+                }
+                Debug.DrawLine(springMount.transform.position, springMount.transform.position + forward * 10);
+
+
             }
 
 

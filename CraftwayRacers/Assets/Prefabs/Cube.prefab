@@ -199,6 +199,7 @@ GameObject:
   - component: {fileID: 1893745782129250765}
   - component: {fileID: 6304801475765648568}
   - component: {fileID: 2132829456590734278}
+  - component: {fileID: 2658361692177055679}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -311,15 +312,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CenterOfMass: {fileID: 1699503461360918882}
-  PlayerInput: {fileID: 0}
+  PlayerInput: {fileID: 2658361692177055679}
   MaxSuspensionLength: 1
-  springForce: 50
-  springDamp: 15
+  springForce: 100
+  springDamp: 100
   SpringMountList:
   - {fileID: 5118843824432404474}
   - {fileID: 8032594322573940692}
   - {fileID: 717826876620771587}
   - {fileID: 5634150761208822315}
+  relativeMovement: {x: 0, y: 0, z: 0}
 --- !u!54 &2132829456590734278
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -347,6 +349,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2658361692177055679
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7211014793976465666}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: a1d23339e5ba7794c9156ea5cb101164, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Movement
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 2007960706820612185}
 --- !u!1 &7280408066443457741
 GameObject:
   m_ObjectHideFlags: 0

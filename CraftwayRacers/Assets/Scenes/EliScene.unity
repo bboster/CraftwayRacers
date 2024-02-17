@@ -4737,10 +4737,6 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
-    - target: {fileID: 2132829456590734278, guid: e0737c35d3c1b8d47a3478efdcf166db, type: 3}
-      propertyPath: m_Mass
-      value: 10
-      objectReference: {fileID: 0}
     - target: {fileID: 5180572192612237893, guid: e0737c35d3c1b8d47a3478efdcf166db, type: 3}
       propertyPath: m_RootOrder
       value: 4
@@ -4784,14 +4780,6 @@ PrefabInstance:
     - target: {fileID: 5180572192612237893, guid: e0737c35d3c1b8d47a3478efdcf166db, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6304801475765648568, guid: e0737c35d3c1b8d47a3478efdcf166db, type: 3}
-      propertyPath: springDamp
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6304801475765648568, guid: e0737c35d3c1b8d47a3478efdcf166db, type: 3}
-      propertyPath: springForce
-      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 7211014793976465666, guid: e0737c35d3c1b8d47a3478efdcf166db, type: 3}
       propertyPath: m_Name
