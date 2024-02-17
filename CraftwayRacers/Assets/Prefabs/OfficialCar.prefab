@@ -554,6 +554,7 @@ MonoBehaviour:
   Player3Spawn: {x: 36.81, y: 456.65, z: -60.53}
   Player4Spawn: {x: 36.81, y: 456.65, z: -60.53}
   PlayerCount: {fileID: 2964461916946570463}
+  parent: {fileID: 0}
 --- !u!1001 &4227709980407404038
 PrefabInstance:
   m_ObjectHideFlags: 0

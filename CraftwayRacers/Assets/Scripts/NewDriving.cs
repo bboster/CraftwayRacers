@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UIElements;
 
 public class NewDriving : MonoBehaviour
 {
@@ -48,6 +49,9 @@ public class NewDriving : MonoBehaviour
         PlayerInput.currentActionMap.FindAction("Reverse").canceled += ctx => ReverseOff();
         PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
         PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
+        PlayerInput.currentActionMap.FindAction("Flip").performed += ctx => Flip();
+        PlayerInput.currentActionMap.FindAction("Rotate").performed += ctx => Rotate();
+
         //PlayerInput.currentActionMap.FindAction("Quit").performed += ctx => Quit();
 
 
@@ -72,6 +76,16 @@ public class NewDriving : MonoBehaviour
         StartCoroutine(CalcSpeed());
         //StartCoroutine(DetectTerrain());
 
+    }
+    public void Rotate()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y + 5f, transform.position.z);
+        transform.Rotate(0,90,0);
+    }
+    public void Flip()
+    {
+        transform.position = new Vector3(transform.position.x, transform.position.y+5f, transform.position.z);
+        transform.Rotate(0,0,180);
     }
     public void ChangeDriveValue(Enum TerrainType)
     {
