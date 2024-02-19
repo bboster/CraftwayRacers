@@ -60,7 +60,7 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "New action",
+                    "name": "Test",
                     "type": "Value",
                     "id": "9bf49e26-a6c5-432f-ba15-28ffa215fd48",
                     "expectedControlType": "Axis",
@@ -187,7 +187,7 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Test",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
