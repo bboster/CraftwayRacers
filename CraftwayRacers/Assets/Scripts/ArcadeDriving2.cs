@@ -5,9 +5,10 @@ using UnityEngine;
 public class ArcadeDriving2 : MonoBehaviour
 {
     public Transform[] SpringMountList = new Transform[4];
-    public float MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f;
+    public GameObject[] Wheels = new GameObject[4]; 
+    public float MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, TireGrip=1f, TireMass = 1f;
     public RaycastHit[] HitList = new RaycastHit[4];
-    //public AnimationCurve FrictionCurve;
+    public AnimationCurve FrictionCurve;
     public Rigidbody CarRb;
     void Start()
     {
@@ -20,7 +21,7 @@ public class ArcadeDriving2 : MonoBehaviour
         {
 
             Suspension(SpringMountList[i], i);
-            //Steering(SpringMountList[i], i);
+            SteeringForce(SpringMountList[i], i);
         }
     }
     public bool IsGrounded(Transform springLoc, int springNum)
@@ -32,24 +33,32 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         return false;
     }
-    public void Steering(Transform springLoc, int springNum)
+    public void SteeringForce(Transform springLoc, int springNum)
     {
-        /*
         if (IsGrounded(springLoc, springNum))
         {
+            /*
+            Vector3 wheelPos = Wheels[springNum].transform.position;
+            wheelPos = new Vector3(HitList[springNum].point.x, HitList[springNum].point.y + WheelRadius, HitList[springNum].point.z);
+
+            Vector3 steeringDir = Wheels[springNum].transform.right;
             Vector3 ContactPoint = HitList[springNum].point;
-            GameObject obj = new GameObject("NewObject");
-            Transform temp = obj.transform;
-            temp.position = ContactPoint; //Putting a vector3 in a transform
 
-            Vector3 steeringDirection = temp.right;
-            Vector3 tireWorldVal = CarRb.GetPointVelocity(HitList[springNum].point);
-            float steeringValue = Vector3.Dot(steeringDirection, tireWorldVal);
+            Vector3 tireWorldVel = CarRb.GetPointVelocity(wheelPos);
+            float steeringValue = Vector3.Dot(steeringDir, tireWorldVel);
+            float velChangeByFriction = (-steeringValue * TireGrip) /Time.fixedDeltaTime;
 
-
-            Debug.DrawLine(ContactPoint, ContactPoint+steeringDirection*10);
-            //float velBasedOnGrip = -steeringValue * FrictionCurve;
-        }*/
+            Debug.DrawLine(wheelPos, wheelPos+steeringDir*10, Color.red);
+            //Remember: Force = Mass * acceleration
+            CarRb.AddForceAtPosition(TireMass * steeringDir * velChangeByFriction, wheelPos);  
+            */
+            Vector3 steeringDir = SpringMountList[springNum].right;
+            Vector3 tireVel = CarRb.GetPointVelocity(SpringMountList[springNum].transform.position);
+            float steeringVel = Vector3.Dot(steeringDir, tireVel);
+            float desiredFrictionChange = (-steeringVel * TireGrip)/Time.fixedDeltaTime;
+            CarRb.AddForceAtPosition(steeringDir * TireMass * desiredFrictionChange, SpringMountList[springNum].transform.position);
+            Debug.DrawRay(SpringMountList[springNum].transform.position, SpringMountList[springNum].transform.position + steeringDir*10f, Color.yellow);
+        }
     }
     public void Suspension(Transform springLoc, int springNum)
     {
