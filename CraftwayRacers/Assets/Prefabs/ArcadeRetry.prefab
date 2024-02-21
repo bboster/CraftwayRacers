@@ -173,6 +173,7 @@ GameObject:
   - component: {fileID: 4418648139209448814}
   - component: {fileID: 2719232121463788315}
   - component: {fileID: 8463831188307706476}
+  - component: {fileID: 8898282404428010472}
   m_Layer: 0
   m_Name: ArcadeRetry
   m_TagString: Untagged
@@ -194,6 +195,7 @@ Transform:
   m_Children:
   - {fileID: 8422280243094699276}
   - {fileID: 5168592655380112378}
+  - {fileID: 943209605229601658}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -280,6 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3a689136fab484aae0f1e5dd53f3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  CenterOfMass: {fileID: 0}
   SpringMountList:
   - {fileID: 2582688679408088813}
   - {fileID: 6721896137605606668}
@@ -290,19 +293,65 @@ MonoBehaviour:
   - {fileID: 6315584708434828314}
   - {fileID: 1517812842459218249}
   - {fileID: 2568079050826280958}
+  TopSpeed: 20
   MaxSuspensionLength: 1
   SpringStrength: 10
   SpringDamper: 1
   WheelRadius: 0.5
   TireGrip: 1
   TireMass: 1
+  steerValue: 0
+  ACValue: 0
   FrictionCurve:
     serializedVersion: 2
     m_Curve: []
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+  TorqueCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0.5
+      inSlope: 1.9996204
+      outSlope: 1.9996204
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.19856404
+      value: 0.8845561
+      inSlope: 0.7240921
+      outSlope: 0.7240921
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.17942022
+    - serializedVersion: 3
+      time: 0.79697436
+      value: 0.7592872
+      inSlope: -1.49287
+      outSlope: -1.49287
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0.35
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
   CarRb: {fileID: 0}
+  PlayerInput: {fileID: 8898282404428010472}
 --- !u!54 &8463831188307706476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -330,6 +379,36 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8898282404428010472
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404501148670966401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62899f850307741f2a39c98a8b639597, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Actions: {fileID: -944628639613478452, guid: a1d23339e5ba7794c9156ea5cb101164, type: 3}
+  m_NotificationBehavior: 0
+  m_UIInputModule: {fileID: 0}
+  m_DeviceLostEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_DeviceRegainedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ControlsChangedEvent:
+    m_PersistentCalls:
+      m_Calls: []
+  m_ActionEvents: []
+  m_NeverAutoSwitchControlSchemes: 0
+  m_DefaultControlScheme: 
+  m_DefaultActionMap: Movement
+  m_SplitScreenIndex: -1
+  m_Camera: {fileID: 0}
 --- !u!1 &3604556752205056270
 GameObject:
   m_ObjectHideFlags: 0
@@ -362,6 +441,37 @@ Transform:
   - {fileID: 7262464434990187152}
   - {fileID: 2382327753340999627}
   - {fileID: 513342805157511720}
+  m_Father: {fileID: 8197311534957059613}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4175381287279619015
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 943209605229601658}
+  m_Layer: 0
+  m_Name: CoM
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &943209605229601658
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4175381287279619015}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 8197311534957059613}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

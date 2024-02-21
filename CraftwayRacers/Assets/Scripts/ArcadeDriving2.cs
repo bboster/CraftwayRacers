@@ -1,17 +1,30 @@
+using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class ArcadeDriving2 : MonoBehaviour
 {
+    public GameObject CenterOfMass;
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] Wheels = new GameObject[4]; 
-    public float MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, TireGrip=1f, TireMass = 1f;
+    public float TopSpeed =20f, MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, TireGrip=1f, TireMass = 1f, steerValue=0, ACValue=0, EnginePower=10f;
     public RaycastHit[] HitList = new RaycastHit[4];
-    public AnimationCurve FrictionCurve;
+    public AnimationCurve FrictionCurve, TorqueCurve;
     public Rigidbody CarRb;
+    public PlayerInput PlayerInput;
     void Start()
     {
+        PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
+        PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
+        PlayerInput.currentActionMap.FindAction("Test").performed += ctx => ACValue = ctx.ReadValue<float>();
+        PlayerInput.currentActionMap.FindAction("Test").canceled += ctx => ACValue = 0;
+        /*
+        if (CenterOfMass == null)
+        {
+            CenterOfMass = GameObject.Find("CoM");
+        }*/
         CarRb = GetComponent<Rigidbody>();
     }
     void Update()
@@ -19,9 +32,19 @@ public class ArcadeDriving2 : MonoBehaviour
         int temp = 0;
         for (int i = temp; i < SpringMountList.Length; i++)
         {
-
             Suspension(SpringMountList[i], i);
+            //SteeringForce(SpringMountList[i], i);
+            //DrivingForce(SpringMountList[i], i);
+        }
+    }
+    void FixedUpdate()
+    {
+        int temp = 0;
+        for (int i = temp; i < SpringMountList.Length; i++)
+        {
+            //Suspension(SpringMountList[i], i);
             SteeringForce(SpringMountList[i], i);
+            DrivingForce(SpringMountList[i], i);
         }
     }
     public bool IsGrounded(Transform springLoc, int springNum)
@@ -32,6 +55,21 @@ public class ArcadeDriving2 : MonoBehaviour
             return true;
         }
         return false;
+    }
+    public void DrivingForce(Transform springLoc, int springNum)
+    {
+        if (IsGrounded(springLoc, springNum))
+        {
+            Vector3 accelDir = SpringMountList[springNum].forward;
+            if(ACValue > 0.0f)
+            {
+                float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
+                float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed/TopSpeed));
+                float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
+                CarRb.AddForceAtPosition(accelDir * (availableTorque * EnginePower), SpringMountList[springNum].transform.position);
+            }
+        }
+        
     }
     public void SteeringForce(Transform springLoc, int springNum)
     {
@@ -52,7 +90,7 @@ public class ArcadeDriving2 : MonoBehaviour
             //Remember: Force = Mass * acceleration
             CarRb.AddForceAtPosition(TireMass * steeringDir * velChangeByFriction, wheelPos);  
             */
-            Vector3 steeringDir = SpringMountList[springNum].right;
+            Vector3 steeringDir = SpringMountList[springNum].right;           
             Vector3 tireVel = CarRb.GetPointVelocity(SpringMountList[springNum].transform.position);
             float steeringVel = Vector3.Dot(steeringDir, tireVel);
             float desiredFrictionChange = (-steeringVel * TireGrip)/Time.fixedDeltaTime;
