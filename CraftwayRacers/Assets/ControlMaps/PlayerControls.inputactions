@@ -60,9 +60,18 @@
                     "initialStateCheck": false
                 },
                 {
-                    "name": "Test",
+                    "name": "Gas",
                     "type": "Value",
                     "id": "9bf49e26-a6c5-432f-ba15-28ffa215fd48",
+                    "expectedControlType": "Axis",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                },
+                {
+                    "name": "Brake",
+                    "type": "Value",
+                    "id": "4f1374aa-ae24-45a1-9654-5fcc7c254e82",
                     "expectedControlType": "Axis",
                     "processors": "",
                     "interactions": "",
@@ -187,7 +196,18 @@
                     "interactions": "",
                     "processors": "",
                     "groups": "",
-                    "action": "Test",
+                    "action": "Gas",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "56c602cb-27b9-4930-90d7-7fc6cfc895ba",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Brake",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

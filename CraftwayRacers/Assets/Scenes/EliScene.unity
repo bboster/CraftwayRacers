@@ -4838,13 +4838,29 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2719232121463788315, guid: fccf7d4f81906f149ab5ec9cde98bc8a, type: 3}
+      propertyPath: SpringDamper
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719232121463788315, guid: fccf7d4f81906f149ab5ec9cde98bc8a, type: 3}
+      propertyPath: SpringStrength
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719232121463788315, guid: fccf7d4f81906f149ab5ec9cde98bc8a, type: 3}
+      propertyPath: MaxSuspensionLength
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2719232121463788315, guid: fccf7d4f81906f149ab5ec9cde98bc8a, type: 3}
+      propertyPath: TorqueCurve.m_Curve.Array.data[3].value
+      value: 0.35
+      objectReference: {fileID: 0}
     - target: {fileID: 3404501148670966401, guid: fccf7d4f81906f149ab5ec9cde98bc8a, type: 3}
       propertyPath: m_Name
       value: Cube (1)
       objectReference: {fileID: 0}
     - target: {fileID: 3404501148670966401, guid: fccf7d4f81906f149ab5ec9cde98bc8a, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8197311534957059613, guid: fccf7d4f81906f149ab5ec9cde98bc8a, type: 3}
       propertyPath: m_RootOrder

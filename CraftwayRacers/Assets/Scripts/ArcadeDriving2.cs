@@ -9,26 +9,54 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject CenterOfMass;
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] Wheels = new GameObject[4]; 
-    public float TopSpeed =20f, MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, TireGrip=.5f, TireMass = 1f, steerValue=0, ACValue=0, EnginePower=10f, MaxSteerAngle=30f;
+    public float TopSpeed =20f, MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, TireGrip=.5f, TireMass = 1f, steerValue=0, ACValue=0, EnginePower=10f, MaxSteerAngle=30f, BrakePower = 100f;
     public RaycastHit[] HitList = new RaycastHit[4];
     public AnimationCurve FrictionCurve, TorqueCurve;
     public Rigidbody CarRb;
     public PlayerInput PlayerInput;
+    private bool readingGas, readingBrake; 
     void Start()
     {
         PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
         PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
-        PlayerInput.currentActionMap.FindAction("Test").performed += ctx => ACValue = ctx.ReadValue<float>();
-        PlayerInput.currentActionMap.FindAction("Test").canceled += ctx => ACValue = 0;
-        
+        PlayerInput.currentActionMap.FindAction("Gas").started += ReadGas;
+        PlayerInput.currentActionMap.FindAction("Brake").started += ReadBrake;
+        PlayerInput.currentActionMap.FindAction("Gas").canceled += EndReadGas;
+        PlayerInput.currentActionMap.FindAction("Brake").canceled += EndReadBrake;
+
         if (CenterOfMass == null)
         {
             CenterOfMass = GameObject.Find("CoM");
         }
         CarRb = GetComponent<Rigidbody>();
     }
+    void ReadGas(InputAction.CallbackContext ctx)
+    {
+        readingGas = true; 
+    }
+
+    void EndReadGas(InputAction.CallbackContext ctx)
+    {
+        readingGas = false;
+    }
+    void ReadBrake(InputAction.CallbackContext ctx)
+    {
+        readingBrake= true;
+    }
+    void EndReadBrake(InputAction.CallbackContext ctx)
+    {
+        readingBrake = false;
+    }
     void Update()
     {
+        if(readingGas == true)
+        {
+            ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
+        }
+        if (readingBrake == true)
+        {
+            ACValue = PlayerInput.currentActionMap.FindAction("Brake").ReadValue<float>()*-1f;
+        }
         int temp = 0;
         for (int i = temp; i < SpringMountList.Length; i++)
         {
@@ -63,12 +91,17 @@ public class ArcadeDriving2 : MonoBehaviour
                 float steeringFactor = steerValue * MaxSteerAngle;
                 accelDir += SpringMountList[springNum].right * steeringFactor;
             }
-            if (ACValue > 0.0f)
+
+            
+            float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
+            float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed/TopSpeed));
+            float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
+            print(currentSpeed);
+
+            CarRb.AddForceAtPosition(accelDir * (availableTorque * EnginePower), SpringMountList[springNum].transform.position);
+            if(currentSpeed > 0 && ACValue < 0)
             {
-                float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
-                float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed/TopSpeed));
-                float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
-                CarRb.AddForceAtPosition(accelDir * (availableTorque * EnginePower), SpringMountList[springNum].transform.position);
+                CarRb.AddForceAtPosition(accelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position);
             }
         }        
     }
