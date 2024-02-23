@@ -314,8 +314,11 @@ MonoBehaviour:
   CenterOfMass: {fileID: 1699503461360918882}
   PlayerInput: {fileID: 2658361692177055679}
   MaxSuspensionLength: 1
-  springForce: 100
-  springDamp: 100
+  SpringForce: 100
+  SpringDamp: 200
+  SteeringSensitivity: 1.5
+  SurfaceOrStaticFriction: 3
+  KineticFriction: 0.5
   SpringMountList:
   - {fileID: 5118843824432404474}
   - {fileID: 8032594322573940692}
