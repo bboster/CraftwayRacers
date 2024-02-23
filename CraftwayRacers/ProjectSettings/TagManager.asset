@@ -8,6 +8,10 @@ TagManager:
   - OffRoad
   - NormalRoad
   - SlickRoad
+  - TPoint
+  - MobileMap
+  - LocalMap
+  - SpawnManager
   layers:
   - Default
   - TransparentFX
