@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -9,12 +10,13 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject CenterOfMass;
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] Wheels = new GameObject[4]; 
-    public float TopSpeed =20f, MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, TireGrip=.5f, TireMass = 1f, steerValue=0, ACValue=0, EnginePower=10f, MaxSteerAngle=30f, BrakePower = 100f;
+    public float TopSpeed =20f, MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, TireGrip=.5f, TireMass = 1f, steerValue=0, ACValue=0, EnginePower=10f, MinSteer=25f, MaxSteer=40f, BrakePower = 10f;
     public RaycastHit[] HitList = new RaycastHit[4];
     public AnimationCurve FrictionCurve, TorqueCurve;
     public Rigidbody CarRb;
     public PlayerInput PlayerInput;
-    private bool readingGas, readingBrake; 
+    private bool readingGas, readingBrake;
+    public TMP_Text accelText; 
     void Start()
     {
         PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
@@ -84,24 +86,34 @@ public class ArcadeDriving2 : MonoBehaviour
     public void DrivingForce(Transform springLoc, int springNum)
     {
         if (IsGrounded(springLoc, springNum))
-        {
+        {           
             Vector3 accelDir = SpringMountList[springNum].forward;
+            float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
+            float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed / TopSpeed));
+            float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
+            if (currentSpeed > 0 && ACValue < 0)
+            {
+                steerValue *= -1f;
+            }
             if (springNum == 0 || springNum == 1)
             {
-                float steeringFactor = steerValue * MaxSteerAngle;
+                float steeringFactor = steerValue * MinSteer;
+                //float steeringFactor = steerValue * Mathf.Lerp(MinSteer, MaxSteer, normalizedSpeed);
                 accelDir += SpringMountList[springNum].right * steeringFactor;
+                //ad = new Vector3(accelDir.x*(Mathf.Lerp(MinSteer, MaxSteer, normalizedSpeed)*ACValue), accelDir.y, accelDir.z);
+                //print(accelDir += SpringMountList[springNum].right * steeringFactor);
             }
-
-            
-            float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
-            float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed/TopSpeed));
-            float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
-            print(currentSpeed);
+ 
 
             CarRb.AddForceAtPosition(accelDir * (availableTorque * EnginePower), SpringMountList[springNum].transform.position);
-            if(currentSpeed > 0 && ACValue < 0)
+            //CarRb.AddForceAtPosition(ad * (availableTorque * EnginePower), SpringMountList[springNum].transform.position);
+
+            if (currentSpeed > 0 && ACValue < 0)
             {
+                //Vector3 newAccelDir = new Vector3(accelDir.x * steerValue, accelDir.y, accelDir.z);
                 CarRb.AddForceAtPosition(accelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position);
+                //print("1" + (accelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position));
+                //print("2 " + (newAccelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position));
             }
         }        
     }
