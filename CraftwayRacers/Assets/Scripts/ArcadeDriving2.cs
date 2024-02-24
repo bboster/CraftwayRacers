@@ -10,12 +10,13 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject CenterOfMass;
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] Wheels = new GameObject[4]; 
-    public float TopSpeed =20f, MaxSuspensionLength = 1f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, TireGrip=.5f, TireMass = 1f, steerValue=0, ACValue=0, EnginePower=10f, MinSteer=25f, MaxSteer=40f, BrakePower = 10f;
+    public float TopSpeed =20f, MaxSuspensionLength = 2f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, FrontTireGrip=.6f, RearTireGrip = .3f, TireMass = 1f, EnginePower=10f, MinSteer=30f, MaxSteer=40f, BrakePower = 50f;
     public RaycastHit[] HitList = new RaycastHit[4];
-    public AnimationCurve FrictionCurve, TorqueCurve;
+    public AnimationCurve TorqueCurve;
     public Rigidbody CarRb;
     public PlayerInput PlayerInput;
     private bool readingGas, readingBrake;
+    private float steerValue = 0, ACValue = 0;
     public TMP_Text accelText; 
     void Start()
     {
@@ -93,7 +94,7 @@ public class ArcadeDriving2 : MonoBehaviour
             float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
             if (currentSpeed > 0 && ACValue < 0)
             {
-                steerValue *= -1f;
+                //steerValue *= -1f;
             }
             if (springNum == 0 || springNum == 1)
             {
@@ -139,7 +140,13 @@ public class ArcadeDriving2 : MonoBehaviour
             Vector3 steeringDir = SpringMountList[springNum].right;           
             Vector3 tireVel = CarRb.GetPointVelocity(SpringMountList[springNum].transform.position);
             float steeringVel = Vector3.Dot(steeringDir, tireVel);
-            float desiredFrictionChange = (-steeringVel * TireGrip)/Time.fixedDeltaTime;
+
+            float gripChoice = RearTireGrip;
+            if (springNum == 0 || springNum == 1)
+            {
+                gripChoice = FrontTireGrip;
+            }
+            float desiredFrictionChange = (-steeringVel * gripChoice)/Time.fixedDeltaTime;
             CarRb.AddForceAtPosition(steeringDir * TireMass * desiredFrictionChange, SpringMountList[springNum].transform.position);
             Debug.DrawRay(SpringMountList[springNum].transform.position, SpringMountList[springNum].transform.position + steeringDir*10f, Color.yellow);
         }
