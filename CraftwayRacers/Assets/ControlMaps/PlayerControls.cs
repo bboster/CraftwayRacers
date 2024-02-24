@@ -82,9 +82,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Test"",
+                    ""name"": ""Gas"",
                     ""type"": ""Value"",
                     ""id"": ""9bf49e26-a6c5-432f-ba15-28ffa215fd48"",
+                    ""expectedControlType"": ""Axis"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Brake"",
+                    ""type"": ""Value"",
+                    ""id"": ""4f1374aa-ae24-45a1-9654-5fcc7c254e82"",
                     ""expectedControlType"": ""Axis"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -209,7 +218,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
-                    ""action"": ""Test"",
+                    ""action"": ""Gas"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""56c602cb-27b9-4930-90d7-7fc6cfc895ba"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Brake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -226,7 +246,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Restart = m_Movement.FindAction("Restart", throwIfNotFound: true);
         m_Movement_Flip = m_Movement.FindAction("Flip", throwIfNotFound: true);
         m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
-        m_Movement_Test = m_Movement.FindAction("Test", throwIfNotFound: true);
+        m_Movement_Gas = m_Movement.FindAction("Gas", throwIfNotFound: true);
+        m_Movement_Brake = m_Movement.FindAction("Brake", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -294,7 +315,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Restart;
     private readonly InputAction m_Movement_Flip;
     private readonly InputAction m_Movement_Rotate;
-    private readonly InputAction m_Movement_Test;
+    private readonly InputAction m_Movement_Gas;
+    private readonly InputAction m_Movement_Brake;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -305,7 +327,8 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Restart => m_Wrapper.m_Movement_Restart;
         public InputAction @Flip => m_Wrapper.m_Movement_Flip;
         public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
-        public InputAction @Test => m_Wrapper.m_Movement_Test;
+        public InputAction @Gas => m_Wrapper.m_Movement_Gas;
+        public InputAction @Brake => m_Wrapper.m_Movement_Brake;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -333,9 +356,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Rotate.started += instance.OnRotate;
             @Rotate.performed += instance.OnRotate;
             @Rotate.canceled += instance.OnRotate;
-            @Test.started += instance.OnTest;
-            @Test.performed += instance.OnTest;
-            @Test.canceled += instance.OnTest;
+            @Gas.started += instance.OnGas;
+            @Gas.performed += instance.OnGas;
+            @Gas.canceled += instance.OnGas;
+            @Brake.started += instance.OnBrake;
+            @Brake.performed += instance.OnBrake;
+            @Brake.canceled += instance.OnBrake;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -358,9 +384,12 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Rotate.started -= instance.OnRotate;
             @Rotate.performed -= instance.OnRotate;
             @Rotate.canceled -= instance.OnRotate;
-            @Test.started -= instance.OnTest;
-            @Test.performed -= instance.OnTest;
-            @Test.canceled -= instance.OnTest;
+            @Gas.started -= instance.OnGas;
+            @Gas.performed -= instance.OnGas;
+            @Gas.canceled -= instance.OnGas;
+            @Brake.started -= instance.OnBrake;
+            @Brake.performed -= instance.OnBrake;
+            @Brake.canceled -= instance.OnBrake;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -386,6 +415,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRestart(InputAction.CallbackContext context);
         void OnFlip(InputAction.CallbackContext context);
         void OnRotate(InputAction.CallbackContext context);
-        void OnTest(InputAction.CallbackContext context);
+        void OnGas(InputAction.CallbackContext context);
+        void OnBrake(InputAction.CallbackContext context);
     }
 }

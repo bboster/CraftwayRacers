@@ -198,7 +198,7 @@ Transform:
   - {fileID: 943209605229601658}
   - {fileID: 3548779797347404839}
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4666401762118633341
 MeshFilter:
@@ -228,7 +228,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10303, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 2100000, guid: 1777540f1d24ff64cbb34503335bcfb3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -295,22 +295,17 @@ MonoBehaviour:
   - {fileID: 1517812842459218249}
   - {fileID: 2568079050826280958}
   TopSpeed: 20
-  MaxSuspensionLength: 1
+  MaxSuspensionLength: 2
   SpringStrength: 10
   SpringDamper: 1
   WheelRadius: 0.5
-  TireGrip: 0.5
+  FrontTireGrip: 0.6
+  RearTireGrip: 0.3
   TireMass: 1
-  steerValue: 0
-  ACValue: 0
-  EnginePower: 10
-  MaxSteerAngle: 30
-  FrictionCurve:
-    serializedVersion: 2
-    m_Curve: []
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  EnginePower: 15
+  MinSteer: 30
+  MaxSteer: 40
+  BrakePower: 50
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
@@ -324,26 +319,35 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.19856404
-      value: 0.8845561
-      inSlope: 0.7240921
-      outSlope: 0.7240921
+      time: 0.17182672
+      value: 0.9912586
+      inSlope: -0.25660938
+      outSlope: -0.25660938
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.21001385
+      outWeight: 1
+    - serializedVersion: 3
+      time: 0.17416465
+      value: 0.9929445
+      inSlope: -0.06532064
+      outSlope: -0.06532064
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.17942022
+      outWeight: 0.9734103
     - serializedVersion: 3
-      time: 0.79697436
-      value: 0.7592872
-      inSlope: -1.49287
-      outSlope: -1.49287
+      time: 0.63180923
+      value: 0.9878452
+      inSlope: -0.02139818
+      outSlope: -0.02139818
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.33333334
+      outWeight: 0.24788645
     - serializedVersion: 3
-      time: 1
-      value: 0.35
+      time: 1.0056306
+      value: 0.4
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -355,6 +359,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   CarRb: {fileID: 0}
   PlayerInput: {fileID: 8898282404428010472}
+  accelText: {fileID: 0}
 --- !u!54 &8463831188307706476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -363,8 +368,8 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3404501148670966401}
   serializedVersion: 4
-  m_Mass: 10
-  m_Drag: 0
+  m_Mass: 20
+  m_Drag: 0.05
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
@@ -471,7 +476,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4175381287279619015}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: 0}
+  m_LocalPosition: {x: 0, y: -0.75, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
