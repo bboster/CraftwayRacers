@@ -17,7 +17,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public PlayerInput PlayerInput;
     private bool readingGas, readingBrake;
     private float steerValue = 0, ACValue = 0;
-    public TMP_Text accelText; 
+    //public TMP_Text accelText; 
     void Start()
     {
         PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
