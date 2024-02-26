@@ -10,13 +10,13 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject CenterOfMass;
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] Wheels = new GameObject[4]; 
-    public float TopSpeed =20f, MaxSuspensionLength = 2f, SpringStrength=10f, SpringDamper=1f, WheelRadius=0.5f, FrontTireGrip=.6f, RearTireGrip = .3f, TireMass = 1f, EnginePower=10f, MinSteer=30f, MaxSteer=40f, BrakePower = 50f;
+    public float TopSpeed =20f, MaxSuspensionLength = 2f, SpringStrength=10f, SpringDamper=1f, FrontTireGrip=.6f, RearTireGrip = .3f, EnginePower=10f, MinSteer=30f, MaxSteer=40f, BrakePower = 50f;
     public RaycastHit[] HitList = new RaycastHit[4];
     public AnimationCurve TorqueCurve;
     public Rigidbody CarRb;
     public PlayerInput PlayerInput;
     private bool readingGas, readingBrake;
-    private float steerValue = 0, ACValue = 0;
+    private float steerValue = 0, ACValue = 0, WheelRadius = 0.5f, TireMass = 1f;
     //public TMP_Text accelText; 
     void Start()
     {
@@ -90,6 +90,7 @@ public class ArcadeDriving2 : MonoBehaviour
         {           
             Vector3 accelDir = SpringMountList[springNum].forward;
             float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
+            print(currentSpeed);
             float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed / TopSpeed));
             float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
             if (currentSpeed > 0 && ACValue < 0)
