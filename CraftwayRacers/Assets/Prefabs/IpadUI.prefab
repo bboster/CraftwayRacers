@@ -124,7 +124,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 320661531549581814}
         m_TargetAssemblyTypeName: RandomTrapPlacement, Assembly-CSharp
-        m_MethodName: SpawnTrapServerRpc
+        m_MethodName: CallSpawn
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -220,7 +220,6 @@ GameObject:
   m_Component:
   - component: {fileID: 8569058419416793012}
   - component: {fileID: 320661531549581814}
-  - component: {fileID: 1739730948770937378}
   m_Layer: 5
   m_Name: IpadUI
   m_TagString: Untagged
@@ -262,46 +261,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 772fdcef254bf4948a33131c5fedfbd4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trapPositions:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  trapTest: {fileID: 8844007007371316005, guid: 765298ba56d572b499d9b7fd6727e2c9, type: 3}
-  parent: {fileID: 0}
-  netParent: {fileID: 0}
   cooldownMarker: {fileID: 3087496252422189269}
---- !u!114 &1739730948770937378
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6494681505727633945}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d5a57f767e5e46a458fc5d3c628d0cbb, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  GlobalObjectIdHash: 951099334
-  AlwaysReplicateAsRoot: 0
-  SynchronizeTransform: 1
-  ActiveSceneSynchronization: 0
-  SceneMigrationSynchronization: 1
-  SpawnWithObservers: 1
-  DontDestroyWithOwner: 0
-  AutoObjectParentSync: 1
 --- !u!1 &7109083148279169870
 GameObject:
   m_ObjectHideFlags: 0

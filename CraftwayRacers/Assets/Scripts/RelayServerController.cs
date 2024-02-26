@@ -18,6 +18,8 @@ public class RelayServerController : MonoBehaviour
     [SerializeField] private TMP_InputField joinCodeInput;
     [SerializeField] private GameObject input;
 
+    [SerializeField] private GameObject spawnManager;
+
     private async void Start()
     {
         await UnityServices.InitializeAsync();
@@ -44,6 +46,7 @@ public class RelayServerController : MonoBehaviour
             NetworkManager.Singleton.StartHost();
 
             input.SetActive(false);
+            Instantiate(spawnManager);
         }
         catch (RelayServiceException e)
         {

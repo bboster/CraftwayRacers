@@ -14,7 +14,10 @@ EditorBuildSettings:
   - enabled: 0
     path: Assets/Scenes/EliScene.unity
     guid: 9683ee2e576753d49922d0700fa9f91b
-  - enabled: 1
+  - enabled: 0
     path: Assets/Scenes/DavidScene.unity
     guid: 0d3c1b2a8802a2e479aa14244c4ebae3
+  - enabled: 1
+    path: Assets/Scenes/FixingScene.unity
+    guid: f51ad09e7bf706f4dbe158fe1d32e6d1
   m_configObjects: {}
