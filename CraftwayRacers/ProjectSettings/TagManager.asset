@@ -8,6 +8,7 @@ TagManager:
   - OffRoad
   - NormalRoad
   - SlickRoad
+  - Shield
   layers:
   - Default
   - TransparentFX

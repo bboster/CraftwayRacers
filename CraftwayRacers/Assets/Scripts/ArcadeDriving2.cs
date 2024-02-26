@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
@@ -14,6 +15,8 @@ public class ArcadeDriving2 : MonoBehaviour
     public AnimationCurve FrictionCurve, TorqueCurve;
     public Rigidbody CarRb;
     public PlayerInput PlayerInput;
+    public bool Shielded;
+
     void Start()
     {
         PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
@@ -109,5 +112,20 @@ public class ArcadeDriving2 : MonoBehaviour
             float dampenedForce = ((compressionOffset * SpringStrength) - velocity * SpringDamper);
             CarRb.AddForceAtPosition(SpringMountList[springNum].up * dampenedForce, SpringMountList[springNum].position);
         }      
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Shield")
+        {
+            StartCoroutine(waiter());
+            Shielded = true;
+        }
+    }
+
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(5);
+        Shielded = false;
     }
 }
