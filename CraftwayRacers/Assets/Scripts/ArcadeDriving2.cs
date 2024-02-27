@@ -17,6 +17,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public PlayerInput PlayerInput;
     private bool readingGas, readingBrake;
     private float steerValue = 0, ACValue = 0, WheelRadius = 0.5f, TireMass = 1f;
+    public bool Shielded;
     //public TMP_Text accelText; 
     void Start()
     {
@@ -162,5 +163,20 @@ public class ArcadeDriving2 : MonoBehaviour
             float dampenedForce = ((compressionOffset * SpringStrength) - velocity * SpringDamper);
             CarRb.AddForceAtPosition(SpringMountList[springNum].up * dampenedForce, SpringMountList[springNum].position);
         }      
+    }
+
+    private void OnTriggerEnter(Collider collision)
+    {
+        if (collision.gameObject.tag == "Shield")
+        {
+            StartCoroutine(waiter());
+            Shielded = true;
+        }
+
+        IEnumerator waiter()
+        {
+            yield return new WaitForSeconds(5);
+            Shielded = false;
+        }
     }
 }

@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Jacks : MonoBehaviour
 {
+    private Rigidbody rb;
     public ArcadeDriving2 Speed;
     public GameObject Player;
     [SerializeField] float CutSpeed; // Player's speed will divide by this number
@@ -28,7 +29,10 @@ public class Jacks : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Debug.Log("Jack Jack");
-            Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;
+            rb = Player.GetComponent<ArcadeDriving2>().CarRb;
+            Vector3 IncomingForce = rb.velocity;
+            rb.AddForce(IncomingForce * 1000);
+            //Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;
         }
     }
 }
