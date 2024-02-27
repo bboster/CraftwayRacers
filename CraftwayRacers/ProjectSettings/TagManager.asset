@@ -12,6 +12,7 @@ TagManager:
   - MobileMap
   - LocalMap
   - SpawnManager
+  - PlacementPoint
   layers:
   - Default
   - TransparentFX

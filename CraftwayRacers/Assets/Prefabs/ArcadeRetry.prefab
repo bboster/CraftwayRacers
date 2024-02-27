@@ -174,6 +174,7 @@ GameObject:
   - component: {fileID: 2719232121463788315}
   - component: {fileID: 8463831188307706476}
   - component: {fileID: 8898282404428010472}
+  - component: {fileID: 779380908733751095}
   m_Layer: 0
   m_Name: ArcadeRetry
   m_TagString: Untagged
@@ -298,10 +299,8 @@ MonoBehaviour:
   MaxSuspensionLength: 2
   SpringStrength: 10
   SpringDamper: 1
-  WheelRadius: 0.5
   FrontTireGrip: 0.6
   RearTireGrip: 0.3
-  TireMass: 1
   EnginePower: 15
   MinSteer: 30
   MaxSteer: 40
@@ -359,7 +358,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   CarRb: {fileID: 0}
   PlayerInput: {fileID: 8898282404428010472}
-  accelText: {fileID: 0}
 --- !u!54 &8463831188307706476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -416,7 +414,25 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 4481067619699031542}
+--- !u!114 &779380908733751095
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404501148670966401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player1Spawn: {x: 35.24, y: 461.05, z: -315.67}
+  Player2Spawn: {x: 37.42, y: 461.05, z: -350.54}
+  Player3Spawn: {x: 66.7, y: 461.05, z: -353.6}
+  Player4Spawn: {x: 67.8, y: 461.05, z: -315.9}
+  PlayerCount: {fileID: 8898282404428010472}
+  parent: {fileID: 0}
 --- !u!1 &3604556752205056270
 GameObject:
   m_ObjectHideFlags: 0

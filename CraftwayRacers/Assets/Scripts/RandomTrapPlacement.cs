@@ -38,4 +38,14 @@ public class RandomTrapPlacement : MonoBehaviour
         onCooldown = false;
         cooldownMarker.SetActive(false);
     }
+
+    public void TrapCaller(int index)
+    {
+        if (spawnManager == null)
+        {
+            spawnManager = GameObject.FindGameObjectWithTag("SpawnManager");
+        }
+
+        spawnManager.GetComponent<NetworkSpawnManager>().CallSpawner(index);
+    }
 }

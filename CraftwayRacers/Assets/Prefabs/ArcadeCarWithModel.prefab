@@ -212,6 +212,7 @@ GameObject:
   - component: {fileID: 1479131496190567437}
   - component: {fileID: 3506038640120930864}
   - component: {fileID: 1835734076980738088}
+  - component: {fileID: 8064529893149638173}
   m_Layer: 0
   m_Name: CarModel_Body
   m_TagString: Untagged
@@ -452,6 +453,24 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &8064529893149638173
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780609019321248658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player1Spawn: {x: -109.1, y: 36.1, z: -348.5}
+  Player2Spawn: {x: -109.1, y: 36.1, z: -374}
+  Player3Spawn: {x: -80, y: 36.1, z: -370.3}
+  Player4Spawn: {x: -68.9, y: 36.1, z: -345.2}
+  PlayerCount: {fileID: 3506038640120930864}
+  parent: {fileID: 0}
 --- !u!1 &2369818625032787342
 GameObject:
   m_ObjectHideFlags: 0
@@ -662,7 +681,7 @@ Transform:
   m_Children:
   - {fileID: 1652306280381320779}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3644433251615608361
 GameObject:
