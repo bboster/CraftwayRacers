@@ -95,7 +95,8 @@ public class ArcadeDriving2 : MonoBehaviour
             float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
             if (currentSpeed > 0 && ACValue < 0)
             {
-                //steerValue *= -1f;
+                steerValue *= -1f;
+                print("STEER: " + steerValue);
             }
             if (springNum == 0 || springNum == 1)
             {
@@ -113,7 +114,7 @@ public class ArcadeDriving2 : MonoBehaviour
             if (currentSpeed > 0 && ACValue < 0)
             {
                 //Vector3 newAccelDir = new Vector3(accelDir.x * steerValue, accelDir.y, accelDir.z);
-                CarRb.AddForceAtPosition(accelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position);
+                CarRb.AddForceAtPosition((accelDir) * BrakePower * ACValue, SpringMountList[springNum].transform.position);
                 //print("1" + (accelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position));
                 //print("2 " + (newAccelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position));
             }
