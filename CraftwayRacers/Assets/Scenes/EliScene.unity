@@ -3678,6 +3678,30 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1479131496190567437, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: MinSteer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479131496190567437, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: EnginePower
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479131496190567437, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: RearTireGrip
+      value: 0.6
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479131496190567437, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: SpringDamper
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479131496190567437, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: FrontTireGrip
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 1835734076980738088, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: m_Mass
+      value: 25
+      objectReference: {fileID: 0}
     - target: {fileID: 3467741717924606125, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
       propertyPath: m_Name
       value: ArcadeCarWithModel

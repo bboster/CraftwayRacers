@@ -336,11 +336,11 @@ MonoBehaviour:
   TopSpeed: 25
   MaxSuspensionLength: 1.5
   SpringStrength: 10
-  SpringDamper: 1
-  FrontTireGrip: 0.7
-  RearTireGrip: 0.4
-  EnginePower: 20
-  MinSteer: 20
+  SpringDamper: 3
+  FrontTireGrip: 0.9
+  RearTireGrip: 0.6
+  EnginePower: 30
+  MinSteer: 10
   MaxSteer: 40
   BrakePower: 50
   TorqueCurve:
@@ -434,7 +434,7 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780609019321248658}
   serializedVersion: 4
-  m_Mass: 20
+  m_Mass: 25
   m_Drag: 0.1
   m_AngularDrag: 0.05
   m_CenterOfMass: {x: 0, y: 0, z: 0}
@@ -446,7 +446,7 @@ Rigidbody:
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
-  m_ImplicitCom: 1
+  m_ImplicitCom: 0
   m_ImplicitTensor: 1
   m_UseGravity: 1
   m_IsKinematic: 0
@@ -578,7 +578,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2450016525474578425}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -137.22675, z: 5.504993}
+  m_LocalPosition: {x: 0, y: -130, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -681,7 +681,7 @@ Transform:
   m_Children:
   - {fileID: 1652306280381320779}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3644433251615608361
 GameObject:
