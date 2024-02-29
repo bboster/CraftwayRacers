@@ -12,6 +12,8 @@ TagManager:
   - MobileMap
   - LocalMap
   - SpawnManager
+  - PlacementPoint
+  - GatchaPaint
   layers:
   - Default
   - TransparentFX
