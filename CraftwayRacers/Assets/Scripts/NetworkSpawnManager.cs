@@ -5,8 +5,8 @@ using Unity.Netcode;
 
 public class NetworkSpawnManager : NetworkBehaviour
 {
-    private GameObject[] trapPositions;
-    private GameObject[] markerPositions;
+   [SerializeField] private GameObject[] trapPositions = new GameObject[21];
+    [SerializeField] private GameObject[] markerPositions = new GameObject[21];
     private GameObject[] placedTraps;
     [SerializeField] private GameObject[] traps;
 
@@ -16,16 +16,32 @@ public class NetworkSpawnManager : NetworkBehaviour
 
     private void Start()
     {
-        gameObject.GetComponent<NetworkObject>().Spawn(true);
-
         //Add all points to trapPositions
-        trapPositions = GameObject.FindGameObjectsWithTag("TPoint");
-        markerPositions = GameObject.FindGameObjectsWithTag("PlacementPoint");
+        //trapPositions = GameObject.FindGameObjectsWithTag("TPoint");
 
-        foreach(GameObject i in markerPositions)
+        for(int i = 0; i < trapPositions.Length; i++)
         {
-            print(i.name);
+            string s = "MPoint (" + i + ")";
+            trapPositions[i] = GameObject.Find(s);
+        }        
+        
+        for(int j = 0; j < markerPositions.Length; j++)
+        {
+            string s = "Point (" + j + ")";
+            markerPositions[j] = GameObject.Find(s);
         }
+
+        //markerPositions = GameObject.FindGameObjectsWithTag("PlacementPoint");
+
+        /*foreach(GameObject i in markerPositions)
+        {
+            Debug.Log(i.name);
+        }
+
+        foreach(GameObject j in trapPositions)
+        {
+            Debug.Log(j.name);
+        }*/
 
         placedTraps = new GameObject[markerPositions.Length];
 
