@@ -175,6 +175,8 @@ GameObject:
   - component: {fileID: 8463831188307706476}
   - component: {fileID: 8898282404428010472}
   - component: {fileID: 779380908733751095}
+  - component: {fileID: 4591388301125705234}
+  - component: {fileID: -3022878532501017884}
   m_Layer: 0
   m_Name: ArcadeRetry
   m_TagString: Untagged
@@ -198,6 +200,7 @@ Transform:
   - {fileID: 5168592655380112378}
   - {fileID: 943209605229601658}
   - {fileID: 3548779797347404839}
+  - {fileID: 6370151673313905433}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -290,11 +293,11 @@ MonoBehaviour:
   - {fileID: 6721896137605606668}
   - {fileID: 3090684087892930143}
   - {fileID: 129058376952818200}
-  WheelList:
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
+  Wheels:
+  - {fileID: 2426752973429625018}
+  - {fileID: 6315584708434828314}
+  - {fileID: 1517812842459218249}
+  - {fileID: 2568079050826280958}
   TopSpeed: 20
   MaxSuspensionLength: 2
   SpringStrength: 10
@@ -427,12 +430,41 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Spawn: {x: 45.1, y: 29.53, z: -357.75}
+  Player1Spawn: {x: 40.71, y: 40, z: -363.0967}
   Player2Spawn: {x: 37.42, y: 461.05, z: -350.54}
   Player3Spawn: {x: 66.7, y: 461.05, z: -353.6}
   Player4Spawn: {x: 67.8, y: 461.05, z: -315.9}
   PlayerCount: {fileID: 8898282404428010472}
   parent: {fileID: 0}
+--- !u!114 &4591388301125705234
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404501148670966401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cff54f68392fbce4bb4b86665b4a8457, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  PB: {fileID: -3022878532501017884}
+  HasPaint: 0
+--- !u!114 &-3022878532501017884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3404501148670966401}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4836d98ab883f1d4e83b05fc25c41dc2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Player: {fileID: 6370151673313905433}
+  Paint: {fileID: 4686697336544067301, guid: 127312447e2ccf24d8da995dbdc242fe, type: 3}
+  isWaiting: 0
 --- !u!1 &3604556752205056270
 GameObject:
   m_ObjectHideFlags: 0
@@ -465,6 +497,37 @@ Transform:
   - {fileID: 7262464434990187152}
   - {fileID: 2382327753340999627}
   - {fileID: 513342805157511720}
+  m_Father: {fileID: 8197311534957059613}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4067146718737695790
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6370151673313905433}
+  m_Layer: 0
+  m_Name: BUFFER
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6370151673313905433
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4067146718737695790}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -1.347}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
   m_Father: {fileID: 8197311534957059613}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
