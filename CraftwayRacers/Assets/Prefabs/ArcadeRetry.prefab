@@ -283,7 +283,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3a689136fab484aae0f1e5dd53f3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CenterOfMass: {fileID: 0}
+  CenterOfMass: {fileID: 4175381287279619015}
   SpringMountList:
   - {fileID: 2582688679408088813}
   - {fileID: 6721896137605606668}
@@ -298,10 +298,8 @@ MonoBehaviour:
   MaxSuspensionLength: 2
   SpringStrength: 10
   SpringDamper: 1
-  WheelRadius: 0.5
   FrontTireGrip: 0.6
   RearTireGrip: 0.3
-  TireMass: 1
   EnginePower: 15
   MinSteer: 30
   MaxSteer: 40
@@ -359,7 +357,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   CarRb: {fileID: 0}
   PlayerInput: {fileID: 8898282404428010472}
-  accelText: {fileID: 0}
+  Shielded: 0
 --- !u!54 &8463831188307706476
 Rigidbody:
   m_ObjectHideFlags: 0

@@ -31,7 +31,7 @@ public class Jacks : MonoBehaviour
             Debug.Log("Jack Jack");
             rb = Player.GetComponent<ArcadeDriving2>().CarRb;
             Vector3 IncomingForce = rb.velocity;
-            rb.AddForce(IncomingForce * 1000);
+            //rb.AddForce(IncomingForce * 1000);
             //Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;
         }
     }
