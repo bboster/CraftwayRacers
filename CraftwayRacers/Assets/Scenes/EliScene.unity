@@ -3678,6 +3678,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1479131496190567437, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: WheelList.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1479131496190567437, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: WheelList.Array.data[0]
+      value: 
+      objectReference: {fileID: 1519806323}
+    - target: {fileID: 1479131496190567437, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+      propertyPath: WheelList.Array.data[4]
+      value: 
+      objectReference: {fileID: 1657893085}
     - target: {fileID: 3467741717924606125, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
       propertyPath: m_Name
       value: ArcadeCarWithModel
@@ -3896,6 +3908,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1519806323 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1149780537874404112, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+  m_PrefabInstance: {fileID: 1331458384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1549368600
 Mesh:
   m_ObjectHideFlags: 0
@@ -4226,6 +4243,11 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &1657893085 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8887174172667899692, guid: 398595f454f9e274d8c1e54d68c6058c, type: 3}
+  m_PrefabInstance: {fileID: 1331458384}
+  m_PrefabAsset: {fileID: 0}
 --- !u!43 &1742680931
 Mesh:
   m_ObjectHideFlags: 0

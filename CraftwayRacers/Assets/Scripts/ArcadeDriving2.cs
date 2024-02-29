@@ -4,13 +4,14 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using static NewDriving;
 
 public class ArcadeDriving2 : MonoBehaviour
 {
     public GameObject CenterOfMass;
     public Transform[] SpringMountList = new Transform[4];
-    public GameObject[] Wheels = new GameObject[4]; 
-    public float TopSpeed =20f, MaxSuspensionLength = 2f, SpringStrength=10f, SpringDamper=1f, FrontTireGrip=.6f, RearTireGrip = .3f, EnginePower=10f, MinSteer=30f, MaxSteer=40f, BrakePower = 50f;
+    public GameObject[] WheelList = new GameObject[4]; 
+    public float TopSpeed =20f, MaxSuspensionLength = 2f, SpringStrength=10f, SpringDamper=1f, FrontTireGrip=.6f, RearTireGrip = .3f, EnginePower=10f, MinSteer=4, MaxSteer=8f, BrakePower = 50f;
     public RaycastHit[] HitList = new RaycastHit[4];
     public AnimationCurve TorqueCurve;
     public Rigidbody CarRb;
@@ -32,6 +33,7 @@ public class ArcadeDriving2 : MonoBehaviour
             CenterOfMass = GameObject.Find("CoM");
         }
         CarRb = GetComponent<Rigidbody>();
+        CarRb.centerOfMass = new Vector3(0, -1, 0);
     }
     void ReadGas(InputAction.CallbackContext ctx)
     {
@@ -52,7 +54,7 @@ public class ArcadeDriving2 : MonoBehaviour
     }
     void Update()
     {
-        if(readingGas == true)
+        if (readingGas == true)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
         }
@@ -64,6 +66,7 @@ public class ArcadeDriving2 : MonoBehaviour
         for (int i = temp; i < SpringMountList.Length; i++)
         {
             Suspension(SpringMountList[i], i);
+            
         }
     }
     void FixedUpdate()
@@ -90,17 +93,18 @@ public class ArcadeDriving2 : MonoBehaviour
         {           
             Vector3 accelDir = SpringMountList[springNum].forward;
             float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
-            print(currentSpeed);
+            //print(currentSpeed);
             float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed / TopSpeed));
             float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
             if (currentSpeed > 0 && ACValue < 0)
             {
-                //steerValue *= -1f;
+                steerValue *= -1f;
+                //print("STEER: " + steerValue);
             }
             if (springNum == 0 || springNum == 1)
             {
-                float steeringFactor = steerValue * MinSteer;
-                //float steeringFactor = steerValue * Mathf.Lerp(MinSteer, MaxSteer, normalizedSpeed);
+                //float steeringFactor = steerValue * MinSteer;
+                float steeringFactor = steerValue * Mathf.Lerp(MaxSteer, MinSteer, normalizedSpeed);
                 accelDir += SpringMountList[springNum].right * steeringFactor;
                 //ad = new Vector3(accelDir.x*(Mathf.Lerp(MinSteer, MaxSteer, normalizedSpeed)*ACValue), accelDir.y, accelDir.z);
                 //print(accelDir += SpringMountList[springNum].right * steeringFactor);
@@ -113,7 +117,7 @@ public class ArcadeDriving2 : MonoBehaviour
             if (currentSpeed > 0 && ACValue < 0)
             {
                 //Vector3 newAccelDir = new Vector3(accelDir.x * steerValue, accelDir.y, accelDir.z);
-                CarRb.AddForceAtPosition(accelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position);
+                CarRb.AddForceAtPosition((accelDir) * BrakePower * ACValue, SpringMountList[springNum].transform.position);
                 //print("1" + (accelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position));
                 //print("2 " + (newAccelDir * BrakePower * ACValue, SpringMountList[springNum].transform.position));
             }
@@ -161,6 +165,10 @@ public class ArcadeDriving2 : MonoBehaviour
             float velocity = Vector3.Dot(SpringMountList[springNum].up, springMountVelocity);
             float dampenedForce = ((compressionOffset * SpringStrength) - velocity * SpringDamper);
             CarRb.AddForceAtPosition(SpringMountList[springNum].up * dampenedForce, SpringMountList[springNum].position);
+            //WheelList[springNum].transform.position.y = SpringMountList[springNum].position.y - compressionOffset;
+            Vector3 wheelPosition = WheelList[springNum].transform.position;
+            wheelPosition.y = SpringMountList[springNum].position.y+0.25f - compressionOffset;
+            WheelList[springNum].transform.position = wheelPosition;
         }      
     }
 }

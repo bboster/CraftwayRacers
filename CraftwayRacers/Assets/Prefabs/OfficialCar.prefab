@@ -187,7 +187,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7076532454101911709}
   m_LocalRotation: {x: 0.15558177, y: -0.00000002110136, z: 0.0000000033234568, w: 0.987823}
-  m_LocalPosition: {x: 0.24, y: 4.59, z: -14.21}
+  m_LocalPosition: {x: 0, y: 363, z: -1218}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -549,10 +549,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Spawn: {x: 36.81, y: 456.65, z: -60.53}
-  Player2Spawn: {x: 36.81, y: 456.65, z: -60.53}
-  Player3Spawn: {x: 36.81, y: 456.65, z: -60.53}
-  Player4Spawn: {x: 36.81, y: 456.65, z: -60.53}
+  Player1Spawn: {x: -109.1, y: 36.1, z: -348.5}
+  Player2Spawn: {x: -109.1, y: 36.1, z: -374}
+  Player3Spawn: {x: -80, y: 36.1, z: -370.3}
+  Player4Spawn: {x: -68.9, y: 36.1, z: -345.2}
   PlayerCount: {fileID: 2964461916946570463}
   parent: {fileID: 0}
 --- !u!1001 &4227709980407404038
