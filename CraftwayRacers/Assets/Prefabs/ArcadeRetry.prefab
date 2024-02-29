@@ -179,7 +179,7 @@ GameObject:
   - component: {fileID: -3022878532501017884}
   m_Layer: 0
   m_Name: ArcadeRetry
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -287,13 +287,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3a689136fab484aae0f1e5dd53f3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CenterOfMass: {fileID: 0}
+  CenterOfMass: {fileID: 4175381287279619015}
   SpringMountList:
   - {fileID: 2582688679408088813}
   - {fileID: 6721896137605606668}
   - {fileID: 3090684087892930143}
   - {fileID: 129058376952818200}
-  Wheels:
+  WheelList:
   - {fileID: 2426752973429625018}
   - {fileID: 6315584708434828314}
   - {fileID: 1517812842459218249}
@@ -359,8 +359,9 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  CarRb: {fileID: 0}
+  CarRb: {fileID: 8463831188307706476}
   PlayerInput: {fileID: 8898282404428010472}
+  Shielded: 0
 --- !u!54 &8463831188307706476
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -430,7 +431,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Spawn: {x: 40.71, y: 40, z: -363.0967}
+  Player1Spawn: {x: 247.44, y: 1350.8, z: 196.96828}
   Player2Spawn: {x: 37.42, y: 461.05, z: -350.54}
   Player3Spawn: {x: 66.7, y: 461.05, z: -353.6}
   Player4Spawn: {x: 67.8, y: 461.05, z: -315.9}

@@ -14,6 +14,7 @@ TagManager:
   - SpawnManager
   - PlacementPoint
   - GatchaPaint
+  - Shield
   layers:
   - Default
   - TransparentFX

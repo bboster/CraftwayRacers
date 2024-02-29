@@ -26,12 +26,12 @@ public class Jacks : MonoBehaviour
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" && Speed.Shielded == false)
         {
             Debug.Log("Jack Jack");
             rb = Player.GetComponent<ArcadeDriving2>().CarRb;
             Vector3 IncomingForce = rb.velocity;
-            //rb.AddForce(IncomingForce * 1000);
+            rb.AddForce(IncomingForce / CutSpeed);
             //Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;
         }
     }
