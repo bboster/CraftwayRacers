@@ -11,7 +11,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject CenterOfMass;
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] WheelList = new GameObject[4]; 
-    public float TopSpeed =20f, MaxSuspensionLength = 2f, SpringStrength=10f, SpringDamper=1f, FrontTireGrip=.6f, RearTireGrip = .3f, EnginePower=10f, MinSteer=4, MaxSteer=8f, BrakePower = 50f;
+    public float TopSpeed =20f, MaxSuspensionLength = 2f, WheelPosMod = 0.5f, SpringStrength=10f, SpringDamper=1f, FrontTireGrip=.6f, RearTireGrip = .3f, EnginePower=10f, MinSteer=4, MaxSteer=8f, BrakePower = 50f;
     public RaycastHit[] HitList = new RaycastHit[4];
     public AnimationCurve TorqueCurve;
     public Rigidbody CarRb;
@@ -108,6 +108,7 @@ public class ArcadeDriving2 : MonoBehaviour
                 accelDir += SpringMountList[springNum].right * steeringFactor;
                 //ad = new Vector3(accelDir.x*(Mathf.Lerp(MinSteer, MaxSteer, normalizedSpeed)*ACValue), accelDir.y, accelDir.z);
                 //print(accelDir += SpringMountList[springNum].right * steeringFactor);
+                WheelList[springNum].transform.localRotation = Quaternion.Euler(0f, steeringFactor*4f, 0f);
             }
  
 
@@ -167,7 +168,7 @@ public class ArcadeDriving2 : MonoBehaviour
             CarRb.AddForceAtPosition(SpringMountList[springNum].up * dampenedForce, SpringMountList[springNum].position);
             //WheelList[springNum].transform.position.y = SpringMountList[springNum].position.y - compressionOffset;
             Vector3 wheelPosition = WheelList[springNum].transform.position;
-            wheelPosition.y = SpringMountList[springNum].position.y+0.25f - compressionOffset;
+            wheelPosition.y = SpringMountList[springNum].position.y+WheelPosMod - compressionOffset;
             WheelList[springNum].transform.position = wheelPosition;
         }      
     }
