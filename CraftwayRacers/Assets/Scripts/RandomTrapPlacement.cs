@@ -26,26 +26,13 @@ public class RandomTrapPlacement : MonoBehaviour
         spawnManager.GetComponent<NetworkSpawnManager>().CallFunc();
     }
 
-    private IEnumerator Cooldown()
-    {
-        for(int i = 6; i > 0; i--)
-        {
-            cooldownMarker.GetComponent<Image>().fillAmount = i/6;
-
-            yield return new WaitForSeconds(0.5f);
-        }
-
-        onCooldown = false;
-        cooldownMarker.SetActive(false);
-    }
-
-    public void TrapCaller(int index)
+    public void TrapCaller(int index, int chosenTrap)
     {
         if (spawnManager == null)
         {
             spawnManager = GameObject.FindGameObjectWithTag("SpawnManager");
         }
 
-        spawnManager.GetComponent<NetworkSpawnManager>().CallSpawner(index);
+        spawnManager.GetComponent<NetworkSpawnManager>().CallSpawner(index, chosenTrap);
     }
 }

@@ -45,6 +45,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 74dcf63d6bb504a49b1118fdfb76ec13, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  traps:
+  - {fileID: 5789635773027154205, guid: e38090cf3c9432c4d886616a18f047f0, type: 3}
+  - {fileID: 8844007007371316005, guid: 765298ba56d572b499d9b7fd6727e2c9, type: 3}
+  - {fileID: 8844007007371316005, guid: 765298ba56d572b499d9b7fd6727e2c9, type: 3}
   trapTest: {fileID: 5789635773027154205, guid: e38090cf3c9432c4d886616a18f047f0, type: 3}
   parent: {fileID: 0}
   netParent: {fileID: 0}

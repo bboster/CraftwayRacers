@@ -8,6 +8,7 @@ public class NetworkSpawnManager : NetworkBehaviour
     private GameObject[] trapPositions;
     private GameObject[] markerPositions;
     private GameObject[] placedTraps;
+    [SerializeField] private GameObject[] traps;
 
     [SerializeField] private GameObject trapTest;
     [SerializeField] private GameObject parent;
@@ -65,21 +66,21 @@ public class NetworkSpawnManager : NetworkBehaviour
             obj.transform.localPosition = trapPositions[choice].transform.localPosition;*/
     }
 
-    public void CallSpawner(int index)
+    public void CallSpawner(int index, int chosenTrap)
     {
-        SpawnChosenTrapServerRpc(index);
+        SpawnChosenTrapServerRpc(index, chosenTrap);
     }
 
     [ServerRpc(RequireOwnership = false)]
-    public void SpawnChosenTrapServerRpc(int index)
+    public void SpawnChosenTrapServerRpc(int index, int chosenTrap)
     {
         if(placedTraps[index] == null)
         {
-            GameObject local = Instantiate(trapTest, markerPositions[index].transform.position, Quaternion.identity);
+            GameObject local = Instantiate(traps[chosenTrap], markerPositions[index].transform.position, Quaternion.identity);
             local.GetComponent<NetworkObject>().Spawn(true);
             placedTraps[index] = local;
 
-            GameObject obj = Instantiate(trapTest, trapPositions[index].transform.position, Quaternion.identity);
+            GameObject obj = Instantiate(traps[chosenTrap], trapPositions[index].transform.position, Quaternion.identity);
             obj.GetComponent<NetworkObject>().Spawn(true);
         }
         else
