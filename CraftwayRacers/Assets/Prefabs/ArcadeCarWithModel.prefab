@@ -427,7 +427,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2782092050192359878}
 --- !u!54 &1835734076980738088
 Rigidbody:
   m_ObjectHideFlags: 0
