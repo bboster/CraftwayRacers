@@ -215,7 +215,7 @@ GameObject:
   - component: {fileID: 8064529893149638173}
   m_Layer: 0
   m_Name: CarModel_Body
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -396,6 +396,7 @@ MonoBehaviour:
     m_RotationOrder: 4
   CarRb: {fileID: 0}
   PlayerInput: {fileID: 3506038640120930864}
+  Shielded: 0
 --- !u!114 &3506038640120930864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -465,7 +466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Spawn: {x: -109.1, y: 36.1, z: -348.5}
+  Player1Spawn: {x: 247.44, y: 1350.8, z: 196.96828}
   Player2Spawn: {x: -109.1, y: 36.1, z: -374}
   Player3Spawn: {x: -80, y: 36.1, z: -370.3}
   Player4Spawn: {x: -68.9, y: 36.1, z: -345.2}

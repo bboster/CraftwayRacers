@@ -5,26 +5,29 @@ using UnityEngine;
 
 public class Jacks : MonoBehaviour
 {
-
-    public NewDriving Driving;
+    private Rigidbody rb;
+    public ArcadeDriving2 Speed;
+    [SerializeField] float CutSpeed; // Player's speed will divide by this number
 
     // Start is called before the first frame update
-    void Start()
-    {
-        Driving = GetComponent<NewDriving>();
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-
-    }
+   
 
     private void OnTriggerEnter(Collider collision)
     {
-        if (collision.gameObject.tag == "Player")
+        if (collision.gameObject.tag == "Player" )
         {
-            Driving.CurrentSpeed = Driving.CurrentSpeed / 2;
+            Speed = collision.GetComponent<ArcadeDriving2>();
+            if(Speed.Shielded == false)
+            {
+                Debug.Log("Jack Jack");
+
+                rb = Speed.CarRb;
+
+                rb.velocity = rb.velocity / 2;
+                // Vector3 IncomingForce = rb.velocity;
+                //rb.AddForce((IncomingForce * -1) / CutSpeed);
+                //Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;
+            }
         }
     }
 }
