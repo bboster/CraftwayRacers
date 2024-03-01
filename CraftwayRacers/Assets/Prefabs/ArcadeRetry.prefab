@@ -300,6 +300,7 @@ MonoBehaviour:
   - {fileID: 2568079050826280958}
   TopSpeed: 20
   MaxSuspensionLength: 2
+  WheelPosMod: 0.5
   SpringStrength: 10
   SpringDamper: 1
   FrontTireGrip: 0.6
@@ -431,10 +432,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Spawn: {x: 247.44, y: 1350.8, z: 196.96828}
-  Player2Spawn: {x: 37.42, y: 461.05, z: -350.54}
-  Player3Spawn: {x: 66.7, y: 461.05, z: -353.6}
-  Player4Spawn: {x: 67.8, y: 461.05, z: -315.9}
+  Player1Spawn: {x: 182.9, y: 23.27563, z: -211.3}
+  Player2Spawn: {x: 204.8, y: 23.27563, z: -211.3}
+  Player3Spawn: {x: 204.8, y: 23.27563, z: -174.3}
+  Player4Spawn: {x: 184.9, y: -23.27563, z: -174.3}
   PlayerCount: {fileID: 8898282404428010472}
   parent: {fileID: 0}
 --- !u!114 &4591388301125705234
