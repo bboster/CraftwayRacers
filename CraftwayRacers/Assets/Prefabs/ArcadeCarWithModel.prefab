@@ -333,16 +333,17 @@ MonoBehaviour:
   - {fileID: 1026213305976882555}
   - {fileID: 6105736314191260292}
   - {fileID: 2369818625032787342}
-  TopSpeed: 35
+  TopSpeed: 100
   MaxSuspensionLength: 1.5
+  WheelPosMod: 0.5
   SpringStrength: 10
   SpringDamper: 3
-  FrontTireGrip: 1
-  RearTireGrip: 0.75
-  EnginePower: 50
-  MinSteer: 5
-  MaxSteer: 10
-  BrakePower: 50
+  FrontTireGrip: 3
+  RearTireGrip: 2
+  EnginePower: 70
+  MinSteer: 10
+  MaxSteer: 15
+  BrakePower: 80
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
