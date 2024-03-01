@@ -334,7 +334,7 @@ MonoBehaviour:
   - {fileID: 6105736314191260292}
   - {fileID: 2369818625032787342}
   TopSpeed: 100
-  MaxSuspensionLength: 2
+  MaxSuspensionLength: 1.5
   WheelPosMod: 0.5
   SpringStrength: 10
   SpringDamper: 3
