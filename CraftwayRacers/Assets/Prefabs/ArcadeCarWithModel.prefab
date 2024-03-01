@@ -308,8 +308,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 400, y: 250, z: 700}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 400, y: 246.18086, z: 700}
+  m_Center: {x: 0, y: 1.9093275, z: 0}
 --- !u!114 &1479131496190567437
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -333,16 +333,17 @@ MonoBehaviour:
   - {fileID: 1026213305976882555}
   - {fileID: 6105736314191260292}
   - {fileID: 2369818625032787342}
-  TopSpeed: 35
+  TopSpeed: 100
   MaxSuspensionLength: 1.5
+  WheelPosMod: 0.5
   SpringStrength: 10
   SpringDamper: 3
-  FrontTireGrip: 1
-  RearTireGrip: 0.75
-  EnginePower: 50
-  MinSteer: 5
-  MaxSteer: 10
-  BrakePower: 50
+  FrontTireGrip: 3
+  RearTireGrip: 2
+  EnginePower: 70
+  MinSteer: 10
+  MaxSteer: 15
+  BrakePower: 80
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
@@ -466,10 +467,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Spawn: {x: 247.44, y: 1350.8, z: 196.96828}
-  Player2Spawn: {x: -109.1, y: 36.1, z: -374}
-  Player3Spawn: {x: -80, y: 36.1, z: -370.3}
-  Player4Spawn: {x: -68.9, y: 36.1, z: -345.2}
+  Player1Spawn: {x: 192.9, y: 30.27563, z: -211.3}
+  Player2Spawn: {x: 214.8, y: 30.27563, z: -211.3}
+  Player3Spawn: {x: 214.8, y: 30.27563, z: -174.3}
+  Player4Spawn: {x: 194.9, y: 30.27563, z: -174.3}
   PlayerCount: {fileID: 3506038640120930864}
   parent: {fileID: 0}
 --- !u!1 &2369818625032787342
