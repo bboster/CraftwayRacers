@@ -296,7 +296,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780609019321248658}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: a8d43948231569f4da84f8b9a293f83a, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -335,15 +335,15 @@ MonoBehaviour:
   - {fileID: 2369818625032787342}
   TopSpeed: 100
   MaxSuspensionLength: 1.5
-  WheelPosMod: 0.5
-  SpringStrength: 10
-  SpringDamper: 3
-  FrontTireGrip: 3
-  RearTireGrip: 2
+  WheelPosMod: 0
+  SpringStrength: 20
+  SpringDamper: 15
+  FrontTireGrip: 0.9
+  RearTireGrip: 0.7
   EnginePower: 70
-  MinSteer: 10
-  MaxSteer: 15
-  BrakePower: 80
+  MinSteer: 3
+  MaxSteer: 5
+  BrakePower: 50
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
@@ -397,7 +397,6 @@ MonoBehaviour:
     m_RotationOrder: 4
   CarRb: {fileID: 0}
   PlayerInput: {fileID: 3506038640120930864}
-  Shielded: 0
 --- !u!114 &3506038640120930864
 MonoBehaviour:
   m_ObjectHideFlags: 0
