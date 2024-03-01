@@ -19,7 +19,7 @@ public class RelayServerController : MonoBehaviour
     [SerializeField] private GameObject input;
 
     [SerializeField] private GameObject spawnManager;
-    [SerializeField] private GameObject testCube;
+    //[SerializeField] private GameObject testCube;
 
     private async void Start()
     {
@@ -70,7 +70,7 @@ public class RelayServerController : MonoBehaviour
     {
         try
         {
-            testCube.SetActive(true);
+            //testCube.SetActive(true);
 
             string joinCode = joinCodeInput.text;
 
@@ -78,12 +78,12 @@ public class RelayServerController : MonoBehaviour
 
             JoinAllocation joinAllocation = await RelayService.Instance.JoinAllocationAsync(joinCode);
 
-            RelayServerData relayServerData = new RelayServerData(joinAllocation, "udp");
+            RelayServerData relayServerData = new RelayServerData(joinAllocation, "dtls");
             NetworkManager.Singleton.GetComponent<UnityTransport>().SetRelayServerData(relayServerData);
 
             NetworkManager.Singleton.StartClient();
 
-            testCube.SetActive(false);
+            //testCube.SetActive(false);
 
             input.SetActive(false);
         }
