@@ -322,7 +322,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1b3a689136fab484aae0f1e5dd53f3ce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CenterOfMass: {fileID: 2450016525474578425}
   SpringMountList:
   - {fileID: 1872305514421994690}
   - {fileID: 4054222403094465257}
@@ -335,15 +334,15 @@ MonoBehaviour:
   - {fileID: 2369818625032787342}
   TopSpeed: 100
   MaxSuspensionLength: 1.5
-  WheelPosMod: 0
   SpringStrength: 20
   SpringDamper: 15
-  FrontTireGrip: 0.9
-  RearTireGrip: 0.7
-  EnginePower: 70
+  WheelPosMod: 0
   MinSteer: 3
   MaxSteer: 5
+  EnginePower: 70
   BrakePower: 50
+  FrontTireGrip: 0.9
+  RearTireGrip: 0.7
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
@@ -396,7 +395,9 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   CarRb: {fileID: 0}
+  CenterOfMass: {fileID: 2450016525474578425}
   PlayerInput: {fileID: 3506038640120930864}
+  Shielded: 0
 --- !u!114 &3506038640120930864
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -675,7 +676,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3467741717924606125}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
   m_LocalPosition: {x: 104.808945, y: 19.837782, z: 27.7}
   m_LocalScale: {x: 0.01, y: 0.01, z: 0.01}
   m_ConstrainProportionsScale: 0
@@ -683,7 +684,7 @@ Transform:
   - {fileID: 1652306280381320779}
   m_Father: {fileID: 0}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!1 &3644433251615608361
 GameObject:
   m_ObjectHideFlags: 0
