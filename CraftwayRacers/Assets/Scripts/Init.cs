@@ -2,9 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Cinemachine;
+using UnityEngine.UI;
+using TMPro;
 
 public class Init : MonoBehaviour
 {
+    private int minutes = 2;
+    private int seconds = 00;
+
     //[SerializeField] private GameObject pcCam;
     [SerializeField] private GameObject ipadCam;
 
@@ -18,6 +23,8 @@ public class Init : MonoBehaviour
 
     [SerializeField] private GameObject relay;
 
+    [SerializeField] private TextMeshProUGUI timerTxt;
+
     private void Awake()
     {
         if (Application.platform == RuntimePlatform.Android)
@@ -30,7 +37,7 @@ public class Init : MonoBehaviour
         }
         else
         {
-
+            StartCoroutine(Timer());
         }
 
         //Trap1 t = new Trap1(new Vector3(0, 1, 2));
@@ -39,5 +46,12 @@ public class Init : MonoBehaviour
         //print(t.Position);
 
         relay.SetActive(true);
+    }
+
+    private IEnumerator Timer()
+    {
+        timerTxt.text = minutes + ":" + seconds;
+
+        yield return new WaitForSeconds(1f);
     }
 }
