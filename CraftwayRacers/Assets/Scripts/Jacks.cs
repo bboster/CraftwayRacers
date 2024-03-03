@@ -6,7 +6,7 @@ using UnityEngine;
 public class Jacks : MonoBehaviour
 {
     private Rigidbody rb;
-    public ArcadeDriving2 Speed;
+    private ArcadeDriving2 Speed;
     [SerializeField] float CutSpeed; // Player's speed will divide by this number
 
     // Start is called before the first frame update
@@ -23,7 +23,7 @@ public class Jacks : MonoBehaviour
 
                 rb = Speed.CarRb;
 
-                rb.velocity = rb.velocity / 2;
+                rb.velocity = rb.velocity / CutSpeed;
                 // Vector3 IncomingForce = rb.velocity;
                 //rb.AddForce((IncomingForce * -1) / CutSpeed);
                 //Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;

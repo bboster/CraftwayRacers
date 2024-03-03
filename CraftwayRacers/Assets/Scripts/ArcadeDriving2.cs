@@ -1,6 +1,7 @@
 using Newtonsoft.Json.Linq;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,7 +34,11 @@ public class ArcadeDriving2 : MonoBehaviour
     public PlayerInput PlayerInput;
     private bool readingGas, readingBrake;
     private float steerValue = 0, ACValue = 0, WheelRadius = 0.5f, TireMass = 1f;
+    
+    //Shield Tings
     public bool Shielded;
+    public GameObject Shield;
+    public float ShieldTimer;
 
     void Start()
     {
@@ -229,12 +234,15 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             StartCoroutine(waiter());
             Shielded = true;
+            Shield.SetActive(true);
         }
 
         IEnumerator waiter()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(ShieldTimer);
             Shielded = false;
+            Shield.SetActive(false);
         }
     }
+
 }
