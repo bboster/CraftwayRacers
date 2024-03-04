@@ -9,10 +9,10 @@ EditorBuildSettings:
     path: Assets/Scenes/MainScene.unity
     guid: 9fc0d4010bbf28b4594072e72b8655ab
   - enabled: 0
-    path: Assets/Scenes/JacobScene.unity
+    path: Assets/Scenes/Programmer/JacobScene.unity
     guid: 47f010fe849d07a49a4dd6cd97590cc5
   - enabled: 0
-    path: Assets/Scenes/EliScene.unity
+    path: Assets/Scenes/Programmer/EliScene.unity
     guid: 9683ee2e576753d49922d0700fa9f91b
   - enabled: 0
     path: Assets/Scenes/DavidScene.unity

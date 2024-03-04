@@ -98,6 +98,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": true
+                },
+                {
+                    ""name"": ""Drift"",
+                    ""type"": ""Button"",
+                    ""id"": ""4c3fe553-fd5c-4d1f-a884-144d2ff15954"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -232,6 +241,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Brake"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""a8c31b13-ec10-46c3-a57d-2dd6b3d55220"",
+                    ""path"": ""<Gamepad>/buttonEast"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Drift"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -248,6 +268,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Rotate = m_Movement.FindAction("Rotate", throwIfNotFound: true);
         m_Movement_Gas = m_Movement.FindAction("Gas", throwIfNotFound: true);
         m_Movement_Brake = m_Movement.FindAction("Brake", throwIfNotFound: true);
+        m_Movement_Drift = m_Movement.FindAction("Drift", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -317,6 +338,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Movement_Rotate;
     private readonly InputAction m_Movement_Gas;
     private readonly InputAction m_Movement_Brake;
+    private readonly InputAction m_Movement_Drift;
     public struct MovementActions
     {
         private @PlayerControls m_Wrapper;
@@ -329,6 +351,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Rotate => m_Wrapper.m_Movement_Rotate;
         public InputAction @Gas => m_Wrapper.m_Movement_Gas;
         public InputAction @Brake => m_Wrapper.m_Movement_Brake;
+        public InputAction @Drift => m_Wrapper.m_Movement_Drift;
         public InputActionMap Get() { return m_Wrapper.m_Movement; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -362,6 +385,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Brake.started += instance.OnBrake;
             @Brake.performed += instance.OnBrake;
             @Brake.canceled += instance.OnBrake;
+            @Drift.started += instance.OnDrift;
+            @Drift.performed += instance.OnDrift;
+            @Drift.canceled += instance.OnDrift;
         }
 
         private void UnregisterCallbacks(IMovementActions instance)
@@ -390,6 +416,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @Brake.started -= instance.OnBrake;
             @Brake.performed -= instance.OnBrake;
             @Brake.canceled -= instance.OnBrake;
+            @Drift.started -= instance.OnDrift;
+            @Drift.performed -= instance.OnDrift;
+            @Drift.canceled -= instance.OnDrift;
         }
 
         public void RemoveCallbacks(IMovementActions instance)
@@ -417,5 +446,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnRotate(InputAction.CallbackContext context);
         void OnGas(InputAction.CallbackContext context);
         void OnBrake(InputAction.CallbackContext context);
+        void OnDrift(InputAction.CallbackContext context);
     }
 }
