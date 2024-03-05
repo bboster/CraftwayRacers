@@ -12,6 +12,8 @@ public class WinTracker : MonoBehaviour
 
     private int playerToWin = -1;
 
+    public GameObject[] players = new GameObject[4];
+
     private void Start()
     {
         StartGame();
@@ -45,7 +47,7 @@ public class WinTracker : MonoBehaviour
 
     private IEnumerator GameTimer()
     {
-        for(int i = 0; i < 120; i++)
+        for(int i = 0; i < 30; i++)
         {
             yield return new WaitForSeconds(1f);
         }
@@ -60,11 +62,11 @@ public class WinTracker : MonoBehaviour
     public void DetermineWinnerWithLaps()
     {
         bool tiedCondition = false;
-        List<int> tiedPlayers = new List<int>();
+        int winner = 0;
 
-        for(int i = 1; i < 4; i++)
+        for (int i = 1; i < 4; i++)
         {
-            int winner = 0;
+
             playerToWin = winner;
 
             if(laps[i] > laps[winner])
@@ -72,19 +74,16 @@ public class WinTracker : MonoBehaviour
                 winner = i;
                 playerToWin = winner;
                 tiedCondition = false;
-                tiedPlayers.Clear();
             }
             else if(laps[i] == laps[winner])
             {
                 tiedCondition = true;
-                tiedPlayers.Add(i);
-                tiedPlayers.Add(winner);
             }
         }
 
         if(tiedCondition)
         {
-            DetermineWinnerWithWaypoints(tiedPlayers);
+            DetermineWinnerWithWaypoints();
         }
         else
         {
@@ -97,34 +96,28 @@ public class WinTracker : MonoBehaviour
     /// <summary>
     /// Declares the player with the most waypoints completed the winner, or if there is a tie, moves on to the next condition.
     /// </summary>
-    /// <param name="tied"></param>
-    private void DetermineWinnerWithWaypoints(List<int> tied)
+    private void DetermineWinnerWithWaypoints()
     {
         bool tiedCondition = false;
-        List<int> tiedPlayers = new List<int>();
+        int winner = 0;
 
-        for(int i = 1; i < tied.Count; i++)
+        for (int j = 1; j < 4; j++)
         {
-            int winner = 0;
-
-            if(waypoints[i] > waypoints[winner])
+            if(waypoints[j] > waypoints[winner])
             {
-                winner = i;
+                winner = j;
                 playerToWin = winner;
                 tiedCondition = false;
-                tiedPlayers.Clear();
             }
-            else if(waypoints[i] == waypoints[winner])
+            else if(waypoints[j] == waypoints[winner])
             {
                 tiedCondition = true;
-                tiedPlayers.Add(i);
-                tiedPlayers.Add(winner);
             }
         }
 
         if(tiedCondition)
         {
-            DetermineWinnerWithDistance(tiedPlayers);
+            DetermineWinnerWithDistance();
         }
         else
         {
@@ -137,9 +130,32 @@ public class WinTracker : MonoBehaviour
     /// <summary>
     /// Declares the winner based on their distance to the next waypoint.
     /// </summary>
-    /// <param name="tied"></param>
-    private void DetermineWinnerWithDistance(List<int> tied)
+    private void DetermineWinnerWithDistance()
     {
-        //Get distance to the next waypoint for each player.
+        bool tiedCondition = false;
+        int winner = 0;
+        
+        for(int k = 1; k < 4; k++)
+        {
+            if (players[k].GetComponent<WaypointTracking>().distFromNextWP > players[winner].GetComponent<WaypointTracking>().distFromNextWP)
+            {
+                winner = k;
+                playerToWin = winner;
+                tiedCondition = false;
+            }
+            else if(players[k].GetComponent<WaypointTracking>().distFromNextWP == players[winner].GetComponent<WaypointTracking>().distFromNextWP)
+            {
+                tiedCondition = true;
+            }
+        }
+
+        if(tiedCondition)
+        {
+            //Tied UI display.
+        }
+        else
+        {
+            print(playerToWin);
+        }
     }
 }

@@ -7,7 +7,7 @@ public class WaypointTracking : MonoBehaviour
     [SerializeField] private int nextWaypoint = 0;
     private int id;
 
-    private float distFromNextWP;
+    public float distFromNextWP;
     private float oldDist;
 
     private GameObject gc;
@@ -19,6 +19,9 @@ public class WaypointTracking : MonoBehaviour
         gc = GameObject.Find("GameController");
 
         id = GameObject.FindGameObjectsWithTag("Player").Length - 1;
+
+        gc.GetComponent<WinTracker>().players[id] = gameObject;
+
         print(id);
 
         StartCoroutine(DirectionTracker());

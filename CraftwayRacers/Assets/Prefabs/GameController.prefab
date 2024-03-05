@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8602532691323661424}
   - component: {fileID: 5067393535294104754}
-  - component: {fileID: 3634445637804794029}
+  - component: {fileID: 6692904200271747183}
   m_Layer: 0
   m_Name: GameController
   m_TagString: GameController
@@ -63,7 +63,7 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
---- !u!114 &3634445637804794029
+--- !u!114 &6692904200271747183
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -77,3 +77,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   waypoints: 00000000000000000000000000000000
   laps: 00000000000000000000000000000000
+  players:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
