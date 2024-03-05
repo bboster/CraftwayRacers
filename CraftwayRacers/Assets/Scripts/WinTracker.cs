@@ -5,22 +5,53 @@ using UnityEngine;
 public class WinTracker : MonoBehaviour
 {
     //Waypoints to determine progress around the track.
-    [SerializeField] private int[] waypoints;
-
-    //Amount of waypoints passed by each player.
-    [SerializeField] private int[] pointsPassed;
+    public int[] waypoints = new int[4];
 
     //Laps completed for each player.
-    [SerializeField] private int[] laps;
+    public int[] laps = new int[4];
 
+    private int playerToWin = -1;
+
+    private void Start()
+    {
+        StartGame();
+    }
+
+    /// <summary>
+    /// Starts the game timer.
+    /// </summary>
+    public void StartGame()
+    {
+        StartCoroutine(GameTimer());
+    }
+
+    /// <summary>
+    /// Adds one to the count of laps a player has completed.
+    /// </summary>
+    /// <param name="playerNum"> The player that has completed a lap. </param>
     public void AddLap(int playerNum)
     {
         laps[playerNum]++;
     }
 
+    /// <summary>
+    /// Adds one to the count of waypoints a player has passed.
+    /// </summary>
+    /// <param name="playerNum"> The player that has passed a waypoint. </param>
     public void AddWaypoint(int playerNum)
     {
         waypoints[playerNum]++;
+    }
+
+    private IEnumerator GameTimer()
+    {
+        for(int i = 0; i < 120; i++)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+
+        //End the game and determine winner.
+        DetermineWinnerWithLaps();
     }
 
     /// <summary>
@@ -34,10 +65,12 @@ public class WinTracker : MonoBehaviour
         for(int i = 1; i < 4; i++)
         {
             int winner = 0;
+            playerToWin = winner;
 
             if(laps[i] > laps[winner])
             {
                 winner = i;
+                playerToWin = winner;
                 tiedCondition = false;
                 tiedPlayers.Clear();
             }
@@ -52,6 +85,10 @@ public class WinTracker : MonoBehaviour
         if(tiedCondition)
         {
             DetermineWinnerWithWaypoints(tiedPlayers);
+        }
+        else
+        {
+            print(playerToWin);
         }
 
         //Set win UI.
@@ -73,6 +110,7 @@ public class WinTracker : MonoBehaviour
             if(waypoints[i] > waypoints[winner])
             {
                 winner = i;
+                playerToWin = winner;
                 tiedCondition = false;
                 tiedPlayers.Clear();
             }
@@ -87,6 +125,10 @@ public class WinTracker : MonoBehaviour
         if(tiedCondition)
         {
             DetermineWinnerWithDistance(tiedPlayers);
+        }
+        else
+        {
+            print(playerToWin);
         }
 
         //Set winner UI.
