@@ -37,6 +37,8 @@ public class SpawningSystem : MonoBehaviour
 
     private bool IsWaiting = true;
 
+    public ThumbtackBehavior TB;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -62,26 +64,38 @@ public class SpawningSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        GameObject Object1 = GameObject.Find("Thumbtack");
-        GameObject Object2 = GameObject.Find("Jacks");
-        if (Object1 != null || Jacks != null)
+        if (TB.isOnGround == true)
         {
-            IsWaiting = false;
+            StartCoroutine(Wait());
+            
         }
-
-        if(IsWaiting == true)
+        if(TB.isOnGround == false)
         {
-            StartCoroutine(LargeHazardsTimer());
+            StartCoroutine(Wait2());
         }
     }
 
-    IEnumerator LargeHazardsTimer()
+    //IEnumerator LargeHazardsTimer()
+    //{
+    //    GameObject largeHazard;
+    //    largeHazard = ChooseLargeHazard();
+    //    yield return new WaitForSeconds(WaitTime);
+    //    Instantiate(largeHazard, PlaceToSpawn(), Quaternion.identity);
+    //    Destroy(largeHazard);
+    //}
+
+    IEnumerator Wait()
     {
-        GameObject largeHazard;
-        largeHazard = ChooseLargeHazard();
         yield return new WaitForSeconds(WaitTime);
-        Instantiate(largeHazard, PlaceToSpawn(), Quaternion.identity);
-        Destroy(largeHazard);
+        TB.isOnGround = false;
+    }
+    
+    IEnumerator Wait2()
+    {
+        
+        yield return new WaitForSeconds(WaitTime);
+        Instantiate(Thumbtack, PlaceToSpawn(), Quaternion.identity);
+        TB.isOnGround = true;
     }
 
     private Vector3 PlaceToSpawn()

@@ -1999,7 +1999,7 @@ GameObject:
   - component: {fileID: 818618937}
   m_Layer: 0
   m_Name: BaseRoad
-  m_TagString: Untagged
+  m_TagString: NormalRoad
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5589,6 +5589,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1719571720}
   - component: {fileID: 1719571719}
+  - component: {fileID: 1719571721}
   m_Layer: 0
   m_Name: SpawningSystemManager
   m_TagString: Untagged
@@ -5630,7 +5631,8 @@ MonoBehaviour:
   Jacks: {fileID: 4637232189886785061, guid: 13aff050f24eaca4db7dabb5b7b6771f, type: 3}
   Thumbtack: {fileID: 5789635773027154205, guid: e38090cf3c9432c4d886616a18f047f0, type: 3}
   RubberBand: {fileID: 0}
-  WaitTime: 10
+  WaitTime: 3
+  TB: {fileID: 1719571721}
 --- !u!4 &1719571720
 Transform:
   m_ObjectHideFlags: 0
@@ -5646,6 +5648,20 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1719571721
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1719571718}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5e62be1b26a4c584ca9253e83ddcc658, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rb: {fileID: 0}
+  isOnGround: 0
 --- !u!1001 &1776494839
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5713,6 +5729,10 @@ PrefabInstance:
     - target: {fileID: 919132149155446097, guid: 7c554f58f7efb3a4a830d4c9657741d4, type: 3}
       propertyPath: m_Name
       value: EditedLoopPiece_V3
+      objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: 7c554f58f7efb3a4a830d4c9657741d4, type: 3}
+      propertyPath: m_TagString
+      value: NormalRoad
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

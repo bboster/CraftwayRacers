@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ThumbtackModel Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: d009a3eac33514549885898ab0976bb0, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -129,6 +133,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rb: {fileID: 5595273433907543228}
+  isOnGround: 0
 --- !u!54 &5595273433907543228
 Rigidbody:
   m_ObjectHideFlags: 0

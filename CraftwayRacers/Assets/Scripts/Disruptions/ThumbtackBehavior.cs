@@ -5,6 +5,7 @@ using UnityEngine;
 public class ThumbtackBehavior : MonoBehaviour
 {
     [SerializeField] private Rigidbody rb;
+    public bool isOnGround = false;
    
     // Start is called before the first frame update
     void Start()
@@ -16,6 +17,7 @@ public class ThumbtackBehavior : MonoBehaviour
     {
         if(collision.gameObject.tag == "NormalRoad")
         {
+            isOnGround = true;
             rb.isKinematic = true;
         }
     }
