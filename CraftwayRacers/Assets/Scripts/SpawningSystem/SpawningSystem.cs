@@ -7,6 +7,7 @@ public class SpawningSystem : MonoBehaviour
     // The list of spawn points.
     public List<Vector3> spawnPoints;
     public List<GameObject> largeHazards;
+    public List<GameObject> gatchaBalls;
 
     // Spawn points for disruptions that can be changed in the inspector.
     [SerializeField] private Vector3 spawnPoint1;
@@ -35,9 +36,12 @@ public class SpawningSystem : MonoBehaviour
     // Amount of wait time
     [SerializeField] private int WaitTime;
 
-    private bool IsWaiting = true;
+    public bool IsWaiting = true;
+    public bool IsWaitingGatcha = true;
 
     public ThumbtackBehavior TB;
+
+    private int count;
 
     // Start is called before the first frame update
     void Start()
@@ -59,48 +63,48 @@ public class SpawningSystem : MonoBehaviour
 
         largeHazards.Add(Thumbtack);
         largeHazards.Add(Jacks);
+
+        gatchaBalls.Add(PaintBrushGatcha);
+        gatchaBalls.Add(CottonBallShieldGatcha);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (TB.isOnGround == true)
+        if (IsWaiting == true) 
         {
-            StartCoroutine(Wait());
-            
+            StartCoroutine(LargeHazardsTimer());
         }
-        if(TB.isOnGround == false)
-        {
-            StartCoroutine(Wait2());
-        }
+        //if (IsWaitingGatcha == true)
+        //{
+        //    StartCoroutine(GatchaBallTimer());
+        //}
     }
 
-    //IEnumerator LargeHazardsTimer()
+    IEnumerator LargeHazardsTimer()
+    {
+        IsWaiting = false;
+        GameObject largeHazard;
+        largeHazard = ChooseLargeHazard();
+        yield return new WaitForSeconds(WaitTime);
+        Instantiate(largeHazard, PlaceToSpawn(), Quaternion.identity);
+        IsWaiting = true;
+    }
+
+    //IEnumerator GatchaBallTimer()
     //{
-    //    GameObject largeHazard;
-    //    largeHazard = ChooseLargeHazard();
+    //    IsWaitingGatcha = false;
+    //    GameObject gatchaBall;
+    //    gatchaBall = ChooseGatchaBall();
     //    yield return new WaitForSeconds(WaitTime);
-    //    Instantiate(largeHazard, PlaceToSpawn(), Quaternion.identity);
-    //    Destroy(largeHazard);
+    //    Instantiate(gatchaBall, PlaceToSpawn(), Quaternion.identity);
+    //    IsWaitingGatcha = true;
     //}
-
-    IEnumerator Wait()
-    {
-        yield return new WaitForSeconds(WaitTime);
-        TB.isOnGround = false;
-    }
     
-    IEnumerator Wait2()
-    {
-        
-        yield return new WaitForSeconds(WaitTime);
-        Instantiate(Thumbtack, PlaceToSpawn(), Quaternion.identity);
-        TB.isOnGround = true;
-    }
-
     private Vector3 PlaceToSpawn()
     {
         int number = Random.Range(0, spawnPoints.Count);
+        spawnPoints.Remove(spawnPoints[number]);
         return spawnPoints[number];
     }
 
@@ -109,6 +113,12 @@ public class SpawningSystem : MonoBehaviour
         int number = Random.Range(0, largeHazards.Count);
         return largeHazards[number];
     }
+
+    //private GameObject ChooseGatchaBall()
+    //{
+    //    int number = Random.Range(0, gatchaBalls.Count);
+    //    return gatchaBalls[number];
+    //}
 
 
 }

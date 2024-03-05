@@ -2,12 +2,11 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ThumbtackBehavior : MonoBehaviour
+public class GatchaSpawning : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb;
     public SpawningSystem spawningSystem;
-   
-    // Start is called before the first frame update
+    public Rigidbody rb;
+
     void Start()
     {
         rb = GetComponent<Rigidbody>();
@@ -15,11 +14,10 @@ public class ThumbtackBehavior : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "NormalRoad")
+        if (collision.gameObject.tag == "NormalRoad")
         {
-            spawningSystem.IsWaiting = true;
+            spawningSystem.IsWaitingGatcha = true;
             rb.isKinematic = true;
         }
     }
-    
 }

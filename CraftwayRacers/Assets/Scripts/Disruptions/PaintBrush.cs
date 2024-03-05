@@ -8,10 +8,6 @@ public class PaintBrush : MonoBehaviour
     [SerializeField] private GameObject Paint;
     public bool isWaiting = false;
 
-    public void SpawnPaints()
-    {
-        Instantiate(Paint, Player.transform.position, Quaternion.identity);
-    }
     
     public IEnumerator SpawnPaintsDelay()
     {
