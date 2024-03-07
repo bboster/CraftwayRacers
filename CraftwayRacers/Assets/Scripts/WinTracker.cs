@@ -5,6 +5,9 @@ using TMPro;
 
 public class WinTracker : MonoBehaviour
 {
+    [Tooltip("In Seconds")]
+    public int gameTime;
+
     //Waypoints to determine progress around the track.
     public int[] waypoints = new int[4];
 
@@ -51,7 +54,7 @@ public class WinTracker : MonoBehaviour
 
     private IEnumerator GameTimer()
     {
-        for(int i = 0; i < 30; i++)
+        for(int i = 0; i < gameTime; i++)
         {
             yield return new WaitForSeconds(1f);
         }
