@@ -16,7 +16,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public RaycastHit[] HitList = new RaycastHit[4];
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] WheelList = new GameObject[4];
-
+    public float compMod = 10f;
     //Tooltips for game devs on driving
     [Tooltip("Used for the torque curve, see below. DO NOT USE FOR JUST 'MORE SPEED'")] public float TopSpeed = 20f;
     [Tooltip("How far the car sits off the ground.")]                                   public float MaxSuspensionLength = 2f;
@@ -43,6 +43,7 @@ public class ArcadeDriving2 : MonoBehaviour
 
     void Start()
     {
+        Application.targetFrameRate = 120;
         PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
         PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
         PlayerInput.currentActionMap.FindAction("Gas").started += ReadGas;
@@ -55,7 +56,7 @@ public class ArcadeDriving2 : MonoBehaviour
             CenterOfMass = GameObject.Find("CoM");
         }
         CarRb = GetComponent<Rigidbody>();
-        CarRb.centerOfMass = new Vector3(0, -1, 0);
+        CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
     }
 
     /// <summary>
@@ -215,18 +216,18 @@ public class ArcadeDriving2 : MonoBehaviour
             float dampenedForce = ((compressionOffset * SpringStrength) - velocity * SpringDamper);
             CarRb.AddForceAtPosition(SpringMountList[springNum].up * dampenedForce, SpringMountList[springNum].position);
 
- 
-            //WheelList[springNum].transform.position.y = SpringMountList[springNum].position.y - compressionOffset;
-            
-            Vector3 wheelPosition = WheelList[springNum].transform.position;
-            wheelPosition.y = SpringMountList[springNum].localPosition.y+WheelPosMod - (compressionOffset*3f);
-            temp += springNum + ": " + wheelPosition.y + ",";
- 
 
+            //WheelList[springNum].transform.position.y = SpringMountList[springNum].position.y - compressionOffset;
+            //Vector3 wheelPosition = WheelList[springNum].transform.position;
+            //wheelPosition.y = SpringMountList[springNum].position.y + WheelPosMod - (compressionOffset*compMod);
+            //WheelList[springNum].transform.position = wheelPosition;
+            Vector3 wheelPosition = WheelList[springNum].transform.position;
+            wheelPosition.y = SpringMountList[springNum].localPosition.y+WheelPosMod + (compressionOffset*compMod);
+            temp += springNum + "Pos: " + wheelPosition.y + "," + "Compression: " + compressionOffset;
             WheelList[springNum].transform.localPosition = new Vector3(WheelList[springNum].GetComponent<WheelInfo>().StartXPosition,
                  wheelPosition.y,
                  WheelList[springNum].GetComponent<WheelInfo>().StartZPosition);
-            
+                   
         }
         print(temp);
     }

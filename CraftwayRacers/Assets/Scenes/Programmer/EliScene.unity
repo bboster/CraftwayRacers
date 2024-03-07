@@ -5338,11 +5338,12 @@ MonoBehaviour:
   - {fileID: 1026213306837529643}
   - {fileID: 6105736315419941844}
   - {fileID: 2369818623711864030}
+  compMod: 100
   TopSpeed: 100
   MaxSuspensionLength: 1.5
-  SpringStrength: 20
-  SpringDamper: 5
-  WheelPosMod: 0
+  SpringStrength: 100
+  SpringDamper: 20
+  WheelPosMod: -50
   MinSteer: 3
   MaxSteer: 5
   EnginePower: 70
@@ -5475,7 +5476,7 @@ Rigidbody:
   m_Mass: 40
   m_Drag: 0.05
   m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: -1, z: 0}
+  m_CenterOfMass: {x: 0, y: -1, z: 0.125}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
   m_IncludeLayers:
@@ -6317,7 +6318,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2450016526601014953}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: -150, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -6684,7 +6685,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780609020640598722}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
