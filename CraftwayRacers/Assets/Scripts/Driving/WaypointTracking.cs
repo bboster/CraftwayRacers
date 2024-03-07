@@ -37,6 +37,11 @@ public class WaypointTracking : MonoBehaviour
             if(oldDist < distFromNextWP)
             {
                 //Show wrong direction UI.
+                
+            }
+            else
+            {
+                
             }
 
             yield return new WaitForSeconds(1f);
