@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class WinTracker : MonoBehaviour
 {
@@ -13,6 +14,9 @@ public class WinTracker : MonoBehaviour
     private int playerToWin = -1;
 
     public GameObject[] players = new GameObject[4];
+
+    [SerializeField] private GameObject winDisplay;
+    [SerializeField] private TextMeshProUGUI winTxt;
 
     private void Start()
     {
@@ -87,7 +91,8 @@ public class WinTracker : MonoBehaviour
         }
         else
         {
-            print(playerToWin);
+            winDisplay.SetActive(true);
+            winTxt.text = "Player " + winner + " Wins!";
         }
 
         //Set win UI.
@@ -121,7 +126,8 @@ public class WinTracker : MonoBehaviour
         }
         else
         {
-            print(playerToWin);
+            winDisplay.SetActive(true);
+            winTxt.text = "Player " + winner + " Wins!";
         }
 
         //Set winner UI.
@@ -155,7 +161,8 @@ public class WinTracker : MonoBehaviour
         }
         else
         {
-            print(playerToWin);
+            winDisplay.SetActive(true);
+            winTxt.text = "Player " + winner + " Wins!";
         }
     }
 }
