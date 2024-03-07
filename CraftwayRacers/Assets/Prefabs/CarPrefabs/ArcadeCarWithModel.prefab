@@ -374,8 +374,8 @@ MonoBehaviour:
   MaxSteer: 5
   EnginePower: 70
   BrakePower: 50
-  FrontTireGrip: 0.9
-  RearTireGrip: 0.7
+  FrontTireGrip: 0.85
+  RearTireGrip: 0.6
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
