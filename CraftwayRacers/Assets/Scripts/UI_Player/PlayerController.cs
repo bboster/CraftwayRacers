@@ -7,6 +7,7 @@ public class PlayerController : MonoBehaviour
 {
     public PaintBrush PB;
     public bool HasPaint;
+    public SpawningSystem SpawningSystem;
     // Start is called before the first frame update
     void Start()
     {

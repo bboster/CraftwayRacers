@@ -213,6 +213,7 @@ GameObject:
   - component: {fileID: 3506038640120930864}
   - component: {fileID: 1835734076980738088}
   - component: {fileID: 8064529893149638173}
+  - component: {fileID: 5213606266752621741}
   m_Layer: 0
   m_Name: CarModel_Body
   m_TagString: Player
@@ -430,7 +431,7 @@ MonoBehaviour:
   m_DefaultControlScheme: 
   m_DefaultActionMap: Movement
   m_SplitScreenIndex: -1
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 2782092050192359878}
 --- !u!54 &1835734076980738088
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -476,6 +477,19 @@ MonoBehaviour:
   Player4Spawn: {x: 203.4, y: 28.9, z: -198.5}
   PlayerCount: {fileID: 3506038640120930864}
   parent: {fileID: 0}
+--- !u!114 &5213606266752621741
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1780609019321248658}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7e953ef1f441ca440b8ef5534ae96ce9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  nextWaypoint: 0
 --- !u!1 &2369818625032787342
 GameObject:
   m_ObjectHideFlags: 0

@@ -32,6 +32,6 @@ public class PositionTracker : NetworkBehaviour
     [ServerRpc]
     public void PositionSetterServerRpc()
     {
-        gc.GetComponent<GameController>().playerPositions.Value.PlayerPositions[0] = transform.position;
+        //gc.GetComponent<GameController>().playerPositions.Value.PlayerPositions[0] = transform.position;
     }
 }
