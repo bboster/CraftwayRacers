@@ -370,12 +370,12 @@ MonoBehaviour:
   SpringStrength: 85
   SpringDamper: 75
   WheelPosMod: -50
-  MinSteer: 5.5
-  MaxSteer: 3.5
+  MinSteer: 1.5
+  MaxSteer: 4
   EnginePower: 80
   BrakePower: 70
-  FrontTireGrip: 0.9
-  RearTireGrip: 0.7
+  FrontTireGrip: 0.8
+  RearTireGrip: 0.6
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
