@@ -14,7 +14,7 @@ public class StartCountdown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        StartCoroutine(ReadySetGo());
+        //StartCoroutine(ReadySetGo());
     }
 
     IEnumerator ReadySetGo()
@@ -45,6 +45,9 @@ public class StartCountdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            StartCoroutine(ReadySetGo());
+        }
     }
 }

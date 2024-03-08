@@ -41,6 +41,10 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject Shield;
     public float ShieldTimer;
 
+    //Forces players to only be able to move when all four players are in
+    /*public bool AllReady;
+    public PlayerInput PlayerCount;*/
+
     void Start()
     {
         Application.targetFrameRate = 120;
@@ -59,12 +63,18 @@ public class ArcadeDriving2 : MonoBehaviour
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
     }
 
+    
+
+
     /// <summary>
     /// Basically inputs here, nothing important. Changes bools
     /// </summary>
     void ReadGas(InputAction.CallbackContext ctx)
     {
-        readingGas = true; 
+        //if (AllReady == true) //Delete all "AllReady" bools if cars aren't able to move at all
+        {
+            readingGas = true;
+        }
     }
     void EndReadGas(InputAction.CallbackContext ctx)
     {
@@ -72,7 +82,10 @@ public class ArcadeDriving2 : MonoBehaviour
     }
     void ReadBrake(InputAction.CallbackContext ctx)
     {
-        readingBrake= true;
+        //if (AllReady == true)
+        {
+            readingBrake = true;
+        }
     }
     void EndReadBrake(InputAction.CallbackContext ctx)
     {
@@ -86,7 +99,12 @@ public class ArcadeDriving2 : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (readingGas == true)
+        /*if (PlayerCount.playerIndex == 3) //If all 4 players are in, the players get to move
+        {
+            AllReady = true;
+        }*/
+
+            if (readingGas == true)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
         }
@@ -138,34 +156,37 @@ public class ArcadeDriving2 : MonoBehaviour
     /// </summary>
     public void DrivingForce(Transform springLoc, int springNum)
     {
-        if (IsGrounded(springLoc, springNum))
-        {           
-            Vector3 accelDir = SpringMountList[springNum].forward;
-            float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
-            float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed / TopSpeed));
-            float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
-            if (currentSpeed > 0 && ACValue < 0)
+        //if (AllReady == true)
+        {
+            if (IsGrounded(springLoc, springNum))
             {
-                steerValue *= -1f;
-            }
-            if (springNum == 0 || springNum == 1) //STEERING HERE
-            {
-                float steeringFactor = steerValue * Mathf.Lerp(MaxSteer, MinSteer, normalizedSpeed);
-                //As you speed up, you get less steering for improved handling. (Think how little steering it takes to switch lanes on the highway)
-                accelDir += SpringMountList[springNum].right * steeringFactor;
-                //ad = new Vector3(accelDir.x*(Mathf.Lerp(MinSteer, MaxSteer, normalizedSpeed)*ACValue), accelDir.y, accelDir.z);
-                //print(accelDir += SpringMountList[springNum].right * steeringFactor);
-                WheelList[springNum].transform.localRotation = Quaternion.Euler(0f, steeringFactor*4f, 0f); //JUST MAKES THE WHEEL GAMEOBJECTS "TURN" visually
-            }
- 
-            //MAIN ACCELERATION HERE
-            CarRb.AddForceAtPosition(accelDir * ((availableTorque * EnginePower)+1f), SpringMountList[springNum].transform.position);
-            //CarRb.AddForceAtPosition(ad * (availableTorque * EnginePower), SpringMountList[springNum].transform.position);
+                Vector3 accelDir = SpringMountList[springNum].forward;
+                float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
+                float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed / TopSpeed));
+                float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
+                if (currentSpeed > 0 && ACValue < 0)
+                {
+                    steerValue *= -1f;
+                }
+                if (springNum == 0 || springNum == 1) //STEERING HERE
+                {
+                    float steeringFactor = steerValue * Mathf.Lerp(MaxSteer, MinSteer, normalizedSpeed);
+                    //As you speed up, you get less steering for improved handling. (Think how little steering it takes to switch lanes on the highway)
+                    accelDir += SpringMountList[springNum].right * steeringFactor;
+                    //ad = new Vector3(accelDir.x*(Mathf.Lerp(MinSteer, MaxSteer, normalizedSpeed)*ACValue), accelDir.y, accelDir.z);
+                    //print(accelDir += SpringMountList[springNum].right * steeringFactor);
+                    WheelList[springNum].transform.localRotation = Quaternion.Euler(0f, steeringFactor * 4f, 0f); //JUST MAKES THE WHEEL GAMEOBJECTS "TURN" visually
+                }
 
-            if (currentSpeed > 0 && ACValue < 0) //braking
-            {
-                //Vector3 newAccelDir = new Vector3(accelDir.x * steerValue, accelDir.y, accelDir.z);
-                CarRb.AddForceAtPosition((accelDir) * BrakePower * ACValue, SpringMountList[springNum].transform.position);
+                //MAIN ACCELERATION HERE
+                CarRb.AddForceAtPosition(accelDir * ((availableTorque * EnginePower) + 1f), SpringMountList[springNum].transform.position);
+                //CarRb.AddForceAtPosition(ad * (availableTorque * EnginePower), SpringMountList[springNum].transform.position);
+
+                if (currentSpeed > 0 && ACValue < 0) //braking
+                {
+                    //Vector3 newAccelDir = new Vector3(accelDir.x * steerValue, accelDir.y, accelDir.z);
+                    CarRb.AddForceAtPosition((accelDir) * BrakePower * ACValue, SpringMountList[springNum].transform.position);
+                }
             }
         }        
     }
