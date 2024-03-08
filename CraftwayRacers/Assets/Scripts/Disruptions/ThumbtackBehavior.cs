@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ThumbtackBehavior : MonoBehaviour
 {
-    [SerializeField] private Rigidbody rb;
+    public Rigidbody rb;
     public SpawningSystem spawningSystem;
    
     // Start is called before the first frame update
@@ -18,6 +18,7 @@ public class ThumbtackBehavior : MonoBehaviour
         if(collision.gameObject.tag == "NormalRoad")
         {
             spawningSystem.IsWaiting = true;
+            rb.constraints = RigidbodyConstraints.FreezePositionY;
             rb.isKinematic = true;
         }
     }

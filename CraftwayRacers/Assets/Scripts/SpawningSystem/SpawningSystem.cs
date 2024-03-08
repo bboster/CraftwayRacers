@@ -8,6 +8,7 @@ public class SpawningSystem : MonoBehaviour
     public List<Vector3> spawnPoints;
     public List<GameObject> largeHazards;
     public List<GameObject> gatchaBalls;
+    public List<Vector3> gatchaSpawns;
 
     // Spawn points for disruptions that can be changed in the inspector.
     [SerializeField] private Vector3 spawnPoint1;
@@ -17,6 +18,7 @@ public class SpawningSystem : MonoBehaviour
     [SerializeField] private Vector3 spawnPoint5;
     [SerializeField] private Vector3 spawnPoint6;
     [SerializeField] private Vector3 spawnPoint7;
+
     [SerializeField] private Vector3 spawnPoint8;
     [SerializeField] private Vector3 spawnPoint9;
     [SerializeField] private Vector3 spawnPoint10;
@@ -53,18 +55,21 @@ public class SpawningSystem : MonoBehaviour
         spawnPoints.Add(spawnPoint5);
         spawnPoints.Add(spawnPoint6);
         spawnPoints.Add(spawnPoint7);
-        spawnPoints.Add(spawnPoint8);
-        spawnPoints.Add(spawnPoint9);
-        spawnPoints.Add(spawnPoint10);
-        spawnPoints.Add(spawnPoint11);
-        spawnPoints.Add(spawnPoint12);
-        spawnPoints.Add(spawnPoint13);
-        spawnPoints.Add(spawnPoint14);
+
+        gatchaSpawns.Add(spawnPoint8);
+        gatchaSpawns.Add(spawnPoint9);
+        gatchaSpawns.Add(spawnPoint10);
+        gatchaSpawns.Add(spawnPoint11);
+        gatchaSpawns.Add(spawnPoint12);
+        gatchaSpawns.Add(spawnPoint13);
+        gatchaSpawns.Add(spawnPoint14);
+
+
 
         largeHazards.Add(Thumbtack);
         largeHazards.Add(Jacks);
 
-        gatchaBalls.Add(PaintBrushGatcha);
+        //gatchaBalls.Add(PaintBrushGatcha);
         gatchaBalls.Add(CottonBallShieldGatcha);
     }
 
@@ -75,10 +80,10 @@ public class SpawningSystem : MonoBehaviour
         {
             StartCoroutine(LargeHazardsTimer());
         }
-        //if (IsWaitingGatcha == true)
-        //{
-        //    StartCoroutine(GatchaBallTimer());
-        //}
+        if (IsWaitingGatcha == true)
+        {
+            StartCoroutine(GatchaBallTimer());
+        }
     }
 
     IEnumerator LargeHazardsTimer()
@@ -91,21 +96,28 @@ public class SpawningSystem : MonoBehaviour
         IsWaiting = true;
     }
 
-    //IEnumerator GatchaBallTimer()
-    //{
-    //    IsWaitingGatcha = false;
-    //    GameObject gatchaBall;
-    //    gatchaBall = ChooseGatchaBall();
-    //    yield return new WaitForSeconds(WaitTime);
-    //    Instantiate(gatchaBall, PlaceToSpawn(), Quaternion.identity);
-    //    IsWaitingGatcha = true;
-    //}
-    
+    IEnumerator GatchaBallTimer()
+    {
+        IsWaitingGatcha = false;
+        GameObject gatchaBall;
+        gatchaBall = ChooseGatchaBall();
+        yield return new WaitForSeconds(WaitTime);
+        Instantiate(gatchaBall, PlaceToSpawnGatcha(), Quaternion.identity);
+        IsWaitingGatcha = true;
+    }
+
     private Vector3 PlaceToSpawn()
     {
-        int number = Random.Range(0, spawnPoints.Count);
+        int number = Random.Range(0, spawnPoints.Count - 1);
         spawnPoints.Remove(spawnPoints[number]);
         return spawnPoints[number];
+    }
+
+    private Vector3 PlaceToSpawnGatcha()
+    {
+        int number = Random.Range(0, gatchaSpawns.Count - 1);
+        gatchaSpawns.Remove(gatchaSpawns[number]);  
+        return gatchaSpawns[number];
     }
 
     private GameObject ChooseLargeHazard()
@@ -114,11 +126,11 @@ public class SpawningSystem : MonoBehaviour
         return largeHazards[number];
     }
 
-    //private GameObject ChooseGatchaBall()
-    //{
-    //    int number = Random.Range(0, gatchaBalls.Count);
-    //    return gatchaBalls[number];
-    //}
+    private GameObject ChooseGatchaBall()
+    {
+        int number = Random.Range(0, gatchaBalls.Count);
+        return gatchaBalls[number];
+    }
 
 
 }

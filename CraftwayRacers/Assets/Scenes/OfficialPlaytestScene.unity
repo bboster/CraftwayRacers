@@ -6865,6 +6865,7 @@ MonoBehaviour:
   spawnPoints: []
   largeHazards: []
   gatchaBalls: []
+  gatchaSpawns: []
   spawnPoint1: {x: -172.7, y: 25, z: 195}
   spawnPoint2: {x: -44, y: 25, z: 174.6}
   spawnPoint3: {x: -237.8, y: 25, z: 1.7}
@@ -6916,7 +6917,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5e62be1b26a4c584ca9253e83ddcc658, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rb: {fileID: 0}
+  rb: {fileID: 5595273433907543228, guid: e38090cf3c9432c4d886616a18f047f0, type: 3}
   spawningSystem: {fileID: 1719571719}
 --- !u!1 &1735039144
 GameObject:
