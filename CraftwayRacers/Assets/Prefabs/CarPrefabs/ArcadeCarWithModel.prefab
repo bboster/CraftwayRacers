@@ -366,16 +366,16 @@ MonoBehaviour:
   - {fileID: 2369818625032787342}
   compMod: 100
   TopSpeed: 100
-  MaxSuspensionLength: 1.5
-  SpringStrength: 100
-  SpringDamper: 20
+  MaxSuspensionLength: 1.35
+  SpringStrength: 85
+  SpringDamper: 75
   WheelPosMod: -50
-  MinSteer: 3
-  MaxSteer: 5
-  EnginePower: 70
-  BrakePower: 50
-  FrontTireGrip: 0.85
-  RearTireGrip: 0.6
+  MinSteer: 5.5
+  MaxSteer: 3.5
+  EnginePower: 80
+  BrakePower: 70
+  FrontTireGrip: 0.9
+  RearTireGrip: 0.7
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
