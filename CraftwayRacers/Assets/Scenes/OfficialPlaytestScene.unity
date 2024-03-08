@@ -1850,6 +1850,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 1132221669756574119, guid: 6e377d6d9c2d34247950d513b97fec9d, type: 3}
+      propertyPath: m_TagString
+      value: NormalRoad
+      objectReference: {fileID: 0}
     - target: {fileID: 2318346485810157656, guid: 6e377d6d9c2d34247950d513b97fec9d, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -8748,6 +8752,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 837087480}
+    - target: {fileID: 289143907261075599, guid: d0811b7d05f2c9142b11ccb7242965c4, type: 3}
+      propertyPath: m_TagString
+      value: NormalRoad
+      objectReference: {fileID: 0}
     - target: {fileID: 593168843418906131, guid: d0811b7d05f2c9142b11ccb7242965c4, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -9073,6 +9081,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1889157982}
+    - target: {fileID: 129144363133301526, guid: 67fdb311505688e468b34b3a6834ee8b, type: 3}
+      propertyPath: m_TagString
+      value: NormalRoad
+      objectReference: {fileID: 0}
     - target: {fileID: 266004750213487811, guid: 67fdb311505688e468b34b3a6834ee8b, type: 3}
       propertyPath: m_Mesh
       value: 

@@ -11,11 +11,12 @@ public class ThumbtackBehavior : MonoBehaviour
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+        spawningSystem = GameObject.Find("SpawningSystemManager").GetComponent<SpawningSystem>();
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.gameObject.tag == "NormalRoad")
+        if(collision.gameObject.CompareTag("NormalRoad"))
         {
             spawningSystem.IsWaiting = true;
             rb.constraints = RigidbodyConstraints.FreezePositionY;
