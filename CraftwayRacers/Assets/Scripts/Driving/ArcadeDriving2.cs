@@ -87,6 +87,7 @@ public class ArcadeDriving2 : MonoBehaviour
     void EndReadDrift(InputAction.CallbackContext ctx)
     {
         isDrifting= false;
+
     }
 
 
@@ -96,7 +97,6 @@ public class ArcadeDriving2 : MonoBehaviour
     /// </summary>
     void Update()
     {
-        print(ACValue);
         if (readingGas)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
@@ -145,6 +145,13 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         return false;
     }
+    
+    IEnumerator AddDrift()
+    {
+        yield return null;
+    }
+
+
     /// <summary>
     /// This where we actually "drive" the car forward and sideways, and reverse if conditions are 
     /// right. We use the lookup curve to determine how much force to apply based on how fast 
