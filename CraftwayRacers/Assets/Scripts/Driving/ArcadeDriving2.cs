@@ -16,7 +16,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public RaycastHit[] HitList = new RaycastHit[4];
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] WheelList = new GameObject[4];
-    public float compMod = 10f;
+    public float compMod = 10f, DriftForce= 10f;
     //Tooltips for game devs on driving
     [Tooltip("Used for the torque curve, see below. DO NOT USE FOR JUST 'MORE SPEED'")] public float TopSpeed = 20f;
     [Tooltip("How far the car sits off the ground.")]                                   public float MaxSuspensionLength = 2f;
@@ -33,7 +33,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public Rigidbody CarRb;
     public GameObject CenterOfMass;
     public PlayerInput PlayerInput;
-    private bool readingGas, readingBrake;
+    private bool readingGas, readingBrake, isDrifting;
     private float steerValue = 0, ACValue = 0, WheelRadius = 0.5f, TireMass = 1f;
     
     //Shield Tings
@@ -47,9 +47,11 @@ public class ArcadeDriving2 : MonoBehaviour
         PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
         PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
         PlayerInput.currentActionMap.FindAction("Gas").started += ReadGas;
-        PlayerInput.currentActionMap.FindAction("Brake").started += ReadBrake;
         PlayerInput.currentActionMap.FindAction("Gas").canceled += EndReadGas;
+        PlayerInput.currentActionMap.FindAction("Brake").started += ReadBrake;
         PlayerInput.currentActionMap.FindAction("Brake").canceled += EndReadBrake;
+        PlayerInput.currentActionMap.FindAction("Drift").started += ReadDrift;
+        PlayerInput.currentActionMap.FindAction("Drift").canceled += EndReadDrift;
 
         if (CenterOfMass == null)
         {
@@ -77,6 +79,14 @@ public class ArcadeDriving2 : MonoBehaviour
     void EndReadBrake(InputAction.CallbackContext ctx)
     {
         readingBrake = false;
+    }
+    void ReadDrift(InputAction.CallbackContext ctx)
+    {
+        isDrifting = true;
+    }
+    void EndReadDrift(InputAction.CallbackContext ctx)
+    {
+        isDrifting= false;
     }
 
 
@@ -144,6 +154,33 @@ public class ArcadeDriving2 : MonoBehaviour
             float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
             float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed / TopSpeed));
             float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
+            if (isDrifting)
+            {
+                accelDir = SpringMountList[springNum].forward * 2;
+                MinSteer = .1f;
+                MaxSteer = 1f;
+                FrontTireGrip = 0.5f;
+                RearTireGrip = 0.4f;
+                //CarRb.constraints = RigidbodyConstraints.FreezeRotationY;
+                float driftForce = DriftForce; 
+                if(steerValue > 0)
+                {
+                    accelDir -= SpringMountList[springNum].right * (driftForce*normalizedSpeed) ;
+                }
+                else
+                {
+                    accelDir += SpringMountList[springNum].right * (driftForce * normalizedSpeed);
+                }        
+            }
+            if(!isDrifting)
+            {
+                //CarRb.constraints = RigidbodyConstraints.None;
+                FrontTireGrip = 0.8f;
+                RearTireGrip = 0.6f;
+                MinSteer = 1.5f;
+                MaxSteer = 4f;
+                //Need a coroutine task for a small duration, apply force in the forward direction of the car, at the normal of the ground// might not have to cause suspension?
+            }
             if (currentSpeed > 0 && ACValue < 0)
             {
                 steerValue *= -1f;
@@ -229,7 +266,7 @@ public class ArcadeDriving2 : MonoBehaviour
                  WheelList[springNum].GetComponent<WheelInfo>().StartZPosition);
                    
         }
-        print(temp);
+        //print(temp);
     }
 
 

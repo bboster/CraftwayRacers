@@ -365,10 +365,11 @@ MonoBehaviour:
   - {fileID: 6105736314191260292}
   - {fileID: 2369818625032787342}
   compMod: 100
+  DriftForce: 20
   TopSpeed: 100
   MaxSuspensionLength: 1.35
-  SpringStrength: 85
-  SpringDamper: 75
+  SpringStrength: 95
+  SpringDamper: 25
   WheelPosMod: -50
   MinSteer: 1.5
   MaxSteer: 4
@@ -471,9 +472,9 @@ Rigidbody:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1780609019321248658}
   serializedVersion: 4
-  m_Mass: 25
+  m_Mass: 35
   m_Drag: 0.1
-  m_AngularDrag: 0.05
+  m_AngularDrag: 0
   m_CenterOfMass: {x: 0, y: -1, z: 0.125}
   m_InertiaTensor: {x: 1, y: 1, z: 1}
   m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
