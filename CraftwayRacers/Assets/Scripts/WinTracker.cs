@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -166,6 +167,23 @@ public class WinTracker : MonoBehaviour
         {
             winDisplay.SetActive(true);
             winTxt.text = "Player " + winner + " Wins!";
+        }
+    }
+
+
+    //CHECK WHO IS IN THE LEAD EVERY FRAME HERE AND ADJUST UI ELEMENTS.
+
+    private IEnumerator WaypointLeadChecker()
+    {
+        for(; ; )
+        {
+            int[] placements = new int[4];
+
+            //Assume placements[0] is 1st place. Fill in placements according to who has the most waypoints passed.
+
+            //If there is tie in waypoints move to distance check.
+
+            yield return new WaitForEndOfFrame();
         }
     }
 }
