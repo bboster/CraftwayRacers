@@ -365,14 +365,14 @@ MonoBehaviour:
   - {fileID: 6105736314191260292}
   - {fileID: 2369818625032787342}
   compMod: 100
-  DriftForce: 20
+  DriftForce: 30
   TopSpeed: 100
   MaxSuspensionLength: 1.35
   SpringStrength: 95
   SpringDamper: 25
   WheelPosMod: -50
-  MinSteer: 1.5
-  MaxSteer: 4
+  MinSteer: 1
+  MaxSteer: 3.5
   EnginePower: 80
   BrakePower: 70
   FrontTireGrip: 0.8
