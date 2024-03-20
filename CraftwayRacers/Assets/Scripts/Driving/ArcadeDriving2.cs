@@ -23,7 +23,7 @@ public class ArcadeDriving2 : MonoBehaviour
     [Tooltip("How much the car resists gravity due to its own mass ")]                  public float SpringStrength = 10f;
     [Tooltip("How fast springs dissipate energy")]                                      public float SpringDamper = 1f;
     [Tooltip("Adjust where the wheel gameobjects sit due to suspension")]               public float WheelPosMod = 0.5f;
-    [Tooltip("Steering values. Higher speeds mean overall steering gets closer to Min")]public float MinSteer = 4, MaxSteer = 8f;
+    [Tooltip("Steering values. Higher speeds mean overall steering gets closer to Min")]public float MinSteer = 2.5f, MaxSteer = 0.5f;
     [Tooltip("More speed and faster braking values here!")]                             public float EnginePower = 10f, BrakePower = 50f;
     [Tooltip("VALUE BETWEEN 0 & 1!!! How much wheels go in the sideways/x direction while driving forward")] 
                                                                                         public float FrontTireGrip = .6f, RearTireGrip = .3f;
@@ -87,6 +87,7 @@ public class ArcadeDriving2 : MonoBehaviour
     void EndReadDrift(InputAction.CallbackContext ctx)
     {
         isDrifting= false;
+
     }
 
 
@@ -96,9 +97,13 @@ public class ArcadeDriving2 : MonoBehaviour
     /// </summary>
     void Update()
     {
-        if (readingGas == true)
+        if (readingGas)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
+        }
+        if(!readingGas)
+        {
+            ACValue = 0;
         }
         if (readingBrake == true)
         {
@@ -140,6 +145,13 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         return false;
     }
+    
+    IEnumerator AddDrift()
+    {
+        yield return null;
+    }
+
+
     /// <summary>
     /// This where we actually "drive" the car forward and sideways, and reverse if conditions are 
     /// right. We use the lookup curve to determine how much force to apply based on how fast 
@@ -177,8 +189,8 @@ public class ArcadeDriving2 : MonoBehaviour
                 //CarRb.constraints = RigidbodyConstraints.None;
                 FrontTireGrip = 0.8f;
                 RearTireGrip = 0.6f;
-                MinSteer = 1.5f;
-                MaxSteer = 4f;
+                MinSteer = .5f;
+                MaxSteer = 2.5f;
                 //Need a coroutine task for a small duration, apply force in the forward direction of the car, at the normal of the ground// might not have to cause suspension?
             }
             if (currentSpeed > 0 && ACValue < 0)
