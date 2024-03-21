@@ -70,7 +70,7 @@ public class WaypointTracking : MonoBehaviour
         {
             nextWaypoint = 0;
             gc.GetComponent<WinTracker>().waypoints[id]++;
-            gc.GetComponent<WinTracker>().laps[id]++;
+            gc.GetComponent<WinTracker>().AddLap(id);
         }
     }
 }

@@ -34,7 +34,7 @@ public class WinTracker : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        StartCoroutine(GameTimer());
+        //StartCoroutine(GameTimer());
         StartCoroutine(WaypointLeadChecker());
     }
 
@@ -45,6 +45,11 @@ public class WinTracker : MonoBehaviour
     public void AddLap(int playerNum)
     {
         laps[playerNum]++;
+        if(laps[playerNum] == 2)
+        {
+            winDisplay.SetActive(true);
+            winTxt.text = "Player " + (playerNum + 1) + " Wins!";
+        }
     }
 
     /// <summary>
