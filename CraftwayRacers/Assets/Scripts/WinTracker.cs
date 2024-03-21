@@ -15,6 +15,8 @@ public class WinTracker : MonoBehaviour
     //Laps completed for each player.
     public int[] laps = new int[4];
 
+    public int[] placements = new int[4];
+
     private int playerToWin = -1;
 
     public GameObject[] players = new GameObject[4];
@@ -33,6 +35,7 @@ public class WinTracker : MonoBehaviour
     public void StartGame()
     {
         StartCoroutine(GameTimer());
+        StartCoroutine(WaypointLeadChecker());
     }
 
     /// <summary>
@@ -175,15 +178,73 @@ public class WinTracker : MonoBehaviour
 
     private IEnumerator WaypointLeadChecker()
     {
-        for(; ; )
+        for (; ; )
         {
-            int[] placements = new int[4];
+            int winner = 0;
+            bool tiedCondition = false;
 
-            //Assume placements[0] is 1st place. Fill in placements according to who has the most waypoints passed.
+            List<int> tiedIndexes = new List<int>();
+            List<int> indexesToSkip = new List<int>();
 
-            //If there is tie in waypoints move to distance check.
+            foreach(int i in placements)
+            {
+                winner = 0;
+
+                for(int index = 0; index < 4; )
+                {
+                    if(index != winner && indexesToSkip.IndexOf(index) == -1 && indexesToSkip.IndexOf(winner) == -1)
+                    {
+                        if(waypoints[index] > waypoints[winner])
+                        {
+                            winner = index;
+                            tiedCondition = false;
+                            index++;
+                        }
+                        else if(waypoints[index] == waypoints[winner])
+                        {
+                            tiedCondition = true;
+                            tiedIndexes.Add(winner);
+                            tiedIndexes.Add(index);
+                            index++;
+                        }
+                        else
+                        {
+                            index++;
+                        }
+                    }
+                    else if(indexesToSkip.IndexOf(winner) != -1)
+                    {
+                        winner++;
+                    }
+                    else
+                    {
+                        index++;
+                    }
+                }
+
+                if(tiedCondition)
+                {
+                    //REMOVE BYPASS ONCE SYSTEM IS COMPLETE.
+                    goto Bypass;
+                    TieResolver();
+                    continue;
+
+                Bypass:
+                    continue;
+                }
+                else
+                {
+                    placements[Array.IndexOf(placements, i)] = winner;
+                    indexesToSkip.Add(winner);
+                }
+            }
 
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    private void TieResolver()
+    {
+        
     }
 }

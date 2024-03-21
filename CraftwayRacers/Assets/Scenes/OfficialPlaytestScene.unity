@@ -5984,6 +5984,22 @@ PrefabInstance:
       propertyPath: winDisplay
       value: 
       objectReference: {fileID: 2093178808}
+    - target: {fileID: 6692904200271747183, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
+      propertyPath: placements.Array.data[0]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692904200271747183, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
+      propertyPath: placements.Array.data[1]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692904200271747183, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
+      propertyPath: placements.Array.data[2]
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692904200271747183, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
+      propertyPath: placements.Array.data[3]
+      value: -1
+      objectReference: {fileID: 0}
     - target: {fileID: 8602532691323661424, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
       propertyPath: m_RootOrder
       value: 12
