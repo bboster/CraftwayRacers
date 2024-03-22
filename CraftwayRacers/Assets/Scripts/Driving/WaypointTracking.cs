@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class WaypointTracking : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class WaypointTracking : MonoBehaviour
 
     private GameObject gc;
     private GameObject[] waypoints;
+
+    [SerializeField] private GameObject wrongWay;
 
     void Start()
     {
@@ -37,14 +40,16 @@ public class WaypointTracking : MonoBehaviour
             if(oldDist < distFromNextWP)
             {
                 //Show wrong direction UI.
+                //wrongWay.SetActive(true);
+                Debug.Log("WRONG WAY");
                 
             }
             else
             {
-                
+                //wrongWay.SetActive(false);
             }
 
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(5f);
         }
 
     }
@@ -65,7 +70,7 @@ public class WaypointTracking : MonoBehaviour
         {
             nextWaypoint = 0;
             gc.GetComponent<WinTracker>().waypoints[id]++;
-            gc.GetComponent<WinTracker>().laps[id]++;
+            gc.GetComponent<WinTracker>().AddLap(id);
         }
     }
 }
