@@ -8489,8 +8489,8 @@ MonoBehaviour:
   spawnPoint13: {x: 169.4, y: 23.47, z: -391.8}
   spawnPoint14: {x: 50, y: 23.47, z: -366}
   TestCube: {fileID: 0}
-  PaintBrushGatcha: {fileID: 1984405831852361823, guid: f60f9ba2769d5094986a749985a39aee, type: 3}
-  CottonBallShieldGatcha: {fileID: 4477035160950197298, guid: b386ff48a0de4ca49b716dcfedea96ee, type: 3}
+  PaintBrushGatcha: {fileID: 5472069269092556349, guid: 0f816f223a6802d44a5a1797abe10104, type: 3}
+  CottonBallShieldGatcha: {fileID: 645135330065601871, guid: c96c0515389dd4c43b4af46590165ced, type: 3}
   Jacks: {fileID: 4637232189886785061, guid: 13aff050f24eaca4db7dabb5b7b6771f, type: 3}
   Thumbtack: {fileID: 5789635773027154205, guid: e38090cf3c9432c4d886616a18f047f0, type: 3}
   RubberBand: {fileID: 0}

@@ -8,9 +8,13 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6103813712701182582, guid: 48e3024f0e8693a408b90d2e837f503d, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 8278a3b4271bac34d8c06bd54822a229, type: 2}
     - target: {fileID: 6323703582564540913, guid: 48e3024f0e8693a408b90d2e837f503d, type: 3}
       propertyPath: m_RootOrder
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6323703582564540913, guid: 48e3024f0e8693a408b90d2e837f503d, type: 3}
       propertyPath: m_LocalPosition.x
@@ -54,7 +58,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6668034772506229579, guid: 48e3024f0e8693a408b90d2e837f503d, type: 3}
       propertyPath: m_Name
-      value: Paintbrush Gatcha (NEW) Variant
+      value: Paintbrush Gatcha (NEW)
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
