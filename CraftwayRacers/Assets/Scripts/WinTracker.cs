@@ -28,7 +28,7 @@ public class WinTracker : MonoBehaviour
 
     private void Start()
     {
-        StartGame();
+        //StartGame();
         DontDestroyOnLoad(gameObject);
     }
 
@@ -37,7 +37,7 @@ public class WinTracker : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        //StartCoroutine(GameTimer());
+        StartCoroutine(GameTimer());
         //StartCoroutine(WaypointLeadChecker());
     }
 

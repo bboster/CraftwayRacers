@@ -59,6 +59,8 @@ public class StartCountdown : MonoBehaviour
         Gaming = true;
         StartRace?.Invoke();
         GO.SetActive(true);
+
+        GameObject.Find("GameController").GetComponent<WinTracker>().StartGame();
         
         yield return new WaitForSeconds(2f);
         GO.SetActive(false);
