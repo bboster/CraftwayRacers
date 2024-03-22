@@ -7,6 +7,13 @@ using UnityEngine.UI;
 
 public class StartCountdown : MonoBehaviour
 {
+    public GameObject Join;
+    public GameObject OnePlayer;
+    private bool oneHasRun;
+    public GameObject TwoPlayer;
+    private bool twoHasRun;
+    public GameObject ThreePlayer;
+    private bool threeHasRun;
     public GameObject Ready;
     public GameObject One;
     public GameObject Two;
@@ -14,20 +21,22 @@ public class StartCountdown : MonoBehaviour
     public GameObject GO;
 
     public PlayerInputManager PlayerCounting;
-    private bool hasRun = false;
+    private bool countDownHasRun = false;
     public bool Gaming = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        if (PlayerCounting.playerCount == 4)
+        Join.SetActive(true);
+        /*if (PlayerCounting.playerCount == 4)
         {
             StartCoroutine(ReadySetGo());
-        }
+        }*/
     }
 
     IEnumerator ReadySetGo()
     {
+        ThreePlayer.SetActive(false);
         Ready.SetActive(true);
 
         yield return new WaitForSeconds(2f);
@@ -56,7 +65,10 @@ public class StartCountdown : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        StartGame();
+        P1();
+        P2();
+        P3();
+        CountDown();
 
         /*if (Input.GetKeyDown(KeyCode.Space))
         {
@@ -64,12 +76,43 @@ public class StartCountdown : MonoBehaviour
         }*/
     }
 
-    void StartGame()
+    void P1()
     {
-        if (PlayerCounting.playerCount == 4 && hasRun == false)
+        if (PlayerCounting.playerCount == 1 && oneHasRun == false)
         {
-            StartCoroutine(ReadySetGo());
-            hasRun = true;
+            Join.SetActive(false);
+            OnePlayer.SetActive(true);
+            oneHasRun = true;
         }
     }
+
+    void P2()
+    {
+        if (PlayerCounting.playerCount == 2 && twoHasRun == false)
+        {
+            OnePlayer.SetActive(false);
+            TwoPlayer.SetActive(true);
+            twoHasRun = true;
+        }
+    }
+
+    void P3()
+    {
+        if (PlayerCounting.playerCount == 3 && threeHasRun == false)
+        {
+            TwoPlayer.SetActive(false);
+            ThreePlayer.SetActive(true);
+            threeHasRun = true;
+        }
+    }
+    void CountDown()
+    {
+        if (PlayerCounting.playerCount == 4 && countDownHasRun == false)
+        {
+            StartCoroutine(ReadySetGo());
+            countDownHasRun = true;
+        }
+    }
+
+
 }
