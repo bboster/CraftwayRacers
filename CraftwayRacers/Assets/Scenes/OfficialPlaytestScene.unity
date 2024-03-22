@@ -6841,7 +6841,7 @@ GameObject:
   - component: {fileID: 1429642469}
   - component: {fileID: 1429642468}
   m_Layer: 6
-  m_Name: GameObject
+  m_Name: CamEffect
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
