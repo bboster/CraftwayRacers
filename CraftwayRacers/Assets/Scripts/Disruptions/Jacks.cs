@@ -7,7 +7,7 @@ public class Jacks : MonoBehaviour
 {
     private Rigidbody rb;
     private ArcadeDriving2 Speed;
-    [SerializeField] float CutSpeed; // Player's speed will divide by this number
+    [Tooltip("BIGGER NUMBERS MEAN MORE SPEED IS REMOVED")][SerializeField] float CutSpeed; // Player's speed will divide by this number
 
     // Start is called before the first frame update
    
