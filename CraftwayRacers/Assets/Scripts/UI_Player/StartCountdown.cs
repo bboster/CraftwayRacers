@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -19,6 +20,8 @@ public class StartCountdown : MonoBehaviour
     public GameObject Two;
     public GameObject Three;
     public GameObject GO;
+
+    public static Action StartRace;
 
     public PlayerInputManager PlayerCounting;
     private bool countDownHasRun = false;
@@ -54,6 +57,7 @@ public class StartCountdown : MonoBehaviour
         yield return new WaitForSeconds(1.5f);
         One.SetActive(false);
         Gaming = true;
+        StartRace?.Invoke();
         GO.SetActive(true);
         
         yield return new WaitForSeconds(2f);
