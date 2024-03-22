@@ -429,7 +429,7 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  CarRb: {fileID: 0}
+  CarRb: {fileID: 1835734076980738088}
   CenterOfMass: {fileID: 2450016525474578425}
   PlayerInput: {fileID: 3506038640120930864}
   Shielded: 0

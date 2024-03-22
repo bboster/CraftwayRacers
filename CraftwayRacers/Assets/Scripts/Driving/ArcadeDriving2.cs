@@ -46,6 +46,12 @@ public class ArcadeDriving2 : MonoBehaviour
             StartCountdown.StartRace += Handle_StartRace;
         
             Application.targetFrameRate = 120;
+        if (CenterOfMass == null)
+        {
+            CenterOfMass = GameObject.Find("CoM");
+        }
+        CarRb = GetComponent<Rigidbody>();
+        CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
     }
 
     void Handle_StartRace()
@@ -58,13 +64,6 @@ public class ArcadeDriving2 : MonoBehaviour
         PlayerInput.currentActionMap.FindAction("Brake").canceled += EndReadBrake;
         PlayerInput.currentActionMap.FindAction("Drift").started += ReadDrift;
         PlayerInput.currentActionMap.FindAction("Drift").canceled += EndReadDrift;
-
-        if (CenterOfMass == null)
-        {
-            CenterOfMass = GameObject.Find("CoM");
-        }
-        CarRb = GetComponent<Rigidbody>();
-        CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
     }
 
     /// <summary>
