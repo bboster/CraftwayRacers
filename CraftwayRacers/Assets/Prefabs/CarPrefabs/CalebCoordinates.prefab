@@ -303,6 +303,7 @@ MonoBehaviour:
   - {fileID: 3376620073528520055}
   - {fileID: 5645243858632224071}
   compMod: 100
+  DriftForce: 10
   TopSpeed: 100
   MaxSuspensionLength: 1.35
   SpringStrength: 85
@@ -371,6 +372,7 @@ MonoBehaviour:
   Shielded: 0
   Shield: {fileID: 7757503177218572454}
   ShieldTimer: 10
+  StartCountdown: {fileID: 5225048106504462724, guid: 7aee5662b3292564d94994be4aa611e9, type: 3}
 --- !u!114 &2677491441460464103
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -444,6 +446,7 @@ MonoBehaviour:
   Player2Spawn: {x: 203.6, y: 28.9, z: -223.9}
   Player3Spawn: {x: 189.58, y: 28.9, z: -187.04}
   Player4Spawn: {x: 203.4, y: 28.9, z: -198.5}
+  Ready: 0
   PlayerCount: {fileID: 2677491441460464103}
   parent: {fileID: 0}
 --- !u!114 &685497799116259395
@@ -460,6 +463,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   nextWaypoint: 0
   distFromNextWP: 0
+  wrongWay: {fileID: 0}
 --- !u!1 &2305655050476363325
 GameObject:
   m_ObjectHideFlags: 0

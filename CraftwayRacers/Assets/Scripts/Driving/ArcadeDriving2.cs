@@ -41,24 +41,34 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject Shield;
     public float ShieldTimer;
 
+    private GameObject StartCountdown;
+    private StartCountdown Ready;
+
     void Start()
     {
-        Application.targetFrameRate = 120;
-        PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
-        PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
-        PlayerInput.currentActionMap.FindAction("Gas").started += ReadGas;
-        PlayerInput.currentActionMap.FindAction("Gas").canceled += EndReadGas;
-        PlayerInput.currentActionMap.FindAction("Brake").started += ReadBrake;
-        PlayerInput.currentActionMap.FindAction("Brake").canceled += EndReadBrake;
-        PlayerInput.currentActionMap.FindAction("Drift").started += ReadDrift;
-        PlayerInput.currentActionMap.FindAction("Drift").canceled += EndReadDrift;
+        /*StartCountdown = GameObject.Find("PlayerInputManager");
 
-        if (CenterOfMass == null)
+        Ready = StartCountdown.GetComponent<StartCountdown>();
+
+        if(Ready.Gaming == true)
         {
-            CenterOfMass = GameObject.Find("CoM");
-        }
-        CarRb = GetComponent<Rigidbody>();
-        CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
+            Debug.Log("REJOICE"); */
+            Application.targetFrameRate = 120;
+            PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
+            PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
+            PlayerInput.currentActionMap.FindAction("Gas").started += ReadGas;
+            PlayerInput.currentActionMap.FindAction("Gas").canceled += EndReadGas;
+            PlayerInput.currentActionMap.FindAction("Brake").started += ReadBrake;
+            PlayerInput.currentActionMap.FindAction("Brake").canceled += EndReadBrake;
+            PlayerInput.currentActionMap.FindAction("Drift").started += ReadDrift;
+            PlayerInput.currentActionMap.FindAction("Drift").canceled += EndReadDrift;
+
+            if (CenterOfMass == null)
+            {
+                CenterOfMass = GameObject.Find("CoM");
+            }
+            CarRb = GetComponent<Rigidbody>();
+            CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
     }
 
     /// <summary>

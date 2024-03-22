@@ -1,3 +1,4 @@
+using JetBrains.Annotations;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
@@ -10,6 +11,9 @@ public class MultiplayerManager : MonoBehaviour
     public Vector3 Player2Spawn;
     public Vector3 Player3Spawn;
     public Vector3 Player4Spawn;
+
+    public bool Ready = false;
+    private bool hasRun = false;
 
     public PlayerInput PlayerCount;
 
@@ -41,6 +45,7 @@ public class MultiplayerManager : MonoBehaviour
         if (PlayerCount.playerIndex == 3)
         {
             transform.position = new Vector3(Player4Spawn.x, Player4Spawn.y, Player4Spawn.z);
+            
         }
     }
 
@@ -49,4 +54,5 @@ public class MultiplayerManager : MonoBehaviour
     {
         
     }
+
 }
