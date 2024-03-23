@@ -64,7 +64,6 @@ public class StartCountdown : MonoBehaviour
         yield return new WaitForSeconds(2f);
         GO.SetActive(false);
 
-
     }
     
     // Update is called once per frame
