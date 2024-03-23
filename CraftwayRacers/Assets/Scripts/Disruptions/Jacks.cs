@@ -28,6 +28,19 @@ public class Jacks : MonoBehaviour
                 //rb.AddForce((IncomingForce * -1) / CutSpeed);
                 //Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;
             }
+
+            if(Speed.Shielded == true)
+            {
+                StartCoroutine(IFrames());
+                Destroy(gameObject);
+            }
+        }
+
+        IEnumerator IFrames()
+        {
+            yield return new WaitForSeconds(5);
+            Speed.Shielded = false;
+            Speed.Shield.SetActive(false); 
         }
     }
 }
