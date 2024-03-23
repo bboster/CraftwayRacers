@@ -52,6 +52,8 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         CarRb = GetComponent<Rigidbody>();
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
+
+        StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayEngineSound(gameObject, "EngineSound"));
     }
 
     void Handle_StartRace()
@@ -118,6 +120,9 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             Suspension(SpringMountList[i], i);        
         }
+
+        Debug.Log((Mathf.Abs(GetComponent<Rigidbody>().velocity.x) + Mathf.Abs(GetComponent<Rigidbody>().velocity.z) +
+                Mathf.Abs(GetComponent<Rigidbody>().velocity.y)) / 40f);
     }
     /// <summary>
     /// Every fixedUpdate/physics step, the script goes through each springmount and determines
