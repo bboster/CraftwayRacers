@@ -9818,10 +9818,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -3093842287598159112, guid: dfe17c46136d7b5419ca4b24fce2ecfb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c9169e84f40ba8499238a8c5f430914, type: 2}
     - target: {fileID: 919132149155446097, guid: dfe17c46136d7b5419ca4b24fce2ecfb, type: 3}
       propertyPath: m_Name
       value: FinishedTrackAndWalls
       objectReference: {fileID: 0}
+    - target: {fileID: 5753245013828488877, guid: dfe17c46136d7b5419ca4b24fce2ecfb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c9169e84f40ba8499238a8c5f430914, type: 2}
+    - target: {fileID: 5860482106242646515, guid: dfe17c46136d7b5419ca4b24fce2ecfb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c9169e84f40ba8499238a8c5f430914, type: 2}
+    - target: {fileID: 6091545870011017380, guid: dfe17c46136d7b5419ca4b24fce2ecfb, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 9c9169e84f40ba8499238a8c5f430914, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
