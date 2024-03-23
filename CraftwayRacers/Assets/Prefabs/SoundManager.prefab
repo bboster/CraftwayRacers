@@ -45,4 +45,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   volume: 1
-  sounds: []
+  sounds:
+  - name: EngineSound
+    clip: {fileID: 8300000, guid: 31d4e66c2b863914a989de19ac2d6e49, type: 3}
+    mixer: {fileID: 24300002, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
+    volume: 0.5
+    pitch: 0
+    source: {fileID: 0}

@@ -59,12 +59,21 @@ public class SoundManager : MonoBehaviour
     public IEnumerator PlayEngineSound(GameObject car, string name)
     {
         Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
+        s.source.loop = true;
         s.source.Play();
 
-        for(; ; )
+        float oldValue = 0.5f;
+
+        for (; ; )
         {
+
             //Get the car speed and relate it to the pitch.
-            //s.source.pitch = //car speed relation.
+            float f = Mathf.Clamp((Mathf.Abs(car.GetComponent<Rigidbody>().velocity.x) + Mathf.Abs(car.GetComponent<Rigidbody>().velocity.z) + 
+                Mathf.Abs(car.GetComponent<Rigidbody>().velocity.y)) / 40f, 0.5f, 2f);
+
+            s.source.pitch = Mathf.Lerp(f, oldValue, 1.5f * Time.deltaTime);
+
+            oldValue = f;
 
             yield return new WaitForEndOfFrame();
         }
