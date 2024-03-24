@@ -47,8 +47,37 @@ MonoBehaviour:
   volume: 1
   sounds:
   - name: EngineSound
-    clip: {fileID: 8300000, guid: 31d4e66c2b863914a989de19ac2d6e49, type: 3}
+    clip: {fileID: 8300000, guid: 655dd766675b03a41abf2a28a65d5213, type: 3}
     mixer: {fileID: 24300002, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
     volume: 0.5
     pitch: 0
     source: {fileID: 0}
+    loop: 0
+  - name: PickupSound
+    clip: {fileID: 8300000, guid: 22dc641849432b64bb9d54e977bbdd61, type: 3}
+    mixer: {fileID: 3754870520726766870, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+    loop: 0
+  - name: CarStartSound
+    clip: {fileID: 8300000, guid: e0b607fc5ecd0244ea079fe066f27700, type: 3}
+    mixer: {fileID: 3754870520726766870, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
+    volume: 0.5
+    pitch: 0
+    source: {fileID: 0}
+    loop: 0
+  - name: CarCollisionSound
+    clip: {fileID: 8300000, guid: 6ac170ee967c3944db9b41566bf50c0d, type: 3}
+    mixer: {fileID: 3754870520726766870, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+    loop: 0
+  - name: BrakingSound
+    clip: {fileID: 8300000, guid: 5ec2a371f502b8f4b8aa913b4cc6afa6, type: 3}
+    mixer: {fileID: 3754870520726766870, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
+    volume: 1
+    pitch: 0
+    source: {fileID: 0}
+    loop: 1

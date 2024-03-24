@@ -41,6 +41,9 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject Shield;
     public float ShieldTimer;
 
+    //SFX bools
+    private bool playingBrake = false;
+
     void Start()
     {
             StartCountdown.StartRace += Handle_StartRace;
@@ -53,7 +56,7 @@ public class ArcadeDriving2 : MonoBehaviour
         CarRb = GetComponent<Rigidbody>();
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
 
-        StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().PlayEngineSound(gameObject, "EngineSound"));
+        StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().EngineStart("CarStartSound", gameObject));
     }
 
     void Handle_StartRace()
@@ -82,10 +85,22 @@ public class ArcadeDriving2 : MonoBehaviour
     void ReadBrake(InputAction.CallbackContext ctx)
     {
         readingBrake= true;
+
+        if(playingBrake == false)
+        {
+            SoundManager.instance.Play("BrakingSound", 100);
+            playingBrake = true;
+        }
     }
     void EndReadBrake(InputAction.CallbackContext ctx)
     {
         readingBrake = false;
+
+        if(playingBrake == true)
+        {
+            SoundManager.instance.Stop("BrakingSound");
+            playingBrake = false;
+        }
     }
     void ReadDrift(InputAction.CallbackContext ctx)
     {
@@ -314,4 +329,11 @@ public class ArcadeDriving2 : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Wall"))
+        {
+            SoundManager.instance.Play("CarCollisionSound", 100);
+        }
+    }
 }

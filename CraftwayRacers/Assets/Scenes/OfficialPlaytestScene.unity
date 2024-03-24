@@ -10022,6 +10022,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: FinishedTrackAndWalls
       objectReference: {fileID: 0}
+    - target: {fileID: 5416247664317817159, guid: dfe17c46136d7b5419ca4b24fce2ecfb, type: 3}
+      propertyPath: m_TagString
+      value: Wall
+      objectReference: {fileID: 0}
     - target: {fileID: 5753245013828488877, guid: dfe17c46136d7b5419ca4b24fce2ecfb, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

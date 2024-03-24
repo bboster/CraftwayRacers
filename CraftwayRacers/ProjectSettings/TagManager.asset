@@ -18,6 +18,7 @@ TagManager:
   - Waypoint
   - LapTrigger
   - Jacks
+  - Wall
   layers:
   - Default
   - TransparentFX

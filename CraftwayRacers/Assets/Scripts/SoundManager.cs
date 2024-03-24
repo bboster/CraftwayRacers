@@ -29,12 +29,14 @@ public class SoundManager : MonoBehaviour
             s.source.outputAudioMixerGroup = s.mixer;
             s.source.volume = s.volume;
             s.source.pitch = s.pitch;
+            s.source.loop = s.loop;
         }
     }
 
-    public void Play(string name)
+    public void Play(string name, int priority)
     {
         Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
+        s.source.priority = priority;
         s.source.Play();
     }
 
@@ -60,6 +62,7 @@ public class SoundManager : MonoBehaviour
     {
         Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
         s.source.loop = true;
+        s.source.priority = 0;
         s.source.Play();
 
         float oldValue = 0.5f;
@@ -77,5 +80,15 @@ public class SoundManager : MonoBehaviour
 
             yield return new WaitForEndOfFrame();
         }
+    }
+
+    public IEnumerator EngineStart(string name, GameObject car)
+    {
+        Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
+        s.source.Play();
+
+        yield return new WaitForSeconds(s.clip.length);
+
+        StartCoroutine(PlayEngineSound(car, "EngineSound"));
     }
 }
