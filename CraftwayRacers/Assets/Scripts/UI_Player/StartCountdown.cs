@@ -26,6 +26,7 @@ public class StartCountdown : MonoBehaviour
     public PlayerInputManager PlayerCounting;
     private bool countDownHasRun = false;
     public bool Gaming = false;
+    public int Players;
 
     // Start is called before the first frame update
     void Start()
@@ -46,23 +47,24 @@ public class StartCountdown : MonoBehaviour
         Ready.SetActive(false);
         Three.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1);
         Three.SetActive(false);
         Two.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1);
         Two.SetActive(false);
         One.SetActive(true);
 
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(1f);
         One.SetActive(false);
         Gaming = true;
         StartRace?.Invoke();
         GO.SetActive(true);
+
+        GameObject.Find("GameController").GetComponent<WinTracker>().StartGame();
         
         yield return new WaitForSeconds(2f);
         GO.SetActive(false);
-
 
     }
     
@@ -82,7 +84,7 @@ public class StartCountdown : MonoBehaviour
 
     void P1()
     {
-        if (PlayerCounting.playerCount == 1 && oneHasRun == false)
+        if (PlayerCounting.playerCount == Players && oneHasRun == false)
         {
             Join.SetActive(false);
             OnePlayer.SetActive(true);
@@ -111,7 +113,7 @@ public class StartCountdown : MonoBehaviour
     }
     void CountDown()
     {
-        if (PlayerCounting.playerCount == 4 && countDownHasRun == false)
+        if (PlayerCounting.playerCount == Players && countDownHasRun == false)
         {
             StartCoroutine(ReadySetGo());
             countDownHasRun = true;

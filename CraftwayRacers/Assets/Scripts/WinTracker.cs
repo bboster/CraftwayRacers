@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.SceneManagement;
+using System.Threading.Tasks;
 
 public class WinTracker : MonoBehaviour
 {
@@ -17,7 +19,7 @@ public class WinTracker : MonoBehaviour
 
     public int[] placements = new int[4];
 
-    private int playerToWin = -1;
+    public int playerToWin = -1;
 
     public GameObject[] players = new GameObject[4];
 
@@ -26,7 +28,8 @@ public class WinTracker : MonoBehaviour
 
     private void Start()
     {
-        StartGame();
+        //StartGame();
+        DontDestroyOnLoad(gameObject);
     }
 
     /// <summary>
@@ -34,21 +37,25 @@ public class WinTracker : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        //StartCoroutine(GameTimer());
-        StartCoroutine(WaypointLeadChecker());
+        StartCoroutine(GameTimer());
+        //StartCoroutine(WaypointLeadChecker());
     }
 
     /// <summary>
     /// Adds one to the count of laps a player has completed.
     /// </summary>
     /// <param name="playerNum"> The player that has completed a lap. </param>
-    public void AddLap(int playerNum)
+    public async void AddLap(int playerNum)
     {
         laps[playerNum]++;
         if(laps[playerNum] == 2)
         {
-            winDisplay.SetActive(true);
-            winTxt.text = "Player " + (playerNum + 1) + " Wins!";
+            /*winDisplay.SetActive(true);
+            winTxt.text = "Player " + (playerNum + 1) + " Wins!";*/
+
+            playerToWin = playerNum + 1;
+
+            await LoadScene();
         }
     }
 
@@ -75,7 +82,7 @@ public class WinTracker : MonoBehaviour
     /// <summary>
     /// Declares the player with the most completed laps the winner or, if there is a tie, moves on to the next condition.
     /// </summary>
-    public void DetermineWinnerWithLaps()
+    public async void DetermineWinnerWithLaps()
     {
         bool tiedCondition = false;
         int winner = 0;
@@ -103,8 +110,10 @@ public class WinTracker : MonoBehaviour
         }
         else
         {
-            winDisplay.SetActive(true);
-            winTxt.text = "Player " + winner + " Wins!";
+            /*winDisplay.SetActive(true);
+            winTxt.text = "Player " + winner + " Wins!";*/
+
+            await LoadScene();
         }
 
         //Set win UI.
@@ -113,7 +122,7 @@ public class WinTracker : MonoBehaviour
     /// <summary>
     /// Declares the player with the most waypoints completed the winner, or if there is a tie, moves on to the next condition.
     /// </summary>
-    private void DetermineWinnerWithWaypoints()
+    private async void DetermineWinnerWithWaypoints()
     {
         bool tiedCondition = false;
         int winner = 0;
@@ -138,8 +147,10 @@ public class WinTracker : MonoBehaviour
         }
         else
         {
-            winDisplay.SetActive(true);
-            winTxt.text = "Player " + winner + " Wins!";
+            /*winDisplay.SetActive(true);
+            winTxt.text = "Player " + winner + " Wins!";*/
+
+            await LoadScene();
         }
 
         //Set winner UI.
@@ -148,7 +159,7 @@ public class WinTracker : MonoBehaviour
     /// <summary>
     /// Declares the winner based on their distance to the next waypoint.
     /// </summary>
-    private void DetermineWinnerWithDistance()
+    private async void DetermineWinnerWithDistance()
     {
         bool tiedCondition = false;
         int winner = 0;
@@ -173,15 +184,24 @@ public class WinTracker : MonoBehaviour
         }
         else
         {
-            winDisplay.SetActive(true);
-            winTxt.text = "Player " + winner + " Wins!";
+            /*winDisplay.SetActive(true);
+            winTxt.text = "Player " + winner + " Wins!";*/
+
+            await LoadScene();
         }
+    }
+
+    private Task LoadScene()
+    {
+        SceneManager.LoadScene("ResultsScene");
+
+        return Task.CompletedTask;
     }
 
 
     //CHECK WHO IS IN THE LEAD EVERY FRAME HERE AND ADJUST UI ELEMENTS.
 
-    private IEnumerator WaypointLeadChecker()
+    /*private IEnumerator WaypointLeadChecker()
     {
         for (; ; )
         {
@@ -231,7 +251,7 @@ public class WinTracker : MonoBehaviour
                 {
                     //REMOVE BYPASS ONCE SYSTEM IS COMPLETE.
                     goto Bypass;
-                    TieResolver();
+                    TieResolver(tiedIndexes, indexesToSkip, i);
                     continue;
 
                 Bypass:
@@ -248,8 +268,8 @@ public class WinTracker : MonoBehaviour
         }
     }
 
-    private void TieResolver()
+    private void TieResolver(List<int> tiedIndexes, List<int> indexesToSkip, int currentPlacement)
     {
         
-    }
+    }*/
 }
