@@ -56,7 +56,10 @@ public class ArcadeDriving2 : MonoBehaviour
         CarRb = GetComponent<Rigidbody>();
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
 
-        StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().EngineStart("CarStartSound", gameObject));
+        if(GameObject.Find("SoundManager")!=null)
+        {
+            StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().EngineStart("CarStartSound", gameObject));
+        }
     }
 
     void Handle_StartRace()
@@ -88,7 +91,7 @@ public class ArcadeDriving2 : MonoBehaviour
 
         if(playingBrake == false)
         {
-            SoundManager.instance.Play("BrakingSound", 100);
+            //SoundManager.instance.Play("BrakingSound", 100);
             playingBrake = true;
         }
     }
@@ -98,7 +101,7 @@ public class ArcadeDriving2 : MonoBehaviour
 
         if(playingBrake == true)
         {
-            SoundManager.instance.Stop("BrakingSound");
+            //SoundManager.instance.Stop("BrakingSound");
             playingBrake = false;
         }
     }
@@ -119,6 +122,10 @@ public class ArcadeDriving2 : MonoBehaviour
     /// </summary>
     void Update()
     {
+        if(Input.GetKeyDown(KeyCode.W))
+        {
+            Handle_StartRace();
+        }
         if (readingGas)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
@@ -136,8 +143,8 @@ public class ArcadeDriving2 : MonoBehaviour
             Suspension(SpringMountList[i], i);        
         }
 
-        Debug.Log((Mathf.Abs(GetComponent<Rigidbody>().velocity.x) + Mathf.Abs(GetComponent<Rigidbody>().velocity.z) +
-                Mathf.Abs(GetComponent<Rigidbody>().velocity.y)) / 40f);
+        //Debug.Log((Mathf.Abs(GetComponent<Rigidbody>().velocity.x) + Mathf.Abs(GetComponent<Rigidbody>().velocity.z) +
+        //        Mathf.Abs(GetComponent<Rigidbody>().velocity.y)) / 40f);
     }
     /// <summary>
     /// Every fixedUpdate/physics step, the script goes through each springmount and determines
@@ -335,5 +342,16 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             SoundManager.instance.Play("CarCollisionSound", 100);
         }
+    }
+    private void OnDestroy()
+    {
+        PlayerInput.currentActionMap.FindAction("Steer").performed -= ctx => steerValue = ctx.ReadValue<float>();
+        PlayerInput.currentActionMap.FindAction("Steer").canceled -= ctx => steerValue = 0;
+        PlayerInput.currentActionMap.FindAction("Gas").started -= ReadGas;
+        PlayerInput.currentActionMap.FindAction("Gas").canceled -= EndReadGas;
+        PlayerInput.currentActionMap.FindAction("Brake").started -= ReadBrake;
+        PlayerInput.currentActionMap.FindAction("Brake").canceled -= EndReadBrake;
+        PlayerInput.currentActionMap.FindAction("Drift").started -= ReadDrift;
+        PlayerInput.currentActionMap.FindAction("Drift").canceled -= EndReadDrift;
     }
 }

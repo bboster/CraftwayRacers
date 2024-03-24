@@ -6,27 +6,40 @@ public class RubberBand : MonoBehaviour
 {
     private Rigidbody rb;
     private ArcadeDriving2 Speed;
-    [SerializeField] public float AddSpeed; // Player's speed will divide by this number
-
-    // Start is called before the first frame update
-
-
-    private void OnTriggerEnter(Collider collision)
+    public float BoostForce = 5f;
+    public bool isBoosting = false;
+    public float BoostDuration =2f;
+    private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.tag == "Player")
         {
-            Speed = collision.GetComponent<ArcadeDriving2>();
-            if (Speed.Shielded == false)
-            {
-                Debug.Log("Jack Jack");
-
+            Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
+            if (Speed.Shielded == false && !isBoosting)
+            {               
                 rb = Speed.CarRb;
-
-                rb.velocity = (rb.velocity * AddSpeed);
-                // Vector3 IncomingForce = rb.velocity;
-                //rb.AddForce((IncomingForce * -1) / CutSpeed);
-                //Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;
+                print("HERE");
+                StartCoroutine(AddForce());
             }
         }
+    }
+    IEnumerator AddForce()
+    {
+        isBoosting = true;
+
+        float elapsedTime = 0f;
+
+        while (elapsedTime < BoostDuration)
+        {
+            float currentSpeed = Vector3.Dot(rb.transform.forward, rb.velocity);
+            float normalizedSpeed = Mathf.Clamp01(Mathf.Abs(currentSpeed / Speed.TopSpeed));
+            //Here we get the current speed of the car and lessen the effect of the boost the more speed you have. Balancing...
+            rb.AddForce(rb.transform.forward * (BoostForce/(normalizedSpeed*5+0.1f)), ForceMode.Impulse);
+
+            elapsedTime += Time.deltaTime;
+
+            yield return null;
+        }
+
+        isBoosting = false;
     }
 }
