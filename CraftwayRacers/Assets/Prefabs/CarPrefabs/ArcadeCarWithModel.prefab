@@ -418,8 +418,8 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.24788645
     - serializedVersion: 3
-      time: 1.0056306
-      value: 0.4
+      time: 1.0018768
+      value: 0.19736102
       inSlope: 0
       outSlope: 0
       tangentMode: 0
@@ -432,6 +432,13 @@ MonoBehaviour:
   CarRb: {fileID: 1835734076980738088}
   CenterOfMass: {fileID: 2450016525474578425}
   PlayerInput: {fileID: 3506038640120930864}
+  FTGRoad: 0
+  FRGOff: 0
+  FTGSlick: 0
+  RTGRoad: 0
+  RTGOff: 0
+  RTGSlick: 0
+  NonRoadTopSpeed: 0
   Shielded: 0
   Shield: {fileID: 3289992167331234640}
   ShieldTimer: 10

@@ -16,26 +16,25 @@ public class ArcadeDriving2 : MonoBehaviour
     public RaycastHit[] HitList = new RaycastHit[4];
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] WheelList = new GameObject[4];
-    public float compMod = 10f, DriftForce= 10f;
+    public float compMod = 100f, DriftForce= 10f;
     //Tooltips for game devs on driving
-    [Tooltip("Used for the torque curve, see below. DO NOT USE FOR JUST 'MORE SPEED'")] public float TopSpeed = 20f;
-    [Tooltip("How far the car sits off the ground.")]                                   public float MaxSuspensionLength = 2f;
-    [Tooltip("How much the car resists gravity due to its own mass ")]                  public float SpringStrength = 10f;
-    [Tooltip("How fast springs dissipate energy")]                                      public float SpringDamper = 1f;
-    [Tooltip("Adjust where the wheel gameobjects sit due to suspension")]               public float WheelPosMod = 0.5f;
-    [Tooltip("Steering values. Higher speeds mean overall steering gets closer to Min")]public float MinSteer = 2.5f, MaxSteer = 0.5f;
-    [Tooltip("More speed and faster braking values here!")]                             public float EnginePower = 10f, BrakePower = 50f;
+    [Tooltip("Used for the torque curve, see below. DO NOT USE FOR JUST 'MORE SPEED'")] public float TopSpeed = 100f;
+    [Tooltip("How far the car sits off the ground.")]                                   public float MaxSuspensionLength = 1.35f;
+    [Tooltip("How much the car resists gravity due to its own mass ")]                  public float SpringStrength = 95f;
+    [Tooltip("How fast springs dissipate energy")]                                      public float SpringDamper = 25f;
+    [Tooltip("Adjust where the wheel gameobjects sit due to suspension")]               public float WheelPosMod = -50f;
+    [Tooltip("Steering values. Higher speeds mean overall steering gets closer to Min")]public float MinSteer = 1f, MaxSteer = 3f;
+    [Tooltip("More speed and faster braking values here!")]                             public float EnginePower = 80f, BrakePower = 70f;
     [Tooltip("VALUE BETWEEN 0 & 1!!! How much wheels go in the sideways/x direction while driving forward")] 
-                                                                                        public float FrontTireGrip = .6f, RearTireGrip = .3f;
+                                                                                        public float FrontTireGrip = .8f, RearTireGrip = .6f;
     [Tooltip("Basically acceleration. Mess with keypoints to change engine behavior")]  public AnimationCurve TorqueCurve;
 
     //Not necessary for changing car behavior
     public Rigidbody CarRb;
     public GameObject CenterOfMass;
     public PlayerInput PlayerInput;
-    private bool readingGas, readingBrake, isDrifting;
-    private float steerValue = 0, ACValue = 0, WheelRadius = 0.5f, TireMass = 1f;
-    
+    private bool readingGas, readingBrake, isDrifting=false, canDrift=true;
+    private float steerValue = 0, ACValue = 0;
     //Shield Tings
     public bool Shielded;
     public GameObject Shield;
@@ -107,15 +106,23 @@ public class ArcadeDriving2 : MonoBehaviour
     }
     void ReadDrift(InputAction.CallbackContext ctx)
     {
-        isDrifting = true;
+        if (canDrift)
+        {
+            isDrifting = true;
+            MinSteer = .1f;
+            MaxSteer = 1f;
+            FrontTireGrip = 0.5f;
+            RearTireGrip = 0.4f;
+        }
     }
     void EndReadDrift(InputAction.CallbackContext ctx)
     {
         isDrifting= false;
-
+        FrontTireGrip = 0.8f;
+        RearTireGrip = 0.6f;
+        MinSteer = 1f;
+        MaxSteer = 3f;
     }
-
-
     /// <summary>
     /// Suspension is here because it doesnt work as well/at all in fixed update. Probably something
     /// to do with framerate.
@@ -142,9 +149,6 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             Suspension(SpringMountList[i], i);        
         }
-
-        //Debug.Log((Mathf.Abs(GetComponent<Rigidbody>().velocity.x) + Mathf.Abs(GetComponent<Rigidbody>().velocity.z) +
-        //        Mathf.Abs(GetComponent<Rigidbody>().velocity.y)) / 40f);
     }
     /// <summary>
     /// Every fixedUpdate/physics step, the script goes through each springmount and determines
@@ -173,14 +177,42 @@ public class ArcadeDriving2 : MonoBehaviour
         Debug.DrawRay(springLoc.position, -transform.up, Color.red, MaxSuspensionLength);
         if (Physics.Raycast(springLoc.position, -transform.up, out HitList[springNum], MaxSuspensionLength))
         {
+            ////if either of the front two wheels are touching offroad
+            //if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("OffRoad") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("OffRoad"))
+            //{
+            //    canDrift = false;
+            //    EnginePower = 20f;
+            //    TopSpeed = 40f;
+            //    FrontTireGrip = 0.9f;
+            //    RearTireGrip = 0.7f;
+            //    MinSteer = 1.5f;
+            //    MaxSteer = 4.5f;
+            //}
+            ////Else if either of the front two wheels are touching slick
+            //else if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("Slick") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("Slick"))
+            //{
+            //    canDrift = false;
+            //    EnginePower = 20f;
+            //    TopSpeed = 40f;
+            //    FrontTireGrip = 0.6f;
+            //    RearTireGrip = 0.5f;
+            //    MinSteer = .25f;
+            //    MaxSteer = 2f;
+            //}
+            ////else if on normal ground, normal values
+            //else if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("Normal") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("Normal"))
+            //{
+            //    canDrift = true;
+            //    EnginePower = 80f;
+            //    TopSpeed = 100f;
+            //    FrontTireGrip = 0.8f;
+            //    RearTireGrip = 0.6f;
+            //    MinSteer = 1f;
+            //    MaxSteer = 3f;
+            //}
             return true;
         }
         return false;
-    }
-    
-    IEnumerator AddDrift()
-    {
-        yield return null;
     }
 
 
@@ -201,11 +233,6 @@ public class ArcadeDriving2 : MonoBehaviour
             if (isDrifting)
             {
                 accelDir = SpringMountList[springNum].forward * 2;
-                MinSteer = .1f;
-                MaxSteer = 1f;
-                FrontTireGrip = 0.5f;
-                RearTireGrip = 0.4f;
-                //CarRb.constraints = RigidbodyConstraints.FreezeRotationY;
                 float driftForce = DriftForce; 
                 if(steerValue > 0)
                 {
@@ -216,15 +243,6 @@ public class ArcadeDriving2 : MonoBehaviour
                     accelDir += SpringMountList[springNum].right * (driftForce * normalizedSpeed);
                 }        
             }
-            if(!isDrifting)
-            {
-                //CarRb.constraints = RigidbodyConstraints.None;
-                FrontTireGrip = 0.8f;
-                RearTireGrip = 0.6f;
-                MinSteer = .5f;
-                MaxSteer = 2.5f;
-                //Need a coroutine task for a small duration, apply force in the forward direction of the car, at the normal of the ground// might not have to cause suspension?
-            }
             if (currentSpeed > 0 && ACValue < 0)
             {
                 steerValue *= -1f;
@@ -234,18 +252,14 @@ public class ArcadeDriving2 : MonoBehaviour
                 float steeringFactor = steerValue * Mathf.Lerp(MaxSteer, MinSteer, normalizedSpeed);
                 //As you speed up, you get less steering for improved handling. (Think how little steering it takes to switch lanes on the highway)
                 accelDir += SpringMountList[springNum].right * steeringFactor;
-                //ad = new Vector3(accelDir.x*(Mathf.Lerp(MinSteer, MaxSteer, normalizedSpeed)*ACValue), accelDir.y, accelDir.z);
-                //print(accelDir += SpringMountList[springNum].right * steeringFactor);
-                WheelList[springNum].transform.localRotation = Quaternion.Euler(0f, steeringFactor*4f, 0f); //JUST MAKES THE WHEEL GAMEOBJECTS "TURN" visually
+                WheelList[springNum].transform.localRotation = Quaternion.Euler(0f, steeringFactor*8f, 0f); //JUST MAKES THE WHEEL GAMEOBJECTS "TURN" visually
             }
  
             //MAIN ACCELERATION HERE
             CarRb.AddForceAtPosition(accelDir * ((availableTorque * EnginePower)+1f), SpringMountList[springNum].transform.position);
-            //CarRb.AddForceAtPosition(ad * (availableTorque * EnginePower), SpringMountList[springNum].transform.position);
 
             if (currentSpeed > 0 && ACValue < 0) //braking
             {
-                //Vector3 newAccelDir = new Vector3(accelDir.x * steerValue, accelDir.y, accelDir.z);
                 CarRb.AddForceAtPosition((accelDir) * BrakePower * ACValue, SpringMountList[springNum].transform.position);
             }
         }        
@@ -273,8 +287,7 @@ public class ArcadeDriving2 : MonoBehaviour
                 gripChoice = FrontTireGrip;
             }
             float desiredFrictionChange = (-steeringVel * gripChoice)/Time.fixedDeltaTime;
-            CarRb.AddForceAtPosition(steeringDir * TireMass * desiredFrictionChange, SpringMountList[springNum].transform.position);
-            //Debug.DrawRay(SpringMountList[springNum].transform.position, SpringMountList[springNum].transform.position + steeringDir*10f, Color.yellow);
+            CarRb.AddForceAtPosition(steeringDir * 1 * desiredFrictionChange, SpringMountList[springNum].transform.position);
         }
     }
     /// <summary>
@@ -297,14 +310,11 @@ public class ArcadeDriving2 : MonoBehaviour
             float dampenedForce = ((compressionOffset * SpringStrength) - velocity * SpringDamper);
             CarRb.AddForceAtPosition(SpringMountList[springNum].up * dampenedForce, SpringMountList[springNum].position);
 
-
-            //WheelList[springNum].transform.position.y = SpringMountList[springNum].position.y - compressionOffset;
-            //Vector3 wheelPosition = WheelList[springNum].transform.position;
-            //wheelPosition.y = SpringMountList[springNum].position.y + WheelPosMod - (compressionOffset*compMod);
-            //WheelList[springNum].transform.position = wheelPosition;
             Vector3 wheelPosition = WheelList[springNum].transform.position;
             wheelPosition.y = SpringMountList[springNum].localPosition.y+WheelPosMod + (compressionOffset*compMod);
             temp += springNum + "Pos: " + wheelPosition.y + "," + "Compression: " + compressionOffset;
+            
+            
             WheelList[springNum].transform.localPosition = new Vector3(WheelList[springNum].GetComponent<WheelInfo>().StartXPosition,
                  wheelPosition.y,
                  WheelList[springNum].GetComponent<WheelInfo>().StartZPosition);
