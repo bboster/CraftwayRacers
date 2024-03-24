@@ -21,9 +21,12 @@ public class ThumbtackBehavior : MonoBehaviour
         {
             //Car = collision.GetComponent<ArcadeDriving2>();
 
-            if (Car.Shielded == false)
+            if (Car.Shielded == true)
             {
-
+                    Car.Shielded = true;
+                    Car.Shield.SetActive(false);
+                    StartCoroutine(IFrames());
+                    Destroy(gameObject);
             }
         }
 
@@ -33,6 +36,12 @@ public class ThumbtackBehavior : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezePositionY;
             rb.isKinematic = true;
         }
+
+
+        IEnumerator IFrames()
+        {
+            yield return new WaitForSeconds(5);
+            Car.Shielded = false;
+        }
     }
-    
 }

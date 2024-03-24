@@ -31,6 +31,8 @@ public class Jacks : MonoBehaviour
 
             if(Speed.Shielded == true)
             {
+                Speed.Shielded = true;
+                Speed.Shield.SetActive(false);
                 StartCoroutine(IFrames());
                 Destroy(gameObject);
             }
@@ -40,7 +42,6 @@ public class Jacks : MonoBehaviour
         {
             yield return new WaitForSeconds(5);
             Speed.Shielded = false;
-            Speed.Shield.SetActive(false); 
         }
     }
 }
