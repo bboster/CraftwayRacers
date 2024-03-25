@@ -6,7 +6,7 @@ public class ThumbtackBehavior : MonoBehaviour
 {
     public Rigidbody rb;
     public SpawningSystem spawningSystem;
-    private ArcadeDriving2 Car;
+    private ArcadeDriving2 Speed;
    
     // Start is called before the first frame update
     void Start()
@@ -19,13 +19,13 @@ public class ThumbtackBehavior : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            //Car = collision.GetComponent<ArcadeDriving2>();
+            //Speed = collision.GetComponent<ArcadeDriving2>();
 
-            if (Car.Shielded == true)
+            if (Speed.Shielded == true)
             {
-                    Car.Shielded = true;
-                    Car.Shield.SetActive(false);
-                    StartCoroutine(IFrames());
+                    //Speed.Shielded = true;
+                    // Speed.Shield.SetActive(false);
+                    //StartCoroutine(IFrames());
                     Destroy(gameObject);
             }
         }
@@ -38,10 +38,10 @@ public class ThumbtackBehavior : MonoBehaviour
         }
 
 
-        IEnumerator IFrames()
+        /*IEnumerator IFrames()
         {
             yield return new WaitForSeconds(5);
             Car.Shielded = false;
-        }
+        }*/
     }
 }
