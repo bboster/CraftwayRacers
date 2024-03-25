@@ -117,11 +117,7 @@ public class ArcadeDriving2 : MonoBehaviour
     }
     void EndReadDrift(InputAction.CallbackContext ctx)
     {
-        isDrifting= false;
-        FrontTireGrip = 0.8f;
-        RearTireGrip = 0.6f;
-        MinSteer = 1f;
-        MaxSteer = 3f;
+        StartCoroutine(ResetControls(0.1f));
     }
     /// <summary>
     /// Suspension is here because it doesnt work as well/at all in fixed update. Probably something
@@ -337,15 +333,45 @@ public class ArcadeDriving2 : MonoBehaviour
             Shielded = true;
             Shield.SetActive(true);
         }
-
-        IEnumerator waiter()
+    }
+    private void OnTriggerStay(Collider collider)
+    {
+        if (collider.gameObject.tag == "Slick")
         {
-            yield return new WaitForSeconds(ShieldTimer);
-            Shielded = false;
-            Shield.SetActive(false);
+            canDrift = false;
+            EnginePower = 30f;
+            TopSpeed = 50f;
+            FrontTireGrip = 0.5f;
+            RearTireGrip = 0.4f;
+            MinSteer = 2.25f;
+            MaxSteer = 5.5f;
         }
     }
-
+    private void OnTriggerExit(Collider collider)
+    {
+        if (collider.CompareTag("Slick"))
+        {
+            StartCoroutine(ResetControls(1f));
+        }
+    }
+    IEnumerator ResetControls(float secondsToWait)
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        canDrift = true;
+        isDrifting = false;
+        FrontTireGrip = 0.8f;
+        RearTireGrip = 0.6f;
+        MinSteer = 1f;
+        MaxSteer = 3f;
+        TopSpeed = 100f;
+        EnginePower = 80f;
+    }
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(ShieldTimer);
+        Shielded = false;
+        Shield.SetActive(false);
+    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Wall"))
