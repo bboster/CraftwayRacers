@@ -20,6 +20,11 @@ public class StartCountdown : MonoBehaviour
     public GameObject Two;
     public GameObject Three;
     public GameObject GO;
+    public GameObject OneStopper;
+    public GameObject TwoStopper;
+    public GameObject ThreeStopper;
+    public GameObject FourStopper;
+
 
     public static Action StartRace;
 
@@ -57,9 +62,14 @@ public class StartCountdown : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         One.SetActive(false);
+        OneStopper.SetActive(false);
+        TwoStopper.SetActive(false);
+        ThreeStopper.SetActive(false);
+        FourStopper.SetActive(false);
         Gaming = true;
         StartRace?.Invoke();
         GO.SetActive(true);
+
 
         GameObject.Find("GameController").GetComponent<WinTracker>().StartGame();
         

@@ -48,17 +48,18 @@ public class ArcadeDriving2 : MonoBehaviour
             StartCountdown.StartRace += Handle_StartRace;
         
             Application.targetFrameRate = 120;
+
+        if(GameObject.Find("SoundManager")!=null)
+        {
+            StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().EngineStart("CarStartSound", gameObject));
+        }
+        
         if (CenterOfMass == null)
         {
             CenterOfMass = GameObject.Find("CoM");
         }
         CarRb = GetComponent<Rigidbody>();
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
-
-        if(GameObject.Find("SoundManager")!=null)
-        {
-            StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().EngineStart("CarStartSound", gameObject));
-        }
     }
 
     void Handle_StartRace()
