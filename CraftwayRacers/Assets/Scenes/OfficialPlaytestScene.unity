@@ -9785,16 +9785,16 @@ MonoBehaviour:
   spawnPoint1: {x: -172.7, y: 25, z: 195}
   spawnPoint2: {x: -44, y: 25, z: 174.6}
   spawnPoint3: {x: -237.8, y: 25, z: 1.7}
-  spawnPoint4: {x: -173.8, y: 25, z: 32.2}
+  spawnPoint4: {x: -180.4, y: 25, z: 42.4}
   spawnPoint5: {x: -67.4, y: 25, z: 14.8}
   spawnPoint6: {x: -95.2, y: 25, z: -94}
   spawnPoint7: {x: -226.8, y: 25, z: -127.4}
   spawnPoint8: {x: 166.2, y: 23.7, z: 125.5}
   spawnPoint9: {x: 129.5, y: 23.7, z: 158.9}
   spawnPoint10: {x: 183, y: 23.7, z: -78}
-  spawnPoint11: {x: 212, y: 23.7, z: -166.1}
-  spawnPoint12: {x: 184.4, y: 23.7, z: -217.4}
-  spawnPoint13: {x: 169.4, y: 23.47, z: -391.8}
+  spawnPoint11: {x: 204.8, y: 23.7, z: -166.1}
+  spawnPoint12: {x: -97.3, y: 23.7, z: -376.7}
+  spawnPoint13: {x: 153.4, y: 23.47, z: -384.7}
   spawnPoint14: {x: 50, y: 23.47, z: -366}
   TestCube: {fileID: 0}
   PaintBrushGatcha: {fileID: 5472069269092556349, guid: 0f816f223a6802d44a5a1797abe10104, type: 3}
