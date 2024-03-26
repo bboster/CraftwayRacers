@@ -19,7 +19,7 @@ public class ThumbtackBehavior : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            //Speed = collision.GetComponent<ArcadeDriving2>();
+            Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
 
             if (Speed.Shielded == true)
             {
