@@ -24,14 +24,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6897255960999532256}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 193.1, y: 25, z: 29.2}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 354.27, y: -9.5, z: 31.777}
+  m_LocalScale: {x: 0.28413, y: 0.28413, z: 0.28413}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1241274746383107311}
   - {fileID: 2076988587854414979}
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1635754114529452804
 PrefabInstance:
@@ -59,7 +59,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc8d460c6a151eb478014a7b73c6e5d6, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 0.07998657
+      value: 457
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc8d460c6a151eb478014a7b73c6e5d6, type: 3}
       propertyPath: m_LocalPosition.y
@@ -67,7 +67,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc8d460c6a151eb478014a7b73c6e5d6, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.6300011
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: bc8d460c6a151eb478014a7b73c6e5d6, type: 3}
       propertyPath: m_LocalRotation.w
@@ -97,6 +97,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: bc8d460c6a151eb478014a7b73c6e5d6, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1857753425763772355, guid: 5954a63de4d0b464a8b214f097caa57f, type: 3}
     - target: {fileID: 919132149155446097, guid: bc8d460c6a151eb478014a7b73c6e5d6, type: 3}
       propertyPath: m_Name
       value: Cottonball_Sheild
@@ -175,6 +179,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: -5754084199372789682, guid: bc8d460c6a151eb478014a7b73c6e5d6, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 1857753425763772355, guid: 5954a63de4d0b464a8b214f097caa57f, type: 3}
     - target: {fileID: 919132149155446097, guid: bc8d460c6a151eb478014a7b73c6e5d6, type: 3}
       propertyPath: m_Name
       value: Cottonball_Sheild2
