@@ -7,10 +7,16 @@ public class ThumbtackBehavior : MonoBehaviour
     public Rigidbody rb;
     public SpawningSystem spawningSystem;
     private ArcadeDriving2 Speed;
+
+    private GameObject mainCam;
+    private GameObject soundManager;
    
     // Start is called before the first frame update
     void Start()
     {
+        mainCam = GameObject.Find("Main Camera");
+        soundManager = GameObject.Find("SoundManager");
+
         rb = GetComponent<Rigidbody>();
         spawningSystem = GameObject.Find("SpawningSystemManager").GetComponent<SpawningSystem>();
     }
@@ -20,6 +26,7 @@ public class ThumbtackBehavior : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("CarCollisionSound").clip, mainCam.transform.position);
 
             if (Speed.Shielded == true)
             {

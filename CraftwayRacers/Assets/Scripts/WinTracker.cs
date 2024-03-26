@@ -26,8 +26,14 @@ public class WinTracker : MonoBehaviour
     [SerializeField] private GameObject winDisplay;
     [SerializeField] private TextMeshProUGUI winTxt;
 
+    private GameObject mainCam;
+    private GameObject soundManager;
+
     private void Start()
     {
+        mainCam = GameObject.Find("Main Camera");
+        soundManager = GameObject.Find("SoundManager");
+
         //StartGame();
         DontDestroyOnLoad(gameObject);
     }
@@ -48,6 +54,7 @@ public class WinTracker : MonoBehaviour
     public async void AddLap(int playerNum)
     {
         laps[playerNum]++;
+        AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Crowd").clip, mainCam.transform.position, 0.3f);
         if(laps[playerNum] == 2)
         {
             /*winDisplay.SetActive(true);
