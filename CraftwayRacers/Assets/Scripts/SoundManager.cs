@@ -33,6 +33,13 @@ public class SoundManager : MonoBehaviour
         }
     }
 
+    public Sound GetSound(string name)
+    {
+        Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
+
+        return s;
+    }
+
     public void Play(string name, int priority)
     {
         Sound s = System.Array.Find(sounds, sounds => sounds.name == name);
