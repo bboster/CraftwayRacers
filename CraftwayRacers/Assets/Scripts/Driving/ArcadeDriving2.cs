@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
+using UnityEngine.Audio;
 
 public class ArcadeDriving2 : MonoBehaviour
 {
@@ -43,16 +44,22 @@ public class ArcadeDriving2 : MonoBehaviour
     //SFX bools
     private bool playingBrake = false;
 
+    private GameObject soundManager;
+    private GameObject mainCam;
+
+    private void Awake()
+    {
+        soundManager = GameObject.Find("SoundManager");
+        mainCam = GameObject.Find("Main Camera");
+    }
+
     void Start()
     {
             StartCountdown.StartRace += Handle_StartRace;
         
             Application.targetFrameRate = 120;
 
-        if(GameObject.Find("SoundManager")!=null)
-        {
-            StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().EngineStart("CarStartSound", gameObject));
-        }
+        StartCoroutine(EngineStart());
         
         if (CenterOfMass == null)
         {
@@ -60,6 +67,45 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         CarRb = GetComponent<Rigidbody>();
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
+    }
+
+    public IEnumerator PlayEngineSound()
+    {
+        Sound s = soundManager.GetComponent<SoundManager>().GetSound("EngineSound");
+        s.source = gameObject.GetComponent<AudioSource>();
+        s.source.clip = s.clip;
+        s.source.outputAudioMixerGroup = s.mixer;
+        s.source.volume = s.volume;
+        s.source.loop = true;
+        s.source.priority = 1;
+
+        s.source.Play();
+
+        float oldValue = 0.5f;
+
+        for (; ; )
+        {
+
+            //Get the car speed and relate it to the pitch.
+            float f = Mathf.Clamp((Mathf.Abs(gameObject.GetComponent<Rigidbody>().velocity.x) + Mathf.Abs(gameObject.GetComponent<Rigidbody>().velocity.z) +
+                Mathf.Abs(gameObject.GetComponent<Rigidbody>().velocity.y)) / 40f, 0.5f, 2f);
+
+            s.source.pitch = Mathf.Lerp(f, oldValue, 1.5f * Time.deltaTime);
+
+            oldValue = f;
+
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator EngineStart()
+    {
+        Sound s = soundManager.GetComponent<SoundManager>().GetSound("CarStartSound");
+        AudioSource.PlayClipAtPoint(s.clip, mainCam.transform.position, 0.5f);
+
+        yield return new WaitForSeconds(s.clip.length);
+
+        StartCoroutine(PlayEngineSound());
     }
 
     void Handle_StartRace()
@@ -91,7 +137,7 @@ public class ArcadeDriving2 : MonoBehaviour
 
         if(playingBrake == false)
         {
-            //SoundManager.instance.Play("BrakingSound", 100);
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("BrakingSound").clip, mainCam.transform.position);
             playingBrake = true;
         }
     }
@@ -101,7 +147,6 @@ public class ArcadeDriving2 : MonoBehaviour
 
         if(playingBrake == true)
         {
-            //SoundManager.instance.Stop("BrakingSound");
             playingBrake = false;
         }
     }
@@ -333,6 +378,7 @@ public class ArcadeDriving2 : MonoBehaviour
             StartCoroutine(waiter());
             Shielded = true;
             Shield.SetActive(true);
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("PickupSound").clip, mainCam.transform.position);
         }
     }
     private void OnTriggerStay(Collider collider)
@@ -377,7 +423,7 @@ public class ArcadeDriving2 : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Wall"))
         {
-            SoundManager.instance.Play("CarCollisionSound", 100);
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("CarCollisionSound").clip, mainCam.transform.position);
         }
     }
     private void OnDestroy()
