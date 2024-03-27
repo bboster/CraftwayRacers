@@ -5,6 +5,7 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 
 public class WinTracker : MonoBehaviour
 {
@@ -28,6 +29,11 @@ public class WinTracker : MonoBehaviour
 
     private GameObject mainCam;
     private GameObject soundManager;
+
+    [SerializeField] private Sprite player1Sticker;
+    [SerializeField] private Sprite player2Sticker;
+    [SerializeField] private Sprite player3Sticker;
+    [SerializeField] private Sprite player4Sticker;
 
     private void Start()
     {
@@ -63,6 +69,7 @@ public class WinTracker : MonoBehaviour
             playerToWin = playerNum + 1;
 
             await LoadScene();
+            SetWinningSticker(playerToWin);
         }
     }
 
@@ -121,9 +128,31 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
+            SetWinningSticker(playerToWin);
         }
 
         //Set win UI.
+    }
+
+    private void SetWinningSticker(int winner)
+    {
+        GameObject img = GameObject.Find("WinningSticker");
+
+        switch(winner)
+        {
+            case 0:
+                img.GetComponent<Image>().sprite = player1Sticker;
+                break;
+            case 1:
+                img.GetComponent<Image>().sprite = player2Sticker;
+                break;
+            case 2:
+                img.GetComponent<Image>().sprite = player3Sticker;
+                break;
+            case 3:
+                img.GetComponent<Image>().sprite = player4Sticker;
+                break;
+        }
     }
 
     /// <summary>
@@ -158,6 +187,7 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
+            SetWinningSticker(playerToWin);
         }
 
         //Set winner UI.
@@ -195,6 +225,7 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
+            SetWinningSticker(playerToWin);
         }
     }
 
