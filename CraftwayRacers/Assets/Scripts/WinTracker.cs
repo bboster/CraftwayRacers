@@ -9,6 +9,8 @@ using UnityEngine.UI;
 
 public class WinTracker : MonoBehaviour
 {
+    private bool gameFinished = false;
+
     [Tooltip("In Seconds")]
     public int gameTime;
 
@@ -40,6 +42,8 @@ public class WinTracker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI player3LapCount;
     [SerializeField] private TextMeshProUGUI player4LapCount;
 
+    private Coroutine timer;
+
     private void Start()
     {
         mainCam = GameObject.Find("Main Camera");
@@ -54,7 +58,7 @@ public class WinTracker : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        StartCoroutine(GameTimer());
+        timer = StartCoroutine(GameTimer());
         //StartCoroutine(WaypointLeadChecker());
     }
 
@@ -88,10 +92,10 @@ public class WinTracker : MonoBehaviour
             /*winDisplay.SetActive(true);
             winTxt.text = "Player " + (playerNum + 1) + " Wins!";*/
 
-            playerToWin = playerNum + 1;
+            playerToWin = playerNum;
 
             await LoadScene();
-            SetWinningSticker(playerToWin);
+            StartCoroutine(SetWinningSticker(playerToWin));
         }
     }
 
@@ -111,8 +115,11 @@ public class WinTracker : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        //End the game and determine winner.
-        DetermineWinnerWithLaps();
+        if(gameFinished == false)
+        {
+            //End the game and determine winner.
+            DetermineWinnerWithLaps();
+        }
     }
 
     /// <summary>
@@ -150,16 +157,29 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
-            SetWinningSticker(playerToWin);
+            StartCoroutine(SetWinningSticker(playerToWin));
         }
 
         //Set win UI.
     }
 
-    private void SetWinningSticker(int winner)
+    private IEnumerator SetWinningSticker(int winner)
     {
-        StopCoroutine(GameTimer());
-        GameObject img = GameObject.Find("WinningSticker");
+        gameFinished = true;
+        StopCoroutine(timer);
+        GameObject img;
+
+        for(; ; )
+        {
+            img = GameObject.Find("WinningSticker");
+
+            if(img != null)
+            {
+                break;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
 
         switch(winner)
         {
@@ -210,7 +230,7 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
-            SetWinningSticker(playerToWin);
+            StartCoroutine(SetWinningSticker(playerToWin));
         }
 
         //Set winner UI.
@@ -248,7 +268,7 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
-            SetWinningSticker(playerToWin);
+            StartCoroutine(SetWinningSticker(playerToWin));
         }
     }
 

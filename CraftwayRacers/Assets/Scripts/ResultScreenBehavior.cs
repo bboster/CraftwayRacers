@@ -15,6 +15,7 @@ public class ResultScreenBehavior : MonoBehaviour
 
     public void PlayAgain()
     {
+        Destroy(GameObject.Find("GameController"));
         SceneManager.LoadScene("OfficialPlaytestScene");
     }
 }
