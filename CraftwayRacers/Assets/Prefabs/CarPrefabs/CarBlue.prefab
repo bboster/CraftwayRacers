@@ -97,7 +97,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: 6ca1e0819a70a4a4b8a5880106da06e8, type: 3}
+  - {fileID: 2100000, guid: 58dff6077a442754192165137c267785, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -374,7 +374,7 @@ GameObject:
   m_Component:
   - component: {fileID: 9103885937942964021}
   m_Layer: 0
-  m_Name: FinalizedUVFinishedCar
+  m_Name: CarBlue
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -459,7 +459,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: 6ca1e0819a70a4a4b8a5880106da06e8, type: 3}
+  - {fileID: 2100000, guid: 58dff6077a442754192165137c267785, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -557,7 +557,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: 6ca1e0819a70a4a4b8a5880106da06e8, type: 3}
+  - {fileID: 2100000, guid: 58dff6077a442754192165137c267785, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -726,7 +726,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: 6ca1e0819a70a4a4b8a5880106da06e8, type: 3}
+  - {fileID: 2100000, guid: 58dff6077a442754192165137c267785, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -837,7 +837,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 8748892135801146194, guid: 6ca1e0819a70a4a4b8a5880106da06e8, type: 3}
+  - {fileID: 2100000, guid: 58dff6077a442754192165137c267785, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
