@@ -35,6 +35,11 @@ public class WinTracker : MonoBehaviour
     [SerializeField] private Sprite player3Sticker;
     [SerializeField] private Sprite player4Sticker;
 
+    [SerializeField] private TextMeshProUGUI player1LapCount;
+    [SerializeField] private TextMeshProUGUI player2LapCount;
+    [SerializeField] private TextMeshProUGUI player3LapCount;
+    [SerializeField] private TextMeshProUGUI player4LapCount;
+
     private void Start()
     {
         mainCam = GameObject.Find("Main Camera");
@@ -61,6 +66,23 @@ public class WinTracker : MonoBehaviour
     {
         laps[playerNum]++;
         AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Crowd").clip, mainCam.transform.position, 0.3f);
+
+        switch(playerNum)
+        {
+            case 0:
+                player1LapCount.text = laps[playerNum] + " / 2";
+                break;
+            case 1:
+                player2LapCount.text = laps[playerNum] + " / 2";
+                break;
+            case 2:
+                player3LapCount.text = laps[playerNum] + " / 2";
+                break;
+            case 3:
+                player4LapCount.text = laps[playerNum] + " / 2";
+                break;
+        }
+
         if(laps[playerNum] == 2)
         {
             /*winDisplay.SetActive(true);
@@ -136,6 +158,7 @@ public class WinTracker : MonoBehaviour
 
     private void SetWinningSticker(int winner)
     {
+        StopCoroutine(GameTimer());
         GameObject img = GameObject.Find("WinningSticker");
 
         switch(winner)
