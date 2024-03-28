@@ -107,7 +107,7 @@ public class StartCountdown : MonoBehaviour
 
     void P1()
     {
-        if (PlayerCounting.playerCount == Players && oneHasRun == false)
+        if (PlayerCounting.playerCount == 1 && oneHasRun == false)
         {
             Join.SetActive(false);
             OnePlayer.SetActive(true);

@@ -34,6 +34,7 @@ public class Jacks : MonoBehaviour
                 rb = Speed.CarRb;
 
                 rb.velocity = rb.velocity / CutSpeed;
+                Destroy(gameObject);
                 // Vector3 IncomingForce = rb.velocity;
                 //rb.AddForce((IncomingForce * -1) / CutSpeed);
                 //Player.GetComponent<ArcadeDriving2>().EnginePower = Player.GetComponent<ArcadeDriving2>().EnginePower / CutSpeed;
