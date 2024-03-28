@@ -29,6 +29,7 @@ public class ArcadeDriving2 : MonoBehaviour
     [Tooltip("VALUE BETWEEN 0 & 1!!! How much wheels go in the sideways/x direction while driving forward")] 
                                                                                         public float FrontTireGrip = .8f, RearTireGrip = .6f;
     [Tooltip("Basically acceleration. Mess with keypoints to change engine behavior")]  public AnimationCurve TorqueCurve;
+    [Tooltip("Psuedo-gravity applied to suspension points that aren't touching the ground")] public float GravityForce = 5f;
 
     //Not necessary for changing car behavior
     public Rigidbody CarRb;
@@ -46,6 +47,7 @@ public class ArcadeDriving2 : MonoBehaviour
 
     private GameObject soundManager;
     private GameObject mainCam;
+    private InputAction steer, gas, brake, drift;
 
     private void Awake()
     {
@@ -110,14 +112,22 @@ public class ArcadeDriving2 : MonoBehaviour
 
     void Handle_StartRace()
     {
-        PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
-        PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
-        PlayerInput.currentActionMap.FindAction("Gas").started += ReadGas;
-        PlayerInput.currentActionMap.FindAction("Gas").canceled += EndReadGas;
-        PlayerInput.currentActionMap.FindAction("Brake").started += ReadBrake;
-        PlayerInput.currentActionMap.FindAction("Brake").canceled += EndReadBrake;
-        PlayerInput.currentActionMap.FindAction("Drift").started += ReadDrift;
-        PlayerInput.currentActionMap.FindAction("Drift").canceled += EndReadDrift;
+        steer = PlayerInput.currentActionMap.FindAction("Steer");
+        steer.performed += ctx => steerValue = ctx.ReadValue<float>();
+        steer = PlayerInput.currentActionMap.FindAction("Steer");
+        steer.canceled += ctx => steerValue = 0;
+        gas = PlayerInput.currentActionMap.FindAction("Gas");
+        gas.started += ReadGas;
+        gas = PlayerInput.currentActionMap.FindAction("Gas");
+        gas.canceled += EndReadGas;
+        brake = PlayerInput.currentActionMap.FindAction("Brake");
+        brake.started += ReadBrake;
+        brake = PlayerInput.currentActionMap.FindAction("Brake");
+        brake.canceled += EndReadBrake;
+        drift = PlayerInput.currentActionMap.FindAction("Drift");
+        drift.started += ReadDrift;
+        drift = PlayerInput.currentActionMap.FindAction("Drift");
+        drift.canceled += EndReadDrift;
     }
 
     /// <summary>
@@ -206,6 +216,7 @@ public class ArcadeDriving2 : MonoBehaviour
             TractionForce(SpringMountList[i], i);
             DrivingForce(SpringMountList[i], i);
         }
+        IsFlippedOver(gameObject, 120);
     }
     /// <summary>
     /// Sends out a raycast from the springmounts (check the gameobjects, attached to chassis) in 
@@ -218,41 +229,23 @@ public class ArcadeDriving2 : MonoBehaviour
     {
         Debug.DrawRay(springLoc.position, -transform.up, Color.red, MaxSuspensionLength);
         if (Physics.Raycast(springLoc.position, -transform.up, out HitList[springNum], MaxSuspensionLength))
-        {
-            ////if either of the front two wheels are touching offroad
-            //if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("OffRoad") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("OffRoad"))
-            //{
-            //    canDrift = false;
-            //    EnginePower = 20f;
-            //    TopSpeed = 40f;
-            //    FrontTireGrip = 0.9f;
-            //    RearTireGrip = 0.7f;
-            //    MinSteer = 1.5f;
-            //    MaxSteer = 4.5f;
-            //}
-            ////Else if either of the front two wheels are touching slick
-            //else if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("Slick") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("Slick"))
-            //{
-            //    canDrift = false;
-            //    EnginePower = 20f;
-            //    TopSpeed = 40f;
-            //    FrontTireGrip = 0.6f;
-            //    RearTireGrip = 0.5f;
-            //    MinSteer = .25f;
-            //    MaxSteer = 2f;
-            //}
-            ////else if on normal ground, normal values
-            //else if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("Normal") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("Normal"))
-            //{
-            //    canDrift = true;
-            //    EnginePower = 80f;
-            //    TopSpeed = 100f;
-            //    FrontTireGrip = 0.8f;
-            //    RearTireGrip = 0.6f;
-            //    MinSteer = 1f;
-            //    MaxSteer = 3f;
-            //}
+        {           
             return true;
+        }
+        return false;
+    }
+    public bool IsFlippedOver(GameObject gameObject, float thresholdAngle)
+    {
+        Vector3 eulerAngles = gameObject.transform.rotation.eulerAngles;
+
+        //normalizing euler angles to be within 0, 360 range
+        float normalizedX = Mathf.Repeat(eulerAngles.x, 360f);
+        float normalizedZ = Mathf.Repeat(eulerAngles.z, 360f);
+
+        if (normalizedX > thresholdAngle && normalizedX < 360f - thresholdAngle || normalizedZ > thresholdAngle && normalizedZ < 360f - thresholdAngle)
+        {
+            StartCoroutine(FlipCar());
+            return true; 
         }
         return false;
     }
@@ -362,9 +355,37 @@ public class ArcadeDriving2 : MonoBehaviour
                  WheelList[springNum].GetComponent<WheelInfo>().StartZPosition);
                    
         }
+        else// not grounded
+        {
+            CarRb.AddForceAtPosition(Vector3.down * GravityForce, SpringMountList[springNum].position);
+        }
         //print(temp);
     }
-
+    IEnumerator ResetControls(float secondsToWait)
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        canDrift = true;
+        isDrifting = false;
+        FrontTireGrip = 0.8f;
+        RearTireGrip = 0.6f;
+        MinSteer = 1f;
+        MaxSteer = 3f;
+        TopSpeed = 100f;
+        EnginePower = 80f;
+    }
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(ShieldTimer);
+        Shielded = false;
+        Shield.SetActive(false);
+    }
+    IEnumerator FlipCar()
+    {
+        yield return new WaitForSeconds(2);
+        CarRb.velocity = Vector3.zero;
+        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+        CarRb.AddForce(Vector3.up*25f);
+    }
 
 
     /// <summary>
@@ -401,24 +422,6 @@ public class ArcadeDriving2 : MonoBehaviour
             StartCoroutine(ResetControls(1f));
         }
     }
-    IEnumerator ResetControls(float secondsToWait)
-    {
-        yield return new WaitForSeconds(secondsToWait);
-        canDrift = true;
-        isDrifting = false;
-        FrontTireGrip = 0.8f;
-        RearTireGrip = 0.6f;
-        MinSteer = 1f;
-        MaxSteer = 3f;
-        TopSpeed = 100f;
-        EnginePower = 80f;
-    }
-    IEnumerator waiter()
-    {
-        yield return new WaitForSeconds(ShieldTimer);
-        Shielded = false;
-        Shield.SetActive(false);
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Wall"))
@@ -428,13 +431,13 @@ public class ArcadeDriving2 : MonoBehaviour
     }
     private void OnDestroy()
     {
-        PlayerInput.currentActionMap.FindAction("Steer").performed -= ctx => steerValue = ctx.ReadValue<float>();
-        PlayerInput.currentActionMap.FindAction("Steer").canceled -= ctx => steerValue = 0;
-        PlayerInput.currentActionMap.FindAction("Gas").started -= ReadGas;
-        PlayerInput.currentActionMap.FindAction("Gas").canceled -= EndReadGas;
-        PlayerInput.currentActionMap.FindAction("Brake").started -= ReadBrake;
-        PlayerInput.currentActionMap.FindAction("Brake").canceled -= EndReadBrake;
-        PlayerInput.currentActionMap.FindAction("Drift").started -= ReadDrift;
-        PlayerInput.currentActionMap.FindAction("Drift").canceled -= EndReadDrift;
+        steer.performed -= ctx => steerValue = ctx.ReadValue<float>();
+        steer.canceled -= ctx => steerValue = 0;
+        gas.started -= ReadGas;
+        gas.canceled -= EndReadGas;
+        brake.started -= ReadBrake;
+        brake.canceled -= EndReadBrake;
+        drift.started -= ReadDrift;
+        drift.canceled -= EndReadDrift;
     }
 }
