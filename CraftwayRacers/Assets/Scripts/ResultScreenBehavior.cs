@@ -10,11 +10,12 @@ public class ResultScreenBehavior : MonoBehaviour
 
     private void Start()
     {
-        winTxt.text = "Player " + GameObject.Find("GameController").GetComponent<WinTracker>().playerToWin + " wins!";
+        winTxt.text = "Player " + (GameObject.Find("GameController").GetComponent<WinTracker>().playerToWin + 1) + " wins!";
     }
 
     public void PlayAgain()
     {
+        Destroy(GameObject.Find("GameController"));
         SceneManager.LoadScene("OfficialPlaytestScene");
     }
 }

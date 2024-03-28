@@ -5,9 +5,12 @@ using UnityEngine;
 using TMPro;
 using UnityEngine.SceneManagement;
 using System.Threading.Tasks;
+using UnityEngine.UI;
 
 public class WinTracker : MonoBehaviour
 {
+    private bool gameFinished = false;
+
     [Tooltip("In Seconds")]
     public int gameTime;
 
@@ -29,6 +32,18 @@ public class WinTracker : MonoBehaviour
     private GameObject mainCam;
     private GameObject soundManager;
 
+    [SerializeField] private Sprite player1Sticker;
+    [SerializeField] private Sprite player2Sticker;
+    [SerializeField] private Sprite player3Sticker;
+    [SerializeField] private Sprite player4Sticker;
+
+    [SerializeField] private TextMeshProUGUI player1LapCount;
+    [SerializeField] private TextMeshProUGUI player2LapCount;
+    [SerializeField] private TextMeshProUGUI player3LapCount;
+    [SerializeField] private TextMeshProUGUI player4LapCount;
+
+    private Coroutine timer;
+
     private void Start()
     {
         mainCam = GameObject.Find("Main Camera");
@@ -43,7 +58,7 @@ public class WinTracker : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
-        StartCoroutine(GameTimer());
+        timer = StartCoroutine(GameTimer());
         //StartCoroutine(WaypointLeadChecker());
     }
 
@@ -55,14 +70,32 @@ public class WinTracker : MonoBehaviour
     {
         laps[playerNum]++;
         AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Crowd").clip, mainCam.transform.position, 0.3f);
+
+        switch(playerNum)
+        {
+            case 0:
+                player1LapCount.text = laps[playerNum] + " / 2";
+                break;
+            case 1:
+                player2LapCount.text = laps[playerNum] + " / 2";
+                break;
+            case 2:
+                player3LapCount.text = laps[playerNum] + " / 2";
+                break;
+            case 3:
+                player4LapCount.text = laps[playerNum] + " / 2";
+                break;
+        }
+
         if(laps[playerNum] == 2)
         {
             /*winDisplay.SetActive(true);
             winTxt.text = "Player " + (playerNum + 1) + " Wins!";*/
 
-            playerToWin = playerNum + 1;
+            playerToWin = playerNum;
 
             await LoadScene();
+            StartCoroutine(SetWinningSticker(playerToWin));
         }
     }
 
@@ -82,8 +115,11 @@ public class WinTracker : MonoBehaviour
             yield return new WaitForSeconds(1f);
         }
 
-        //End the game and determine winner.
-        DetermineWinnerWithLaps();
+        if(gameFinished == false)
+        {
+            //End the game and determine winner.
+            DetermineWinnerWithLaps();
+        }
     }
 
     /// <summary>
@@ -121,9 +157,45 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
+            StartCoroutine(SetWinningSticker(playerToWin));
         }
 
         //Set win UI.
+    }
+
+    private IEnumerator SetWinningSticker(int winner)
+    {
+        gameFinished = true;
+        StopCoroutine(timer);
+        GameObject img;
+
+        for(; ; )
+        {
+            img = GameObject.Find("WinningSticker");
+
+            if(img != null)
+            {
+                break;
+            }
+
+            yield return new WaitForEndOfFrame();
+        }
+
+        switch(winner)
+        {
+            case 0:
+                img.GetComponent<Image>().sprite = player1Sticker;
+                break;
+            case 1:
+                img.GetComponent<Image>().sprite = player2Sticker;
+                break;
+            case 2:
+                img.GetComponent<Image>().sprite = player3Sticker;
+                break;
+            case 3:
+                img.GetComponent<Image>().sprite = player4Sticker;
+                break;
+        }
     }
 
     /// <summary>
@@ -158,6 +230,7 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
+            StartCoroutine(SetWinningSticker(playerToWin));
         }
 
         //Set winner UI.
@@ -195,6 +268,7 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
+            StartCoroutine(SetWinningSticker(playerToWin));
         }
     }
 
