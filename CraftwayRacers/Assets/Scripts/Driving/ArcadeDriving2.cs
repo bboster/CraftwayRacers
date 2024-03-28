@@ -29,7 +29,7 @@ public class ArcadeDriving2 : MonoBehaviour
     [Tooltip("VALUE BETWEEN 0 & 1!!! How much wheels go in the sideways/x direction while driving forward")] 
                                                                                         public float FrontTireGrip = .8f, RearTireGrip = .6f;
     [Tooltip("Basically acceleration. Mess with keypoints to change engine behavior")]  public AnimationCurve TorqueCurve;
-    [Tooltip("Psuedo-gravity applied to suspension points that aren't touching the ground")] public float GravityForce = 10f;
+    [Tooltip("Psuedo-gravity applied to suspension points that aren't touching the ground")] public float GravityForce = 5f;
 
     //Not necessary for changing car behavior
     public Rigidbody CarRb;
@@ -357,7 +357,6 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         else// not grounded
         {
-            print("APPLYGRAVITY");
             CarRb.AddForceAtPosition(Vector3.down * GravityForce, SpringMountList[springNum].position);
         }
         //print(temp);
