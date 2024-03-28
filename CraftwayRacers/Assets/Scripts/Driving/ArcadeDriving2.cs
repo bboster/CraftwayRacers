@@ -185,7 +185,7 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             Handle_StartRace();
         }
-        if (readingGas)
+        if (readingGas || readingGas && readingBrake)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
         }
