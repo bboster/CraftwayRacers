@@ -779,7 +779,6 @@ GameObject:
   - component: {fileID: 8632376944375445172}
   - component: {fileID: 8271836361374315807}
   - component: {fileID: 5609904192371954627}
-  - component: {fileID: 8085285437398895484}
   - component: {fileID: 9082204676844285992}
   m_Layer: 0
   m_Name: CarModel_Main
@@ -1042,10 +1041,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 82c4de4d49a98ce49b2e6a3df7935f65, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Player1Spawn: {x: 189.83, y: 28.9, z: -208.0959}
-  Player2Spawn: {x: 203.6, y: 28.9, z: -223.9}
-  Player3Spawn: {x: 189.58, y: 28.9, z: -187.04}
-  Player4Spawn: {x: 203.4, y: 28.9, z: -198.5}
+  Player1Spawn: {x: 189.83, y: 25.9, z: -208.0959}
+  Player2Spawn: {x: 203.6, y: 25.9, z: -223.9}
+  Player3Spawn: {x: 189.58, y: 25.9, z: -187.04}
+  Player4Spawn: {x: 203.4, y: 25.9, z: -198.5}
   Ready: 0
   PlayerCount: {fileID: 3605162772267834932}
   parent: {fileID: 0}
@@ -1064,21 +1063,6 @@ MonoBehaviour:
   nextWaypoint: 0
   distFromNextWP: 0
   wrongWay: {fileID: 0}
---- !u!114 &8085285437398895484
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7125441016071492170}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cff54f68392fbce4bb4b86665b4a8457, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  PB: {fileID: 0}
-  HasPaint: 0
-  SpawningSystem: {fileID: 0}
 --- !u!82 &9082204676844285992
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1256,7 +1240,7 @@ Camera:
   m_TargetEye: 3
   m_HDR: 1
   m_AllowMSAA: 1
-  m_AllowDynamicResolution: 0
+  m_AllowDynamicResolution: 1
   m_ForceIntoRT: 0
   m_OcclusionCulling: 1
   m_StereoConvergence: 10
