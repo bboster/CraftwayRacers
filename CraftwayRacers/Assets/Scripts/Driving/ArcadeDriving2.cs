@@ -5,6 +5,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
+using UnityEngine.Audio;
 
 public class ArcadeDriving2 : MonoBehaviour
 {
@@ -28,6 +29,7 @@ public class ArcadeDriving2 : MonoBehaviour
     [Tooltip("VALUE BETWEEN 0 & 1!!! How much wheels go in the sideways/x direction while driving forward")] 
                                                                                         public float FrontTireGrip = .8f, RearTireGrip = .6f;
     [Tooltip("Basically acceleration. Mess with keypoints to change engine behavior")]  public AnimationCurve TorqueCurve;
+    [Tooltip("Psuedo-gravity applied to suspension points that aren't touching the ground")] public float GravityForce = 5f;
 
     //Not necessary for changing car behavior
     public Rigidbody CarRb;
@@ -43,16 +45,23 @@ public class ArcadeDriving2 : MonoBehaviour
     //SFX bools
     private bool playingBrake = false;
 
+    private GameObject soundManager;
+    private GameObject mainCam;
+    private InputAction steer, gas, brake, drift;
+
+    private void Awake()
+    {
+        soundManager = GameObject.Find("SoundManager");
+        mainCam = GameObject.Find("Main Camera");
+    }
+
     void Start()
     {
             StartCountdown.StartRace += Handle_StartRace;
         
             Application.targetFrameRate = 120;
 
-        if(GameObject.Find("SoundManager")!=null)
-        {
-            StartCoroutine(GameObject.Find("SoundManager").GetComponent<SoundManager>().EngineStart("CarStartSound", gameObject));
-        }
+        StartCoroutine(EngineStart());
         
         if (CenterOfMass == null)
         {
@@ -62,16 +71,63 @@ public class ArcadeDriving2 : MonoBehaviour
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
     }
 
+    public IEnumerator PlayEngineSound()
+    {
+        Sound s = soundManager.GetComponent<SoundManager>().GetSound("EngineSound");
+        s.source = gameObject.GetComponent<AudioSource>();
+        s.source.clip = s.clip;
+        s.source.outputAudioMixerGroup = s.mixer;
+        s.source.volume = s.volume;
+        s.source.loop = true;
+        s.source.priority = 1;
+
+        s.source.Play();
+
+        float oldValue = 0.5f;
+
+        for (; ; )
+        {
+
+            //Get the car speed and relate it to the pitch.
+            float f = Mathf.Clamp((Mathf.Abs(gameObject.GetComponent<Rigidbody>().velocity.x) + Mathf.Abs(gameObject.GetComponent<Rigidbody>().velocity.z) +
+                Mathf.Abs(gameObject.GetComponent<Rigidbody>().velocity.y)) / 40f, 0.5f, 2f);
+
+            s.source.pitch = Mathf.Lerp(f, oldValue, 1.5f * Time.deltaTime);
+
+            oldValue = f;
+
+            yield return new WaitForEndOfFrame();
+        }
+    }
+
+    public IEnumerator EngineStart()
+    {
+        Sound s = soundManager.GetComponent<SoundManager>().GetSound("CarStartSound");
+        AudioSource.PlayClipAtPoint(s.clip, mainCam.transform.position, 0.5f);
+
+        yield return new WaitForSeconds(s.clip.length);
+
+        StartCoroutine(PlayEngineSound());
+    }
+
     void Handle_StartRace()
     {
-        PlayerInput.currentActionMap.FindAction("Steer").performed += ctx => steerValue = ctx.ReadValue<float>();
-        PlayerInput.currentActionMap.FindAction("Steer").canceled += ctx => steerValue = 0;
-        PlayerInput.currentActionMap.FindAction("Gas").started += ReadGas;
-        PlayerInput.currentActionMap.FindAction("Gas").canceled += EndReadGas;
-        PlayerInput.currentActionMap.FindAction("Brake").started += ReadBrake;
-        PlayerInput.currentActionMap.FindAction("Brake").canceled += EndReadBrake;
-        PlayerInput.currentActionMap.FindAction("Drift").started += ReadDrift;
-        PlayerInput.currentActionMap.FindAction("Drift").canceled += EndReadDrift;
+        steer = PlayerInput.currentActionMap.FindAction("Steer");
+        steer.performed += ctx => steerValue = ctx.ReadValue<float>();
+        steer = PlayerInput.currentActionMap.FindAction("Steer");
+        steer.canceled += ctx => steerValue = 0;
+        gas = PlayerInput.currentActionMap.FindAction("Gas");
+        gas.started += ReadGas;
+        gas = PlayerInput.currentActionMap.FindAction("Gas");
+        gas.canceled += EndReadGas;
+        brake = PlayerInput.currentActionMap.FindAction("Brake");
+        brake.started += ReadBrake;
+        brake = PlayerInput.currentActionMap.FindAction("Brake");
+        brake.canceled += EndReadBrake;
+        drift = PlayerInput.currentActionMap.FindAction("Drift");
+        drift.started += ReadDrift;
+        drift = PlayerInput.currentActionMap.FindAction("Drift");
+        drift.canceled += EndReadDrift;
     }
 
     /// <summary>
@@ -91,7 +147,7 @@ public class ArcadeDriving2 : MonoBehaviour
 
         if(playingBrake == false)
         {
-            //SoundManager.instance.Play("BrakingSound", 100);
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("BrakingSound").clip, mainCam.transform.position);
             playingBrake = true;
         }
     }
@@ -101,7 +157,6 @@ public class ArcadeDriving2 : MonoBehaviour
 
         if(playingBrake == true)
         {
-            //SoundManager.instance.Stop("BrakingSound");
             playingBrake = false;
         }
     }
@@ -130,7 +185,7 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             Handle_StartRace();
         }
-        if (readingGas)
+        if (readingGas || readingGas && readingBrake)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
         }
@@ -161,6 +216,7 @@ public class ArcadeDriving2 : MonoBehaviour
             TractionForce(SpringMountList[i], i);
             DrivingForce(SpringMountList[i], i);
         }
+        IsFlippedOver(gameObject, 120);
     }
     /// <summary>
     /// Sends out a raycast from the springmounts (check the gameobjects, attached to chassis) in 
@@ -173,41 +229,23 @@ public class ArcadeDriving2 : MonoBehaviour
     {
         Debug.DrawRay(springLoc.position, -transform.up, Color.red, MaxSuspensionLength);
         if (Physics.Raycast(springLoc.position, -transform.up, out HitList[springNum], MaxSuspensionLength))
-        {
-            ////if either of the front two wheels are touching offroad
-            //if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("OffRoad") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("OffRoad"))
-            //{
-            //    canDrift = false;
-            //    EnginePower = 20f;
-            //    TopSpeed = 40f;
-            //    FrontTireGrip = 0.9f;
-            //    RearTireGrip = 0.7f;
-            //    MinSteer = 1.5f;
-            //    MaxSteer = 4.5f;
-            //}
-            ////Else if either of the front two wheels are touching slick
-            //else if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("Slick") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("Slick"))
-            //{
-            //    canDrift = false;
-            //    EnginePower = 20f;
-            //    TopSpeed = 40f;
-            //    FrontTireGrip = 0.6f;
-            //    RearTireGrip = 0.5f;
-            //    MinSteer = .25f;
-            //    MaxSteer = 2f;
-            //}
-            ////else if on normal ground, normal values
-            //else if (HitList[0].collider.gameObject.layer == LayerMask.NameToLayer("Normal") || HitList[1].collider.gameObject.layer == LayerMask.NameToLayer("Normal"))
-            //{
-            //    canDrift = true;
-            //    EnginePower = 80f;
-            //    TopSpeed = 100f;
-            //    FrontTireGrip = 0.8f;
-            //    RearTireGrip = 0.6f;
-            //    MinSteer = 1f;
-            //    MaxSteer = 3f;
-            //}
+        {           
             return true;
+        }
+        return false;
+    }
+    public bool IsFlippedOver(GameObject gameObject, float thresholdAngle)
+    {
+        Vector3 eulerAngles = gameObject.transform.rotation.eulerAngles;
+
+        //normalizing euler angles to be within 0, 360 range
+        float normalizedX = Mathf.Repeat(eulerAngles.x, 360f);
+        float normalizedZ = Mathf.Repeat(eulerAngles.z, 360f);
+
+        if (normalizedX > thresholdAngle && normalizedX < 360f - thresholdAngle || normalizedZ > thresholdAngle && normalizedZ < 360f - thresholdAngle)
+        {
+            StartCoroutine(FlipCar());
+            return true; 
         }
         return false;
     }
@@ -317,9 +355,37 @@ public class ArcadeDriving2 : MonoBehaviour
                  WheelList[springNum].GetComponent<WheelInfo>().StartZPosition);
                    
         }
+        else// not grounded
+        {
+            CarRb.AddForceAtPosition(Vector3.down * GravityForce, SpringMountList[springNum].position);
+        }
         //print(temp);
     }
-
+    IEnumerator ResetControls(float secondsToWait)
+    {
+        yield return new WaitForSeconds(secondsToWait);
+        canDrift = true;
+        isDrifting = false;
+        FrontTireGrip = 0.8f;
+        RearTireGrip = 0.6f;
+        MinSteer = 1f;
+        MaxSteer = 3f;
+        TopSpeed = 100f;
+        EnginePower = 80f;
+    }
+    IEnumerator waiter()
+    {
+        yield return new WaitForSeconds(ShieldTimer);
+        Shielded = false;
+        Shield.SetActive(false);
+    }
+    IEnumerator FlipCar()
+    {
+        yield return new WaitForSeconds(2);
+        CarRb.velocity = Vector3.zero;
+        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
+        CarRb.AddForce(Vector3.up*25f);
+    }
 
 
     /// <summary>
@@ -333,6 +399,7 @@ public class ArcadeDriving2 : MonoBehaviour
             StartCoroutine(waiter());
             Shielded = true;
             Shield.SetActive(true);
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("PickupSound").clip, mainCam.transform.position);
         }
     }
     private void OnTriggerStay(Collider collider)
@@ -355,40 +422,23 @@ public class ArcadeDriving2 : MonoBehaviour
             StartCoroutine(ResetControls(1f));
         }
     }
-    IEnumerator ResetControls(float secondsToWait)
-    {
-        yield return new WaitForSeconds(secondsToWait);
-        canDrift = true;
-        isDrifting = false;
-        FrontTireGrip = 0.8f;
-        RearTireGrip = 0.6f;
-        MinSteer = 1f;
-        MaxSteer = 3f;
-        TopSpeed = 100f;
-        EnginePower = 80f;
-    }
-    IEnumerator waiter()
-    {
-        yield return new WaitForSeconds(ShieldTimer);
-        Shielded = false;
-        Shield.SetActive(false);
-    }
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Wall"))
         {
-            SoundManager.instance.Play("CarCollisionSound", 100);
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("CarCollisionSound").clip, mainCam.transform.position);
         }
     }
     private void OnDestroy()
     {
-        PlayerInput.currentActionMap.FindAction("Steer").performed -= ctx => steerValue = ctx.ReadValue<float>();
-        PlayerInput.currentActionMap.FindAction("Steer").canceled -= ctx => steerValue = 0;
-        PlayerInput.currentActionMap.FindAction("Gas").started -= ReadGas;
-        PlayerInput.currentActionMap.FindAction("Gas").canceled -= EndReadGas;
-        PlayerInput.currentActionMap.FindAction("Brake").started -= ReadBrake;
-        PlayerInput.currentActionMap.FindAction("Brake").canceled -= EndReadBrake;
-        PlayerInput.currentActionMap.FindAction("Drift").started -= ReadDrift;
-        PlayerInput.currentActionMap.FindAction("Drift").canceled -= EndReadDrift;
+        StartCountdown.StartRace -= Handle_StartRace;
+        steer.performed -= ctx => steerValue = ctx.ReadValue<float>();
+        steer.canceled -= ctx => steerValue = 0;
+        gas.started -= ReadGas;
+        gas.canceled -= EndReadGas;
+        brake.started -= ReadBrake;
+        brake.canceled -= EndReadBrake;
+        drift.started -= ReadDrift;
+        drift.canceled -= EndReadDrift;
     }
 }

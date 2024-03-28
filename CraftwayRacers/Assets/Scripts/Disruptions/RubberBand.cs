@@ -9,19 +9,26 @@ public class RubberBand : MonoBehaviour
     public float BoostForce = 5f;
     public bool isBoosting = false;
     public float BoostDuration =2f;
-    private void OnCollisionEnter(Collision collision)
+
+    private GameObject mainCam;
+    private GameObject soundManager;
+    private void Awake()
+    {
+        mainCam = GameObject.Find("Main Camera");
+        soundManager = GameObject.Find("SoundManager");
+    }
+    private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.tag == "Player")
         {
             Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
-            if (Speed.Shielded == false && !isBoosting)
-            {               
                 rb = Speed.CarRb;
-                print("HERE");
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemPickup").clip, mainCam.transform.position);
+            print("HERE");
                 StartCoroutine(AddForce());
-            }
         }
     }
+
     IEnumerator AddForce()
     {
         isBoosting = true;
@@ -41,5 +48,6 @@ public class RubberBand : MonoBehaviour
         }
 
         isBoosting = false;
+        Destroy(gameObject);
     }
 }

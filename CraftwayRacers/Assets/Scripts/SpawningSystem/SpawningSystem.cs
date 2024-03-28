@@ -27,12 +27,12 @@ public class SpawningSystem : MonoBehaviour
     [SerializeField] private Vector3 spawnPoint14;
 
     // Objects that are spawned
-    [SerializeField] private GameObject TestCube;
-    [SerializeField] private GameObject PaintBrushGatcha;
+    //[SerializeField] private GameObject TestCube; Caleb was here
+    [SerializeField] private GameObject BoosterGatcha;
     [SerializeField] private GameObject CottonBallShieldGatcha;
     [SerializeField] private GameObject Jacks;
     [SerializeField] private GameObject Thumbtack;
-    [SerializeField] private GameObject RubberBand;
+    //[SerializeField] private GameObject RubberBand; Caleb was here
 
     // Amount of wait time
     [SerializeField] private int WaitTime;
@@ -73,7 +73,7 @@ public class SpawningSystem : MonoBehaviour
 
         largeHazards.Add(Thumbtack);
         largeHazards.Add(Jacks);
-        largeHazards.Add(PaintBrushGatcha);
+        largeHazards.Add(BoosterGatcha); //Caleb changed "Paintbrush" to "Booster"
         largeHazards.Add(CottonBallShieldGatcha);
 
         //gatchaBalls.Add(PaintBrushGatcha);
