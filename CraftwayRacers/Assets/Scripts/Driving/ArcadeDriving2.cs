@@ -431,6 +431,7 @@ public class ArcadeDriving2 : MonoBehaviour
     }
     private void OnDestroy()
     {
+        StartCountdown.StartRace -= Handle_StartRace;
         steer.performed -= ctx => steerValue = ctx.ReadValue<float>();
         steer.canceled -= ctx => steerValue = 0;
         gas.started -= ReadGas;

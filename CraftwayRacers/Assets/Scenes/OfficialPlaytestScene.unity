@@ -9933,7 +9933,7 @@ PrefabInstance:
       objectReference: {fileID: 2093178810}
     - target: {fileID: 6692904200271747183, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
       propertyPath: gameTime
-      value: 155
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: 6692904200271747183, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
       propertyPath: winDisplay
