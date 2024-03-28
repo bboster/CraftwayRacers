@@ -11041,6 +11041,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3754870520726766870, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
     - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
+      propertyPath: sounds.Array.data[0].volume
+      value: 0.2
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: sounds.Array.data[5].volume
       value: 0.3
       objectReference: {fileID: 0}
@@ -12078,7 +12082,6 @@ MonoBehaviour:
   spawnPoint12: {x: -97.3, y: 23.7, z: -376.7}
   spawnPoint13: {x: 153.4, y: 23.47, z: -384.7}
   spawnPoint14: {x: 50, y: 23.47, z: -366}
-  TestCube: {fileID: 0}
   BoosterGatcha: {fileID: 4917164704543200856, guid: e0f469f2adc484d41979227fce5d2561, type: 3}
   CottonBallShieldGatcha: {fileID: 645135330065601871, guid: c96c0515389dd4c43b4af46590165ced, type: 3}
   Jacks: {fileID: 4637232189886785061, guid: 13aff050f24eaca4db7dabb5b7b6771f, type: 3}
