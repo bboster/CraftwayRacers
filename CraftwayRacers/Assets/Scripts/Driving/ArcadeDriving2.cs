@@ -124,10 +124,10 @@ public class ArcadeDriving2 : MonoBehaviour
         brake.started += ReadBrake;
         brake = PlayerInput.currentActionMap.FindAction("Brake");
         brake.canceled += EndReadBrake;
-        drift = PlayerInput.currentActionMap.FindAction("Drift");
-        drift.started += ReadDrift;
-        drift = PlayerInput.currentActionMap.FindAction("Drift");
-        drift.canceled += EndReadDrift;
+        //drift = PlayerInput.currentActionMap.FindAction("Drift");
+        //drift.started += ReadDrift;
+        //drift = PlayerInput.currentActionMap.FindAction("Drift");
+        //drift.canceled += EndReadDrift;
     }
 
     /// <summary>
@@ -282,12 +282,16 @@ public class ArcadeDriving2 : MonoBehaviour
             {
                 steerValue *= -1f;
             }
+
+            float rotationAmount = Vector3.Dot(transform.forward, CarRb.velocity) * Time.deltaTime * 360f / (2 * Mathf.PI); // Calculate rotation amount based on speed
+            WheelList[springNum].transform.Rotate(Vector3.right, rotationAmount); // Rotate the wheel around its local X-axis
+
             if (springNum == 0 || springNum == 1) //STEERING HERE
             {
                 float steeringFactor = steerValue * Mathf.Lerp(MaxSteer, MinSteer, normalizedSpeed);
                 //As you speed up, you get less steering for improved handling. (Think how little steering it takes to switch lanes on the highway)
                 accelDir += SpringMountList[springNum].right * steeringFactor;
-                WheelList[springNum].transform.localRotation = Quaternion.Euler(0f, steeringFactor*8f, 0f); //JUST MAKES THE WHEEL GAMEOBJECTS "TURN" visually
+                WheelList[springNum].transform.localRotation = Quaternion.Euler(rotationAmount*10f, steeringFactor*10f, 0f); //JUST MAKES THE WHEEL GAMEOBJECTS "TURN" visually
             }
  
             //MAIN ACCELERATION HERE
@@ -438,7 +442,7 @@ public class ArcadeDriving2 : MonoBehaviour
         gas.canceled -= EndReadGas;
         brake.started -= ReadBrake;
         brake.canceled -= EndReadBrake;
-        drift.started -= ReadDrift;
-        drift.canceled -= EndReadDrift;
+        //drift.started -= ReadDrift;
+        //drift.canceled -= EndReadDrift;
     }
 }

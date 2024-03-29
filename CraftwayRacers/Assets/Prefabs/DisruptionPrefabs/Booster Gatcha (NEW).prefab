@@ -212,7 +212,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9779d7508157d154b89365d92a72af05, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BoostForce: 20
+  BoostForce: 25
   isBoosting: 0
   BoostDuration: 1.5
 --- !u!4 &5725930636126096610 stripped

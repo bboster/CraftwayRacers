@@ -42,6 +42,11 @@ public class WinTracker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI player3LapCount;
     [SerializeField] private TextMeshProUGUI player4LapCount;
 
+    [SerializeField] private TextMeshProUGUI timer1;
+    [SerializeField] private TextMeshProUGUI timer2;
+    [SerializeField] private TextMeshProUGUI timer3;
+    [SerializeField] private TextMeshProUGUI timer4;
+
     private Coroutine timer;
 
     private void Start()
@@ -110,8 +115,33 @@ public class WinTracker : MonoBehaviour
 
     private IEnumerator GameTimer()
     {
-        for(int i = 0; i < gameTime; i++)
+        for(int i = gameTime; i > 0; i--)
         {
+            int minutes = i / 60;
+            int seconds = i % 60;
+
+            if (seconds == 0)
+            {
+                timer1.text = minutes + ":00";
+                timer2.text = minutes + ":00";
+                timer3.text = minutes + ":00";
+                timer4.text = minutes + ":00";
+            }
+            else if (seconds > 9)
+            {
+                timer1.text = minutes + ":" + seconds;
+                timer2.text = minutes + ":" + seconds;
+                timer3.text = minutes + ":" + seconds;
+                timer4.text = minutes + ":" + seconds;
+            }
+            else
+            {
+                timer1.text = minutes + ":0" + seconds;
+                timer2.text = minutes + ":0" + seconds;
+                timer3.text = minutes + ":0" + seconds;
+                timer4.text = minutes + ":0" + seconds;
+            }
+
             yield return new WaitForSeconds(1f);
         }
 
