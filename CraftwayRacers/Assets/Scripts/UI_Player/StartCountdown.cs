@@ -140,7 +140,7 @@ public class StartCountdown : MonoBehaviour
     {
         if (PlayerCounting.playerCount == Players && countDownHasRun == false)
         {
-            StartCoroutine(ReadySetGo());
+            StartCoroutine(ReadySetGo()); //Call this coroutine with a press of the button 
             countDownHasRun = true;
         }
     }
