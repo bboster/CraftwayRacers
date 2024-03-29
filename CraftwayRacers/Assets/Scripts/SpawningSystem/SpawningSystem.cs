@@ -83,10 +83,17 @@ public class SpawningSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (IsWaiting == true) 
-        {
-            StartCoroutine(LargeHazardsTimer());
-        }
+        
+        
+          if (IsWaiting == true && spawnPoints.Count > 0)
+          {
+              StartCoroutine(LargeHazardsTimer());
+          }
+        
+        //if (IsWaiting == true) 
+        //{
+        //    StartCoroutine(LargeHazardsTimer());
+        //}
         //if (IsWaitingGatcha == true)
         //{
         //    StartCoroutine(GatchaBallTimer());
@@ -118,10 +125,10 @@ public class SpawningSystem : MonoBehaviour
         //int number = Random.Range(0, spawnPoints.Count - 1);
         //spawnPoints.Remove(spawnPoints[number]);
         //return spawnPoints[number];
-        if (spawnPoints.Count == 0)
-        {
-            Debug.LogError("No more spawn points available!");
-        }
+        //if (spawnPoints.Count == 0)
+        //{
+        //    Debug.LogError("No more spawn points available!");
+        //}
 
         int index = Random.Range(0, spawnPoints.Count);
         Vector3 spawnPosition = spawnPoints[index];
