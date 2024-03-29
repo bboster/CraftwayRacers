@@ -908,8 +908,8 @@ MonoBehaviour:
   SpringStrength: 95
   SpringDamper: 25
   WheelPosMod: -50
-  MinSteer: 1
-  MaxSteer: 3.5
+  MinSteer: 0
+  MaxSteer: 2.5
   EnginePower: 80
   BrakePower: 70
   FrontTireGrip: 0.8
