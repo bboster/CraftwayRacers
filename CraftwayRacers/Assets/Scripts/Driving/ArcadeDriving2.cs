@@ -216,7 +216,7 @@ public class ArcadeDriving2 : MonoBehaviour
             TractionForce(SpringMountList[i], i);
             DrivingForce(SpringMountList[i], i);
         }
-        IsFlippedOver(gameObject, 120);
+        IsFlippedOver(gameObject, 89);
     }
     /// <summary>
     /// Sends out a raycast from the springmounts (check the gameobjects, attached to chassis) in 
