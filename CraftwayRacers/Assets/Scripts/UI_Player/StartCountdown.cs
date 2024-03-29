@@ -29,13 +29,15 @@ public class StartCountdown : MonoBehaviour
     private GameObject soundManager;
     private GameObject musicPlayer;
 
-
     public static Action StartRace;
 
     public PlayerInputManager PlayerCounting;
     private bool countDownHasRun = false;
     public bool Gaming = false;
     public int Players;
+
+    [SerializeField]
+    private List<LayerMask> playerLayers;
 
     // Start is called before the first frame update
     void Start()
