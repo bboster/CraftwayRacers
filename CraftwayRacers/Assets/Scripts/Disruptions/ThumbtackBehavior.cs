@@ -30,10 +30,11 @@ public class ThumbtackBehavior : MonoBehaviour
 
             if (Speed.Shielded == true)
             {
-                    //Speed.Shielded = true;
-                    // Speed.Shield.SetActive(false);
-                    //StartCoroutine(IFrames());
-                    Destroy(gameObject);
+                //Speed.Shielded = true;
+                // Speed.Shield.SetActive(false);
+                //StartCoroutine(IFrames());
+                AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemBreak").clip, mainCam.transform.position);
+                Destroy(gameObject);
             }
         }
 
