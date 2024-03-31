@@ -103,7 +103,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 629276511594519716}
-  m_Material: {fileID: 13400000, guid: a8d43948231569f4da84f8b9a293f83a, type: 2}
+  m_Material: {fileID: 13400000, guid: ab12bbaee0718054da54ab82c50e9019, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -141,6 +141,8 @@ MonoBehaviour:
   - {fileID: 9183500121274499655}
   compMod: 100
   DriftForce: 30
+  DriftBoost: 10
+  driftTimer: 0
   TopSpeed: 100
   MaxSuspensionLength: 1.35
   SpringStrength: 95
@@ -209,7 +211,6 @@ MonoBehaviour:
   PlayerInput: {fileID: 368863910294505274}
   Shielded: 0
   Shield: {fileID: 7531862671791699949}
-  ShieldTimer: 15
 --- !u!114 &368863910294505274
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1184,7 +1185,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6636166560355693601}
-  m_LocalRotation: {x: 0.17128977, y: -0.00000003282756, z: 0.000000005707376, w: 0.98522073}
+  m_LocalRotation: {x: 0.17128977, y: 0.00000003282756, z: -0.000000005707376, w: 0.98522073}
   m_LocalPosition: {x: 0, y: 469.00006, z: -859}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0

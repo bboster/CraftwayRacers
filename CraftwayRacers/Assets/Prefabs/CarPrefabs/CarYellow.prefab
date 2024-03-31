@@ -438,7 +438,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2320138184454267994}
-  m_Material: {fileID: 13400000, guid: a8d43948231569f4da84f8b9a293f83a, type: 2}
+  m_Material: {fileID: 13400000, guid: ab12bbaee0718054da54ab82c50e9019, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -476,6 +476,8 @@ MonoBehaviour:
   - {fileID: 5440964720039611649}
   compMod: 100
   DriftForce: 30
+  DriftBoost: 10
+  driftTimer: 0
   TopSpeed: 100
   MaxSuspensionLength: 1.35
   SpringStrength: 95
@@ -544,7 +546,6 @@ MonoBehaviour:
   PlayerInput: {fileID: 95797300413966631}
   Shielded: 0
   Shield: {fileID: 2071263162512029877}
-  ShieldTimer: 15
 --- !u!114 &95797300413966631
 MonoBehaviour:
   m_ObjectHideFlags: 0

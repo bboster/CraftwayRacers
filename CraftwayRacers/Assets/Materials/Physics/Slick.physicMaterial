@@ -9,6 +9,6 @@ PhysicMaterial:
   m_Name: Slick
   dynamicFriction: 0.1
   staticFriction: 0.1
-  bounciness: 0.4
+  bounciness: 0.5
   frictionCombine: 1
-  bounceCombine: 0
+  bounceCombine: 3
