@@ -47,6 +47,8 @@ public class WinTracker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timer3;
     [SerializeField] private TextMeshProUGUI timer4;
 
+    public GameObject[] wrongWayTexts;
+
     private Coroutine timer;
 
     private void Start()

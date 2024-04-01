@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WaypointTracking : MonoBehaviour
 {
     [SerializeField] private int nextWaypoint = 0;
-    private int id;
+    [SerializeField] private int id;
 
     public float distFromNextWP;
     private float oldDist;
@@ -40,13 +40,13 @@ public class WaypointTracking : MonoBehaviour
             if(oldDist < distFromNextWP)
             {
                 //Show wrong direction UI.
-                //wrongWay.SetActive(true);
+
                 Debug.Log("WRONG WAY");
                 
             }
             else
             {
-                //wrongWay.SetActive(false);
+                
             }
 
             yield return new WaitForSeconds(5f);
