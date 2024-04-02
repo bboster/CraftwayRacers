@@ -35,7 +35,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public Rigidbody CarRb;
     public GameObject CenterOfMass;
     public PlayerInput PlayerInput;
-    private bool readingGas, readingBrake, isDrifting=false, canDrift=true;
+    private bool readingGas, readingBrake, isDrifting=false, canDrift=true, canDrive;
     private float steerValue = 0, ACValue = 0, ShieldTimer;
     //Shield Tings
     public bool Shielded;
@@ -56,6 +56,7 @@ public class ArcadeDriving2 : MonoBehaviour
 
     void Start()
     {
+        canDrive = false;
         StartCountdown.StartRace += Handle_StartRace;
         
         Application.targetFrameRate = 120;
@@ -68,6 +69,18 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         CarRb = GetComponent<Rigidbody>();
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
+        steer = PlayerInput.currentActionMap.FindAction("Steer");
+        steer.performed += ctx => steerValue = ctx.ReadValue<float>();
+        steer.canceled += ctx => steerValue = 0;
+        gas = PlayerInput.currentActionMap.FindAction("Gas");
+        gas.started += ReadGas;
+        gas.canceled += EndReadGas;
+        brake = PlayerInput.currentActionMap.FindAction("Brake");
+        brake.started += ReadBrake;
+        brake.canceled += EndReadBrake;
+        drift = PlayerInput.currentActionMap.FindAction("Drift");
+        drift.started += ReadDrift;
+        drift.canceled += EndReadDrift;
     }
     public IEnumerator PlayEngineSound()
     {
@@ -110,27 +123,13 @@ public class ArcadeDriving2 : MonoBehaviour
 
     void Handle_StartRace()
     {
-        steer = PlayerInput.currentActionMap.FindAction("Steer");
-        steer.performed += ctx => steerValue = ctx.ReadValue<float>();
-        steer = PlayerInput.currentActionMap.FindAction("Steer");
-        steer.canceled += ctx => steerValue = 0;
-        gas = PlayerInput.currentActionMap.FindAction("Gas");
-        gas.started += ReadGas;
-        gas = PlayerInput.currentActionMap.FindAction("Gas");
-        gas.canceled += EndReadGas;
-        brake = PlayerInput.currentActionMap.FindAction("Brake");
-        brake.started += ReadBrake;
-        brake = PlayerInput.currentActionMap.FindAction("Brake");
-        brake.canceled += EndReadBrake;
-        drift = PlayerInput.currentActionMap.FindAction("Drift");
-        drift.started += ReadDrift;
-        drift = PlayerInput.currentActionMap.FindAction("Drift");
-        drift.canceled += EndReadDrift;
+        canDrive = true;
     }
 
     /// <summary>
     /// Basically inputs here, nothing important. Changes bools
     /// </summary>
+    /// 
     void ReadGas(InputAction.CallbackContext ctx)
     {
         readingGas = true; 
@@ -258,7 +257,7 @@ public class ArcadeDriving2 : MonoBehaviour
     /// </summary>
     public void DrivingForce(Transform springLoc, int springNum)
     {
-        if (IsGrounded(springLoc, springNum))
+        if (IsGrounded(springLoc, springNum) && canDrive)
         {           
             Vector3 accelDir = SpringMountList[springNum].forward;
             float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
