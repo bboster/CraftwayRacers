@@ -32,7 +32,7 @@ public class StartCountdown : MonoBehaviour
     public static Action StartRace;
 
     public PlayerInputManager PlayerCounting;
-    private bool countDownHasRun = false;
+    public bool countDownHasRun = false; // changed this to public
     public bool Gaming = false;
     public int Players;
 
@@ -87,10 +87,12 @@ public class StartCountdown : MonoBehaviour
 
 
         GameObject.Find("GameController").GetComponent<WinTracker>().StartGame();
-        
+
+
         yield return new WaitForSeconds(2f);
         GO.SetActive(false);
 
+        
     }
     
     // Update is called once per frame

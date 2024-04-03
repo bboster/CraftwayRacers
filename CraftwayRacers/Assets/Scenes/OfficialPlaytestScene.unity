@@ -4672,6 +4672,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 341190649}
     - target: {fileID: 3375065002883662622, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
+      propertyPath: SS
+      value: 
+      objectReference: {fileID: 1719571719}
+    - target: {fileID: 3375065002883662622, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
       propertyPath: One
       value: 
       objectReference: {fileID: 443167349}
@@ -10850,6 +10854,17 @@ MonoBehaviour:
   - {fileID: 5091290012702753865, guid: 9d1e2642c66f2234c9fe7bdfa2b588d5, type: 3}
   - {fileID: 7094852120178821221, guid: 1355e3ffb9a4fa84b851a56443bdb8b2, type: 3}
   - {fileID: 8274203036115325607, guid: d02a6437ce1813449b069dcd0f21f2d3, type: 3}
+--- !u!114 &1485078640 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3375065002883662622, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
+  m_PrefabInstance: {fileID: 682754925}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1485078635}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 575430882c3d5b849b8783e2fa0a714b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!43 &1495027673
 Mesh:
   m_ObjectHideFlags: 0
@@ -13051,6 +13066,7 @@ MonoBehaviour:
   IsWaiting: 1
   IsWaitingGatcha: 1
   TB: {fileID: 1719571721}
+  SC: {fileID: 1485078640}
 --- !u!4 &1719571720
 Transform:
   m_ObjectHideFlags: 0
