@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
 using UnityEngine.Audio;
+using System;
 
 public class ArcadeDriving2 : MonoBehaviour
 {
@@ -36,9 +37,10 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject CenterOfMass;
     public PlayerInput PlayerInput;
     private bool readingGas, readingBrake, isDrifting, canDrift, canDrive;
-    private float steerValue = 0, ACValue = 0, ShieldTimer;
+    private float steerValue = 0, ACValue = 0;
     //Shield Tings
     public bool Shielded;
+    public float ShieldTimer;
     public GameObject Shield;
 
     //SFX bools
