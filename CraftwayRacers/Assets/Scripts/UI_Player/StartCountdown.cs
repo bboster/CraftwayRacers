@@ -15,6 +15,8 @@ public class StartCountdown : MonoBehaviour
     private bool twoHasRun;
     public GameObject ThreePlayer;
     private bool threeHasRun;
+    public GameObject FourPlayer;
+    private bool fourHasRun;
     public GameObject Ready;
     public GameObject One;
     public GameObject Two;
@@ -55,7 +57,10 @@ public class StartCountdown : MonoBehaviour
 
     IEnumerator ReadySetGo()
     {
+        OnePlayer.SetActive(false);
+        TwoPlayer.SetActive(false);
         ThreePlayer.SetActive(false);
+        FourPlayer.SetActive(false);
         Ready.SetActive(true);
 
         yield return new WaitForSeconds(2f);
@@ -101,12 +106,13 @@ public class StartCountdown : MonoBehaviour
         P1();
         P2();
         P3();
-        CountDown();
+        P4();
+ 
 
-        /*if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            StartCoroutine(ReadySetGo());
-        }*/
+           CountDown();
+        }
     }
 
     void P1()
@@ -138,14 +144,19 @@ public class StartCountdown : MonoBehaviour
             threeHasRun = true;
         }
     }
-    void CountDown()
+
+    void P4()
     {
-        if (PlayerCounting.playerCount == Players && countDownHasRun == false)
+        if (PlayerCounting.playerCount == 4 && fourHasRun == false)
         {
-            StartCoroutine(ReadySetGo()); //Call this coroutine with a press of the button 
-            countDownHasRun = true;
+            ThreePlayer.SetActive(false);
+            FourPlayer.SetActive(true);
+            fourHasRun = true;
         }
     }
-
-
+    void CountDown()
+    {
+            StartCoroutine(ReadySetGo()); //Call this coroutine with a press of the button 
+            countDownHasRun = true;
+    }
 }
