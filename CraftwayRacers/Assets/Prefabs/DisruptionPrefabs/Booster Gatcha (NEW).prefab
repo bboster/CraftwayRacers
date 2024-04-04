@@ -89,6 +89,7 @@ MonoBehaviour:
   BoostForce: 25
   isBoosting: 0
   BoostDuration: 1.5
+  Animator: {fileID: 5909673957265779978}
 --- !u!95 &5909673957265779978
 Animator:
   serializedVersion: 5
