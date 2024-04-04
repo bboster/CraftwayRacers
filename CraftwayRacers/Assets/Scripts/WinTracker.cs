@@ -20,7 +20,7 @@ public class WinTracker : MonoBehaviour
     //Laps completed for each player.
     public int[] laps = new int[4];
 
-    public int[] placements = new int[4];
+    public GameObject[] placements = new GameObject[4];
 
     public int playerToWin = -1;
 
@@ -49,13 +49,46 @@ public class WinTracker : MonoBehaviour
 
     private Coroutine timer;
 
+    public GameObject[] wrongWay;
+    [SerializeField] private GameObject InputController;
+
     private void Start()
     {
         mainCam = GameObject.Find("Main Camera");
         soundManager = GameObject.Find("SoundManager");
 
+        WaypointTracking.placementTracking += PlacementTracking_Fire;
+
         //StartGame();
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void PlacementTracking_Fire(int carId, float distToNxtWP, int wpPassed)
+    {
+        if(InputController.GetComponent<StartCountdown>().Gaming == true)
+        {
+            int curIndex = Array.IndexOf(placements, players[carId]);
+        
+            if(curIndex != 0)
+            {
+                if (waypoints[carId] > waypoints[placements[curIndex - 1].GetComponent<WaypointTracking>().id])
+                {
+                    GameObject switchObj = placements[curIndex - 1];
+                    placements[curIndex] = switchObj;
+                    placements[curIndex - 1] = players[carId];
+                }
+                else if (waypoints[carId] == waypoints[placements[curIndex - 1].GetComponent<WaypointTracking>().id])
+                {
+                    if (players[carId].GetComponent<WaypointTracking>().distFromNextWP <
+                        placements[curIndex - 1].GetComponent<WaypointTracking>().distFromNextWP)
+                    {
+                        GameObject switchObj = placements[curIndex - 1];
+                        placements[curIndex] = switchObj;
+                        placements[curIndex - 1] = players[carId];
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>
@@ -140,6 +173,11 @@ public class WinTracker : MonoBehaviour
                 timer2.text = minutes + ":0" + seconds;
                 timer3.text = minutes + ":0" + seconds;
                 timer4.text = minutes + ":0" + seconds;
+            }
+
+            if(i <= 15)
+            {
+                timer1.color = Color.red;
             }
 
             yield return new WaitForSeconds(1f);
@@ -308,7 +346,6 @@ public class WinTracker : MonoBehaviour
 
         return Task.CompletedTask;
     }
-
 
     //CHECK WHO IS IN THE LEAD EVERY FRAME HERE AND ADJUST UI ELEMENTS.
 
