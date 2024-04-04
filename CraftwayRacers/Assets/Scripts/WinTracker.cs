@@ -142,11 +142,6 @@ public class WinTracker : MonoBehaviour
                 timer4.text = minutes + ":0" + seconds;
             }
 
-            if(i <= 15)
-            {
-                timer1.color = Color.red;
-            }
-
             yield return new WaitForSeconds(1f);
         }
 

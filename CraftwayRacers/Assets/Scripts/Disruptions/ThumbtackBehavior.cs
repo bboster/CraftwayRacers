@@ -27,6 +27,14 @@ public class ThumbtackBehavior : MonoBehaviour
         {
             Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("CarCollisionSound").clip, mainCam.transform.position);
+
+            if (Speed.Shielded == true)
+            {
+                    //Speed.Shielded = true;
+                    // Speed.Shield.SetActive(false);
+                    //StartCoroutine(IFrames());
+                    Destroy(gameObject);
+            }
         }
 
         if (collision.gameObject.CompareTag("NormalRoad"))
@@ -36,26 +44,11 @@ public class ThumbtackBehavior : MonoBehaviour
             rb.isKinematic = true;
         }
 
+
         /*IEnumerator IFrames()
         {
             yield return new WaitForSeconds(5);
             Car.Shielded = false;
         }*/
-    }
-
-    private void OnTriggerEnter(Collider collision)
-    {
-        if (collision.gameObject.tag == "Player")
-        {
-            Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
-            if (Speed.Shielded == true)
-            {
-                //Speed.Shielded = true;
-                // Speed.Shield.SetActive(false);
-                //StartCoroutine(IFrames());
-                AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemBreak").clip, mainCam.transform.position);
-                Destroy(gameObject);
-            }
-        }
     }
 }

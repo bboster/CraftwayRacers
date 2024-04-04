@@ -44,8 +44,6 @@ public class SpawningSystem : MonoBehaviour
 
     private int count;
 
-    public StartCountdown SC;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -85,13 +83,24 @@ public class SpawningSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-         if (IsWaiting == true && spawnPoints.Count > 0 && SC.countDownHasRun == true)
-         {
-             StartCoroutine(LargeHazardsTimer());
-         }
+        
+        
+          if (IsWaiting == true && spawnPoints.Count > 0)
+          {
+              StartCoroutine(LargeHazardsTimer());
+          }
+        
+        //if (IsWaiting == true) 
+        //{
+        //    StartCoroutine(LargeHazardsTimer());
+        //}
+        //if (IsWaitingGatcha == true)
+        //{
+        //    StartCoroutine(GatchaBallTimer());
+        //}
     }
 
-    public IEnumerator LargeHazardsTimer()
+    IEnumerator LargeHazardsTimer()
     {
         IsWaiting = false;
         GameObject largeHazard;

@@ -45,7 +45,6 @@ public class Jacks : MonoBehaviour
                 /*Speed.Shielded = true;
                 Speed.Shield.SetActive(false);*/
                 //StartCoroutine(IFrames());
-                AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemBreak").clip, mainCam.transform.position);
                 Destroy(gameObject);
             }
         }

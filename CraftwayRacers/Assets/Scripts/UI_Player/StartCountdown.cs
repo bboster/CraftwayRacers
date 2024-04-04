@@ -15,8 +15,6 @@ public class StartCountdown : MonoBehaviour
     private bool twoHasRun;
     public GameObject ThreePlayer;
     private bool threeHasRun;
-    public GameObject FourPlayer;
-    private bool fourHasRun;
     public GameObject Ready;
     public GameObject One;
     public GameObject Two;
@@ -31,15 +29,13 @@ public class StartCountdown : MonoBehaviour
     private GameObject soundManager;
     private GameObject musicPlayer;
 
+
     public static Action StartRace;
 
     public PlayerInputManager PlayerCounting;
-    public bool countDownHasRun = false; // changed this to public
+    private bool countDownHasRun = false;
     public bool Gaming = false;
     public int Players;
-
-    [SerializeField]
-    private List<LayerMask> playerLayers;
 
     // Start is called before the first frame update
     void Start()
@@ -57,10 +53,7 @@ public class StartCountdown : MonoBehaviour
 
     IEnumerator ReadySetGo()
     {
-        OnePlayer.SetActive(false);
-        TwoPlayer.SetActive(false);
         ThreePlayer.SetActive(false);
-        FourPlayer.SetActive(false);
         Ready.SetActive(true);
 
         yield return new WaitForSeconds(2f);
@@ -92,12 +85,10 @@ public class StartCountdown : MonoBehaviour
 
 
         GameObject.Find("GameController").GetComponent<WinTracker>().StartGame();
-
-
+        
         yield return new WaitForSeconds(2f);
         GO.SetActive(false);
 
-        
     }
     
     // Update is called once per frame
@@ -106,13 +97,12 @@ public class StartCountdown : MonoBehaviour
         P1();
         P2();
         P3();
-        P4();
- 
+        CountDown();
 
-        if (Input.GetKeyDown(KeyCode.Space))
+        /*if (Input.GetKeyDown(KeyCode.Space))
         {
-           CountDown();
-        }
+            StartCoroutine(ReadySetGo());
+        }*/
     }
 
     void P1()
@@ -144,19 +134,14 @@ public class StartCountdown : MonoBehaviour
             threeHasRun = true;
         }
     }
-
-    void P4()
-    {
-        if (PlayerCounting.playerCount == 4 && fourHasRun == false)
-        {
-            ThreePlayer.SetActive(false);
-            FourPlayer.SetActive(true);
-            fourHasRun = true;
-        }
-    }
     void CountDown()
     {
-            StartCoroutine(ReadySetGo()); //Call this coroutine with a press of the button 
+        if (PlayerCounting.playerCount == Players && countDownHasRun == false)
+        {
+            StartCoroutine(ReadySetGo());
             countDownHasRun = true;
+        }
     }
+
+
 }
