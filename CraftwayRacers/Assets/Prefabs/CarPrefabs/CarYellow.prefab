@@ -551,7 +551,7 @@ MonoBehaviour:
   PlayerInput: {fileID: 95797300413966631}
   Shielded: 0
   ShieldTimer: 15
-  Shield: {fileID: 0}
+  Shield: {fileID: 4611248372655530574}
 --- !u!114 &95797300413966631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1778,6 +1778,11 @@ PrefabInstance:
 --- !u!4 &1761681946488270725 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8663597833738214187, guid: 466cd0aacf02b4349b24c63ae913a233, type: 3}
+  m_PrefabInstance: {fileID: 6938226468588205230}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4611248372655530574 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6897255960999532256, guid: 466cd0aacf02b4349b24c63ae913a233, type: 3}
   m_PrefabInstance: {fileID: 6938226468588205230}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7471511472469357330
