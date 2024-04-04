@@ -26,8 +26,8 @@ public class RubberBand : MonoBehaviour
             Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
             rb = Speed.CarRb;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("BoostSound").clip, mainCam.transform.position);
-            if(Animator.name == "Gatcha")
-                Animator.SetBool("ifOpen", true);
+            //if(Animator.name == "Gatcha")
+                //Animator.SetBool("ifOpen", true);
             print("HERE");
                 StartCoroutine(AddForce());
         }
