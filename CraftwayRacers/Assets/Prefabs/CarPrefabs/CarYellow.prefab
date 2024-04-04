@@ -377,6 +377,7 @@ Transform:
   - {fileID: 4947097023288174963}
   - {fileID: 1291600898088468302}
   - {fileID: 2842456554165728627}
+  - {fileID: 3522551488537604827}
   m_Father: {fileID: 554930298159536355}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -474,20 +475,20 @@ MonoBehaviour:
   - {fileID: 5150261167482789710}
   - {fileID: 5440964720039611649}
   compMod: 100
-  DriftForce: 30
-  DriftBoost: 10
+  DriftForce: 10
+  DriftBoost: 500
   driftTimer: 0
   TopSpeed: 100
   MaxSuspensionLength: 1.35
   SpringStrength: 95
   SpringDamper: 25
   WheelPosMod: -50
-  MinSteer: 0.25
-  MaxSteer: 2.75
+  MinSteer: 1
+  MaxSteer: 2
   EnginePower: 80
-  BrakePower: 70
-  FrontTireGrip: 0.8
-  RearTireGrip: 0.6
+  BrakePower: 75
+  FrontTireGrip: 0.95
+  RearTireGrip: 0.8
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
@@ -501,32 +502,23 @@ MonoBehaviour:
       inWeight: 0.33333334
       outWeight: 0.33333334
     - serializedVersion: 3
-      time: 0.081736624
-      value: 0.9841898
-      inSlope: -0.25660938
-      outSlope: -0.25660938
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.21001385
-      outWeight: 1
-    - serializedVersion: 3
-      time: 0.08407456
-      value: 0.98587567
-      inSlope: 0.032543268
-      outSlope: 0.032543268
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 1
-      outWeight: 0.9734103
-    - serializedVersion: 3
-      time: 0.63180923
-      value: 0.9878452
-      inSlope: -0.02139818
-      outSlope: -0.02139818
+      time: 0.06123707
+      value: 1.4787234
+      inSlope: -0.039012898
+      outSlope: -0.039012898
       tangentMode: 0
       weightedMode: 0
       inWeight: 0.33333334
-      outWeight: 0.24788645
+      outWeight: 0.8125157
+    - serializedVersion: 3
+      time: 0.40633512
+      value: 0.7519578
+      inSlope: -1.1178111
+      outSlope: -1.1178111
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.55751264
     - serializedVersion: 3
       time: 1.0018768
       value: 0.19736102
@@ -539,18 +531,18 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
-  GravityForce: 5
-  OffRdMinSteer: 0
-  OffRdMaxSteer: 0
-  OffRdFTG: 0
-  OffRdRTG: 0
-  OffRdDrag: 0
+  GravityForce: 75
+  OffRdMinSteer: 2
+  OffRdMaxSteer: 3
+  OffRdFTG: 0.6
+  OffRdRTG: 0.5
+  OffRdDrag: 0.4
   CarRb: {fileID: 8671484360288076896}
   CenterOfMass: {fileID: 8616091426478124822}
   PlayerInput: {fileID: 95797300413966631}
   Shielded: 0
   ShieldTimer: 15
-  Shield: {fileID: 0}
+  Shield: {fileID: 1688335809684668176}
 --- !u!114 &95797300413966631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1259,7 +1251,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6653726161894064021}
-  m_LocalRotation: {x: 0.17128977, y: -0.00000003282756, z: 0.000000005707376, w: 0.98522073}
+  m_LocalRotation: {x: 0.17128977, y: 0.00000003282756, z: -0.000000005707376, w: 0.98522073}
   m_LocalPosition: {x: 0, y: 469.00006, z: -859}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -1495,7 +1487,6 @@ Transform:
   - {fileID: 7950428831185142234}
   - {fileID: 1063964304630105138}
   - {fileID: 6440371949649923743}
-  - {fileID: 3522551488537604827}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
@@ -1676,7 +1667,7 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 554930298159536355}
+    m_TransformParent: {fileID: 1063964304630105138}
     m_Modifications:
     - target: {fileID: 1241274746383107311, guid: 466cd0aacf02b4349b24c63ae913a233, type: 3}
       propertyPath: m_LocalPosition.x
@@ -1724,7 +1715,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8663597833738214187, guid: 466cd0aacf02b4349b24c63ae913a233, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -130
+      value: -129.99992
       objectReference: {fileID: 0}
     - target: {fileID: 8663597833738214187, guid: 466cd0aacf02b4349b24c63ae913a233, type: 3}
       propertyPath: m_LocalPosition.z
