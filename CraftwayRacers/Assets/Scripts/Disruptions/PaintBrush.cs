@@ -8,6 +8,7 @@ public class PaintBrush : MonoBehaviour
     [SerializeField] private Vector3 placeToSpawn;
     [SerializeField] private GameObject Paint;
     public bool isWaiting = false;
+    public Animator Animator;
 
     private void OnTriggerEnter(Collider collision)
     {
@@ -23,6 +24,7 @@ public class PaintBrush : MonoBehaviour
                 }
             }
             gameObject.GetComponent<Collider>().enabled = false;
+            Animator.SetBool("ifOpen", true);
             StartCoroutine(SpawnPaintsDelay());
         }
     }
@@ -32,5 +34,9 @@ public class PaintBrush : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         Instantiate(Paint, placeToSpawn, Quaternion.identity);
         isWaiting = false;
+    }
+    private void Opened()
+    {
+        Destroy(gameObject);
     }
 }

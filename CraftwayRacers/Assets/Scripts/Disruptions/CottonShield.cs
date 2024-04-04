@@ -7,6 +7,7 @@ public class CottonShield : MonoBehaviour
     private Material Ball;
     private GameObject mainCam;
     private GameObject soundManager;
+    public Animator Animator;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,11 @@ public class CottonShield : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemPickup").clip, mainCam.transform.position);
-            Destroy(gameObject);
+            Animator.SetBool("ifOpen", true);
         }
+    }
+    private void Opened()
+    {
+        Destroy(gameObject);
     }
 }
