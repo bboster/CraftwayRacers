@@ -49,6 +49,8 @@ public class WinTracker : MonoBehaviour
 
     private Coroutine timer;
 
+    public GameObject[] wrongWay;
+
     private void Start()
     {
         mainCam = GameObject.Find("Main Camera");

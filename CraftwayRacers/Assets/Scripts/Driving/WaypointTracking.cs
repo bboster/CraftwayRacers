@@ -6,7 +6,7 @@ using UnityEngine.UI;
 public class WaypointTracking : MonoBehaviour
 {
     [SerializeField] private int nextWaypoint = 0;
-    private int id;
+    [SerializeField] private int id;
 
     public float distFromNextWP;
     private float oldDist;
@@ -14,7 +14,7 @@ public class WaypointTracking : MonoBehaviour
     private GameObject gc;
     private GameObject[] waypoints;
 
-    [SerializeField] private GameObject wrongWay;
+    private Coroutine wrongWayTimer;
 
     void Start()
     {
@@ -37,21 +37,38 @@ public class WaypointTracking : MonoBehaviour
             oldDist = distFromNextWP;
             distFromNextWP = Vector3.Distance(transform.position, waypoints[nextWaypoint].transform.position);
 
-            if(oldDist < distFromNextWP)
+            if(oldDist < distFromNextWP && GetComponent<Rigidbody>().velocity.x + GetComponent<Rigidbody>().velocity.z > 2)
             {
-                //Show wrong direction UI.
-                //wrongWay.SetActive(true);
-                Debug.Log("WRONG WAY");
-                
+                if(wrongWayTimer == null)
+                {
+                    //Show wrong direction UI.
+                    wrongWayTimer = StartCoroutine(WrongWayTimer());
+                    Debug.Log("WRONG WAY");
+                }
             }
             else
             {
-                //wrongWay.SetActive(false);
+                if(wrongWayTimer != null)
+                {
+                    gc.GetComponent<WinTracker>().wrongWay[id].SetActive(false);
+                    StopCoroutine(wrongWayTimer);
+                    wrongWayTimer = null;
+                }
             }
 
-            yield return new WaitForSeconds(5f);
+            yield return new WaitForSeconds(1.5f);
         }
 
+    }
+
+    private IEnumerator WrongWayTimer()
+    {
+        for(int i = 3; i > 0; i--)
+        {
+            yield return new WaitForSeconds(1f);
+        }
+
+        gc.GetComponent<WinTracker>().wrongWay[id].SetActive(true);
     }
 
     private void OnTriggerEnter(Collider other)
