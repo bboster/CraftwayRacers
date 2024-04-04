@@ -22,7 +22,7 @@ public class RubberBand : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
-                rb = Speed.CarRb;
+            rb = Speed.CarRb;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemPickup").clip, mainCam.transform.position);
             print("HERE");
                 StartCoroutine(AddForce());
@@ -48,6 +48,5 @@ public class RubberBand : MonoBehaviour
         }
 
         isBoosting = false;
-        Destroy(gameObject);
     }
 }

@@ -6,6 +6,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using UnityEngine.Scripting;
 using UnityEngine.Audio;
+using System;
 
 public class ArcadeDriving2 : MonoBehaviour
 {
@@ -17,30 +18,30 @@ public class ArcadeDriving2 : MonoBehaviour
     public RaycastHit[] HitList = new RaycastHit[4];
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] WheelList = new GameObject[4];
-    public float compMod = 100f, DriftForce= 10f;
+    public float compMod = 100f, DriftForce= 10f, DriftBoost = 10f, driftTimer;
     //Tooltips for game devs on driving
     [Tooltip("Used for the torque curve, see below. DO NOT USE FOR JUST 'MORE SPEED'")] public float TopSpeed = 100f;
     [Tooltip("How far the car sits off the ground.")]                                   public float MaxSuspensionLength = 1.35f;
     [Tooltip("How much the car resists gravity due to its own mass ")]                  public float SpringStrength = 95f;
     [Tooltip("How fast springs dissipate energy")]                                      public float SpringDamper = 25f;
     [Tooltip("Adjust where the wheel gameobjects sit due to suspension")]               public float WheelPosMod = -50f;
-    [Tooltip("Steering values. Higher speeds mean overall steering gets closer to Min")]public float MinSteer = 1f, MaxSteer = 3f;
-    [Tooltip("More speed and faster braking values here!")]                             public float EnginePower = 80f, BrakePower = 70f;
+    [Tooltip("Steering values. Higher speeds mean overall steering gets closer to Min")]public float MinSteer = 1f, MaxSteer = 2f;
+    [Tooltip("More speed and faster braking values here!")]                             public float EnginePower = 80f, BrakePower = 75f;
     [Tooltip("VALUE BETWEEN 0 & 1!!! How much wheels go in the sideways/x direction while driving forward")] 
                                                                                         public float FrontTireGrip = .8f, RearTireGrip = .6f;
     [Tooltip("Basically acceleration. Mess with keypoints to change engine behavior")]  public AnimationCurve TorqueCurve;
-    [Tooltip("Psuedo-gravity applied to suspension points that aren't touching the ground")] public float GravityForce = 5f;
-
+    [Tooltip("Psuedo-gravity applied to suspension points that aren't touching the ground")] public float GravityForce = 75f;
+    public float OffRdMinSteer, OffRdMaxSteer, OffRdFTG, OffRdRTG, OffRdDrag;
     //Not necessary for changing car behavior
     public Rigidbody CarRb;
     public GameObject CenterOfMass;
     public PlayerInput PlayerInput;
-    private bool readingGas, readingBrake, isDrifting=false, canDrift=true;
+    private bool readingGas, readingBrake, isDrifting, canDrift, canDrive;
     private float steerValue = 0, ACValue = 0;
     //Shield Tings
     public bool Shielded;
-    public GameObject Shield;
     public float ShieldTimer;
+    public GameObject Shield;
 
     //SFX bools
     private bool playingBrake = false;
@@ -48,18 +49,19 @@ public class ArcadeDriving2 : MonoBehaviour
     private GameObject soundManager;
     private GameObject mainCam;
     private InputAction steer, gas, brake, drift;
-
     private void Awake()
     {
         soundManager = GameObject.Find("SoundManager");
         mainCam = GameObject.Find("Main Camera");
     }
-
     void Start()
     {
-            StartCountdown.StartRace += Handle_StartRace;
+        canDrive = false;
+        canDrift = false;
+        isDrifting = false;
+        StartCountdown.StartRace += Handle_StartRace;
         
-            Application.targetFrameRate = 120;
+        Application.targetFrameRate = 120;
 
         StartCoroutine(EngineStart());
         
@@ -69,8 +71,19 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         CarRb = GetComponent<Rigidbody>();
         CarRb.centerOfMass = new Vector3(0, -1, 0.125f);
+        steer = PlayerInput.currentActionMap.FindAction("Steer");
+        steer.performed += ctx => steerValue = ctx.ReadValue<float>();
+        steer.canceled += ctx => steerValue = 0;
+        gas = PlayerInput.currentActionMap.FindAction("Gas");
+        gas.started += ReadGas;
+        gas.canceled += EndReadGas;
+        brake = PlayerInput.currentActionMap.FindAction("Brake");
+        brake.started += ReadBrake;
+        brake.canceled += EndReadBrake;
+        drift = PlayerInput.currentActionMap.FindAction("Drift");
+        drift.started += ReadDrift;
+        drift.canceled += EndReadDrift;
     }
-
     public IEnumerator PlayEngineSound()
     {
         Sound s = soundManager.GetComponent<SoundManager>().GetSound("EngineSound");
@@ -112,27 +125,13 @@ public class ArcadeDriving2 : MonoBehaviour
 
     void Handle_StartRace()
     {
-        steer = PlayerInput.currentActionMap.FindAction("Steer");
-        steer.performed += ctx => steerValue = ctx.ReadValue<float>();
-        steer = PlayerInput.currentActionMap.FindAction("Steer");
-        steer.canceled += ctx => steerValue = 0;
-        gas = PlayerInput.currentActionMap.FindAction("Gas");
-        gas.started += ReadGas;
-        gas = PlayerInput.currentActionMap.FindAction("Gas");
-        gas.canceled += EndReadGas;
-        brake = PlayerInput.currentActionMap.FindAction("Brake");
-        brake.started += ReadBrake;
-        brake = PlayerInput.currentActionMap.FindAction("Brake");
-        brake.canceled += EndReadBrake;
-        //drift = PlayerInput.currentActionMap.FindAction("Drift");
-        //drift.started += ReadDrift;
-        //drift = PlayerInput.currentActionMap.FindAction("Drift");
-        //drift.canceled += EndReadDrift;
+        canDrive = true;
     }
 
     /// <summary>
     /// Basically inputs here, nothing important. Changes bools
     /// </summary>
+    /// 
     void ReadGas(InputAction.CallbackContext ctx)
     {
         readingGas = true; 
@@ -169,11 +168,13 @@ public class ArcadeDriving2 : MonoBehaviour
             MaxSteer = 1f;
             FrontTireGrip = 0.5f;
             RearTireGrip = 0.4f;
+            driftTimer = 0f;
         }
     }
     void EndReadDrift(InputAction.CallbackContext ctx)
     {
-        StartCoroutine(ResetControls(0.1f));
+        AddDriftBoost(driftTimer);    
+        ResetControls();
     }
     /// <summary>
     /// Suspension is here because it doesnt work as well/at all in fixed update. Probably something
@@ -185,7 +186,7 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             Handle_StartRace();
         }
-        if (readingGas || readingGas && readingBrake)
+        if (readingGas)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
         }
@@ -193,7 +194,7 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             ACValue = 0;
         }
-        if (readingBrake == true)
+        if (readingBrake)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Brake").ReadValue<float>()*-1f;
         }
@@ -216,7 +217,8 @@ public class ArcadeDriving2 : MonoBehaviour
             TractionForce(SpringMountList[i], i);
             DrivingForce(SpringMountList[i], i);
         }
-        IsFlippedOver(gameObject, 120);
+        IsFlippedOver(gameObject, 89);
+        IsOffRoad();
     }
     /// <summary>
     /// Sends out a raycast from the springmounts (check the gameobjects, attached to chassis) in 
@@ -249,7 +251,35 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         return false;
     }
-
+    public void IsOffRoad()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(CenterOfMass.transform.position, -transform.up, out hit, MaxSuspensionLength))
+        {
+            if (hit.collider.CompareTag("OffRoad"))
+            {
+                if (isDrifting) //IF im drifting, turn it off and reset the controls
+                {
+                    canDrift = false;
+                    isDrifting = false;
+                    ResetControls();
+                }
+                //Now, continuing, update the controls to reflect off road values
+                FrontTireGrip = OffRdFTG;
+                RearTireGrip = OffRdRTG;
+                MinSteer = OffRdMinSteer;
+                MaxSteer = OffRdMaxSteer;
+                CarRb.drag = OffRdDrag;
+            }
+            else //if im no longer offroad (i.e., 99% of the time)
+            {
+                if(!isDrifting) //And if im not drifting; reset the controls
+                {
+                    ResetControls();
+                }
+            }
+        }
+    }
 
     /// <summary>
     /// This where we actually "drive" the car forward and sideways, and reverse if conditions are 
@@ -259,7 +289,7 @@ public class ArcadeDriving2 : MonoBehaviour
     /// </summary>
     public void DrivingForce(Transform springLoc, int springNum)
     {
-        if (IsGrounded(springLoc, springNum))
+        if (IsGrounded(springLoc, springNum) && canDrive)
         {           
             Vector3 accelDir = SpringMountList[springNum].forward;
             float currentSpeed = Vector3.Dot(transform.forward, CarRb.velocity);
@@ -267,11 +297,12 @@ public class ArcadeDriving2 : MonoBehaviour
             float availableTorque = TorqueCurve.Evaluate(normalizedSpeed) * ACValue;
             if (isDrifting)
             {
-                accelDir = SpringMountList[springNum].forward * 2;
+                driftTimer += Time.deltaTime;
+                accelDir = SpringMountList[springNum].forward * (2f*normalizedSpeed);
                 float driftForce = DriftForce; 
                 if(steerValue > 0)
                 {
-                    accelDir -= SpringMountList[springNum].right * (driftForce*normalizedSpeed) ;
+                    accelDir -= SpringMountList[springNum].right * (driftForce * normalizedSpeed) ;
                 }
                 else
                 {
@@ -302,6 +333,11 @@ public class ArcadeDriving2 : MonoBehaviour
                 CarRb.AddForceAtPosition((accelDir) * BrakePower * ACValue, SpringMountList[springNum].transform.position);
             }
         }        
+    }
+    public void AddDriftBoost(float driftTime)
+    {
+        CarRb.AddForce(CarRb.transform.forward * driftTime * DriftBoost, ForceMode.Acceleration);
+        print("Boost " + Vector3.forward * driftTime * DriftBoost);
     }
     /// <summary>
     /// This is all about sideways friction. Without this, there is absolutely ZERO friction (try commenting
@@ -365,17 +401,16 @@ public class ArcadeDriving2 : MonoBehaviour
         }
         //print(temp);
     }
-    IEnumerator ResetControls(float secondsToWait)
+    public void ResetControls()
     {
-        yield return new WaitForSeconds(secondsToWait);
-        canDrift = true;
-        isDrifting = false;
-        FrontTireGrip = 0.8f;
-        RearTireGrip = 0.6f;
+        FrontTireGrip = 0.95f;
+        RearTireGrip = 0.8f;
         MinSteer = 1f;
-        MaxSteer = 3f;
+        MaxSteer = 2f;
         TopSpeed = 100f;
         EnginePower = 80f;
+        driftTimer = 0;
+        CarRb.drag = 0.1f;
     }
     IEnumerator waiter()
     {
@@ -423,7 +458,7 @@ public class ArcadeDriving2 : MonoBehaviour
     {
         if (collider.CompareTag("Slick"))
         {
-            StartCoroutine(ResetControls(1f));
+            ResetControls();
         }
     }
     private void OnCollisionEnter(Collision collision)
@@ -442,7 +477,7 @@ public class ArcadeDriving2 : MonoBehaviour
         gas.canceled -= EndReadGas;
         brake.started -= ReadBrake;
         brake.canceled -= EndReadBrake;
-        //drift.started -= ReadDrift;
-        //drift.canceled -= EndReadDrift;
+        drift.started -= ReadDrift;
+        drift.canceled -= EndReadDrift;
     }
 }
