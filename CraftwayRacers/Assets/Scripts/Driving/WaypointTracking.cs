@@ -7,19 +7,23 @@ public class WaypointTracking : MonoBehaviour
 {
     [SerializeField] private int nextWaypoint = 0;
     [SerializeField] private int id;
+    [SerializeField] private int wrongWaypointNum = 16;
 
     public float distFromNextWP;
+    [SerializeField] private float distFromWrongWaypoint;
     private float oldDist;
 
     private GameObject gc;
     private GameObject[] waypoints;
 
     private Coroutine wrongWayTimer;
+    private Coroutine wrongWayStopper;
 
     void Start()
     {
         waypoints = GameObject.Find("GameController").GetComponent<GameController>().waypointTriggers;
         gc = GameObject.Find("GameController");
+
 
         id = GameObject.FindGameObjectsWithTag("Player").Length - 1;
 
@@ -34,15 +38,23 @@ public class WaypointTracking : MonoBehaviour
     {
         for(; ; )
         {
-            oldDist = distFromNextWP;
+            oldDist = distFromWrongWaypoint;
+            distFromWrongWaypoint = Vector3.Distance(transform.position, waypoints[wrongWaypointNum].transform.position);
             distFromNextWP = Vector3.Distance(transform.position, waypoints[nextWaypoint].transform.position);
 
-            if(oldDist < distFromNextWP && GetComponent<Rigidbody>().velocity.x + GetComponent<Rigidbody>().velocity.z > 2)
+            if(oldDist > distFromWrongWaypoint && Mathf.Abs(GetComponent<Rigidbody>().velocity.x + GetComponent<Rigidbody>().velocity.z) > 2)
             {
                 if(wrongWayTimer == null)
                 {
                     //Show wrong direction UI.
                     wrongWayTimer = StartCoroutine(WrongWayTimer());
+
+                    if(wrongWayStopper != null)
+                    {
+                        StopCoroutine(wrongWayStopper);
+                        wrongWayStopper = null;
+                    }
+
                     Debug.Log("WRONG WAY");
                 }
             }
@@ -50,25 +62,41 @@ public class WaypointTracking : MonoBehaviour
             {
                 if(wrongWayTimer != null)
                 {
-                    gc.GetComponent<WinTracker>().wrongWay[id].SetActive(false);
                     StopCoroutine(wrongWayTimer);
+
+                    if(wrongWayStopper == null)
+                    {
+                        wrongWayStopper = StartCoroutine(StopWrongWayTimer());
+                    }
+
+                    //StopCoroutine(wrongWayTimer);
                     wrongWayTimer = null;
                 }
             }
 
-            yield return new WaitForSeconds(1.5f);
+            yield return new WaitForEndOfFrame();
         }
 
     }
 
     private IEnumerator WrongWayTimer()
     {
-        for(int i = 3; i > 0; i--)
+        for(float i = 1.5f; i > 0; i -= 0.5f)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(0.5f);
         }
 
         gc.GetComponent<WinTracker>().wrongWay[id].SetActive(true);
+    }
+
+    private IEnumerator StopWrongWayTimer()
+    {
+        for(float i = 1.5f; i > 0; i -= 0.5f)
+        {
+            yield return new WaitForSeconds(0.5f);
+        }
+
+        gc.GetComponent<WinTracker>().wrongWay[id].SetActive(false);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -79,6 +107,23 @@ public class WaypointTracking : MonoBehaviour
             {
                 nextWaypoint++;
                 gc.GetComponent<WinTracker>().waypoints[id]++;
+
+                wrongWaypointNum = other.gameObject.GetComponent<WaypointID>().waypointID;
+            }
+            else if(other.gameObject.GetComponent<WaypointID>().waypointID == wrongWaypointNum)
+            {
+                if(wrongWaypointNum > 0)
+                {
+                    wrongWaypointNum = other.gameObject.GetComponent<WaypointID>().waypointID - 1;
+                }
+                else if (other.gameObject.GetComponent<WaypointID>().waypointID == 0)
+                {
+                    wrongWaypointNum = 17;
+                }
+            }
+            else if(other.gameObject.GetComponent<WaypointID>().waypointID == wrongWaypointNum + 1)
+            {
+                wrongWaypointNum = other.gameObject.GetComponent<WaypointID>().waypointID;
             }
 
             //Increase counter for waypoints.
@@ -88,6 +133,10 @@ public class WaypointTracking : MonoBehaviour
             nextWaypoint = 0;
             gc.GetComponent<WinTracker>().waypoints[id]++;
             gc.GetComponent<WinTracker>().AddLap(id);
+        }
+        else if(other.gameObject.CompareTag("LapTrigger") && wrongWaypointNum == 17)
+        {
+            wrongWaypointNum = other.gameObject.GetComponent<WaypointID>().waypointID - 1;
         }
     }
 }
