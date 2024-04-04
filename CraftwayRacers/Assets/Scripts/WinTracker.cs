@@ -56,8 +56,15 @@ public class WinTracker : MonoBehaviour
         mainCam = GameObject.Find("Main Camera");
         soundManager = GameObject.Find("SoundManager");
 
+        WaypointTracking.placementTracking += PlacementTracking_Fire;
+
         //StartGame();
         DontDestroyOnLoad(gameObject);
+    }
+
+    private void PlacementTracking_Fire(int carId, float distToNxtWP, int wpPassed)
+    {
+        throw new NotImplementedException();
     }
 
     /// <summary>
@@ -315,7 +322,6 @@ public class WinTracker : MonoBehaviour
 
         return Task.CompletedTask;
     }
-
 
     //CHECK WHO IS IN THE LEAD EVERY FRAME HERE AND ADJUST UI ELEMENTS.
 

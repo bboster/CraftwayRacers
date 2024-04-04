@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,6 +9,7 @@ public class WaypointTracking : MonoBehaviour
     [SerializeField] private int nextWaypoint = 0;
     [SerializeField] private int id;
     [SerializeField] private int wrongWaypointNum = 16;
+    [SerializeField] private int waypointsPassed;
 
     public float distFromNextWP;
     [SerializeField] private float distFromWrongWaypoint;
@@ -18,6 +20,8 @@ public class WaypointTracking : MonoBehaviour
 
     private Coroutine wrongWayTimer;
     private Coroutine wrongWayStopper;
+
+    public static Action<int, float, int> placementTracking;
 
     void Start()
     {
@@ -32,6 +36,11 @@ public class WaypointTracking : MonoBehaviour
         print(id);
 
         StartCoroutine(DirectionTracker());
+    }
+
+    private void Update()
+    {
+        placementTracking?.Invoke(id, distFromNextWP, waypointsPassed);
     }
 
     private IEnumerator DirectionTracker()
@@ -115,10 +124,12 @@ public class WaypointTracking : MonoBehaviour
                 if(wrongWaypointNum > 0)
                 {
                     wrongWaypointNum = other.gameObject.GetComponent<WaypointID>().waypointID - 1;
+                    gc.GetComponent<WinTracker>().waypoints[id]--;
                 }
                 else if (other.gameObject.GetComponent<WaypointID>().waypointID == 0)
                 {
                     wrongWaypointNum = 17;
+                    gc.GetComponent<WinTracker>().waypoints[id]--;
                 }
             }
             else if(other.gameObject.GetComponent<WaypointID>().waypointID == wrongWaypointNum + 1)
@@ -137,6 +148,7 @@ public class WaypointTracking : MonoBehaviour
         else if(other.gameObject.CompareTag("LapTrigger") && wrongWaypointNum == 17)
         {
             wrongWaypointNum = other.gameObject.GetComponent<WaypointID>().waypointID - 1;
+            gc.GetComponent<WinTracker>().waypoints[id]--;
         }
     }
 }
