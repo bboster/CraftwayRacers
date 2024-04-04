@@ -20,7 +20,7 @@ public class WinTracker : MonoBehaviour
     //Laps completed for each player.
     public int[] laps = new int[4];
 
-    public int[] placements = new int[4];
+    public GameObject[] placements = new GameObject[4];
 
     public int playerToWin = -1;
 
@@ -50,6 +50,7 @@ public class WinTracker : MonoBehaviour
     private Coroutine timer;
 
     public GameObject[] wrongWay;
+    [SerializeField] private GameObject InputController;
 
     private void Start()
     {
@@ -64,7 +65,30 @@ public class WinTracker : MonoBehaviour
 
     private void PlacementTracking_Fire(int carId, float distToNxtWP, int wpPassed)
     {
-        throw new NotImplementedException();
+        if(InputController.GetComponent<StartCountdown>().Gaming == true)
+        {
+            int curIndex = Array.IndexOf(placements, players[carId]);
+        
+            if(curIndex != 0)
+            {
+                if (waypoints[carId] > waypoints[placements[curIndex - 1].GetComponent<WaypointTracking>().id])
+                {
+                    GameObject switchObj = placements[curIndex - 1];
+                    placements[curIndex] = switchObj;
+                    placements[curIndex - 1] = players[carId];
+                }
+                else if (waypoints[carId] == waypoints[placements[curIndex - 1].GetComponent<WaypointTracking>().id])
+                {
+                    if (players[carId].GetComponent<WaypointTracking>().distFromNextWP <
+                        placements[curIndex - 1].GetComponent<WaypointTracking>().distFromNextWP)
+                    {
+                        GameObject switchObj = placements[curIndex - 1];
+                        placements[curIndex] = switchObj;
+                        placements[curIndex - 1] = players[carId];
+                    }
+                }
+            }
+        }
     }
 
     /// <summary>

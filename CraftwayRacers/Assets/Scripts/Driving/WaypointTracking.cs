@@ -7,7 +7,7 @@ using UnityEngine.UI;
 public class WaypointTracking : MonoBehaviour
 {
     [SerializeField] private int nextWaypoint = 0;
-    [SerializeField] private int id;
+    public int id;
     [SerializeField] private int wrongWaypointNum = 16;
     [SerializeField] private int waypointsPassed;
 
@@ -28,8 +28,8 @@ public class WaypointTracking : MonoBehaviour
         waypoints = GameObject.Find("GameController").GetComponent<GameController>().waypointTriggers;
         gc = GameObject.Find("GameController");
 
-
         id = GameObject.FindGameObjectsWithTag("Player").Length - 1;
+        gc.GetComponent<WinTracker>().placements[id] = gameObject;
 
         gc.GetComponent<WinTracker>().players[id] = gameObject;
 
