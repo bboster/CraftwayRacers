@@ -12,6 +12,8 @@ public class RubberBand : MonoBehaviour
 
     private GameObject mainCam;
     private GameObject soundManager;
+    public Animator Animator;
+
     private void Awake()
     {
         mainCam = GameObject.Find("Main Camera");
@@ -24,6 +26,8 @@ public class RubberBand : MonoBehaviour
             Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
             rb = Speed.CarRb;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("BoostSound").clip, mainCam.transform.position);
+            //if(Animator.name == "Gatcha")
+                //Animator.SetBool("ifOpen", true);
             print("HERE");
                 StartCoroutine(AddForce());
         }
@@ -49,4 +53,10 @@ public class RubberBand : MonoBehaviour
 
         isBoosting = false;
     }
+
+    private void Opened()
+    {
+        Destroy(gameObject);
+    }
+
 }

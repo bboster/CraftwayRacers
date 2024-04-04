@@ -137,6 +137,7 @@ MonoBehaviour:
   placeToSpawn: {x: 0, y: 0, z: 0}
   Paint: {fileID: 4686697336544067301, guid: 127312447e2ccf24d8da995dbdc242fe, type: 3}
   isWaiting: 0
+  Animator: {fileID: 2865472589074471065}
 --- !u!114 &-7124197916215173102
 MonoBehaviour:
   m_ObjectHideFlags: 0
