@@ -48,6 +48,5 @@ public class RubberBand : MonoBehaviour
         }
 
         isBoosting = false;
-        Destroy(gameObject);
     }
 }
