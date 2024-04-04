@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.77311975, g: 0.803413, b: 0.86689967, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4606,6 +4606,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Boosters
       objectReference: {fileID: 0}
+    - target: {fileID: 7166982784647280025, guid: e2ffc7946b8ba554bb0fac1d8d112b04, type: 3}
+      propertyPath: BoostForce
+      value: 100
+      objectReference: {fileID: 0}
     - target: {fileID: 8895616301290075420, guid: e2ffc7946b8ba554bb0fac1d8d112b04, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -6242,7 +6246,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 769182698}
-  m_LocalRotation: {x: -6.2123853e-16, y: 0.98522073, z: -0.17128976, w: -1.6376618e-16}
+  m_LocalRotation: {x: 6.2123853e-16, y: 0.98522073, z: -0.17128976, w: 1.6376618e-16}
   m_LocalPosition: {x: -227.04373, y: -20.210567, z: 224.17546}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -12393,7 +12397,7 @@ PrefabInstance:
     - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: sounds.Array.data[11].clip
       value: 
-      objectReference: {fileID: 8300000, guid: 3820bd66f9815ae498c6e5fc3b80d31e, type: 3}
+      objectReference: {fileID: 8300000, guid: 67892d20fdd336a42be0e5ae12936c64, type: 3}
     - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: sounds.Array.data[11].name
       value: BoostSound
