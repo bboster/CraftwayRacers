@@ -1139,6 +1139,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShorterWalls
       objectReference: {fileID: 0}
+    - target: {fileID: 5416247664317817159, guid: 2883fd449bd80544c83d5ac5d87849b1, type: 3}
+      propertyPath: m_Name
+      value: ActualWalls
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -11511,11 +11515,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8b9a305e18de0c04dbd257a21cd47087, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sharedProfile: {fileID: 11400000, guid: 9bcf581e35d12914d848b661f55f0881, type: 2}
-  isGlobal: 1
-  blendDistance: 0
-  weight: 1
-  priority: 0
 --- !u!4 &1429642469
 Transform:
   m_ObjectHideFlags: 0
@@ -19573,8 +19572,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5416247664441301650}
-  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -149.12015, y: 50.719353, z: -99.09783}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -151.92015, y: 52.119354, z: -98.69783}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -19978,12 +19977,12 @@ GameObject:
   - component: {fileID: 9141069477354781571}
   - component: {fileID: 967048153}
   m_Layer: 0
-  m_Name: Track_Walls
+  m_Name: InvisibleWalls
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &5466485797831206652
 Transform:
   m_ObjectHideFlags: 0
@@ -20543,7 +20542,7 @@ MeshRenderer:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5416247664441301650}
-  m_Enabled: 1
+  m_Enabled: 0
   m_CastShadows: 1
   m_ReceiveShadows: 1
   m_DynamicOccludee: 1
