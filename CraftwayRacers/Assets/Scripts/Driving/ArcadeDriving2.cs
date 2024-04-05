@@ -191,17 +191,17 @@ public class ArcadeDriving2 : MonoBehaviour
         {
             Handle_StartRace();
         }
+        if (readingBrake)
+        {
+            ACValue = PlayerInput.currentActionMap.FindAction("Brake").ReadValue<float>() * -1f;
+        }
         if (readingGas)
         {
             ACValue = PlayerInput.currentActionMap.FindAction("Gas").ReadValue<float>();
         }
-        if(!readingGas)
+        if(!readingGas && !readingBrake)
         {
             ACValue = 0;
-        }
-        if (readingBrake)
-        {
-            ACValue = PlayerInput.currentActionMap.FindAction("Brake").ReadValue<float>()*-1f;
         }
         for (int i = 0; i < SpringMountList.Length; i++)
         {
