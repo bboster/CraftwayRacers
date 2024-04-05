@@ -42,6 +42,11 @@ public class ArcadeDriving2 : MonoBehaviour
     public bool Shielded;
     public float ShieldTimer;
     public GameObject Shield;
+    //Paintbrush Things
+    public GameObject Paintbrush;
+    public Animator GachaBrush;
+    [SerializeField] private GameObject Paint;
+    [SerializeField] private GameObject placeToSpawn;
 
     //SFX bools
     private bool playingBrake = false;
@@ -440,6 +445,20 @@ public class ArcadeDriving2 : MonoBehaviour
             Shield.SetActive(true);
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("PickupSound").clip, mainCam.transform.position);
         }
+        if (collision.gameObject.tag == "GatchaPaint")
+        {
+            GachaBrush.SetBool("Painted", true);
+        }
+    }
+
+    void Paintbrushing()
+    {
+        Instantiate(Paint, placeToSpawn.transform.position, Quaternion.identity);
+    }
+    
+    void PaintbrushOff()
+    {
+        GachaBrush.SetBool("Painted", false);
     }
     private void OnTriggerStay(Collider collider)
     {
