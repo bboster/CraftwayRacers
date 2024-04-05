@@ -13222,7 +13222,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: sounds.Array.size
-      value: 12
+      value: 13
       objectReference: {fileID: 0}
     - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: sounds.Array.data[5].clip
@@ -13301,6 +13301,14 @@ PrefabInstance:
       value: BoostSound
       objectReference: {fileID: 0}
     - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
+      propertyPath: sounds.Array.data[12].clip
+      value: 
+      objectReference: {fileID: 8300000, guid: 7860ef48f3baac448b1a4ee0195cee50, type: 3}
+    - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
+      propertyPath: sounds.Array.data[12].name
+      value: Join
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: sounds.Array.data[1].mixer
       value: 
       objectReference: {fileID: 24300002, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
@@ -13349,6 +13357,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 3754870520726766870, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
     - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
+      propertyPath: sounds.Array.data[12].mixer
+      value: 
+      objectReference: {fileID: 3754870520726766870, guid: 2d5d0491c7859084ab6d9e497c17d65d, type: 2}
+    - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: sounds.Array.data[5].volume
       value: 0.3
       objectReference: {fileID: 0}
@@ -13374,6 +13386,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: sounds.Array.data[11].volume
+      value: 0.78
+      objectReference: {fileID: 0}
+    - target: {fileID: 3066285915294658096, guid: c272c406172c3804e9731e89f95f7423, type: 3}
+      propertyPath: sounds.Array.data[12].volume
       value: 0.78
       objectReference: {fileID: 0}
     - target: {fileID: 8285604000022290522, guid: c272c406172c3804e9731e89f95f7423, type: 3}
@@ -15108,6 +15124,10 @@ MonoBehaviour:
   IsWaitingGatcha: 1
   TB: {fileID: 1719571721}
   SC: {fileID: 1485078640}
+  thumbtackAmount: 4
+  maxAmountThumbtack: 0
+  jacksAmount: 0
+  maxAmountJacks: 5
 --- !u!4 &1719571720
 Transform:
   m_ObjectHideFlags: 0
