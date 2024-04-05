@@ -122,6 +122,8 @@ public class StartCountdown : MonoBehaviour
             Join.SetActive(false);
             OnePlayer.SetActive(true);
             oneHasRun = true;
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
+
         }
     }
 
@@ -132,6 +134,7 @@ public class StartCountdown : MonoBehaviour
             OnePlayer.SetActive(false);
             TwoPlayer.SetActive(true);
             twoHasRun = true;
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
         }
     }
 
@@ -141,7 +144,8 @@ public class StartCountdown : MonoBehaviour
         {
             TwoPlayer.SetActive(false);
             ThreePlayer.SetActive(true);
-            threeHasRun = true;
+            threeHasRun = true; 
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
         }
     }
 
@@ -152,6 +156,7 @@ public class StartCountdown : MonoBehaviour
             ThreePlayer.SetActive(false);
             FourPlayer.SetActive(true);
             fourHasRun = true;
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
         }
     }
     void CountDown()
