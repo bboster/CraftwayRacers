@@ -32,6 +32,8 @@ public class StartCountdown : MonoBehaviour
     [SerializeField] private GameObject p3JoinImg;
     [SerializeField] private GameObject p4JoinImg;
 
+    [SerializeField] private Animator a;
+
     private GameObject mainCam;
     private GameObject soundManager;
     private GameObject musicPlayer;
@@ -49,6 +51,8 @@ public class StartCountdown : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        a = GameObject.Find("JoinScreen").GetComponent<Animator>();
+
         mainCam = GameObject.Find("Main Camera");
         soundManager = GameObject.Find("SoundManager");
         musicPlayer = GameObject.Find("MusicPlayer");
@@ -62,6 +66,8 @@ public class StartCountdown : MonoBehaviour
 
     IEnumerator ReadySetGo()
     {
+        a.enabled = true;
+
         OnePlayer.SetActive(false);
         TwoPlayer.SetActive(false);
         ThreePlayer.SetActive(false);
@@ -137,7 +143,6 @@ public class StartCountdown : MonoBehaviour
         {
             OnePlayer.SetActive(false);
             TwoPlayer.SetActive(true);
-            p1JoinImg.SetActive(false);
             p2JoinImg.SetActive(true);
             twoHasRun = true;
         }
@@ -149,7 +154,6 @@ public class StartCountdown : MonoBehaviour
         {
             TwoPlayer.SetActive(false);
             ThreePlayer.SetActive(true);
-            p2JoinImg.SetActive(false);
             p3JoinImg.SetActive(true);
             threeHasRun = true;
         }
@@ -161,7 +165,6 @@ public class StartCountdown : MonoBehaviour
         {
             ThreePlayer.SetActive(false);
             FourPlayer.SetActive(true);
-            p3JoinImg.SetActive(false);
             p4JoinImg.SetActive(true);
             fourHasRun = true;
         }
