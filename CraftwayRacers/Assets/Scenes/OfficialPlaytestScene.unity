@@ -14644,6 +14644,10 @@ MonoBehaviour:
   IsWaitingGatcha: 1
   TB: {fileID: 1719571721}
   SC: {fileID: 1485078640}
+  thumbtackAmount: 4
+  maxAmountThumbtack: 0
+  jacksAmount: 0
+  maxAmountJacks: 5
 --- !u!4 &1719571720
 Transform:
   m_ObjectHideFlags: 0
