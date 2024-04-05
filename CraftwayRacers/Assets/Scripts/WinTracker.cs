@@ -21,6 +21,7 @@ public class WinTracker : MonoBehaviour
     public int[] laps = new int[4];
 
     public GameObject[] placements = new GameObject[4];
+    public int[] winners;
 
     public int playerToWin = -1;
 
@@ -132,6 +133,10 @@ public class WinTracker : MonoBehaviour
 
             playerToWin = playerNum;
 
+            winners[0] = placements[0].GetComponent<WaypointTracking>().id;
+            winners[1] = placements[1].GetComponent<WaypointTracking>().id;
+            winners[2] = placements[2].GetComponent<WaypointTracking>().id;
+            winners[3] = placements[3].GetComponent<WaypointTracking>().id;
             await LoadScene();
             StartCoroutine(SetWinningSticker(playerToWin));
         }
@@ -224,6 +229,10 @@ public class WinTracker : MonoBehaviour
             /*winDisplay.SetActive(true);
             winTxt.text = "Player " + winner + " Wins!";*/
 
+            winners[0] = placements[0].GetComponent<WaypointTracking>().id;
+            winners[1] = placements[1].GetComponent<WaypointTracking>().id;
+            winners[2] = placements[2].GetComponent<WaypointTracking>().id;
+            winners[3] = placements[3].GetComponent<WaypointTracking>().id;
             await LoadScene();
             StartCoroutine(SetWinningSticker(playerToWin));
         }

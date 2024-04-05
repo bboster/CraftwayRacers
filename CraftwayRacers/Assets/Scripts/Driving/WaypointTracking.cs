@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class WaypointTracking : MonoBehaviour
 {
@@ -124,12 +125,12 @@ public class WaypointTracking : MonoBehaviour
                 if(wrongWaypointNum > 0)
                 {
                     wrongWaypointNum = other.gameObject.GetComponent<WaypointID>().waypointID - 1;
-                    gc.GetComponent<WinTracker>().waypoints[id]--;
+                    //gc.GetComponent<WinTracker>().waypoints[id]--;
                 }
                 else if (other.gameObject.GetComponent<WaypointID>().waypointID == 0)
                 {
                     wrongWaypointNum = 17;
-                    gc.GetComponent<WinTracker>().waypoints[id]--;
+                    //gc.GetComponent<WinTracker>().waypoints[id]--;
                 }
             }
             else if(other.gameObject.GetComponent<WaypointID>().waypointID == wrongWaypointNum + 1)
@@ -148,7 +149,7 @@ public class WaypointTracking : MonoBehaviour
         else if(other.gameObject.CompareTag("LapTrigger") && wrongWaypointNum == 17)
         {
             wrongWaypointNum = other.gameObject.GetComponent<WaypointID>().waypointID - 1;
-            gc.GetComponent<WinTracker>().waypoints[id]--;
+            //gc.GetComponent<WinTracker>().waypoints[id]--;
         }
     }
 }

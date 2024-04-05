@@ -27,6 +27,11 @@ public class StartCountdown : MonoBehaviour
     public GameObject ThreeStopper;
     public GameObject FourStopper;
 
+    [SerializeField] private GameObject p1JoinImg;
+    [SerializeField] private GameObject p2JoinImg;
+    [SerializeField] private GameObject p3JoinImg;
+    [SerializeField] private GameObject p4JoinImg;
+
     private GameObject mainCam;
     private GameObject soundManager;
     private GameObject musicPlayer;
@@ -121,6 +126,7 @@ public class StartCountdown : MonoBehaviour
         {
             Join.SetActive(false);
             OnePlayer.SetActive(true);
+            p1JoinImg.SetActive(true);
             oneHasRun = true;
         }
     }
@@ -131,6 +137,8 @@ public class StartCountdown : MonoBehaviour
         {
             OnePlayer.SetActive(false);
             TwoPlayer.SetActive(true);
+            p1JoinImg.SetActive(false);
+            p2JoinImg.SetActive(true);
             twoHasRun = true;
         }
     }
@@ -141,6 +149,8 @@ public class StartCountdown : MonoBehaviour
         {
             TwoPlayer.SetActive(false);
             ThreePlayer.SetActive(true);
+            p2JoinImg.SetActive(false);
+            p3JoinImg.SetActive(true);
             threeHasRun = true;
         }
     }
@@ -151,6 +161,8 @@ public class StartCountdown : MonoBehaviour
         {
             ThreePlayer.SetActive(false);
             FourPlayer.SetActive(true);
+            p3JoinImg.SetActive(false);
+            p4JoinImg.SetActive(true);
             fourHasRun = true;
         }
     }
