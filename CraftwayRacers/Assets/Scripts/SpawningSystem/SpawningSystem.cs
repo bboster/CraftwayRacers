@@ -46,6 +46,12 @@ public class SpawningSystem : MonoBehaviour
 
     public StartCountdown SC;
 
+    // Controls existence of thumbtacks
+    [SerializeField] private int thumbtackAmount = 0;
+    [SerializeField] private int maxAmountThumbtack;
+    [SerializeField] private int jacksAmount = 0;
+    [SerializeField] private int maxAmountJacks;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -63,32 +69,30 @@ public class SpawningSystem : MonoBehaviour
         spawnPoints.Add(spawnPoint12);
         spawnPoints.Add(spawnPoint13);
         spawnPoints.Add(spawnPoint14);
-        //gatchaSpawns.Add(spawnPoint8);
-        //gatchaSpawns.Add(spawnPoint9);
-        //gatchaSpawns.Add(spawnPoint10);
-        //gatchaSpawns.Add(spawnPoint11);
-        //gatchaSpawns.Add(spawnPoint12);
-        //gatchaSpawns.Add(spawnPoint13);
-        //gatchaSpawns.Add(spawnPoint14);
-
-
-
+   
         largeHazards.Add(Thumbtack);
         largeHazards.Add(Jacks);
         largeHazards.Add(BoosterGatcha); //Caleb changed "Paintbrush" to "Booster"
         largeHazards.Add(CottonBallShieldGatcha);
-
-        //gatchaBalls.Add(PaintBrushGatcha);
-        //gatchaBalls.Add(CottonBallShieldGatcha);
     }
 
     // Update is called once per frame
     void Update()
     {
-         if (IsWaiting == true && spawnPoints.Count > 0 && SC.countDownHasRun == true)
-         {
-             StartCoroutine(LargeHazardsTimer());
-         }
+        if(thumbtackAmount == maxAmountThumbtack)
+        {
+            largeHazards.Remove(Thumbtack);
+        }
+
+        if(jacksAmount == maxAmountJacks)
+        {
+            largeHazards.Remove(Jacks);
+        }
+
+        if (IsWaiting == true && spawnPoints.Count > 0 && SC.countDownHasRun == true)
+        {
+            StartCoroutine(LargeHazardsTimer());
+        }
     }
 
     public IEnumerator LargeHazardsTimer()
@@ -101,50 +105,27 @@ public class SpawningSystem : MonoBehaviour
         IsWaiting = true;
     }
 
-    //IEnumerator GatchaBallTimer()
-    //{
-    //    IsWaitingGatcha = false;
-    //    GameObject gatchaBall;
-    //    gatchaBall = ChooseGatchaBall();
-    //    yield return new WaitForSeconds(WaitTime);
-    //    Instantiate(gatchaBall, PlaceToSpawnGatcha(), Quaternion.identity);
-    //    IsWaitingGatcha = true;
-    //}
-
     private Vector3 PlaceToSpawn()
     {
-        //int number = Random.Range(0, spawnPoints.Count - 1);
-        //spawnPoints.Remove(spawnPoints[number]);
-        //return spawnPoints[number];
-        //if (spawnPoints.Count == 0)
-        //{
-        //    Debug.LogError("No more spawn points available!");
-        //}
-
         int index = Random.Range(0, spawnPoints.Count);
         Vector3 spawnPosition = spawnPoints[index];
         spawnPoints.RemoveAt(index);  // Remove the selected spawn point from the list
         return spawnPosition;
     }
 
-    //private Vector3 PlaceToSpawnGatcha()
-    //{
-    //    int number = Random.Range(0, gatchaSpawns.Count - 1);
-    //    gatchaSpawns.Remove(gatchaSpawns[number]);  
-    //    return gatchaSpawns[number];
-    //}
-
     private GameObject ChooseLargeHazard()
     {
         int number = Random.Range(0, largeHazards.Count);
+        if (largeHazards[number] == Thumbtack)
+        {
+            thumbtackAmount++;
+        }
+        if (largeHazards[number] = Jacks)
+        {
+            jacksAmount++;
+        }
         return largeHazards[number];
     }
-
-    //private GameObject ChooseGatchaBall()
-    //{
-    //    int number = Random.Range(0, gatchaBalls.Count);
-    //    return gatchaBalls[number];
-    //}
 
 
 }
