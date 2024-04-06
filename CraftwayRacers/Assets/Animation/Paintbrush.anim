@@ -127,7 +127,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 0.25
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 0.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 0.73333335
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -141,7 +155,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 1.2333333
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 1.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 1.7333333
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -155,7 +183,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 2.25
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 2.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 2.7166667
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -169,7 +211,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 3.2333333
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 3.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 3.7333333
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -183,7 +239,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 4.233333
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 4.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 4.75
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -197,7 +267,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 5.25
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 5.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 5.75
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -211,7 +295,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 6.233333
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 6.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 6.733333
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -225,7 +323,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 7.233333
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 7.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 7.733333
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -239,7 +351,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 8.25
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 8.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 8.733334
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
@@ -253,7 +379,21 @@ AnimationClip:
     floatParameter: 0
     intParameter: 0
     messageOptions: 0
+  - time: 9.233334
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
   - time: 9.5
+    functionName: Paintbrushing
+    data: 
+    objectReferenceParameter: {fileID: 0}
+    floatParameter: 0
+    intParameter: 0
+    messageOptions: 0
+  - time: 9.733334
     functionName: Paintbrushing
     data: 
     objectReferenceParameter: {fileID: 0}
