@@ -21,7 +21,7 @@ public class WinTracker : MonoBehaviour
     public int[] laps = new int[4];
 
     public GameObject[] placements = new GameObject[4];
-    public int[] winners;
+    public int[] winners = new int[4];
 
     public int playerToWin = -1;
 
@@ -138,7 +138,7 @@ public class WinTracker : MonoBehaviour
             winners[2] = placements[2].GetComponent<WaypointTracking>().id;
             winners[3] = placements[3].GetComponent<WaypointTracking>().id;
             await LoadScene();
-            StartCoroutine(SetWinningSticker(playerToWin));
+            DisplayWinners();
         }
     }
 
@@ -190,9 +190,29 @@ public class WinTracker : MonoBehaviour
 
         if(gameFinished == false)
         {
-            //End the game and determine winner.
-            DetermineWinnerWithLaps();
+            EndGame();
         }
+    }
+
+    private async void EndGame()
+    {
+        //End the game and determine winner.
+        //DetermineWinnerWithLaps();
+        winners[0] = placements[0].GetComponent<WaypointTracking>().id;
+        winners[1] = placements[1].GetComponent<WaypointTracking>().id;
+        if(placements[2] != null)
+        {
+            winners[2] = placements[2].GetComponent<WaypointTracking>().id;
+            if(placements[3] != null)
+            {
+                winners[3] = placements[3].GetComponent<WaypointTracking>().id;
+            }
+
+        }
+
+
+        await LoadScene();
+        DisplayWinners();
     }
 
     /// <summary>
@@ -234,7 +254,7 @@ public class WinTracker : MonoBehaviour
             winners[2] = placements[2].GetComponent<WaypointTracking>().id;
             winners[3] = placements[3].GetComponent<WaypointTracking>().id;
             await LoadScene();
-            StartCoroutine(SetWinningSticker(playerToWin));
+            DisplayWinners();
         }
 
         //Set win UI.
@@ -307,7 +327,7 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
-            StartCoroutine(SetWinningSticker(playerToWin));
+            DisplayWinners();
         }
 
         //Set winner UI.
@@ -345,7 +365,7 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
-            StartCoroutine(SetWinningSticker(playerToWin));
+            DisplayWinners();
         }
     }
 
@@ -354,6 +374,99 @@ public class WinTracker : MonoBehaviour
         SceneManager.LoadScene("ResultsScene");
 
         return Task.CompletedTask;
+    }
+
+    private void DisplayWinners()
+    {
+        TextMeshProUGUI win1 = GameObject.Find("Win1Txt").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI win2 = GameObject.Find("Win2Txt").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI win3 = GameObject.Find("Win3Txt").GetComponent<TextMeshProUGUI>();
+        TextMeshProUGUI win4 = GameObject.Find("Win4Txt").GetComponent<TextMeshProUGUI>();
+
+        GameObject sticker1 = GameObject.Find("Sticker1");
+        GameObject sticker2 = GameObject.Find("Sticker2");
+        GameObject sticker3 = GameObject.Find("Sticker3");
+        GameObject sticker4 = GameObject.Find("Sticker4");
+
+        switch(winners[0])
+        {
+            case 0:
+                win1.text = "Blue Wins!";
+                sticker1.GetComponent<Image>().sprite = player1Sticker;
+                break;
+            case 1:
+                win1.text = "Red Wins!";
+                sticker1.GetComponent<Image>().sprite = player2Sticker;
+                break;
+            case 2:
+                win1.text = "Yellow Wins!";
+                sticker1.GetComponent<Image>().sprite = player3Sticker;
+                break;
+            case 3:
+                win1.text = "Green Wins!";
+                sticker1.GetComponent<Image>().sprite = player4Sticker;
+                break;
+        }
+
+        switch (winners[1])
+        {
+            case 0:
+                win2.text = "#2 Blue";
+                sticker2.GetComponent<Image>().sprite = player1Sticker;
+                break;
+            case 1:
+                win2.text = "#2 Red";
+                sticker2.GetComponent<Image>().sprite = player2Sticker;
+                break;
+            case 2:
+                win2.text = "#2 Yellow";
+                sticker2.GetComponent<Image>().sprite = player3Sticker;
+                break;
+            case 3:
+                win2.text = "#2 Green";
+                sticker2.GetComponent<Image>().sprite = player4Sticker;
+                break;
+        }
+
+        switch (winners[2])
+        {
+            case 0:
+                win3.text = "#3 Blue";
+                sticker3.GetComponent<Image>().sprite = player1Sticker;
+                break;
+            case 1:
+                win3.text = "#3 Red";
+                sticker3.GetComponent<Image>().sprite = player2Sticker;
+                break;
+            case 2:
+                win3.text = "#3 Yellow";
+                sticker3.GetComponent<Image>().sprite = player3Sticker;
+                break;
+            case 3:
+                win3.text = "#3 Green";
+                sticker3.GetComponent<Image>().sprite = player4Sticker;
+                break;
+        }
+
+        switch (winners[3])
+        {
+            case 0:
+                win4.text = "#4 Blue";
+                sticker4.GetComponent<Image>().sprite = player1Sticker;
+                break;
+            case 1:
+                win4.text = "#4 Red";
+                sticker4.GetComponent<Image>().sprite = player2Sticker;
+                break;
+            case 2:
+                win4.text = "#4 Yellow";
+                sticker4.GetComponent<Image>().sprite = player3Sticker;
+                break;
+            case 3:
+                win4.text = "#4 Green";
+                sticker4.GetComponent<Image>().sprite = player4Sticker;
+                break;
+        }
     }
 
     //CHECK WHO IS IN THE LEAD EVERY FRAME HERE AND ADJUST UI ELEMENTS.

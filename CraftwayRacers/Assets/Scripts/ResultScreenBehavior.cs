@@ -10,7 +10,7 @@ public class ResultScreenBehavior : MonoBehaviour
 
     private void Start()
     {
-        winTxt.text = "Player " + (GameObject.Find("GameController").GetComponent<WinTracker>().playerToWin + 1) + " wins!";
+        //winTxt.text = "Player " + (GameObject.Find("GameController").GetComponent<WinTracker>().playerToWin + 1) + " wins!";
     }
 
     public void PlayAgain()
