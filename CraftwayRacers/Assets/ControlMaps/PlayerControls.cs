@@ -148,7 +148,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""id"": ""ccf603c2-73c7-4c14-94f6-75d4e1e338ad"",
                     ""path"": ""1DAxis"",
                     ""interactions"": """",
-                    ""processors"": ""AxisDeadzone(min=0.3,max=0.9)"",
+                    ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Steer"",
                     ""isComposite"": true,

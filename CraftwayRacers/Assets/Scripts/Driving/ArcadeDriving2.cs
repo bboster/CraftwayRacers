@@ -409,11 +409,11 @@ public class ArcadeDriving2 : MonoBehaviour
     public void ResetControls()
     {
         FrontTireGrip = 0.95f;
-        RearTireGrip = 0.8f;
-        MinSteer = 1f;
-        MaxSteer = 2f;
-        TopSpeed = 100f;
-        EnginePower = 80f;
+        RearTireGrip = 0.9f;
+        MinSteer = 3.5f;
+        MaxSteer = 4f;
+        TopSpeed = 120f;
+        EnginePower = 90f;
         driftTimer = 0;
         CarRb.drag = 0.1f;
     }
