@@ -12168,6 +12168,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 1515002562}
     - target: {fileID: 6692904200271747183, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
+      propertyPath: winners.Array.size
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 6692904200271747183, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
       propertyPath: wrongWay.Array.size
       value: 4
       objectReference: {fileID: 0}
