@@ -52,6 +52,8 @@ public class SpawningSystem : MonoBehaviour
     [SerializeField] private int jacksAmount = 0;
     [SerializeField] private int maxAmountJacks;
 
+    private int number;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -79,15 +81,6 @@ public class SpawningSystem : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if(thumbtackAmount == maxAmountThumbtack)
-        {
-            largeHazards.Remove(Thumbtack);
-        }
-
-        if(jacksAmount == maxAmountJacks)
-        {
-            largeHazards.Remove(Jacks);
-        }
 
         if (IsWaiting == true && spawnPoints.Count > 0 && SC.countDownHasRun == true)
         {
@@ -115,13 +108,21 @@ public class SpawningSystem : MonoBehaviour
 
     private GameObject ChooseLargeHazard()
     {
-        int number = Random.Range(0, largeHazards.Count);
+        number = Random.Range(0, largeHazards.Count);
         if (largeHazards[number] == Thumbtack)
         {
+            if(thumbtackAmount >= maxAmountThumbtack)
+            {
+                largeHazards.RemoveAt(number);
+            }
             thumbtackAmount++;
         }
-        if (largeHazards[number] = Jacks)
+        else if (largeHazards[number] == Jacks)
         {
+            if(jacksAmount >= maxAmountJacks)
+            {
+                largeHazards.RemoveAt(number);
+            }
             jacksAmount++;
         }
         return largeHazards[number];
