@@ -138,7 +138,6 @@ public class WinTracker : MonoBehaviour
             winners[2] = placements[2].GetComponent<WaypointTracking>().id;
             winners[3] = placements[3].GetComponent<WaypointTracking>().id;
             await LoadScene();
-            DisplayWinners();
         }
     }
 
@@ -212,7 +211,6 @@ public class WinTracker : MonoBehaviour
 
 
         await LoadScene();
-        DisplayWinners();
     }
 
     /// <summary>
@@ -254,7 +252,6 @@ public class WinTracker : MonoBehaviour
             winners[2] = placements[2].GetComponent<WaypointTracking>().id;
             winners[3] = placements[3].GetComponent<WaypointTracking>().id;
             await LoadScene();
-            DisplayWinners();
         }
 
         //Set win UI.
@@ -327,7 +324,6 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
-            DisplayWinners();
         }
 
         //Set winner UI.
@@ -365,7 +361,6 @@ public class WinTracker : MonoBehaviour
             winTxt.text = "Player " + winner + " Wins!";*/
 
             await LoadScene();
-            DisplayWinners();
         }
     }
 
@@ -376,96 +371,11 @@ public class WinTracker : MonoBehaviour
         return Task.CompletedTask;
     }
 
-    private void DisplayWinners()
+    private void OnLevelWasLoaded(int level)
     {
-        TextMeshProUGUI win1 = GameObject.Find("Win1Txt").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI win2 = GameObject.Find("Win2Txt").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI win3 = GameObject.Find("Win3Txt").GetComponent<TextMeshProUGUI>();
-        TextMeshProUGUI win4 = GameObject.Find("Win4Txt").GetComponent<TextMeshProUGUI>();
-
-        GameObject sticker1 = GameObject.Find("Sticker1");
-        GameObject sticker2 = GameObject.Find("Sticker2");
-        GameObject sticker3 = GameObject.Find("Sticker3");
-        GameObject sticker4 = GameObject.Find("Sticker4");
-
-        switch(winners[0])
+        if (level == 1)
         {
-            case 0:
-                win1.text = "Blue Wins!";
-                sticker1.GetComponent<Image>().sprite = player1Sticker;
-                break;
-            case 1:
-                win1.text = "Red Wins!";
-                sticker1.GetComponent<Image>().sprite = player2Sticker;
-                break;
-            case 2:
-                win1.text = "Yellow Wins!";
-                sticker1.GetComponent<Image>().sprite = player3Sticker;
-                break;
-            case 3:
-                win1.text = "Green Wins!";
-                sticker1.GetComponent<Image>().sprite = player4Sticker;
-                break;
-        }
-
-        switch (winners[1])
-        {
-            case 0:
-                win2.text = "#2 Blue";
-                sticker2.GetComponent<Image>().sprite = player1Sticker;
-                break;
-            case 1:
-                win2.text = "#2 Red";
-                sticker2.GetComponent<Image>().sprite = player2Sticker;
-                break;
-            case 2:
-                win2.text = "#2 Yellow";
-                sticker2.GetComponent<Image>().sprite = player3Sticker;
-                break;
-            case 3:
-                win2.text = "#2 Green";
-                sticker2.GetComponent<Image>().sprite = player4Sticker;
-                break;
-        }
-
-        switch (winners[2])
-        {
-            case 0:
-                win3.text = "#3 Blue";
-                sticker3.GetComponent<Image>().sprite = player1Sticker;
-                break;
-            case 1:
-                win3.text = "#3 Red";
-                sticker3.GetComponent<Image>().sprite = player2Sticker;
-                break;
-            case 2:
-                win3.text = "#3 Yellow";
-                sticker3.GetComponent<Image>().sprite = player3Sticker;
-                break;
-            case 3:
-                win3.text = "#3 Green";
-                sticker3.GetComponent<Image>().sprite = player4Sticker;
-                break;
-        }
-
-        switch (winners[3])
-        {
-            case 0:
-                win4.text = "#4 Blue";
-                sticker4.GetComponent<Image>().sprite = player1Sticker;
-                break;
-            case 1:
-                win4.text = "#4 Red";
-                sticker4.GetComponent<Image>().sprite = player2Sticker;
-                break;
-            case 2:
-                win4.text = "#4 Yellow";
-                sticker4.GetComponent<Image>().sprite = player3Sticker;
-                break;
-            case 3:
-                win4.text = "#4 Green";
-                sticker4.GetComponent<Image>().sprite = player4Sticker;
-                break;
+            GameObject.Find("ResultsController").GetComponent<ResultScreenManager>().DisplayWinners(gameObject.GetComponent<WinTracker>());
         }
     }
 
