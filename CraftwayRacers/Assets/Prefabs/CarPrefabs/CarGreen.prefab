@@ -287,17 +287,17 @@ MonoBehaviour:
   DriftForce: 10
   DriftBoost: 500
   driftTimer: 0
-  TopSpeed: 100
+  TopSpeed: 120
   MaxSuspensionLength: 1.35
   SpringStrength: 95
   SpringDamper: 25
   WheelPosMod: -50
-  MinSteer: 1
-  MaxSteer: 2
-  EnginePower: 80
+  MinSteer: 2.5
+  MaxSteer: 3.5
+  EnginePower: 90
   BrakePower: 75
   FrontTireGrip: 0.95
-  RearTireGrip: 0.8
+  RearTireGrip: 0.85
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
@@ -1168,6 +1168,7 @@ GameObject:
   - component: {fileID: 2773052550433614587}
   - component: {fileID: 6242880873684380179}
   - component: {fileID: 5449195849537890184}
+  - component: {fileID: 3461485426695053223}
   m_Layer: 13
   m_Name: P4CamFollow
   m_TagString: Untagged
@@ -1289,6 +1290,50 @@ MonoBehaviour:
         m_Calls: []
   m_LegacyBlendHint: 0
   m_ComponentOwner: {fileID: 5452364119691629143}
+--- !u!114 &3461485426695053223
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6177005129067462380}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a79441f348de89743a2939f4d699eac1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_RenderShadows: 1
+  m_RequiresDepthTextureOption: 2
+  m_RequiresOpaqueTextureOption: 2
+  m_CameraType: 0
+  m_Cameras: []
+  m_RendererIndex: -1
+  m_VolumeLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  m_VolumeTrigger: {fileID: 0}
+  m_VolumeFrameworkUpdateModeOption: 2
+  m_RenderPostProcessing: 0
+  m_Antialiasing: 0
+  m_AntialiasingQuality: 2
+  m_StopNaN: 0
+  m_Dithering: 0
+  m_ClearDepth: 1
+  m_AllowXRRendering: 1
+  m_AllowHDROutput: 1
+  m_UseScreenCoordOverride: 0
+  m_ScreenSizeOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_ScreenCoordScaleBias: {x: 0, y: 0, z: 0, w: 0}
+  m_RequiresDepthTexture: 0
+  m_RequiresColorTexture: 0
+  m_Version: 2
+  m_TaaSettings:
+    quality: 3
+    frameInfluence: 0.1
+    jitterScale: 1
+    mipBias: 0
+    varianceClampScale: 0.9
+    contrastAdaptiveSharpening: 0
 --- !u!1 &6478220929692243683
 GameObject:
   m_ObjectHideFlags: 0

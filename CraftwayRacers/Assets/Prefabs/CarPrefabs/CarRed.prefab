@@ -256,17 +256,17 @@ MonoBehaviour:
   DriftForce: 10
   DriftBoost: 500
   driftTimer: 0
-  TopSpeed: 100
+  TopSpeed: 120
   MaxSuspensionLength: 1.35
   SpringStrength: 95
   SpringDamper: 25
   WheelPosMod: -50
-  MinSteer: 1
-  MaxSteer: 2
-  EnginePower: 80
+  MinSteer: 2.5
+  MaxSteer: 3.5
+  EnginePower: 90
   BrakePower: 75
   FrontTireGrip: 0.95
-  RearTireGrip: 0.8
+  RearTireGrip: 0.85
   TorqueCurve:
     serializedVersion: 2
     m_Curve:
