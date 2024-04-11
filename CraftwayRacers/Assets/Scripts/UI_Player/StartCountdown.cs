@@ -22,10 +22,7 @@ public class StartCountdown : MonoBehaviour
     public GameObject Two;
     public GameObject Three;
     public GameObject GO;
-    public GameObject OneStopper;
-    public GameObject TwoStopper;
-    public GameObject ThreeStopper;
-    public GameObject FourStopper;
+    public GameObject OppaStoppas; //Game objects that stop the player from moving before the game starts
 
     [SerializeField] private GameObject p1JoinImg;
     [SerializeField] private GameObject p2JoinImg;
@@ -91,10 +88,7 @@ public class StartCountdown : MonoBehaviour
 
         yield return new WaitForSeconds(1f);
         One.SetActive(false);
-        OneStopper.SetActive(false);
-        TwoStopper.SetActive(false);
-        ThreeStopper.SetActive(false);
-        FourStopper.SetActive(false);
+        OppaStoppas.SetActive(false);
         Gaming = true;
         StartRace?.Invoke();
         GO.SetActive(true);
