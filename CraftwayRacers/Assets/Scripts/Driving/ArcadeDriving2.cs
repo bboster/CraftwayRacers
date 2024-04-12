@@ -18,7 +18,6 @@ public class ArcadeDriving2 : MonoBehaviour
     public RaycastHit[] HitList = new RaycastHit[4];
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] WheelList = new GameObject[4];
-    public float compMod = 100f, DriftForce= 10f, DriftBoost = 10f, driftTimer;
     //Tooltips for game devs on driving
     [Tooltip("Used for the torque curve, see below. DO NOT USE FOR JUST 'MORE SPEED'")] public float TopSpeed = 100f;
     [Tooltip("How far the car sits off the ground.")]                                   public float MaxSuspensionLength = 1.35f;
@@ -31,15 +30,15 @@ public class ArcadeDriving2 : MonoBehaviour
                                                                                         public float FrontTireGrip = .8f, RearTireGrip = .6f;
     [Tooltip("Basically acceleration. Mess with keypoints to change engine behavior")]  public AnimationCurve TorqueCurve;
     [Tooltip("Psuedo-gravity applied to suspension points that aren't touching the ground")] public float GravityForce = 75f;
-    public float OffRdMinSteer, OffRdMaxSteer, OffRdFTG, OffRdRTG, OffRdDrag;
+    public float compMod = 100f, OffRdMinSteer, OffRdMaxSteer, OffRdFTG, OffRdRTG, OffRdDrag, driftFTG = 0.5f, driftRTG = 0.4f, driftMXSteer = 1f, driftMNSteer = .1f,  DriftForce = 10f, DriftBoost = 10f, driftTimer;
     //Not necessary for changing car behavior
     public Rigidbody CarRb;
     public GameObject CenterOfMass;
     public PlayerInput PlayerInput;
-    private bool readingGas, readingBrake, isDrifting, canDrift, canDrive;
+    private bool readingGas, readingBrake, isDrifting, canDrive;
     private float steerValue = 0, ACValue = 0;
     //Shield Tings
-    public bool Shielded;
+    public bool Shielded, canDrift;
     public float ShieldTimer;
     public GameObject Shield;
     //Paintbrush Things
@@ -58,7 +57,6 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject boostSymbol;
     public GameObject boostVFX1;
     public GameObject boostVFX2;
-
     private void Awake()
     {
         soundManager = GameObject.Find("SoundManager");
@@ -136,6 +134,7 @@ public class ArcadeDriving2 : MonoBehaviour
     void Handle_StartRace()
     {
         canDrive = true;
+        canDrift = false;
     }
 
     /// <summary>
@@ -174,10 +173,10 @@ public class ArcadeDriving2 : MonoBehaviour
         if (canDrift)
         {
             isDrifting = true;
-            MinSteer = .1f;
-            MaxSteer = 1f;
-            FrontTireGrip = 0.5f;
-            RearTireGrip = 0.4f;
+            MinSteer = driftMNSteer;
+            MaxSteer = driftMXSteer;
+            FrontTireGrip = driftFTG;
+            RearTireGrip = driftRTG;
             driftTimer = 0f;
         }
     }
@@ -346,8 +345,8 @@ public class ArcadeDriving2 : MonoBehaviour
     }
     public void AddDriftBoost(float driftTime)
     {
-        CarRb.AddForce(CarRb.transform.forward * driftTime * DriftBoost, ForceMode.Acceleration);
-        print("Boost " + Vector3.forward * driftTime * DriftBoost);
+        driftTime = Mathf.Clamp(driftTime, 0, 5);
+        CarRb.AddForce(CarRb.transform.forward * (driftTime*driftTime) * DriftBoost, ForceMode.Acceleration);
     }
     /// <summary>
     /// This is all about sideways friction. Without this, there is absolutely ZERO friction (try commenting
@@ -421,6 +420,8 @@ public class ArcadeDriving2 : MonoBehaviour
         EnginePower = 90f;
         driftTimer = 0;
         CarRb.drag = 0.1f;
+        canDrift = true;
+        isDrifting = false;
     }
     IEnumerator waiter()
     {
