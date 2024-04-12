@@ -51,7 +51,10 @@ public class SpawningSystem : MonoBehaviour
     [SerializeField] private int maxAmountThumbtack;
     [SerializeField] private int jacksAmount = 0;
     [SerializeField] private int maxAmountJacks;
+    public int gatchaAmount = 1;
+    public List<GameObject> GatchaList;
 
+    public List<Vector3> respawns = new List<Vector3>();
     private int number;
 
     // Start is called before the first frame update
@@ -76,15 +79,26 @@ public class SpawningSystem : MonoBehaviour
         largeHazards.Add(Jacks);
         largeHazards.Add(BoosterGatcha); //Caleb changed "Paintbrush" to "Booster"
         largeHazards.Add(CottonBallShieldGatcha);
+
+        GatchaList.Add(BoosterGatcha);
+        GatchaList.Add(CottonBallShieldGatcha);
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (IsWaiting == true && spawnPoints.Count > 0 && SC.countDownHasRun == true)
+        if (IsWaiting == true && spawnPoints.Count > 0 && SC.countDownHasRun == true && gatchaAmount >= 0)
         {
             StartCoroutine(LargeHazardsTimer());
+            if(gatchaAmount == 0)
+            {
+                gatchaAmount--;
+            }
+        }
+        if (IsWaiting == true && respawns.Count > 0 && SC.countDownHasRun == true && gatchaAmount < 0)
+        {
+            StartCoroutine(GatchaTimer());
         }
     }
 
@@ -98,6 +112,16 @@ public class SpawningSystem : MonoBehaviour
         IsWaiting = true;
     }
 
+    public IEnumerator GatchaTimer()
+    {
+        IsWaiting = false;
+        GameObject gatcha;
+        gatcha = ChooseGatcha();
+        yield return new WaitForSeconds(WaitTime);
+        Instantiate(gatcha, PlaceToSpawnGatcha(), Quaternion.identity);
+        IsWaiting = true;
+    }
+
     private Vector3 PlaceToSpawn()
     {
         int index = Random.Range(0, spawnPoints.Count);
@@ -106,6 +130,19 @@ public class SpawningSystem : MonoBehaviour
         return spawnPosition;
     }
 
+    private GameObject ChooseGatcha()
+    {
+        number = Random.Range(0, GatchaList.Count);
+        return GatchaList[number];
+    }
+
+    private Vector3 PlaceToSpawnGatcha()
+    {
+        int index = Random.Range(0, respawns.Count);
+        Vector3 respawnPosition = respawns[index];
+        respawns.RemoveAt(index);
+        return respawnPosition;
+    }
     private GameObject ChooseLargeHazard()
     {
         number = Random.Range(0, largeHazards.Count);
@@ -124,6 +161,11 @@ public class SpawningSystem : MonoBehaviour
                 largeHazards.RemoveAt(number);
             }
             jacksAmount++;
+        }
+        else if (largeHazards[number] == BoosterGatcha || largeHazards[number] == CottonBallShieldGatcha)
+        {
+            gatchaAmount++;
+            respawns.Add(largeHazards[number].transform.position);
         }
         return largeHazards[number];
     }

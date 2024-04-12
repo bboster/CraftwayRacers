@@ -151,7 +151,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 525a702ee3a498b4c971354c21b7815c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spawningSystem: {fileID: 0}
+  spawningSystem: {fileID: 351130268537563103, guid: 4997c8ac00246ca49a3a29793e6f358d, type: 3}
 --- !u!136 &4082656337737536982
 CapsuleCollider:
   m_ObjectHideFlags: 0
