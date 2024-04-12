@@ -164,8 +164,17 @@ public class WinTracker : MonoBehaviour
 
             winners[0] = placements[0].GetComponent<WaypointTracking>().id;
             winners[1] = placements[1].GetComponent<WaypointTracking>().id;
-            winners[2] = placements[2].GetComponent<WaypointTracking>().id;
-            winners[3] = placements[3].GetComponent<WaypointTracking>().id;
+
+            if(placements[2] != null)
+            {
+                winners[2] = placements[2].GetComponent<WaypointTracking>().id;
+
+                if(placements[3] != null)
+                {
+                    winners[3] = placements[3].GetComponent<WaypointTracking>().id;
+                }
+            }
+
             await LoadScene();
         }
     }
@@ -231,6 +240,7 @@ public class WinTracker : MonoBehaviour
         if(placements[2] != null)
         {
             winners[2] = placements[2].GetComponent<WaypointTracking>().id;
+
             if(placements[3] != null)
             {
                 winners[3] = placements[3].GetComponent<WaypointTracking>().id;
