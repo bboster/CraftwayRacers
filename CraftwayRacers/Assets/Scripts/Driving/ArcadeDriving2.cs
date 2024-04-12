@@ -58,6 +58,9 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject boostSymbol;
     public GameObject boostVFX1;
     public GameObject boostVFX2;
+
+    private bool canPlayCollisionSfx = true;
+
     private void Awake()
     {
         soundManager = GameObject.Find("SoundManager");
@@ -492,9 +495,23 @@ public class ArcadeDriving2 : MonoBehaviour
     {
         if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Wall"))
         {
-            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("CarCollisionSound").clip, mainCam.transform.position);
+            if(canPlayCollisionSfx)
+            {
+                AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("CarCollisionSound").clip, mainCam.transform.position);
+                StartCoroutine(CollisionSoundTimer());
+            }
         }
     }
+
+    private IEnumerator CollisionSoundTimer()
+    {
+        canPlayCollisionSfx = false;
+
+        yield return new WaitForSeconds(1f);
+
+        canPlayCollisionSfx = true;
+    }
+
     private void OnDestroy()
     {
         StartCountdown.StartRace -= Handle_StartRace;
