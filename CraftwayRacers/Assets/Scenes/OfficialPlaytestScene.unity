@@ -6214,7 +6214,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5652678643441070014, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
       propertyPath: m_RootOrder
-      value: 10
+      value: 9
       objectReference: {fileID: 0}
     - target: {fileID: 5652678643441070014, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
       propertyPath: m_LocalPosition.x
@@ -6848,7 +6848,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &727545836
 MonoBehaviour:
@@ -13777,7 +13777,7 @@ PrefabInstance:
       objectReference: {fileID: 1508029408}
     - target: {fileID: 8602532691323661424, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
       propertyPath: m_RootOrder
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 8602532691323661424, guid: 17a64baa71e524347b3edea3855f450b, type: 3}
       propertyPath: m_LocalPosition.x
@@ -14790,7 +14790,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!114 &1540648532
 MonoBehaviour:
@@ -14903,7 +14903,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 848770354774800624, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: m_RootOrder
-      value: 12
+      value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 848770354774800624, guid: c272c406172c3804e9731e89f95f7423, type: 3}
       propertyPath: m_LocalPosition.x
@@ -16734,7 +16734,7 @@ MonoBehaviour:
   spawnPoint8: {x: 166.2, y: 22.7, z: 125.5}
   spawnPoint9: {x: 129.5, y: 22.7, z: 158.9}
   spawnPoint10: {x: 183, y: 22.7, z: -78}
-  spawnPoint11: {x: 203.8, y: 22.7, z: -166.1}
+  spawnPoint11: {x: 202, y: 22.7, z: -166.1}
   spawnPoint12: {x: -97.3, y: 22.7, z: -376.7}
   spawnPoint13: {x: 153.4, y: 22.47, z: -384.7}
   spawnPoint14: {x: 50, y: 22.47, z: -366}
@@ -18522,7 +18522,7 @@ RectTransform:
   - {fileID: 1508029407}
   - {fileID: 301681975}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
