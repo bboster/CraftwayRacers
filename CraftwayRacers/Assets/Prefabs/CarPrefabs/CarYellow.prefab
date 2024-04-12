@@ -368,7 +368,7 @@ GameObject:
   - component: {fileID: 9015469045127790324}
   - component: {fileID: 4893227817374340191}
   m_Layer: 0
-  m_Name: Cube
+  m_Name: PaintSpawnPoint
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,7 +382,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 971680041831129586}
   m_LocalRotation: {x: -0, y: -1, z: -0, w: 0}
-  m_LocalPosition: {x: -6.9000244, y: -156.20003, z: -665.7999}
+  m_LocalPosition: {x: -6.9000244, y: -100, z: -695}
   m_LocalScale: {x: 10, y: 10, z: 10}
   m_ConstrainProportionsScale: 0
   m_Children: []
