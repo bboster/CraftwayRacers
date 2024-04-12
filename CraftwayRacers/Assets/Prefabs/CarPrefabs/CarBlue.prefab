@@ -2649,7 +2649,7 @@ MonoBehaviour:
   PlayerInput: {fileID: 8928887191435197503}
   Shielded: 0
   canDrift: 0
-  ShieldTimer: 15
+  ShieldTimer: 10
   Shield: {fileID: 1981832910952023764}
   Paintbrush: {fileID: 3017964129882966431}
   GachaBrush: {fileID: 3178888116342363369}
