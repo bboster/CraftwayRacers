@@ -29,6 +29,11 @@ public class StartCountdown : MonoBehaviour
     [SerializeField] private GameObject p3JoinImg;
     [SerializeField] private GameObject p4JoinImg;
 
+    [SerializeField] private GameObject join1;
+    [SerializeField] private GameObject join2;
+    [SerializeField] private GameObject join3;
+    [SerializeField] private GameObject join4;
+
     [SerializeField] private Animator a;
 
     private GameObject mainCam;
@@ -127,6 +132,7 @@ public class StartCountdown : MonoBehaviour
             Join.SetActive(false);
             //OnePlayer.SetActive(true);
             p1JoinImg.SetActive(true);
+            join1.SetActive(true);
             oneHasRun = true;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
 
@@ -140,6 +146,8 @@ public class StartCountdown : MonoBehaviour
             /*OnePlayer.SetActive(false);
             TwoPlayer.SetActive(true);*/
             p2JoinImg.SetActive(true);
+            join2.SetActive(true);
+            join1.SetActive(false);
             twoHasRun = true;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
         }
@@ -152,6 +160,8 @@ public class StartCountdown : MonoBehaviour
             /*TwoPlayer.SetActive(false);
             ThreePlayer.SetActive(true);*/
             p3JoinImg.SetActive(true);
+            join3.SetActive(true);
+            join2.SetActive(false);
             threeHasRun = true;
         }
     }
@@ -163,6 +173,8 @@ public class StartCountdown : MonoBehaviour
             /*ThreePlayer.SetActive(false);
             FourPlayer.SetActive(true);*/
             p4JoinImg.SetActive(true);
+            join4.SetActive(true);
+            join3.SetActive(false);
             fourHasRun = true;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
         }

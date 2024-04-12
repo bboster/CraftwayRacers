@@ -6149,6 +6149,22 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 884206464}
     - target: {fileID: 3375065002883662622, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
+      propertyPath: join1
+      value: 
+      objectReference: {fileID: 41101922}
+    - target: {fileID: 3375065002883662622, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
+      propertyPath: join2
+      value: 
+      objectReference: {fileID: 441684882}
+    - target: {fileID: 3375065002883662622, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
+      propertyPath: join3
+      value: 
+      objectReference: {fileID: 1517537032}
+    - target: {fileID: 3375065002883662622, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
+      propertyPath: join4
+      value: 
+      objectReference: {fileID: 691133858}
+    - target: {fileID: 3375065002883662622, guid: f593c12b5a257754dafb31bf6a3260ba, type: 3}
       propertyPath: Gaming
       value: 0
       objectReference: {fileID: 0}
