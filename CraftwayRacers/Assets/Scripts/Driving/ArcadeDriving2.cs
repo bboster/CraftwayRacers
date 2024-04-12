@@ -18,6 +18,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public RaycastHit[] HitList = new RaycastHit[4];
     public Transform[] SpringMountList = new Transform[4];
     public GameObject[] WheelList = new GameObject[4];
+    public GameObject[] FrontWheelList = new GameObject[2];
     //Tooltips for game devs on driving
     [Tooltip("Used for the torque curve, see below. DO NOT USE FOR JUST 'MORE SPEED'")] public float TopSpeed = 100f;
     [Tooltip("How far the car sits off the ground.")]                                   public float MaxSuspensionLength = 1.35f;
@@ -331,7 +332,8 @@ public class ArcadeDriving2 : MonoBehaviour
                 float steeringFactor = steerValue * Mathf.Lerp(MaxSteer, MinSteer, normalizedSpeed);
                 //As you speed up, you get less steering for improved handling. (Think how little steering it takes to switch lanes on the highway)
                 accelDir += SpringMountList[springNum].right * steeringFactor;
-                WheelList[springNum].transform.localRotation = Quaternion.Euler(rotationAmount*10f, steeringFactor*10f, 0f); //JUST MAKES THE WHEEL GAMEOBJECTS "TURN" visually
+                WheelList[springNum].transform.localRotation = Quaternion.Euler(0f, steeringFactor*10f, 0f); //JUST MAKES THE WHEEL GAMEOBJECTS "TURN" visually
+                FrontWheelList[springNum].transform.Rotate(Vector3.right, rotationAmount);
             }
  
             //MAIN ACCELERATION HERE
