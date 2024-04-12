@@ -54,6 +54,11 @@ public class ArcadeDriving2 : MonoBehaviour
     private GameObject soundManager;
     private GameObject mainCam;
     private InputAction steer, gas, brake, drift;
+
+    public GameObject boostSymbol;
+    public GameObject boostVFX1;
+    public GameObject boostVFX2;
+
     private void Awake()
     {
         soundManager = GameObject.Find("SoundManager");
