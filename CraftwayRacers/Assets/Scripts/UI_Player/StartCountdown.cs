@@ -17,7 +17,6 @@ public class StartCountdown : MonoBehaviour
     private bool threeHasRun;
     //public GameObject FourPlayer;
     private bool fourHasRun;
-    public GameObject Ready;
     public GameObject One;
     public GameObject Two;
     public GameObject Three;
@@ -74,10 +73,8 @@ public class StartCountdown : MonoBehaviour
         TwoPlayer.SetActive(false);
         ThreePlayer.SetActive(false);
         FourPlayer.SetActive(false);*/
-        Ready.SetActive(true);
 
         yield return new WaitForSeconds(2f);
-        Ready.SetActive(false);
         Three.SetActive(true);
         AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Countdown").clip, mainCam.transform.position);
 
