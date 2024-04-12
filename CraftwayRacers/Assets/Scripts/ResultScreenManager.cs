@@ -15,6 +15,13 @@ public class ResultScreenManager : MonoBehaviour
     [SerializeField] private GameObject win3;
     [SerializeField] private GameObject win4;
 
+    [SerializeField] private Animator objToFade;
+
+    private void Start()
+    {
+        StartCoroutine(NextSceneTimer());
+    }
+
     public void DisplayWinners(WinTracker wt)
     {
         GameObject sticker1 = GameObject.Find("Sticker1");
@@ -89,5 +96,16 @@ public class ResultScreenManager : MonoBehaviour
                 sticker4.GetComponent<Image>().sprite = player4Sticker;
                 break;
         }
+    }
+
+    private IEnumerator NextSceneTimer()
+    {
+        yield return new WaitForSeconds(7f);
+
+        objToFade.enabled = true;
+
+        yield return new WaitForSeconds(10f);
+
+        UnityEngine.SceneManagement.SceneManager.LoadScene(0);
     }
 }

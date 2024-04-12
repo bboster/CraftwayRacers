@@ -48,6 +48,12 @@ public class WinTracker : MonoBehaviour
     [SerializeField] private TextMeshProUGUI timer3;
     [SerializeField] private TextMeshProUGUI timer4;
 
+    [SerializeField] private Image[] placementSprites;
+    [SerializeField] private Sprite[] p1Placements;
+    [SerializeField] private Sprite[] p2Placements;
+    [SerializeField] private Sprite[] p3Placements;
+    [SerializeField] private Sprite[] p4Placements;
+
     private Coroutine timer;
 
     public GameObject[] wrongWay;
@@ -89,6 +95,22 @@ public class WinTracker : MonoBehaviour
                     }
                 }
             }
+
+            switch(carId)
+            {
+                case 0:
+                    placementSprites[0].sprite = p1Placements[Array.IndexOf(placements, players[carId])];
+                    break;
+                case 1:
+                    placementSprites[1].sprite = p2Placements[Array.IndexOf(placements, players[carId])];
+                    break;
+                case 2:
+                    placementSprites[2].sprite = p3Placements[Array.IndexOf(placements, players[carId])];
+                    break;
+                case 3:
+                    placementSprites[3].sprite = p4Placements[Array.IndexOf(placements, players[carId])];
+                    break;
+            }
         }
     }
 
@@ -97,6 +119,13 @@ public class WinTracker : MonoBehaviour
     /// </summary>
     public void StartGame()
     {
+        foreach(Image i in placementSprites)
+        {
+            i.color = new Color(255, 255, 255, 255);
+        }
+
+        timer1.enabled = true;
+
         timer = StartCoroutine(GameTimer());
         //StartCoroutine(WaypointLeadChecker());
     }
@@ -135,8 +164,17 @@ public class WinTracker : MonoBehaviour
 
             winners[0] = placements[0].GetComponent<WaypointTracking>().id;
             winners[1] = placements[1].GetComponent<WaypointTracking>().id;
-            winners[2] = placements[2].GetComponent<WaypointTracking>().id;
-            winners[3] = placements[3].GetComponent<WaypointTracking>().id;
+
+            if(placements[2] != null)
+            {
+                winners[2] = placements[2].GetComponent<WaypointTracking>().id;
+
+                if(placements[3] != null)
+                {
+                    winners[3] = placements[3].GetComponent<WaypointTracking>().id;
+                }
+            }
+
             await LoadScene();
         }
     }
@@ -202,6 +240,7 @@ public class WinTracker : MonoBehaviour
         if(placements[2] != null)
         {
             winners[2] = placements[2].GetComponent<WaypointTracking>().id;
+
             if(placements[3] != null)
             {
                 winners[3] = placements[3].GetComponent<WaypointTracking>().id;

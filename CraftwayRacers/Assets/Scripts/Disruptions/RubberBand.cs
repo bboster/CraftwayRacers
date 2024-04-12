@@ -12,6 +12,9 @@ public class RubberBand : MonoBehaviour
 
     private GameObject mainCam;
     private GameObject soundManager;
+    private GameObject BoostSymbol;
+    private GameObject BoostVFX1;
+    private GameObject BoostVFX2;
     public Animator Animator;
 
     private void Awake()
@@ -24,6 +27,12 @@ public class RubberBand : MonoBehaviour
         if (collision.gameObject.tag == "Player")
         {
             Speed = collision.gameObject.GetComponent<ArcadeDriving2>();
+            BoostSymbol = Speed.boostSymbol;
+            BoostVFX1 = Speed.boostVFX1;
+            BoostVFX2 = Speed.boostVFX2;
+            BoostSymbol.SetActive(true);
+            BoostVFX1.SetActive(true);
+            BoostVFX2.SetActive(true);
             rb = Speed.CarRb;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("BoostSound").clip, mainCam.transform.position);
             //if(Animator.name == "Gatcha")
@@ -52,6 +61,9 @@ public class RubberBand : MonoBehaviour
         }
 
         isBoosting = false;
+        BoostSymbol.SetActive(false);
+        BoostVFX1.SetActive(false);
+        BoostVFX2.SetActive(false);
     }
 
     private void Opened()
