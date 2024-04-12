@@ -66,7 +66,7 @@ public class ArcadeDriving2 : MonoBehaviour
     void Start()
     {
         canDrive = false;
-        canDrift = false;
+        canDrift = true;
         isDrifting = false;
         StartCountdown.StartRace += Handle_StartRace;
         
@@ -171,6 +171,7 @@ public class ArcadeDriving2 : MonoBehaviour
     }
     void ReadDrift(InputAction.CallbackContext ctx)
     {
+        /*
         if (canDrift)
         {
             isDrifting = true;
@@ -179,12 +180,14 @@ public class ArcadeDriving2 : MonoBehaviour
             FrontTireGrip = driftFTG;
             RearTireGrip = driftRTG;
             driftTimer = 0f;
-        }
+        }*/
     }
     void EndReadDrift(InputAction.CallbackContext ctx)
     {
+        /*
         AddDriftBoost(driftTimer);    
         ResetControls();
+        */
     }
     /// <summary>
     /// Suspension is here because it doesnt work as well/at all in fixed update. Probably something
