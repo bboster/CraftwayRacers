@@ -9,13 +9,13 @@ using UnityEngine.UI;
 public class StartCountdown : MonoBehaviour
 {
     public GameObject Join;
-    public GameObject OnePlayer;
+    //public GameObject OnePlayer;
     private bool oneHasRun;
-    public GameObject TwoPlayer;
+    //public GameObject TwoPlayer;
     private bool twoHasRun;
-    public GameObject ThreePlayer;
+    //public GameObject ThreePlayer;
     private bool threeHasRun;
-    public GameObject FourPlayer;
+    //public GameObject FourPlayer;
     private bool fourHasRun;
     public GameObject Ready;
     public GameObject One;
@@ -65,10 +65,10 @@ public class StartCountdown : MonoBehaviour
     {
         a.enabled = true;
 
-        OnePlayer.SetActive(false);
+        /*OnePlayer.SetActive(false);
         TwoPlayer.SetActive(false);
         ThreePlayer.SetActive(false);
-        FourPlayer.SetActive(false);
+        FourPlayer.SetActive(false);*/
         Ready.SetActive(true);
 
         yield return new WaitForSeconds(2f);
@@ -125,7 +125,7 @@ public class StartCountdown : MonoBehaviour
         if (PlayerCounting.playerCount == 1 && oneHasRun == false)
         {
             Join.SetActive(false);
-            OnePlayer.SetActive(true);
+            //OnePlayer.SetActive(true);
             p1JoinImg.SetActive(true);
             oneHasRun = true;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
@@ -137,8 +137,8 @@ public class StartCountdown : MonoBehaviour
     {
         if (PlayerCounting.playerCount == 2 && twoHasRun == false)
         {
-            OnePlayer.SetActive(false);
-            TwoPlayer.SetActive(true);
+            /*OnePlayer.SetActive(false);
+            TwoPlayer.SetActive(true);*/
             p2JoinImg.SetActive(true);
             twoHasRun = true;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
@@ -149,8 +149,8 @@ public class StartCountdown : MonoBehaviour
     {
         if (PlayerCounting.playerCount == 3 && threeHasRun == false)
         {
-            TwoPlayer.SetActive(false);
-            ThreePlayer.SetActive(true);
+            /*TwoPlayer.SetActive(false);
+            ThreePlayer.SetActive(true);*/
             p3JoinImg.SetActive(true);
             threeHasRun = true;
         }
@@ -160,8 +160,8 @@ public class StartCountdown : MonoBehaviour
     {
         if (PlayerCounting.playerCount == 4 && fourHasRun == false)
         {
-            ThreePlayer.SetActive(false);
-            FourPlayer.SetActive(true);
+            /*ThreePlayer.SetActive(false);
+            FourPlayer.SetActive(true);*/
             p4JoinImg.SetActive(true);
             fourHasRun = true;
             AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
