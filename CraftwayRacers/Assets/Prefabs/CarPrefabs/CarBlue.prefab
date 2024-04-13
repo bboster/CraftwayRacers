@@ -2859,6 +2859,9 @@ MonoBehaviour:
   boostSymbol: {fileID: 7067644915790936889}
   boostVFX1: {fileID: 8706414279473910793}
   boostVFX2: {fileID: 3947169482645536019}
+  smokeVFX1: {fileID: 8116818183668701101}
+  smokeVFX2: {fileID: 2140240605041098224}
+  boostVFXCanvas: {fileID: 0}
 --- !u!114 &8928887191435197503
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4212,7 +4215,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 3510013316337151952, guid: 460c91c1e9b6aad4a91c8dbbaf185330, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6269990205216146175, guid: 460c91c1e9b6aad4a91c8dbbaf185330, type: 3}
       propertyPath: m_RootOrder
