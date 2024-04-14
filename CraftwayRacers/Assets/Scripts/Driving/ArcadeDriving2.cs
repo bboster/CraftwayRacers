@@ -480,11 +480,10 @@ public class ArcadeDriving2 : MonoBehaviour
         if (collider.gameObject.tag == "Slick")
         {
             canDrift = false;
-            EnginePower = 30f;
-            TopSpeed = 50f;
+            CarRb.drag = 0.3f;
             FrontTireGrip = 0.5f;
             RearTireGrip = 0.4f;
-            MinSteer = 2.25f;
+            MinSteer = 3.25f;
             MaxSteer = 5.5f;
         }
     }
