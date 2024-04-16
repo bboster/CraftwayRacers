@@ -60,6 +60,7 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject boostVFX2;
     public GameObject smokeVFX1;
     public GameObject smokeVFX2;
+    public GameObject spdLines;
 
     private bool canPlayCollisionSfx = true;
 

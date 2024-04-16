@@ -17,6 +17,7 @@ public class RubberBand : MonoBehaviour
     private GameObject BoostVFX2;
     private GameObject SmokeVFX1;
     private GameObject SmokeVFX2;
+    private GameObject SpdLines;
     public Animator Animator;
 
     private void Awake()
@@ -34,9 +35,11 @@ public class RubberBand : MonoBehaviour
             BoostVFX2 = Speed.boostVFX2;
             SmokeVFX1 = Speed.smokeVFX1;
             SmokeVFX2 = Speed.smokeVFX2;
+            SpdLines = Speed.spdLines;
             BoostSymbol.SetActive(true);
             BoostVFX1.SetActive(true);
             BoostVFX2.SetActive(true);
+            SpdLines.SetActive(true);
             SmokeVFX1.SetActive(false);
             SmokeVFX2.SetActive(false);
             rb = Speed.CarRb;
@@ -70,6 +73,7 @@ public class RubberBand : MonoBehaviour
         BoostSymbol.SetActive(false);
         BoostVFX1.SetActive(false);
         BoostVFX2.SetActive(false);
+        SpdLines.SetActive(false);
         SmokeVFX1.SetActive(true);
         SmokeVFX2.SetActive(true);
     }
