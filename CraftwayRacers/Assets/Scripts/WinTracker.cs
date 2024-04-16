@@ -414,7 +414,7 @@ public class WinTracker : MonoBehaviour
     {
         if (level == 1)
         {
-            GameObject.Find("ResultsController").GetComponent<ResultScreenManager>().DisplayWinners(gameObject.GetComponent<WinTracker>());
+            GameObject.Find("ResultsController").GetComponent<ResultScreenManager>().DisplayWinners(gameObject.GetComponent<WinTracker>(), gameObject);
         }
     }
 

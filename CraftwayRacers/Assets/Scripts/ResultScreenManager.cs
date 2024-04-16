@@ -22,7 +22,7 @@ public class ResultScreenManager : MonoBehaviour
         StartCoroutine(NextSceneTimer());
     }
 
-    public void DisplayWinners(WinTracker wt)
+    public void DisplayWinners(WinTracker wt, GameObject toDestroy)
     {
         GameObject sticker1 = GameObject.Find("Sticker1");
         GameObject sticker2 = GameObject.Find("Sticker2");
@@ -96,6 +96,8 @@ public class ResultScreenManager : MonoBehaviour
                 sticker4.GetComponent<Image>().sprite = player4Sticker;
                 break;
         }
+
+        Destroy(toDestroy);
     }
 
     private IEnumerator NextSceneTimer()
