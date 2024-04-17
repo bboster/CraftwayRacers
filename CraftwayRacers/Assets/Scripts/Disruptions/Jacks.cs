@@ -49,14 +49,14 @@ public class Jacks : MonoBehaviour
                 //StartCoroutine(IFrames());
                 AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemBreak").clip, mainCam.transform.position);
                 Poof.Play();
-                Destroy(gameObject);
+                JackDestroy();
             }
         }
 
-        /*IEnumerator JackDestroy
+        IEnumerator JackDestroy()
         {
-            yield return new WaitForSeconds(5);
+            yield return new WaitForSeconds(0.8f);
             Destroy(gameObject);
-        }*/
+        }
     }
 }

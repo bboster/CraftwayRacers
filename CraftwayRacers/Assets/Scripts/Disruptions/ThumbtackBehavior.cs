@@ -38,12 +38,6 @@ public class ThumbtackBehavior : MonoBehaviour
             rb.constraints = RigidbodyConstraints.FreezePositionY;
             rb.isKinematic = true;
         }
-
-        /*IEnumerator IFrames()
-        {
-            yield return new WaitForSeconds(5);
-            Car.Shielded = false;
-        }*/
     }
 
     private void OnTriggerEnter(Collider collision)
@@ -59,8 +53,14 @@ public class ThumbtackBehavior : MonoBehaviour
                 AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemBreak").clip, mainCam.transform.position);
                 PoofVFX1.SetActive(true);
                 PoofVFX2.SetActive(true);
-                Destroy(gameObject);
+                ThumbtackDestroy();
             }
+        }
+
+        IEnumerator ThumbtackDestroy()
+        {
+            yield return new WaitForSeconds(0.8f);
+            Destroy(gameObject);
         }
     }
 }
