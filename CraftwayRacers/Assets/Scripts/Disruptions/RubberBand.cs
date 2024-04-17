@@ -47,11 +47,11 @@ public class RubberBand : MonoBehaviour
             //if(Animator.name == "Gatcha")
                 //Animator.SetBool("ifOpen", true);
             print("HERE");
-                StartCoroutine(AddForce());
+                StartCoroutine(AddForce(BoostVFX1, BoostVFX2, BoostSymbol, SmokeVFX1, SmokeVFX2, SpdLines));
         }
     }
 
-    IEnumerator AddForce()
+    IEnumerator AddForce(GameObject b1, GameObject b2, GameObject bSym, GameObject s1, GameObject s2, GameObject sL)
     {
         isBoosting = true;
 
@@ -70,12 +70,12 @@ public class RubberBand : MonoBehaviour
         }
 
         isBoosting = false;
-        BoostSymbol.SetActive(false);
-        BoostVFX1.SetActive(false);
-        BoostVFX2.SetActive(false);
-        SpdLines.SetActive(false);
-        SmokeVFX1.SetActive(true);
-        SmokeVFX2.SetActive(true);
+        bSym.SetActive(false);
+        b1.SetActive(false);
+        b2.SetActive(false);
+        sL.SetActive(false);
+        s1.SetActive(true);
+        s2.SetActive(true);
     }
 
     private void Opened()
