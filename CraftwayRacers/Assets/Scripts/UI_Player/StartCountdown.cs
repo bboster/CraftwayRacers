@@ -160,6 +160,7 @@ public class StartCountdown : MonoBehaviour
             join3.SetActive(true);
             join2.SetActive(false);
             threeHasRun = true;
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("Join").clip, mainCam.transform.position);
         }
     }
 

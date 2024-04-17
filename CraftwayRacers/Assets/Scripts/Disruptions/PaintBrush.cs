@@ -10,6 +10,15 @@ public class PaintBrush : MonoBehaviour
     public bool isWaiting = false;
     public Animator Animator;
 
+    private GameObject mainCam;
+    private GameObject soundManager;
+
+    private void Awake()
+    {
+        mainCam = GameObject.Find("Main Camera");
+        soundManager = GameObject.Find("SoundManager");
+    }
+
     private void OnTriggerEnter(Collider collision)
     {
         if (collision.gameObject.CompareTag("Player"))
@@ -25,6 +34,7 @@ public class PaintBrush : MonoBehaviour
             }
             gameObject.GetComponent<Collider>().enabled = false;
             Animator.SetBool("ifOpen", true);
+            AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemPickup").clip, mainCam.transform.position);
             StartCoroutine(SpawnPaintsDelay());
         }
     }
