@@ -2976,7 +2976,7 @@ MonoBehaviour:
   TopSpeed: 120
   MaxSuspensionLength: 1.35
   SpringStrength: 95
-  SpringDamper: 25
+  SpringDamper: 20
   WheelPosMod: -50
   MinSteer: 2.5
   MaxSteer: 3.5
@@ -3057,6 +3057,8 @@ MonoBehaviour:
   smokeVFX1: {fileID: 8116818183668701101}
   smokeVFX2: {fileID: 2140240605041098224}
   spdLines: {fileID: 6239002433931147333}
+  sparks: {fileID: 8811604544751386124}
+  glue: {fileID: 1046467610006524328}
 --- !u!114 &8928887191435197503
 MonoBehaviour:
   m_ObjectHideFlags: 0

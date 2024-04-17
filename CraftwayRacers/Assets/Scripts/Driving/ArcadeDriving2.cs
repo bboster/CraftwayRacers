@@ -61,6 +61,8 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject smokeVFX1;
     public GameObject smokeVFX2;
     public GameObject spdLines;
+    public GameObject sparks;
+    public GameObject glue;
 
     private bool canPlayCollisionSfx = true;
 
@@ -288,12 +290,17 @@ public class ArcadeDriving2 : MonoBehaviour
                 MinSteer = OffRdMinSteer;
                 MaxSteer = OffRdMaxSteer;
                 CarRb.drag = OffRdDrag;
+                glue.SetActive(true);
             }
             else //if im no longer offroad (i.e., 99% of the time)
             {
                 if(!isDrifting) //And if im not drifting; reset the controls
                 {
                     ResetControls();
+                    if(glue.activeSelf)
+                    {
+                        glue.SetActive(false);
+                    }
                 }
             }
         }
@@ -381,6 +388,14 @@ public class ArcadeDriving2 : MonoBehaviour
                 gripChoice = FrontTireGrip;
             }
             float desiredFrictionChange = (-steeringVel * gripChoice)/Time.fixedDeltaTime;
+            if(Mathf.Abs(desiredFrictionChange) > 200f && !sparks.activeSelf)
+            {
+                sparks.SetActive(true);
+            }
+            else if(Mathf.Abs(desiredFrictionChange) < 200f && sparks.activeSelf)
+            {
+                sparks.SetActive(false);
+            }
             CarRb.AddForceAtPosition(steeringDir * 1 * desiredFrictionChange, SpringMountList[springNum].transform.position);
         }
     }
