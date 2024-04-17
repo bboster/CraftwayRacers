@@ -52,25 +52,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.85
+      value: 6.8499904
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.7
+      value: 0.69999963
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.44
+      value: 0.44000688
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.41093472
+      value: 0.41093475
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -104,6 +120,11 @@ PrefabInstance:
 --- !u!4 &5223252088676149184 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 22265462467978092}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &7775306910847789374 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
   m_PrefabInstance: {fileID: 22265462467978092}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &870258112481943026
@@ -239,6 +260,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 9054330679684267478}
 --- !u!4 &835838126703131161 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff5906274d3a31f429a1fd45b95d0755, type: 3}
@@ -256,25 +278,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.51
+      value: 6.509997
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.92
+      value: 0.9199991
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.43
+      value: 0.43000507
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.41528708
+      value: 0.41528705
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -286,7 +324,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5681638
+      value: 0.5681639
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -308,6 +346,11 @@ PrefabInstance:
 --- !u!4 &6790506441135584040 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 1589519882571052932}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &9054330679684267478 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
   m_PrefabInstance: {fileID: 1589519882571052932}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2019048654303023891
@@ -443,6 +486,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 2734850778253361538}
 --- !u!4 &1985985665368274168 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff5906274d3a31f429a1fd45b95d0755, type: 3}
@@ -460,21 +504,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 8.31
+      value: 8.309982
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.34
+      value: 0.33999807
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.49
+      value: 0.49000138
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -482,7 +542,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.46761823
+      value: -0.46761826
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -509,6 +569,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+--- !u!198 &6569986752503388897 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 3496238091607052467}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8698280798725313567 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
@@ -526,29 +591,45 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 6.28
+      value: 6.279986
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.92
+      value: 0.91999644
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.42
+      value: 0.42000994
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.37558302
+      value: 0.37558305
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.387348
+      value: -0.38734803
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.y
@@ -556,7 +637,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5953564
+      value: 0.59535635
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -575,6 +656,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+--- !u!198 &5983058069483248182 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 4080399508998213732}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8112073593887020232 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
@@ -713,6 +799,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 2394964231697636889}
 --- !u!4 &4475319680189639078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff5906274d3a31f429a1fd45b95d0755, type: 3}
@@ -730,21 +817,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.36
+      value: 7.359974
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.65
+      value: 0.6499958
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.46
+      value: 0.45999908
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -752,11 +855,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.x
-      value: -0.4015663
+      value: -0.40156636
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: -0.5859422
+      value: -0.58594227
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.z
@@ -779,6 +882,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+--- !u!198 &5869031756467620601 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 4240868472695570603}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &8280207801836258311 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
@@ -796,25 +904,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7.78
+      value: 7.7799797
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.23
+      value: 0.22999524
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.47
+      value: 0.47000685
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.4304984
+      value: 0.43049836
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -826,7 +950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5566646
+      value: 0.5566645
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -848,6 +972,11 @@ PrefabInstance:
 --- !u!4 &191217368385032423 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 5374190077109572683}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2394964231697636889 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
   m_PrefabInstance: {fileID: 5374190077109572683}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5411032999611397738
@@ -983,6 +1112,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 5983058069483248182}
 --- !u!4 &5520674981614031233 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff5906274d3a31f429a1fd45b95d0755, type: 3}
@@ -1000,25 +1130,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 7
+      value: 6.9999814
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.44
+      value: 0.43999597
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.45
+      value: 0.449996
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.4113622
+      value: 0.41136217
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1052,6 +1198,11 @@ PrefabInstance:
 --- !u!4 &463848924161838972 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 5646474257017801680}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &2734850778253361538 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
   m_PrefabInstance: {fileID: 5646474257017801680}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &5988374726099952606
@@ -1192,6 +1343,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 7775306910847789374}
 --- !u!1001 &7382111784331411316
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1330,6 +1482,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 1186062586400037832}
 --- !u!1001 &7551365418981094060
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1463,6 +1616,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 5869031756467620601}
 --- !u!4 &8016811594228176199 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: ff5906274d3a31f429a1fd45b95d0755, type: 3}
@@ -1602,6 +1756,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 1234524972038514019}
 --- !u!1001 &8533993904498864504
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1740,6 +1895,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   CutSpeed: 2
+  Poof: {fileID: 6569986752503388897}
 --- !u!1001 &8829733450277023537
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -1752,21 +1908,37 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -7.07
+      value: -7.0700097
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.6
+      value: -0.6000014
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.08
+      value: -0.07999818
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1778,7 +1950,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0.41061902
+      value: 0.410619
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.z
@@ -1801,6 +1973,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+--- !u!198 &1234524972038514019 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 8829733450277023537}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3655270892844837789 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
@@ -1818,25 +1995,41 @@ PrefabInstance:
       propertyPath: m_Name
       value: PoofSpawnEffect
       objectReference: {fileID: 0}
+    - target: {fileID: 741468286752412404, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_RootOrder
-      value: -2
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 9.4
+      value: 9.399995
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.2
+      value: 0.2000002
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.54
+      value: 0.5400069
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.w
-      value: 0.42063335
+      value: 0.42063326
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.x
@@ -1848,7 +2041,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0.5641948
+      value: 0.56419486
       objectReference: {fileID: 0}
     - target: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -1867,6 +2060,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+--- !u!198 &1186062586400037832 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 8925526990842253722}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &3742057851013715254 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}

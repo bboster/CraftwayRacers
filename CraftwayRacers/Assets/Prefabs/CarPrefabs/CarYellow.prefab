@@ -1340,6 +1340,7 @@ MonoBehaviour:
   spdLines: {fileID: 445030590221457378}
   sparks: {fileID: 168223392945641338}
   glue: {fileID: 2155381414290537371}
+  Poof: {fileID: 8996593465767625084}
 --- !u!114 &95797300413966631
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2985,7 +2986,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6653726161894064021}
-  m_LocalRotation: {x: 0.17128976, y: 3.611467e-15, z: -1.3942362e-15, w: 0.98522073}
+  m_LocalRotation: {x: 0.17128976, y: -3.611467e-15, z: 1.3942362e-15, w: 0.98522073}
   m_LocalPosition: {x: 0, y: 469.00006, z: -859}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -3970,6 +3971,11 @@ PrefabInstance:
 --- !u!4 &6863937174099529602 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5202680425485567148, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
+  m_PrefabInstance: {fileID: 1689474615035759406}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &8996593465767625084 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7757567049681930834, guid: c27c02188ed87ad4c984eb903a0f66d7, type: 3}
   m_PrefabInstance: {fileID: 1689474615035759406}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2976985985705793572

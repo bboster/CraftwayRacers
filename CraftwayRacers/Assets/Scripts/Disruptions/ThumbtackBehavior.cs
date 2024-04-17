@@ -10,7 +10,10 @@ public class ThumbtackBehavior : MonoBehaviour
 
     private GameObject mainCam;
     private GameObject soundManager;
-   
+
+    public GameObject PoofVFX1;
+    public GameObject PoofVFX2;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -54,6 +57,8 @@ public class ThumbtackBehavior : MonoBehaviour
                 // Speed.Shield.SetActive(false);
                 //StartCoroutine(IFrames());
                 AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemBreak").clip, mainCam.transform.position);
+                PoofVFX1.SetActive(true);
+                PoofVFX2.SetActive(true);
                 Destroy(gameObject);
             }
         }

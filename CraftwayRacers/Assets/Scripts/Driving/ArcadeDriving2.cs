@@ -64,6 +64,8 @@ public class ArcadeDriving2 : MonoBehaviour
     public GameObject sparks;
     public GameObject glue;
 
+    public ParticleSystem Poof;
+
     private bool canPlayCollisionSfx = true;
 
     private void Awake()
@@ -479,6 +481,16 @@ public class ArcadeDriving2 : MonoBehaviour
         if (collision.gameObject.tag == "GatchaPaint")
         {
             GachaBrush.SetBool("Painted", true);
+        }
+
+        if (collision.gameObject.tag == "Jacks" && Shielded == true)
+        {
+            Poof.Play();
+        }
+
+        if (collision.gameObject.tag == "Thumbtack" && Shielded == true)
+        {
+            Poof.Play();
         }
     }
 

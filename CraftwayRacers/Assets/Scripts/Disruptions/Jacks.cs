@@ -12,6 +12,8 @@ public class Jacks : MonoBehaviour
     private GameObject mainCam;
     private GameObject soundManager;
 
+    public ParticleSystem Poof;
+
     private void Awake()
     {
         mainCam = GameObject.Find("Main Camera");
@@ -46,14 +48,15 @@ public class Jacks : MonoBehaviour
                 Speed.Shield.SetActive(false);*/
                 //StartCoroutine(IFrames());
                 AudioSource.PlayClipAtPoint(soundManager.GetComponent<SoundManager>().GetSound("ItemBreak").clip, mainCam.transform.position);
+                Poof.Play();
                 Destroy(gameObject);
             }
         }
 
-        /*IEnumerator IFrames()
+        /*IEnumerator JackDestroy
         {
             yield return new WaitForSeconds(5);
-            Speed.Shielded = false;
+            Destroy(gameObject);
         }*/
     }
 }
