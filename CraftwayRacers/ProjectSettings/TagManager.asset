@@ -21,6 +21,7 @@ TagManager:
   - Wall
   - Slick
   - Thumbtack
+  - PIManager
   layers:
   - Default
   - TransparentFX

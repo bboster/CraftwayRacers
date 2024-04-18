@@ -31,6 +31,7 @@ public class WaypointTracking : MonoBehaviour
 
         id = GameObject.FindGameObjectsWithTag("Player").Length - 1;
         gc.GetComponent<WinTracker>().placements[id] = gameObject;
+        Debug.Log(gc.GetComponent<WinTracker>().placements[id]);
 
         gc.GetComponent<WinTracker>().players[id] = gameObject;
 

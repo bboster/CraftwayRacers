@@ -72,6 +72,11 @@ public class WinTracker : MonoBehaviour
 
     private void PlacementTracking_Fire(int carId, float distToNxtWP, int wpPassed)
     {
+        if(InputController == null)
+        {
+            InputController = GameObject.FindGameObjectWithTag("PIManager");
+        }
+
         if(InputController.GetComponent<StartCountdown>().Gaming == true)
         {
             int curIndex = Array.IndexOf(placements, players[carId]);
@@ -416,6 +421,11 @@ public class WinTracker : MonoBehaviour
         {
             GameObject.Find("ResultsController").GetComponent<ResultScreenManager>().DisplayWinners(gameObject.GetComponent<WinTracker>(), gameObject);
         }
+    }
+
+    private void OnDestroy()
+    {
+        WaypointTracking.placementTracking -= PlacementTracking_Fire;
     }
 
     //CHECK WHO IS IN THE LEAD EVERY FRAME HERE AND ADJUST UI ELEMENTS.
